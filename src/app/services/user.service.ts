@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 const API_URL = 'http://localhost:8080/api/test/';
@@ -9,6 +10,7 @@ const API_URL = 'http://localhost:8080/api/test/';
   providedIn: 'root'
 })
 export class UserService {
+
 
   constructor(private http: HttpClient) { }
 
@@ -19,15 +21,18 @@ export class UserService {
 
   // get public content "/dev"
   getDevBoard(): Observable<any> {
+
+
+
     return this.http.get(API_URL + 'dev', { responseType: 'text' });
   }
 
-   // get public content "/scm"
+  // get public content "/scm"
   getScrummBoard(): Observable<any> {
     return this.http.get(API_URL + 'scm', { responseType: 'text' });
   }
 
-   // get public content "/po"
+  // get public content "/po"
   getPoBoard(): Observable<any> {
     return this.http.get(API_URL + 'po', { responseType: 'text' });
   }

@@ -18,7 +18,9 @@ export class BoardDevComponent implements OnInit {
         this.content = data;
       },
       err => {
-        this.content = JSON.parse(err.error).message;
+        //this.content = JSON.parse(err.error).message;
+        this.content = err.error.message;
+        ;
       }
     );
   }
