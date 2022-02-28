@@ -13,7 +13,7 @@ export class BoardScrmComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getModeratorBoard().subscribe(
+    this.userService.getScrummBoard().subscribe(
       data => {
         this.content = data;
       },

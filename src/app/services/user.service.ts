@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
-const API_URL = 'http://localhost:8081/api/test/';
+const API_URL = 'http://localhost:8080/api/test/';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +17,19 @@ export class UserService {
     return this.http.get(API_URL + 'all', { responseType: 'text' });
   }
 
-  // get public content "/user"
-  getUserBoard(): Observable<any> {
-    return this.http.get(API_URL + 'user', { responseType: 'text' });
+  // get public content "/dev"
+  getDevBoard(): Observable<any> {
+    return this.http.get(API_URL + 'dev', { responseType: 'text' });
   }
 
-   // get public content "/mod"
-  getModeratorBoard(): Observable<any> {
-    return this.http.get(API_URL + 'mod', { responseType: 'text' });
+   // get public content "/scm"
+  getScrummBoard(): Observable<any> {
+    return this.http.get(API_URL + 'scm', { responseType: 'text' });
   }
 
-   // get public content "/admin"
-  getAdminBoard(): Observable<any> {
-    return this.http.get(API_URL + 'admin', { responseType: 'text' });
+   // get public content "/po"
+  getPoBoard(): Observable<any> {
+    return this.http.get(API_URL + 'po', { responseType: 'text' });
   }
 
 }

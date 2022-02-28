@@ -13,7 +13,7 @@ export class BoardPoComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getAdminBoard().subscribe(
+    this.userService.getPoBoard().subscribe(
       data => {
         this.content = data;
       },
