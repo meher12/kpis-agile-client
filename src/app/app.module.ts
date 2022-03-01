@@ -15,6 +15,9 @@ import { HomeComponent } from './home/home.component';
 import { authInterceptorProviders } from './services/auth-interceptor.service';
 import { CreateSprintComponent } from './component/sprint/create-sprint/create-sprint.component';
 import { CreateProjetComponent } from './component/projet/create-projet/create-projet.component';
+import { ProjetListComponent } from './component/projet/projet-list/projet-list.component';
+
+
 
 
 @NgModule({
@@ -29,6 +32,8 @@ import { CreateProjetComponent } from './component/projet/create-projet/create-p
     HomeComponent,
     CreateSprintComponent,
     CreateProjetComponent,
+    ProjetListComponent,
+
 
   ],
   imports: [
