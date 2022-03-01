@@ -1,0 +1,55 @@
+<div class="container">
+    <h3> Create Projet</h3>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+         <!-- Title -->
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" formControlName="titre" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && fctl['titre'].errors }" />
+            <div *ngIf="submitted && fctl['titre'].errors" class="invalid-feedback">
+                <div *ngIf="fctl['titre'].errors['required']">Title is required</div>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label>Description</label>
+            <textarea  type="text" formControlName="description" class="form-control md-textarea"
+                [ngClass]="{ 'is-invalid': submitted && fctl['description'].errors }" mdbInput></textarea>
+            <div *ngIf="submitted && fctl['description'].errors" class="invalid-feedback">
+                <div *ngIf="fctl['description'].errors['required']">Description is required</div>
+            </div>
+        </div>
+
+         <!-- Date Debut -->
+         <div class="form-group">
+            <label>Start Date</label>
+            <input  type="date" formControlName="description" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && fctl['date_debut'].errors }">
+            <div *ngIf="submitted && fctl['date_debut'].errors" class="invalid-feedback">
+                <div *ngIf="fctl['date_debut'].errors['required']">Date is required</div>
+            </div>
+        </div>
+
+        <!-- Date Fin -->
+        <div class="form-group">
+            <label>End Date</label>
+            <input  type="date" formControlName="date_fin" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && fctl['date_fin'].errors }">
+            <div *ngIf="submitted && fctl['date_fin'].errors" class="invalid-feedback">
+                <div *ngIf="fctl['date_fin'].errors['required']">Date is required</div>
+            </div>
+        </div>
+
+       
+
+         <!-- Button -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="button" (click)="onReset()" class="btn btn-warning float-right" >
+              Reset
+            </button>
+          </div>
+    </form>
+</div>
