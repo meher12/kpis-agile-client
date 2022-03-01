@@ -12,5 +12,4 @@ export class Task {
     public estimation: number;
     public statut: ETask ;
     public story: Story;
-    public developer: User;
 }

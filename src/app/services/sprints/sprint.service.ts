@@ -8,7 +8,7 @@ import { Sprint } from 'src/app/models/sprint.model';
 })
 export class SprintService {
 
-  private baseUrl = "http://localhost:8080/api/v1/sprints";
+  private baseUrl = "http://localhost:8080/api/sprints";
 
   constructor(private httpClient: HttpClient) { }
 

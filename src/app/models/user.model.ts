@@ -6,6 +6,5 @@ export class User {
     public id: number;
     public username: String;
     public  email: String;
-    public projet: Projet;
-    public tasks: Task[];
+    public password: String;
 }
