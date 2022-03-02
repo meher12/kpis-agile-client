@@ -1,42 +1,86 @@
 <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a href="#" class="navbar-brand">KHMeher</a>
-      <ul class="navbar-nav mr-auto" routerLinkActive="active">
-        <li class="nav-item">
-          <a href="/home" class="nav-link" routerLink="home">Home </a>
-        </li>
-        <li class="nav-item" *ngIf="showPOBoard">
-          <a href="/po" class="nav-link" routerLink="po">Product Owner Board</a>
-        </li>
-        <li class="nav-item" *ngIf="showScrumMBoard || showPOBoard">
-          <a href="/scrm" class="nav-link" routerLink="scrm">Scrum Master Board</a>
-        </li>
-        <li class="nav-item">
-          <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev">Developer Board</a>
-        </li>
-      </ul>
-  
-      <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-        <li class="nav-item">
-          <a href="/signup" class="nav-link" routerLink="signup">Sign Up</a>
-        </li>
-        <li class="nav-item">
-          <a href="/signin" class="nav-link" routerLink="signin">Signin</a>
-        </li>
-      </ul>
-  
-      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-        <li class="nav-item">
-          <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-        </li>
-        <li class="nav-item">
-          <a href class="nav-link" (click)="logout()">LogOut</a>
-        </li>
-      </ul>
-    </nav>
-  
-    <div class="container">
-      <router-outlet></router-outlet>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">KPIs Agile</a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item">
+        <a href="/home" class="nav-link" routerLink="home">Home </a>
+      </li>
+      <li class="nav-item" *ngIf="showPOBoard">
+        <a href="/po" class="nav-link" routerLink="po">Product Owner Board</a>
+      </li>
+      <li class="nav-item" *ngIf="showScrumMBoard || showPOBoard">
+        <a href="/scrm" class="nav-link" routerLink="scrm">Scrum Master Board</a>
+      </li>
+      <li class="nav-item">
+        <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev">Developer Board</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/signup" class="nav-link" routerLink="signup">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a href="/signin" class="nav-link" routerLink="signin">Signin</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" id="nnn" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" (click)="logout()">LogOut</a>
+      </li>
+
+    </ul>
+  </nav>
+
+  <!-- *************** -->
+
+
+<!-- Sidebar Menu -->
+
+  <div class="d-flex">
+    <!-- Sidebar Product Owner -->
+    <div class="bg-light border-right" id="sidebar-wrapper" *ngIf="showPOBoard">
+      <div class="sidebar-heading">Therichpost </div>
+      <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action bg-light">Manage Projet</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+      </div>
     </div>
+
+
+
+    <!-- Sidebar Scrum master-->
+    <div class="bg-light border-right" id="sidebar-wrapper" *ngIf="showScrumMBoard">
+      <div class="sidebar-heading">Therichpost </div>
+      <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action bg-light">Manage Projet</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
+      </div>
+    </div>
+
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+   
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+   
+    <!-- /#page-content-wrapper -->
   </div>
-  
+  <!-- /#wrapper -->
+
+  <!-- *********Public Content********** -->
+
+  <div class="container" *ngIf="!isLoggedIn">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -20,6 +20,7 @@ import { ProjetListComponent } from './component/projet/projet-list/projet-list.
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,8 @@ import { ProjetListComponent } from './component/projet/projet-list/projet-list.
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+
+
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
