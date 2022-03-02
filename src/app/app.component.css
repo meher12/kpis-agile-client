@@ -1,5 +1,9 @@
-body {
+/* body {
     overflow-x: hidden;
+  } */
+
+  .container{
+    margin: 5px auto;
   }
   
   #sidebar-wrapper {

@@ -1,1 +1,27 @@
-<p>projet-list works!</p>
+<div class="row">
+    <h2> Project List</h2>
+    <h3 class="text-danger">{{msgError}}</h3>
+    <div class="col-md-12">
+        <a routerLink="/createproject"  class="nav-link">Add Project</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let project of projects">
+                <td> {{project.titre}}</td>
+                <td>{{project.description}}</td>
+                <td>{{project.date_debut}}</td>
+                <td>{{project.date_fin}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
