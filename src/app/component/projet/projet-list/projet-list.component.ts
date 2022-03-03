@@ -55,4 +55,9 @@ export class ProjetListComponent implements OnInit {
       )
   }
 
+    // navigate to page update employee
+    updateProject(id: number) {
+      this.router.navigate(['/updateproject', id]);
+    }
+
 }

@@ -16,6 +16,8 @@ import { authInterceptorProviders } from './services/auth-interceptor.service';
 import { CreateSprintComponent } from './component/sprint/create-sprint/create-sprint.component';
 import { CreateProjetComponent } from './component/projet/create-projet/create-projet.component';
 import { ProjetListComponent } from './component/projet/projet-list/projet-list.component';
+import { UpdateProjetComponent } from './component/projet/update-projet/update-projet.component';
+
 
 
 
@@ -35,6 +37,8 @@ import { ProjetListComponent } from './component/projet/projet-list/projet-list.
     CreateSprintComponent,
     CreateProjetComponent,
     ProjetListComponent,
+    UpdateProjetComponent,
+
 
 
   ],

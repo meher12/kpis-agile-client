@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, FormArray, FormControl, Valida
 import { Router } from '@angular/router';
 import { Projet } from 'src/app/models/projet.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
+
 
 import Swal from 'sweetalert2';
 import { DateValidator } from '../date.validator';
@@ -15,7 +15,6 @@ import { DateValidator } from '../date.validator';
 })
 export class CreateProjetComponent implements OnInit {
 
-  isLoggedIn = false;
   msgError = "";
   submitted = false;
   projet: Projet = new Projet();
@@ -32,7 +31,6 @@ export class CreateProjetComponent implements OnInit {
 
 
   ngOnInit(): void {
-    //this.isLoggedIn = !!this.tokenStorageService.getToken();
 
       this.form = this.formBuilder.group({
       titre: ['', Validators.required],
