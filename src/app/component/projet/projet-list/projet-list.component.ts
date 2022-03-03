@@ -54,10 +54,31 @@ export class ProjetListComponent implements OnInit {
          
       )
   }
-
-    // navigate to page update employee
+    // navigate to page update project
     updateProject(id: number) {
       this.router.navigate(['/updateproject', id]);
     }
+
+    // delete project by Id
+
+    deletedProject(id: number){
+      this.projectService.deleteProject(id)
+      .subscribe(data =>{
+        console.log(data);
+        Swal.fire('Hey!', "Project with id: "+id+" is deleted", 'success');
+
+        this.refresh();
+        this.getAllProject();
+      },
+      err => {
+        this.msgError = err.error.message;
+        Swal.fire('Hey!', this.msgError, 'warning')
+        console.error(this.msgError);
+      })
+    }
+
+    refresh(): void {
+      window.location.reload();
+  }
 
 }

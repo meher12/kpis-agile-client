@@ -18,56 +18,55 @@ export class UpdateProjetComponent implements OnInit {
   msgError = "";
   submitted = false;
   projet: Projet = new Projet();
+  form: FormGroup;
 
   constructor(private projectService: ProjectService, private router: Router, private formBuilder: FormBuilder,
     private route: ActivatedRoute) { }
 
-
-  form: FormGroup;
-
-
   ngOnInit(): void {
 
-     // form
-     
-    
+    // form
+
+
     // get id from project list
-     this.id = this.route.snapshot.params['id'];
-     this.projectService.getProjectById(this.id)
-     .subscribe(data => {
-       this.projet = data;
+    this.id = this.route.snapshot.params['id'];
+    this.projectService.getProjectById(this.id)
+      .subscribe(data => {
 
-       this.form = this.formBuilder.group({
-        titre: [this.projet.titre, Validators.required],
-        description: [this.projet.description, Validators.required],
-        date_debut: [this.projet.date_debut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
-        date_fin: [this.projet.date_fin, Validators.compose([Validators.required, DateValidator.dateVaidator])],
-      });
+        this.projet = data;
+
+        this.form = this.formBuilder.group({
+          titre: [this.projet.titre, Validators.required],
+          description: [this.projet.description, Validators.required],
+          date_debut: [this.projet.date_debut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
+          date_fin: [this.projet.date_fin, Validators.compose([Validators.required, DateValidator.dateVaidator])],
+        });
 
 
 
-     },
-      err =>  {
-        this.msgError = err.error.message;
-        console.error(this.msgError);
-      }
-     )
-    
+      },
+        err => {
+          this.msgError = err.error.message;
+          console.error(this.msgError);
+        }
+      )
+
   }
 
   onSubmitUpdateProject() {
+
     this.projet = this.form.value;
-    this.projectService.updateProject(this.id,this.projet)
+    this.projectService.updateProject(this.id, this.projet)
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Project is updated', 'info')
         this.gotToProjectList();
       },
-      err => {
-        this.msgError = err.error.message;
-        Swal.fire('Hey!', this.msgError, 'warning')
-        console.error(this.msgError);
-      }
+        err => {
+          this.msgError = err.error.message;
+          Swal.fire('Hey!', this.msgError, 'warning')
+          console.error(this.msgError);
+        }
       )
   }
 
