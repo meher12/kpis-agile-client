@@ -1,26 +1,38 @@
 <div class="row">
-    <h2> Project List</h2>
-    <div class="col-md-12">
-        <a routerLink="/createproject"  class="nav-link">Add Project</a>
+    <div class="mx-auto text-info">
+        <h1>Project List</h1>
     </div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let project of projects">
-                <td> {{project.titre}}</td>
-                <td>{{project.description}}</td>
-                <td>{{project.date_debut}}</td>
-                <td>{{project.date_fin}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col-md-12 mx-1">
+        <a routerLink="/createproject" class="btn btn-primary">Add Project</a>
+    </div>
 
+    <div class="table-responsive-xl">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let project of projects">
+                    <td> {{project.titre}}</td>
+                    <td>{{project.description}}</td>
+                    <td>{{project.date_debut}}</td>
+                    <td>{{project.date_fin}}</td>
+                    <td>
+                        <div class="nowrap">
+                            <button class="btn btn-info" (click)="updateProject(project.id)">Update</button>
+                            <button style="margin-left: 2px" class="btn btn-danger"
+                                (click)=" deletedProject(project.id)">Delete</button>
+                        </div>
+                       
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
