@@ -1,10 +1,12 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Projet } from 'src/app/models/projet.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+
+import Swal from 'sweetalert2';
+import { DateValidator } from '../date.validator';
 
 @Component({
   selector: 'app-create-projet',
@@ -13,47 +15,53 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 export class CreateProjetComponent implements OnInit {
 
- 
-
+  isLoggedIn = false;
+  msgError = "";
   submitted = false;
   projet: Projet = new Projet();
 
-  constructor(private projectService: ProjectService, private router: Router, private formBuilder: FormBuilder, private datePipe: DatePipe) { }
+  constructor(private projectService: ProjectService, private router: Router, private formBuilder: FormBuilder) { }
 
 
   form: FormGroup = new FormGroup({
     titre: new FormControl(''),
     description: new FormControl(''),
-    date_debut: new FormControl(this.datePipe.transform(new Date(), 'yyyy-MM-dd')),
-    date_fin: new FormControl(this.datePipe.transform(new Date(), 'yyyy-MM-dd')),
+    date_debut: new FormControl(''),
+    date_fin: new FormControl(''),
   });
 
 
   ngOnInit(): void {
-    
+    //this.isLoggedIn = !!this.tokenStorageService.getToken();
 
       this.form = this.formBuilder.group({
       titre: ['', Validators.required],
       description: ['', Validators.required],
-      date_debut: ['', Validators.required],
-      date_fin: ['', Validators.required]
+      date_debut: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
+      date_fin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
     });
     
     
   }
 
   saveProjet() {
+    this.projet = this.form.value;
     this.projectService.createProject(this.projet)
       .subscribe(data => {
         console.log(data);
+        Swal.fire('Hey!', 'Project is saved', 'info')
         this.gotToProjectList();
       },
-        error => console.log(error)
+      err => {
+        this.msgError = err.error.message;
+        Swal.fire('Hey!', this.msgError, 'warning')
+        console.error(this.msgError);
+      }
       )
   }
 
   gotToProjectList() {
-    this.router.navigate(['/projets']);
+    this.router.navigate(['/projectList']);
   }
 
   get fctl(): { [key: string]: AbstractControl } {

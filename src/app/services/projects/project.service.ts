@@ -24,8 +24,8 @@ export class ProjectService {
   }
 
   // create new sprint
-   createProject(project: Projet): Observable<Object> {
-    return this.httpClient.post(`${baseUrl}`, project);
+   createProject(project: Projet): Observable<any> {
+    return this.httpClient.post(`${baseUrl}` + '/projects', project, httpOptions);
   }
 /*
   // get sprint by id

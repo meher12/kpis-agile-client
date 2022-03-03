@@ -25,7 +25,7 @@
          <!-- Date Debut -->
          <div class="form-group">
             <label>Start Date</label>
-            <input  type="date" formControlName="description" class="form-control"
+            <input  type="date" formControlName="date_debut" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && fctl['date_debut'].errors }">
             <div *ngIf="submitted && fctl['date_debut'].errors" class="invalid-feedback">
                 <div *ngIf="fctl['date_debut'].errors['required']">Date is required</div>
@@ -42,7 +42,15 @@
             </div>
         </div>
 
-       
+        <!-- Sprint -->
+       <!--  <div class="form-group">
+            <label>Title</label>
+            <input type="text" formControlName="sprint" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && fctl['sprint'].errors }" />
+            <div *ngIf="submitted && fctl['sprint'].errors" class="invalid-feedback">
+                <div *ngIf="fctl['sprint'].errors['required']">Title is required</div>
+            </div>
+        </div> -->
 
          <!-- Button -->
         <div class="form-group">

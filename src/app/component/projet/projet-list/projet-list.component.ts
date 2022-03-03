@@ -4,6 +4,8 @@ import { Projet } from 'src/app/models/projet.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-projet-list',
   templateUrl: './projet-list.component.html',
@@ -23,6 +25,7 @@ export class ProjetListComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
      // if( this.roles.includes('ROLE_PRODUCTOWNER')){ 
+       
         this.getAllProject();
       /* }
 
@@ -35,6 +38,7 @@ export class ProjetListComponent implements OnInit {
  /*  gotToProjectList() {
     this.router.navigate(['/home']);
   } */
+
  
   getAllProject() {
     this.projectService.getProjectList()
@@ -44,6 +48,7 @@ export class ProjetListComponent implements OnInit {
       },
         err => {
           this.msgError = err.error.message;
+          Swal.fire('Hey!', this.msgError, 'warning')
           console.error(this.msgError);
         }
          
