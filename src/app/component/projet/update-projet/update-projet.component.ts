@@ -37,9 +37,9 @@ export class UpdateProjetComponent implements OnInit {
 
         this.form = this.formBuilder.group({
           titre: [this.projet.titre, Validators.required],
-          description: [this.projet.description, Validators.required],
-          date_debut: [this.projet.date_debut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
-          date_fin: [this.projet.date_fin, Validators.compose([Validators.required, DateValidator.dateVaidator])],
+          description: [this.projet.descriptionProject, Validators.required],
+          date_debut: [this.projet.dateDebut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
+          date_fin: [this.projet.dateFin, Validators.compose([Validators.required, DateValidator.dateVaidator])],
         });
 
 

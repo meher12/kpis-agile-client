@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { now } from 'moment';
 import { Projet } from 'src/app/models/projet.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 
@@ -24,22 +25,25 @@ export class CreateProjetComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     titre: new FormControl(''),
-    description: new FormControl(''),
-    date_debut: new FormControl(''),
-    date_fin: new FormControl(''),
+    uniqueID: new FormControl(''),
+    descriptionProject: new FormControl(''),
+    dateDebut: new FormControl(''),
+    dateFin: new FormControl(''),
   });
 
 
   ngOnInit(): void {
 
-      this.form = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       titre: ['', Validators.required],
-      description: ['', Validators.required],
-      date_debut: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
-      date_fin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
+      uniqueID: [("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase(), Validators.required],
+      descriptionProject: ['', Validators.required],
+      dateDebut: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
+      dateFin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
     });
     
-    
+  
+
   }
 
   saveProjet() {
@@ -50,11 +54,11 @@ export class CreateProjetComponent implements OnInit {
         Swal.fire('Hey!', 'Project is saved', 'info')
         this.gotToProjectList();
       },
-      err => {
-        this.msgError = err.error.message;
-        Swal.fire('Hey!', this.msgError, 'warning')
-        console.error(this.msgError);
-      }
+        err => {
+          this.msgError = err.error.message;
+          Swal.fire('Hey!', this.msgError, 'warning')
+          console.error(this.msgError);
+        }
       )
   }
 
@@ -80,4 +84,14 @@ export class CreateProjetComponent implements OnInit {
     this.submitted = false;
     this.form.reset();
   }
+
+ /*  onGenerateId(event: any){
+
+     event.target.value = ("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase();
+
+    this.form.setValue({
+      uniqueID: ("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase()
+    });  
+  } */
+
 }

@@ -10,6 +10,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Unique ID</th>
                     <th>Title</th>
                     <th>Description</th>
                     <th>Start Date</th>
@@ -19,10 +20,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let project of projects">
+                    <td>{{project.uniqueID}}</td>
                     <td> {{project.titre}}</td>
-                    <td>{{project.description}}</td>
-                    <td>{{project.date_debut}}</td>
-                    <td>{{project.date_fin}}</td>
+                    <td>{{project.descriptionProject}}</td>
+                    <td>{{project.dateDebut}}</td>
+                    <td>{{project.dateFin}}</td>
                     <td>
                         <div class="nowrap">
                             <button class="btn btn-info" (click)="updateProject(project.id)">Update</button>

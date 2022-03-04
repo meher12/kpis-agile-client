@@ -3,9 +3,10 @@
 export class Projet {
 
     public id: number;
+    public uniqueID: string
     public titre: string;
-    public description: string;
-    public date_debut: Date;
-    public date_fin: Date;
+    public descriptionProject: string;
+    public dateDebut: Date;
+    public dateFin: Date;
    
 }

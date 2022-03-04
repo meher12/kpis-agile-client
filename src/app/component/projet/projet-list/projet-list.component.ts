@@ -17,29 +17,16 @@ export class ProjetListComponent implements OnInit {
   roles: string[] = [];
   msgError = "";
   projects: Projet[];
-  constructor(private projectService: ProjectService, private tokenStorageService: TokenStorageService, private router:  Router){ }
+  constructor(private projectService: ProjectService, private router: Router) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-   /*  if (this.isLoggedIn)  {*/
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-     // if( this.roles.includes('ROLE_PRODUCTOWNER')){ 
-       
-        this.getAllProject();
-      /* }
 
-      else{
-        this.gotToProjectList()
-      } */
-      
+    this.getAllProject();
+
   }
 
- /*  gotToProjectList() {
-    this.router.navigate(['/home']);
-  } */
 
- 
+
   getAllProject() {
     this.projectService.getProjectList()
       .subscribe(data => {
@@ -51,34 +38,34 @@ export class ProjetListComponent implements OnInit {
           Swal.fire('Hey!', this.msgError, 'warning')
           console.error(this.msgError);
         }
-         
+
       )
   }
-    // navigate to page update project
-    updateProject(id: number) {
-      this.router.navigate(['/updateproject', id]);
-    }
+  // navigate to page update project
+  updateProject(id: number) {
+    this.router.navigate(['/updateproject', id]);
+  }
 
-    // delete project by Id
+  // delete project by Id
 
-    deletedProject(id: number){
-      this.projectService.deleteProject(id)
-      .subscribe(data =>{
+  deletedProject(id: number) {
+    this.projectService.deleteProject(id)
+      .subscribe(data => {
         console.log(data);
-        Swal.fire('Hey!', "Project with id: "+id+" is deleted", 'success');
+        Swal.fire('Hey!', "Project with id: " + id + " is deleted", 'success');
 
         this.refresh();
         this.getAllProject();
       },
-      err => {
-        this.msgError = err.error.message;
-        Swal.fire('Hey!', this.msgError, 'warning')
-        console.error(this.msgError);
-      })
-    }
+        err => {
+          this.msgError = err.error.message;
+          Swal.fire('Hey!', this.msgError, 'warning')
+          console.error(this.msgError);
+        })
+  }
 
-    refresh(): void {
-      window.location.reload();
+  refresh(): void {
+    window.location.reload();
   }
 
 }
