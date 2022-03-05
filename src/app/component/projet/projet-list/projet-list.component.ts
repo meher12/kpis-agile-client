@@ -47,7 +47,7 @@ export class ProjetListComponent implements OnInit {
     this.router.navigate(['/updateproject', id]);
   }
 
-  // ****************
+// delete project by Id
   confirmDeleteById(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -69,14 +69,13 @@ export class ProjetListComponent implements OnInit {
       if (result.isConfirmed) {
         swalWithBootstrapButtons.fire(
           'Deleted!',
-          'Your file has been deleted.',
+          'Your project '+ id +' has been deleted.',
           'success'
         )
 
         this.projectService.deleteProject(id)
           .subscribe(data => {
             console.log(data);
-
             this.getAllProject();
           },
             err => {
@@ -91,33 +90,15 @@ export class ProjetListComponent implements OnInit {
       ) {
         swalWithBootstrapButtons.fire(
           'Cancelled',
-          'Your imaginary file is safe :)',
+          'Your imaginary project is safe :)',
           'error'
         )
       }
     })
   }
-  //********** */
-  // delete project by Id
-  /*   deletedProject(id: number) {
-      this.projectService.deleteProject(id)
-        .subscribe(data => {
-         console.log(data);
-         // Swal.fire('Hey!', "Project with id: " + id + " is deleted", 'success');
-  
-    
-         
-          this.getAllProject();
-          //this.refresh();
-        },
-          err => {
-            this.msgError = err.error.message;
-            Swal.fire('Hey!', this.msgError, 'warning')
-            console.error(this.msgError);
-          })
-    } */
+ 
 
-
+    // delete all project
     confirmDeleteAll() {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -139,14 +120,13 @@ export class ProjetListComponent implements OnInit {
         if (result.isConfirmed) {
           swalWithBootstrapButtons.fire(
             'Deleted!',
-            'Your file has been deleted.',
+            'All project has been deleted.',
             'success'
           )
   
           this.projectService.deleteAllProjects()
             .subscribe(data => {
               console.log(data);
-  
               this.getAllProject();
             },
               err => {
@@ -161,7 +141,7 @@ export class ProjetListComponent implements OnInit {
         ) {
           swalWithBootstrapButtons.fire(
             'Cancelled',
-            'Your imaginary file is safe :)',
+            'Your imaginary projects is safe :)',
             'error'
           )
         }

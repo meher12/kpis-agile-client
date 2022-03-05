@@ -18,14 +18,22 @@ export class UpdateProjetComponent implements OnInit {
   msgError = "";
   submitted = false;
   projet: Projet = new Projet();
-  form: FormGroup;
+
 
   constructor(private projectService: ProjectService, private router: Router, private formBuilder: FormBuilder,
     private route: ActivatedRoute) { }
 
+
+  form: FormGroup = new FormGroup({
+    titre: new FormControl(),
+    uniqueID: new FormControl(),
+    descriptionProject: new FormControl(),
+    dateDebut: new FormControl(),
+    dateFin: new FormControl(),
+  });
+
   ngOnInit(): void {
 
-    // form
 
 
     // get id from project list
@@ -37,9 +45,10 @@ export class UpdateProjetComponent implements OnInit {
 
         this.form = this.formBuilder.group({
           titre: [this.projet.titre, Validators.required],
-          description: [this.projet.descriptionProject, Validators.required],
-          date_debut: [this.projet.dateDebut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
-          date_fin: [this.projet.dateFin, Validators.compose([Validators.required, DateValidator.dateVaidator])],
+          uniqueID: [this.projet.uniqueID, Validators.required],
+          descriptionProject: [this.projet.descriptionProject, Validators.required],
+          dateDebut: [this.projet.dateDebut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
+          dateFin: [this.projet.dateFin, Validators.compose([Validators.required, DateValidator.dateVaidator])],
         });
 
 
@@ -59,7 +68,7 @@ export class UpdateProjetComponent implements OnInit {
     this.projectService.updateProject(this.id, this.projet)
       .subscribe(data => {
         console.log(data);
-        Swal.fire('Hey!', 'Project is updated', 'info')
+        Swal.fire('Hey!', 'Project ' + this.projet.titre + ' updated', 'info')
         this.gotToProjectList();
       },
         err => {

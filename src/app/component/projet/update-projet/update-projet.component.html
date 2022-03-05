@@ -1,52 +1,72 @@
-<div class="container">
-    <h3> Update Projet</h3>
-    <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
+<div class="row">
+    <div class="col-md-12">
+        
+        <div class="card card-container">
+            <h3 style="text-align: center;"> Update Projet</h3>
+            <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
 
-         <!-- Title -->
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" formControlName="titre" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && fctl['titre'].errors }" />
-            <div *ngIf="submitted && fctl['titre'].errors" class="invalid-feedback">
-                <div *ngIf="fctl['titre'].errors['required']">Title is required</div>
-            </div>
+                <!-- Title -->
+
+                <div class="form-group">
+                    <label class="form-label">Title</label>
+                    <input type="text" formControlName="titre" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['titre'].errors }" />
+                    <div *ngIf="submitted && fctl['titre'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['titre'].errors['required']">Title is required</div>
+                    </div>
+                </div>
+
+
+                <!-- Unique Id -->
+                <div class="form-group">
+                    <label class="form-label">Project unique ID</label>
+
+                    <input type="text" formControlName="uniqueID" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['uniqueID'].errors }" disabled="" />
+                    <div *ngIf="submitted && fctl['uniqueID'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['uniqueID'].errors['required']">UniqueID is required</div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea type="text" formControlName="descriptionProject" class="form-control md-textarea"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['descriptionProject'].errors }"
+                        rows="3"></textarea>
+                    <div *ngIf="submitted && fctl['descriptionProject'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['descriptionProject'].errors['required']">Description is required</div>
+                    </div>
+                </div>
+
+                <!-- Date Debut -->
+                <div class="form-group">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" formControlName="dateDebut" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['dateDebut'].errors }">
+                    <div *ngIf="submitted && fctl['dateDebut'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['dateDebut'].errors['required']">Date is required</div>
+                    </div>
+                </div>
+
+                <!-- Date Fin -->
+                <div class="form-group">
+                    <label class="form-label">End Date</label>
+                    <input type="date" formControlName="dateFin" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['dateFin'].errors }">
+                    <div *ngIf="submitted && fctl['dateFin'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['dateFin'].errors['required']">Date is required</div>
+                    </div>
+                </div>
+
+
+
+                <!-- Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                   
+                </div>
+            </form>
         </div>
-
-        <!-- Description -->
-        <div class="form-group">
-            <label>Description</label>
-            <textarea  type="text" formControlName="description" class="form-control md-textarea"
-                [ngClass]="{ 'is-invalid': submitted && fctl['description'].errors }" mdbInput></textarea>
-            <div *ngIf="submitted && fctl['description'].errors" class="invalid-feedback">
-                <div *ngIf="fctl['description'].errors['required']">Description is required</div>
-            </div>
-        </div>
-
-         <!-- Date Debut -->
-         <div class="form-group">
-            <label>Start Date</label>
-            <input  type="date" formControlName="date_debut" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && fctl['date_debut'].errors }">
-            <div *ngIf="submitted && fctl['date_debut'].errors" class="invalid-feedback">
-                <div *ngIf="fctl['date_debut'].errors['required']">Date is required</div>
-            </div>
-        </div>
-
-        <!-- Date Fin -->
-        <div class="form-group">
-            <label>End Date</label>
-            <input  type="date" formControlName="date_fin" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && fctl['date_fin'].errors }">
-            <div *ngIf="submitted && fctl['date_fin'].errors" class="invalid-feedback">
-                <div *ngIf="fctl['date_fin'].errors['required']">Date is required</div>
-            </div>
-        </div>
-
-
-
-         <!-- Button -->
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Update</button>
-          </div>
-    </form>
+    </div>
 </div>
