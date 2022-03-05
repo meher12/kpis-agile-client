@@ -51,7 +51,7 @@ export class CreateProjetComponent implements OnInit {
     this.projectService.createProject(this.projet)
       .subscribe(data => {
         console.log(data);
-        Swal.fire('Hey!', 'Project is saved', 'info')
+        Swal.fire('Hey!', 'Project '+ this.projet.titre + ' is saved', 'info')
         this.gotToProjectList();
       },
         err => {

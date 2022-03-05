@@ -17,6 +17,7 @@ export class ProjetListComponent implements OnInit {
   roles: string[] = [];
   msgError = "";
   projects: Projet[];
+  dprojects: Projet[];
   constructor(private projectService: ProjectService, private router: Router) { }
 
   ngOnInit(): void {
@@ -46,23 +47,144 @@ export class ProjetListComponent implements OnInit {
     this.router.navigate(['/updateproject', id]);
   }
 
-  // delete project by Id
-
-  deletedProject(id: number) {
-    this.projectService.deleteProject(id)
-      .subscribe(data => {
-        console.log(data);
-        Swal.fire('Hey!', "Project with id: " + id + " is deleted", 'success');
-
-        this.refresh();
-        this.getAllProject();
+  // ****************
+  confirmDeleteById(id: number) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
       },
-        err => {
-          this.msgError = err.error.message;
-          Swal.fire('Hey!', this.msgError, 'warning')
-          console.error(this.msgError);
-        })
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+
+        this.projectService.deleteProject(id)
+          .subscribe(data => {
+            console.log(data);
+
+            this.getAllProject();
+          },
+            err => {
+              this.msgError = err.error.message;
+              Swal.fire('Hey!', this.msgError, 'warning')
+              console.error(this.msgError);
+            })
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
   }
+  //********** */
+  // delete project by Id
+  /*   deletedProject(id: number) {
+      this.projectService.deleteProject(id)
+        .subscribe(data => {
+         console.log(data);
+         // Swal.fire('Hey!', "Project with id: " + id + " is deleted", 'success');
+  
+    
+         
+          this.getAllProject();
+          //this.refresh();
+        },
+          err => {
+            this.msgError = err.error.message;
+            Swal.fire('Hey!', this.msgError, 'warning')
+            console.error(this.msgError);
+          })
+    } */
+
+
+    confirmDeleteAll() {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+  
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+  
+          this.projectService.deleteAllProjects()
+            .subscribe(data => {
+              console.log(data);
+  
+              this.getAllProject();
+            },
+              err => {
+                this.msgError = err.error.message;
+                Swal.fire('Hey!', this.msgError, 'warning')
+                console.error(this.msgError);
+              })
+  
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+          )
+        }
+      })
+    }
+
+
+
+
+
+ /*  deleteAllProjects() {
+    this.projectService.deleteAllProjects().subscribe(data => {
+
+      this.projects = data;
+      console.log(data);
+    },
+      err => {
+        this.msgError = err.error.message;
+        Swal.fire('Hey!', this.msgError, 'warning')
+        console.error(this.msgError);
+      })
+
+  } */
 
   refresh(): void {
     window.location.reload();

@@ -17,29 +17,34 @@ export class ProjectService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // get all sprints
+  // get all project
   getProjectList(): Observable<Projet[]> {
     return this.httpClient.get<Projet[]>(`${baseUrl}`, httpOptions);
   }
 
-  // create new sprint
+  // create new project
    createProject(project: Projet): Observable<Object> {
     return this.httpClient.post(`${baseUrl}`, project, httpOptions);
   }
 
-  // get sprint by id
+  // get project by id
   getProjectById(id: number): Observable<Projet> {
     return this.httpClient.get<Projet>(`${baseUrl}/${id}`, httpOptions);
   }
 
-  // update sprint by id
+  // update project by id
   updateProject(id: number, project: Projet): Observable<Object> {
     return this.httpClient.put(`${baseUrl}/${id}`, project, httpOptions);
   }
 
-  // delete sprint
+  // delete project by id
   deleteProject(id: number): Observable<Object> {
     return this.httpClient.delete(`${baseUrl}/${id}`, httpOptions);
+  } 
+
+   // delete project by id
+   deleteAllProjects(): Observable<any> {
+    return this.httpClient.delete(`${baseUrl}`,  httpOptions);
   } 
 
 }
