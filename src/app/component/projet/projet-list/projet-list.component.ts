@@ -47,7 +47,7 @@ export class ProjetListComponent implements OnInit {
     this.router.navigate(['/updateproject', id]);
   }
 
-// delete project by Id
+  // delete project by Id
   confirmDeleteById(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -69,7 +69,7 @@ export class ProjetListComponent implements OnInit {
       if (result.isConfirmed) {
         swalWithBootstrapButtons.fire(
           'Deleted!',
-          'Your project '+ id +' has been deleted.',
+          'Your project ' + id + ' has been deleted.',
           'success'
         )
 
@@ -96,75 +96,73 @@ export class ProjetListComponent implements OnInit {
       }
     })
   }
+
+
+  // delete all project
+  confirmDeleteAll() {
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'All project has been deleted.',
+          'success'
+        ),
+
+        this.projectService.deleteAllProjects()
+          .subscribe(data => {
+            console.log(data);
+            this.getAllProject();
+          },
+            err => {
+              this.msgError = err.error.message;
+              Swal.fire('Hey!', this.msgError, 'warning')
+              console.error(this.msgError);
+            })
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary projects is safe :)',
+          'error'
+        )
+      }
+    })
+
+  }
+
+  /*  deleteAllProjects() {
+     this.projectService.deleteAllProjects().subscribe(data => {
  
-
-    // delete all project
-    confirmDeleteAll() {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-  
-      swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire(
-            'Deleted!',
-            'All project has been deleted.',
-            'success'
-          )
-  
-          this.projectService.deleteAllProjects()
-            .subscribe(data => {
-              console.log(data);
-              this.getAllProject();
-            },
-              err => {
-                this.msgError = err.error.message;
-                Swal.fire('Hey!', this.msgError, 'warning')
-                console.error(this.msgError);
-              })
-  
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your imaginary projects is safe :)',
-            'error'
-          )
-        }
-      })
-    }
-
-
-
-
-
- /*  deleteAllProjects() {
-    this.projectService.deleteAllProjects().subscribe(data => {
-
-      this.projects = data;
-      console.log(data);
-    },
-      err => {
-        this.msgError = err.error.message;
-        Swal.fire('Hey!', this.msgError, 'warning')
-        console.error(this.msgError);
-      })
-
-  } */
+       this.projects = data;
+       console.log(data);
+     },
+       err => {
+         this.msgError = err.error.message;
+         Swal.fire('Hey!', this.msgError, 'warning')
+         console.error(this.msgError);
+       })
+ 
+   } */
 
   refresh(): void {
     window.location.reload();
