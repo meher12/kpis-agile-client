@@ -14,15 +14,26 @@ import Swal from 'sweetalert2';
 export class ProjetListComponent implements OnInit {
 
   isLoggedIn = false;
+  showPOBoard = false;
   roles: string[] = [];
   msgError = "";
   projects: Projet[];
   dprojects: Projet[];
-  constructor(private projectService: ProjectService, private router: Router) { }
+  constructor(private projectService: ProjectService, private router: Router, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
 
-    this.getAllProject();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      
+      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      this.getAllProject();
+      
+    }
+   
 
   }
 

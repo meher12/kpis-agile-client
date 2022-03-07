@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { now } from 'moment';
 import { Projet } from 'src/app/models/projet.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 import Swal from 'sweetalert2';
@@ -16,11 +17,16 @@ import { DateValidator } from '../date.validator';
 })
 export class CreateProjetComponent implements OnInit {
 
+  isLoggedIn = false;
+  showPOBoard = false;
+  roles: string[] = [];
+
   msgError = "";
   submitted = false;
   projet: Projet = new Projet();
 
-  constructor(private projectService: ProjectService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private projectService: ProjectService, private router: Router, private formBuilder: FormBuilder, 
+    private tokenStorageService: TokenStorageService) { }
 
 
   form: FormGroup = new FormGroup({
@@ -34,6 +40,14 @@ export class CreateProjetComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      
+      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+
     this.form = this.formBuilder.group({
       titre: ['', Validators.required],
       uniqueID: [("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase(), Validators.required],
@@ -42,7 +56,7 @@ export class CreateProjetComponent implements OnInit {
       dateFin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
     });
     
-  
+    }
 
   }
 
