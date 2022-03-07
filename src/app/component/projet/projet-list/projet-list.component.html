@@ -13,7 +13,7 @@
 
     <div class="table-responsive" style="text-align: center;">
         <table class="table table-hover">
-            <thead>
+            <thead class="thead-light">
                 <tr>
                     <th>Unique ID</th>
                     <th>Title</th>
@@ -32,6 +32,7 @@
                     <td>{{project.dateFin}}</td>
                     <td>
                         <div class="nowrap">
+                            <button class="btn btn-success" (click)="detailsProject(project.id)">Details</button>
                             <button class="btn btn-info" (click)="updateProject(project.id)">Update</button>
                             <button style="margin-left: 2px" class="btn btn-danger"
                                 (click)="confirmDeleteById(project.id)">Delete</button>

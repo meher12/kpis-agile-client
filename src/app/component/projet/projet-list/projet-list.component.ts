@@ -53,6 +53,12 @@ export class ProjetListComponent implements OnInit {
 
       )
   }
+
+
+   // navigate to page update project
+   detailsProject(id: number) {
+    this.router.navigate(['/detailsproject', id]);
+  }
   // navigate to page update project
   updateProject(id: number) {
     this.router.navigate(['/updateproject', id]);

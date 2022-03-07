@@ -1,0 +1,33 @@
+<div class="container">
+    <h3> View Project Details</h3>
+    <div>
+        <div>
+            <label> <b> uniqueID: </b></label> {{project.uniqueID}}
+        </div>
+        <div>
+            <label> <b> Last Name: </b></label> {{project.titre}}
+        </div>
+        <div>
+            <label> <b> Email Id: </b></label> {{project.descriptionProject}}
+        </div>
+
+        <div>
+            <label> <b> Email Id: </b></label> {{project.dateDebut}}
+        </div>
+
+        <div>
+            <label> <b> Email Id: </b></label> {{project.dateFin}}
+        </div>
+
+        <div *ngFor="let sprint of project.sprints" >
+            <div>
+                <label> <b> ********** Id: </b></label> {{sprint.sUniqueID}}
+            </div>
+            <div>
+                <label> <b> ********** Id: </b></label> {{sprint.stitre}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
