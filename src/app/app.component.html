@@ -26,7 +26,7 @@
           </li>
         </ul>
 
-        <ul class="navbar-nav fexr" *ngIf="!isLoggedIn">
+        <ul class="navbar-nav" *ngIf="!isLoggedIn">
           <li class="nav-item">
             <a href="/signup" class="nav-link" routerLink="signup">Sign Up</a>
           </li>
@@ -35,9 +35,9 @@
           </li>
         </ul>
 
-       <ul class="navbar-nav float-right" *ngIf="isLoggedIn">
+       <ul class="navbar-nav" *ngIf="isLoggedIn">
           <li class="nav-item">
-            <a href="/profile" class="nav-link float-right" routerLink="profile">{{ username }}</a>
+            <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
           </li>
           <li class="nav-item">
             <a href class="nav-link" (click)="logout()">LogOut</a>
