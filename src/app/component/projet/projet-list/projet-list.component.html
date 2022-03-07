@@ -1,20 +1,20 @@
 <div class="card" *ngIf="showPOBoard;else BadCredentials">
     <h3 style="text-align: center;">Project List</h3>
 
-<div class="col-md-10" style="margin-bottom: 10px;">
-    <div class="btn-group btn-group-toggle" role="group">
-        <button routerLink="/createproject" class="btn btn-outline-primary">Add Project</button>
-        <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete All
-            project</button>
+    <div class="col-md-10" style="margin-bottom: 10px;">
+        <div class="btn-group btn-group-toggle" role="group">
+            <button routerLink="/createproject" class="btn btn-outline-primary">Add Project</button>
+            <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete All
+                project</button>
 
+        </div>
     </div>
-</div>
-   
+
 
     <div class="table-responsive" style="text-align: center;">
-        <table class="table table-hover">
-            <thead class="thead-light">
-                <tr>
+        <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
+            <thead class="bg-none bgc-default-tp1">
+                <tr class="text-white">
                     <th>Unique ID</th>
                     <th>Title</th>
                     <th>Description</th>
@@ -31,9 +31,9 @@
                     <td>{{project.dateDebut}}</td>
                     <td>{{project.dateFin}}</td>
                     <td>
-                        <div class="nowrap">
+                        <div class="nowrap btn-group">
                             <button class="btn btn-success" (click)="detailsProject(project.id)">Details</button>
-                            <button class="btn btn-info" (click)="updateProject(project.id)">Update</button>
+                            <button style="margin-left: 2px" class="btn btn-info" (click)="updateProject(project.id)">Update</button>
                             <button style="margin-left: 2px" class="btn btn-danger"
                                 (click)="confirmDeleteById(project.id)">Delete</button>
                         </div>
@@ -44,7 +44,8 @@
         </table>
     </div>
 
+
 </div>
 <ng-template #BadCredentials>
-   <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3> 
-  </ng-template>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>
