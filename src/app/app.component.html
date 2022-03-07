@@ -2,11 +2,12 @@
 
 
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-
     <ul class="nav-links">
+      
       <!-- USING CHECKBOX HACK -->
       <input type="checkbox" id="checkbox_toggle" />
       <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+
       <!-- NAVIGATION MENUS -->
       <div class="menu">
         <a href="#" class="navbar-brand">KPIs Agile</a>
@@ -34,14 +35,7 @@
           </li>
         </ul>
 
-      <!--   <div class="navbar-nav float-right" *ngIf="isLoggedIn">
-          <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-
-              <a href class="nav-link" (click)="logout()">LogOut</a>
-
-        </div> -->
-
-       <ul class="navbar-nav" *ngIf="isLoggedIn">
+       <ul class="navbar-nav float-right" *ngIf="isLoggedIn">
           <li class="nav-item">
             <a href="/profile" class="nav-link float-right" routerLink="profile">{{ username }}</a>
           </li>
@@ -56,7 +50,6 @@
     </ul>
   </nav>
 
-  <!-- *************** -->
 
   <!-- Sidebar Menu -->
   <!-- Sidebar Product Owner -->

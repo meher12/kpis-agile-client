@@ -18,18 +18,17 @@
 
 /* NAVBAR STYLING STARTS */
 .navbar {
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  background-color: teal;
   color: #fff;
  }
 
 
 
  .menu .nav-links  {
-  float: left;
+ /* float: left;*/
  }
 .menu .nav-links a {
   color: #fff;
@@ -42,7 +41,7 @@
   font-size: 18px;
  }
  .menu li:hover {
-  background-color: #4c9e9e;
+  background-color: #343a40;
   border-radius: 5px;
   transition: 0.3s ease;
  }
@@ -66,16 +65,22 @@
  .menu { 
   display:none;
   /*position: absolute;*/
-  background-color:teal;
+  background-color: #343a40;
   right: 0;
   left: 0;
   text-align: center;
   padding: 16px 0;
  }
+
+ .menu li a{
+  display: flex;
+  flex-direction: column;
+ }
  .menu li:hover {
   display: inline-block;
-  background-color:#4c9e9e;
   transition: 0.3s ease;
+  color: #f1f1f1;
+  text-overflow: clip;
  }
  .menu li + li {
   margin-top: 12px;
@@ -88,6 +93,7 @@
  }
  }
 
+/* The Main Content */
   .container{
     margin: 5px auto;
   }
