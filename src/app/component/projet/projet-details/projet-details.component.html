@@ -1,86 +1,131 @@
-<div class="container">
-    <h3> View Project Details</h3>
+<!-- <div class="container">
+  <h3> View Project Details</h3>
+  <div>
     <div>
-        <div>
-            <label> <b> Unique ID: </b></label> {{project.uniqueID}}
-        </div>
-        <div>
-            <label> <b> Title: </b></label> {{project.titre}}
-        </div>
-        <div>
-            <label> <b> Description: </b></label> {{project.descriptionProject}}
-        </div>
-
-        <div>
-            <label> <b> Start Date </b></label> {{project.dateDebut}}
-        </div>
-
-        <div>
-            <label> <b> End Date: </b></label> {{project.dateFin}}
-        </div>
-
-        <div *ngFor="let sprint of project.sprints" >
-
-            <details>
-                <summary>Details</summary>
-                List sprints:
-            </details>
-            <div>
-                <label> <b> sUniqueID: </b></label> {{sprint.sUniqueID}}
-            </div>
-            <div>
-                <label> <b> stitre: </b></label> {{sprint.stitre}}
-            </div>
-        </div>
+      <label> <b> Unique ID: </b></label> {{project.uniqueID}}
     </div>
-</div>
+    <div>
+      <label> <b> Title: </b></label> {{project.titre}}
+    </div>
+    <div>
+      <label> <b> Description: </b></label> {{project.descriptionProject}}
+    </div>
 
-<div class="col-md-8">
+    <div>
+      <label> <b> Start Date: </b></label> {{project.dateDebut}}
+    </div>
+
+    <div>
+      <label> <b> End Date: </b></label> {{project.dateFin}}
+    </div>
+
+    <div *ngFor="let sprint of project.sprints">
+
+      <details>
+        <summary>Details</summary>
+        List sprints:
+      </details>
+      <div>
+        <label> <b> sUniqueID: </b></label> {{sprint.sUniqueID}}
+      </div>
+      <div>
+        <label> <b> stitre: </b></label> {{sprint.stitre}}
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="card">
+  <h3 class="text-center"> View Project Details</h3>
+
+  <div class="col-md-12">
     <div class="card mb-3">
       <div class="card-body">
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="mb-0">Full Name</h6>
+            <h6 class="mb-0">Unique ID:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            Kenneth Valdez
+            {{project.uniqueID}}
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="mb-0">Email</h6>
+            <h6 class="mb-0">Title:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            fip@jukmuh.al
+            {{project.titre}}
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="mb-0">Phone</h6>
+            <h6 class="mb-0">Description:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            (239) 816-9029
+            {{project.descriptionProject}}
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="mb-0">Mobile</h6>
+            <h6 class="mb-0">Start Date:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            (320) 380-4539
+            {{project.dateDebut}}
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="mb-0">Address</h6>
+            <h6 class="mb-0"> End Date:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            Bay Area, San Francisco, CA
+            {{project.dateFin}}
           </div>
         </div>
 
+        <div class="without-table-tag" *ngIf="sprintList.length>0; else noSprintList">
+          <h3> List Sprints of {{project.titre}} project: </h3>
+          <br>
+          <div class="table">
+            <div class="row bold">
+              <div class="col c5 border">ID</div>
+              <div class="col c25 border">Title</div>
+              <div class="col c50 border">Description</div>
+              <div class="col c30 border">Start Date</div>
+              <div class="col clast border">End Date</div>
+            </div>
+            <div class="row" *ngFor="let sprint of project.sprints">
+              <div class="col c5 border">{{sprint.sUniqueID}}</div>
+              <div class="col c25 border">{{sprint.stitre}}</div>
+              <div class="col c50 border">{{sprint.sdescription}}</div>
+              <div class="col c30 border">{{sprint.sdateDebut}}</div>
+              <div class="col clast border">{{sprint.sdateFin}}</div>
+            </div>
+          </div>
+        </div>
 
+          <ng-template #noSprintList>
+            <div  class="text-danger font-weight-bold" style="padding-top: 10px;">
+              <h3>There is no Sprint for this project!!</h3>
+            </div>
+          </ng-template>
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+
+  </div>

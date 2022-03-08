@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Projet } from 'src/app/models/projet.model';
+import { Sprint } from 'src/app/models/sprint.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class ProjetDetailsComponent implements OnInit {
 
   id: number;
   project: Projet;
+  sprintList: Sprint[];
   constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -22,6 +24,7 @@ export class ProjetDetailsComponent implements OnInit {
     this.projectService.getProjectById(this.id)
       .subscribe(data => {
         this.project = data;
+        this.sprintList =  this.project.sprints;
         console.log(this.project);
         
       },

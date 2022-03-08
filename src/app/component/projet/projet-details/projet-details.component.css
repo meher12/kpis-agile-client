@@ -1,20 +1,56 @@
-details {
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding: .5em .5em 0;
+.card {
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   display: flex ;
+  }
+ 
+.without-table-tag{
+    margin-top: 15px;
 }
+.without-table-tag .table{
+    display:table;
+    width:100%;
+    text-align: center;
+    overflow-x: auto;
+ }
+ 
+.without-table-tag .row{
+    display:table-row;
+    
+ }
+ .without-table-tag .bold{
+     font-weight: bold;
+ }
+ 
+.without-table-tag .col{
+     display:table-cell;
+     padding-top: 15px;
+    border:1px solid rgb(132, 137, 156);
+ }
+ 
+.without-table-tag .c50{
+    width:40%;
+ }
+ 
+.without-table-tag .c25{
+    width:25%;
+ }
 
-summary {
-    font-weight: bold;
-    margin: -.5em -.5em 0;
-    padding: .5em;
-}
+ .without-table-tag .c5{
+    width:10%;
+ }
 
-details[open] {
-    padding: .5em;
-}
+ .without-table-tag .c30{
+    width:15%;
+ }
+ .clast{
+    width:15%;
+ }
 
-details[open] summary {
-    border-bottom: 1px solid #aaa;
-    margin-bottom: .5em;
-}
