@@ -15,7 +15,7 @@ export class AppComponent {
   isLoggedIn = false;
   showPOBoard = false;
   showScrumMBoard = false;
-  //showDevBoard = false;
+  showDevBoard = false;
   username?: string;
 
   constructor(private tokenStorageService: TokenStorageService) { }
@@ -30,7 +30,7 @@ export class AppComponent {
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
-     // this.showDevBoard =  this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
+      this.showDevBoard =  this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 
       this.username = user.username;
     }

@@ -15,6 +15,8 @@ export class ProjetListComponent implements OnInit {
 
   isLoggedIn = false;
   showPOBoard = false;
+  showScrumMBoard = false;
+
   roles: string[] = [];
   msgError = "";
   projects: Projet[];
@@ -30,6 +32,8 @@ export class ProjetListComponent implements OnInit {
       this.roles = user.roles;
       
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+
       this.getAllProject();
       
     }

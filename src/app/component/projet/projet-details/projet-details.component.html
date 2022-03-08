@@ -1,42 +1,4 @@
-<!-- <div class="container">
-  <h3> View Project Details</h3>
-  <div>
-    <div>
-      <label> <b> Unique ID: </b></label> {{project.uniqueID}}
-    </div>
-    <div>
-      <label> <b> Title: </b></label> {{project.titre}}
-    </div>
-    <div>
-      <label> <b> Description: </b></label> {{project.descriptionProject}}
-    </div>
-
-    <div>
-      <label> <b> Start Date: </b></label> {{project.dateDebut}}
-    </div>
-
-    <div>
-      <label> <b> End Date: </b></label> {{project.dateFin}}
-    </div>
-
-    <div *ngFor="let sprint of project.sprints">
-
-      <details>
-        <summary>Details</summary>
-        List sprints:
-      </details>
-      <div>
-        <label> <b> sUniqueID: </b></label> {{sprint.sUniqueID}}
-      </div>
-      <div>
-        <label> <b> stitre: </b></label> {{sprint.stitre}}
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-<div class="card">
+<div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
   <h3 class="text-center"> View Project Details</h3>
 
   <div class="col-md-12">
@@ -108,24 +70,15 @@
           </div>
         </div>
 
-          <ng-template #noSprintList>
-            <div  class="text-danger font-weight-bold" style="padding-top: 10px;">
-              <h3>There is no Sprint for this project!!</h3>
-            </div>
-          </ng-template>
-
-
-
-
-
-
-
-
-
-
+        <ng-template #noSprintList>
+          <div class="text-danger font-weight-bold" style="padding-top: 10px;">
+            <h3>There is no Sprint for this project!!</h3>
+          </div>
+        </ng-template>
       </div>
     </div>
-
-
-
   </div>
+</div>
+<ng-template #BadCredentials>
+  <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>

@@ -18,6 +18,7 @@ import { CreateProjetComponent } from './component/projet/create-projet/create-p
 import { ProjetListComponent } from './component/projet/projet-list/projet-list.component';
 import { UpdateProjetComponent } from './component/projet/update-projet/update-projet.component';
 import { ProjetDetailsComponent } from './component/projet/projet-details/projet-details.component';
+import { SprintListComponent } from './component/sprint/sprint-list/sprint-list.component';
 
 
 
@@ -40,6 +41,7 @@ import { ProjetDetailsComponent } from './component/projet/projet-details/projet
     ProjetListComponent,
     UpdateProjetComponent,
     ProjetDetailsComponent,
+    SprintListComponent,
 
 
 

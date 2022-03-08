@@ -1,8 +1,8 @@
-<div class="card" *ngIf="showPOBoard;else BadCredentials">
+<div class="card"  *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
     <h3 style="text-align: center;">Project List</h3>
 
-    <div class="col-md-10" style="margin-bottom: 10px;">
-        <div class="btn-group btn-group-toggle" role="group">
+    <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
+        <div  class="btn-group btn-group-toggle" role="group">
             <button routerLink="/createproject" class="btn btn-outline-primary">Add Project</button>
             <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete All
                 project</button>
@@ -14,7 +14,7 @@
     <div class="table-responsive" style="text-align: center;">
         <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
             <thead class="bg-none bgc-default-tp1">
-                <tr class="text-white">
+                <tr>
                     <th>Unique ID</th>
                     <th>Title</th>
                     <th>Description</th>
@@ -23,6 +23,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr *ngFor="let project of projects">
                     <td>{{project.uniqueID}}</td>
@@ -33,8 +34,8 @@
                     <td>
                         <div class="nowrap btn-group">
                             <button class="btn btn-success" (click)="detailsProject(project.id)">Details</button>
-                            <button style="margin-left: 2px" class="btn btn-info" (click)="updateProject(project.id)">Update</button>
-                            <button style="margin-left: 2px" class="btn btn-danger"
+                            <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info" (click)="updateProject(project.id)">Update</button>
+                            <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
                                 (click)="confirmDeleteById(project.id)">Delete</button>
                         </div>
 
