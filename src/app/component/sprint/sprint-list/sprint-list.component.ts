@@ -15,6 +15,8 @@ import Swal from 'sweetalert2';
 export class SprintListComponent implements OnInit {
 
   sprints: Sprint[];
+
+
   projet_id: number;
 
   msgError = "";
@@ -37,27 +39,62 @@ export class SprintListComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-      this.cgetAllSprints();
+     
     }
 
   }
 
 
-  // // get all Sprints By ProjectId
-  cgetAllSprints() {
-
-    this.sprintService.getAllSprints()
+  cgetAllSprintsByProjectRef(event: any) {
+    
+    this.sprintService.getAllSprintsByProjectRef(event.target.value)
       .subscribe(data => {
         this.sprints = data;
         console.log(this.sprints);
-        console.log(JSON.parse(JSON.stringify(this.sprints)));
+
       },
-       
-        
         err => {
           this.msgError = err.error.message;
-          Swal.fire('Hey!', this.msgError, 'warning')
+          Swal.fire('Hey!', 'Insert ref project to display list of sprints now is: '+ this.msgError, 'warning')
           console.error(this.msgError);
         });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+    // // get all Sprints By ProjectId
+   /*  cgetAllSprints() {
+      this.sprintService.getAllSprints()
+        .subscribe(data => {
+          this.sprints = data;
+          console.log(this.sprints);
+          console.log(JSON.parse(JSON.stringify(this.sprints)));
+        },
+         
+          
+          err => {
+            this.msgError = err.error.message;
+            Swal.fire('Hey!', this.msgError, 'warning')
+            console.error(this.msgError);
+          });
+    } */
+
 }
+
+
+
+
+

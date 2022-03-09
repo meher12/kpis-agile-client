@@ -27,7 +27,12 @@ export class SprintService {
     return this.httpClient.get<Sprint[]>(`${baseUrl}`+'/sprints/' , httpOptions);
   }
 
-   // get project by id
+   // get AllSprints By ProjectId
+   getAllSprintsByProjectRef(project_ref: string): Observable<Sprint[]> {
+    return this.httpClient.get<Sprint[]>(`${baseUrl}/${project_ref}` + '/sprints/' , httpOptions);
+  }
+
+   // get sprint by id
    getSprintById(id: number): Observable<Sprint> {
     return this.httpClient.get<Sprint>(`${baseUrl}`+'/sprints/'+`${id}`, httpOptions);
   }

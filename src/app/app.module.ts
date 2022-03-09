@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 
+// search module
+//import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BoardPoComponent } from './board-po/board-po.component';
@@ -52,6 +55,7 @@ import { SprintListComponent } from './component/sprint/sprint-list/sprint-list.
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    //Ng2SearchPipeModule
 
 
   ],

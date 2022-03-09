@@ -1,38 +1,48 @@
 <div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
     <h3 style="text-align: center;">Sprint List</h3>
-
-    <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
-        <div  class="btn-group btn-group-toggle" role="group">
-            <button routerLink="/createsprint" class="btn btn-outline-primary">Add Sprint</button>
-            <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete All
-                Sprint</button>
-
-        </div>
+    <div class="container text-center">
+        <h1>Sprint Search Using Project Reference</h1>
     </div>
 
+    <div class="container container-search-sprints">
+        <div class="search-sprints">
+            <input class="form-control" type="text" name="search"  (keyup)="cgetAllSprintsByProjectRef($event)" autocomplete="off"
+                placeholder="&#61442; Start searching for a sprint by project reference" [(ngModel)]="searchText">
+        </div>
 
-    <div class="table-responsive" style="text-align: center;">
-        <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
-            <thead class="bg-none bgc-default-tp1">
-                <tr>
-                    <th>Reference</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+        <div *ngIf="searchText">
+        <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
+            <div class="btn-group btn-group-toggle" role="group">
+                <button routerLink="/createsprint" class="btn btn-outline-primary">Add Sprint</button>
+                <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete All
+                    Sprint</button>
 
-            <tbody>
-                <tr *ngFor="let sprint of sprints">
-                    <td>{{sprint.sReference}}</td>
-                    <td> {{sprint.stitre}}</td>
-                    <td>{{sprint.sdescription}}</td>
-                    <td>{{sprint.sdateDebut}}</td>
-                    <td>{{sprint.sdateFin}}</td>
-                    <td>{{sprint.projet?.titre}}</td>
-                    <!-- <td>
+            </div>
+        </div>
+
+
+        <div class="table-responsive" style="text-align: center;">
+            <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
+                <thead class="bg-none bgc-default-tp1">
+                    <tr>
+                        <th>Reference</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let sprint of sprints">
+                        <td>{{sprint.sReference}}</td>
+                        <td> {{sprint.stitre}}</td>
+                        <td>{{sprint.sdescription}}</td>
+                        <td>{{sprint.sdateDebut}}</td>
+                        <td>{{sprint.sdateFin}}</td>
+                        <td>{{sprint.projet?.titre}}</td>
+                        <!-- <td>
                         <div class="nowrap btn-group">
                             <button class="btn btn-success" (click)="detailsProject(project.id)">Details</button>
                             <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info" (click)="updateProject(project.id)">Update</button>
@@ -41,11 +51,12 @@
                         </div>
 
                     </td> -->
-                </tr>
-            </tbody>
-        </table>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
     </div>
-
 
 </div>
 <ng-template #BadCredentials>

@@ -12,4 +12,22 @@
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
    display: flex ;
   }
+
+  .search-sprints {
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin:auto;
+  }
+  
+  .form-control {
+    box-shadow: 0 10px 40px 0 #B0C1D9;
+    
+  }
+  .form-control::placeholder  {
+    font-family: FontAwesome;
+  }
+
+.container-search-sprints .row {
+    display: block;
+}
  
