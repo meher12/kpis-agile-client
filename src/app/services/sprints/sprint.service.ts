@@ -1,40 +1,61 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sprint } from 'src/app/models/sprint.model';
+
+const baseUrl = "http://localhost:8080/api/sprints";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class SprintService {
 
-  private baseUrl = "http://localhost:8080/api/sprints";
 
   constructor(private httpClient: HttpClient) { }
 
-  // get all sprints
-  getSprintList(): Observable<Sprint[]>{
-    return this.httpClient.get<Sprint[]>(`${this.baseUrl}`);
+  // get AllSprints By ProjectId
+  getAllSprintsByProjectId(projet_id: number): Observable<Sprint[]> {
+    return this.httpClient.get<Sprint[]>(`${baseUrl}` +'/projects/'+`${projet_id}`+'/sprints', httpOptions);
   }
 
-  // create new sprint
-  createSprint(sprint: Sprint): Observable<Object>{
-     return this.httpClient.post(`${this.baseUrl}`, sprint);
+  // get AllSprints By ProjectId
+  getAllSprints(): Observable<Sprint[]> {
+    return this.httpClient.get<Sprint[]>(`${baseUrl}`+'/sprints/' , httpOptions);
   }
 
-  // get sprint by id
-  getSprintById(id: number): Observable<Sprint>{
-    return this.httpClient.get<Sprint>(`${this.baseUrl}/${id}`);
+   // get project by id
+   getSprintById(id: number): Observable<Sprint> {
+    return this.httpClient.get<Sprint>(`${baseUrl}`+'/sprints/'+`${id}`, httpOptions);
   }
 
-  // update sprint by id
-  updateSprint(id: number, sprint: Sprint): Observable<Object>{
-     return this.httpClient.put(`${this.baseUrl}/${id}`, sprint);
+  /* // create new project
+   createProject(sprint: Sprint): Observable<Object> {
+    return this.httpClient.post(`${baseUrl}`, sprint, httpOptions);
   }
 
-  // delete sprint
-  deleteSprint(id: number): Observable<Object> {
-    return this.httpClient.delete(`${this.baseUrl}/${id}`);
+  // get project by id
+  getProjectById(id: number): Observable<Sprint> {
+    return this.httpClient.get<Sprint>(`${baseUrl}/${id}`, httpOptions);
   }
+
+  // update project by id
+  updateProject(id: number, sprint: Sprint): Observable<Object> {
+    return this.httpClient.put(`${baseUrl}/${id}`, sprint, httpOptions);
+  }
+
+  // delete project by id
+  deleteProject(id: number): Observable<Object> {
+    return this.httpClient.delete(`${baseUrl}/${id}`, httpOptions);
+  } 
+
+   // delete project by id
+   deleteAllProjects(): Observable<any> {
+    return this.httpClient.delete(`${baseUrl}`,  httpOptions);
+  } 
+ */
 
 }

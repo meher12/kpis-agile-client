@@ -8,7 +8,7 @@
                 <!-- Title -->
 
                 <div class="form-group">
-                    <label class="form-label">Title</label>
+                    <label class="form-label">Title*</label>
                     <input type="text" formControlName="titre" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && fctl['titre'].errors }" />
                     <div *ngIf="submitted && fctl['titre'].errors" class="invalid-feedback">
@@ -19,18 +19,18 @@
 
                 <!-- Unique Id -->
                 <div class="form-group">
-                    <label class="form-label">Project unique ID</label>
+                    <label class="form-label">Reference</label>
 
-                    <input type="text" formControlName="uniqueID" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && fctl['uniqueID'].errors }" disabled="" />
-                    <div *ngIf="submitted && fctl['uniqueID'].errors" class="invalid-feedback">
-                        <div *ngIf="fctl['uniqueID'].errors['required']">UniqueID is required</div>
+                    <input type="text" formControlName="pReference" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['pReference'].errors }" disabled="" />
+                    <div *ngIf="submitted && fctl['pReference'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['pReference'].errors['required']">UniqueID is required</div>
                     </div>
                 </div>
 
                 <!-- Description -->
                 <div class="form-group">
-                    <label class="form-label">Description</label>
+                    <label class="form-label">Description*</label>
                     <textarea type="text" formControlName="descriptionProject" class="form-control md-textarea"
                         [ngClass]="{ 'is-invalid': submitted && fctl['descriptionProject'].errors }"
                         rows="3"></textarea>
@@ -41,7 +41,7 @@
 
                 <!-- Date Debut -->
                 <div class="form-group">
-                    <label class="form-label">Start Date</label>
+                    <label class="form-label">Start Date*</label>
                     <input type="date" formControlName="dateDebut" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && fctl['dateDebut'].errors }">
                     <div *ngIf="submitted && fctl['dateDebut'].errors" class="invalid-feedback">
@@ -51,7 +51,7 @@
 
                 <!-- Date Fin -->
                 <div class="form-group">
-                    <label class="form-label">End Date</label>
+                    <label class="form-label">End Date*</label>
                     <input type="date" formControlName="dateFin" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && fctl['dateFin'].errors }">
                     <div *ngIf="submitted && fctl['dateFin'].errors" class="invalid-feedback">

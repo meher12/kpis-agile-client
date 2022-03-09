@@ -6,10 +6,10 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-3">
-            <h6 class="mb-0">Unique ID:</h6>
+            <h6 class="mb-0">Reference:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            {{project.uniqueID}}
+            {{project.pReference}}
           </div>
         </div>
         <hr>
@@ -49,19 +49,19 @@
           </div>
         </div>
 
-        <div class="without-table-tag" *ngIf="sprintList.length>0; else noSprintList">
+        <div class="without-table-tag" *ngIf="sprintList?.length > 0; else noSprintList">
           <h3> List Sprints of {{project.titre}} project: </h3>
           <br>
           <div class="table">
             <div class="row bold">
-              <div class="col c5 border">ID</div>
+              <div class="col c5 border">Reference</div>
               <div class="col c25 border">Title</div>
               <div class="col c50 border">Description</div>
               <div class="col c30 border">Start Date</div>
               <div class="col clast border">End Date</div>
             </div>
             <div class="row" *ngFor="let sprint of project.sprints">
-              <div class="col c5 border">{{sprint.sUniqueID}}</div>
+              <div class="col c5 border">{{sprint.sReference}}</div>
               <div class="col c25 border">{{sprint.stitre}}</div>
               <div class="col c50 border">{{sprint.sdescription}}</div>
               <div class="col c30 border">{{sprint.sdateDebut}}</div>

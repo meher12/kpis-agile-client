@@ -1,1 +1,53 @@
-<p>sprint-list works!</p>
+<div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
+    <h3 style="text-align: center;">Sprint List</h3>
+
+    <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
+        <div  class="btn-group btn-group-toggle" role="group">
+            <button routerLink="/createsprint" class="btn btn-outline-primary">Add Sprint</button>
+            <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete All
+                Sprint</button>
+
+        </div>
+    </div>
+
+
+    <div class="table-responsive" style="text-align: center;">
+        <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
+            <thead class="bg-none bgc-default-tp1">
+                <tr>
+                    <th>Reference</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let sprint of sprints">
+                    <td>{{sprint.sReference}}</td>
+                    <td> {{sprint.stitre}}</td>
+                    <td>{{sprint.sdescription}}</td>
+                    <td>{{sprint.sdateDebut}}</td>
+                    <td>{{sprint.sdateFin}}</td>
+                    <td>{{sprint.projet?.titre}}</td>
+                    <!-- <td>
+                        <div class="nowrap btn-group">
+                            <button class="btn btn-success" (click)="detailsProject(project.id)">Details</button>
+                            <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info" (click)="updateProject(project.id)">Update</button>
+                            <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
+                                (click)="confirmDeleteById(project.id)">Delete</button>
+                        </div>
+
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+<ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>

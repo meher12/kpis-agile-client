@@ -53,9 +53,7 @@ export class ProjetListComponent implements OnInit {
           this.msgError = err.error.message;
           Swal.fire('Hey!', this.msgError, 'warning')
           console.error(this.msgError);
-        }
-
-      )
+        });
   }
 
 

@@ -54,14 +54,14 @@
   <!-- Sidebar Menu -->
   <!-- Sidebar Product Owner -->
   <div class="sidebar" *ngIf="showPOBoard">
-    <a class="active" href="#home">Home</a>
     <a href="/projectList" routerLinkActive="/projectList">Manage Projet</a>
-    <a href="#">Manage Sprint</a>
+    <a href="/sprintList" routerLinkActive="/sprintList">Manage Sprint</a>
   </div>
 
   <!-- Sidebar Scrum Master -->
   <div class="sidebar" *ngIf="showScrumMBoard">
     <a href="/projectList" routerLinkActive="/projectList">List Projet</a>
+    <a href="/sprintList" routerLinkActive="/sprintList">Manage Sprint</a>
   </div>
 
   <!-- ********* Conten with Role********** -->

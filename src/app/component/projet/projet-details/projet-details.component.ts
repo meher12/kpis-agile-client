@@ -22,6 +22,7 @@ export class ProjetDetailsComponent implements OnInit {
   msgError = "";
 
   id: number;
+  
   project: Projet;
   sprintList: Sprint[];
   constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute,

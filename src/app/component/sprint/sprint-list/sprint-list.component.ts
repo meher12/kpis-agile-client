@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Projet } from 'src/app/models/projet.model';
+import { Sprint } from 'src/app/models/sprint.model';
+import { SprintService } from 'src/app/services/sprints/sprint.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sprint-list',
@@ -7,9 +14,50 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SprintListComponent implements OnInit {
 
-  constructor() { }
+  sprints: Sprint[];
+  projet_id: number;
+
+  msgError = "";
+  isLoggedIn = false;
+  showPOBoard = false;
+  showScrumMBoard = false;
+
+  roles: string[] = [];
+
+  constructor(private sprintService: SprintService, private router: Router, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+
+      this.cgetAllSprints();
+    }
+
   }
 
+
+  // // get all Sprints By ProjectId
+  cgetAllSprints() {
+
+    this.sprintService.getAllSprints()
+      .subscribe(data => {
+        this.sprints = data;
+        console.log(this.sprints);
+        console.log(JSON.parse(JSON.stringify(this.sprints)));
+      },
+       
+        
+        err => {
+          this.msgError = err.error.message;
+          Swal.fire('Hey!', this.msgError, 'warning')
+          console.error(this.msgError);
+        });
+  }
 }

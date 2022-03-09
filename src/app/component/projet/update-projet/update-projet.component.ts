@@ -31,7 +31,7 @@ export class UpdateProjetComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     titre: new FormControl(),
-    uniqueID: new FormControl(),
+    pReference: new FormControl(),
     descriptionProject: new FormControl(),
     dateDebut: new FormControl(),
     dateFin: new FormControl(),
@@ -56,7 +56,7 @@ export class UpdateProjetComponent implements OnInit {
 
         this.form = this.formBuilder.group({
           titre: [this.projet.titre, Validators.required],
-          uniqueID: [this.projet.uniqueID, Validators.required],
+          pReference: [this.projet.pReference, Validators.required],
           descriptionProject: [this.projet.descriptionProject, Validators.required],
           dateDebut: [this.projet.dateDebut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
           dateFin: [this.projet.dateFin, Validators.compose([Validators.required, DateValidator.dateVaidator])],
