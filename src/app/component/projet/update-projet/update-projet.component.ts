@@ -7,7 +7,8 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 import Swal from 'sweetalert2';
-import { DateValidator } from '../date.validator';
+import { DateValidator } from '../../date.validator';
+
 @Component({
   selector: 'app-update-projet',
   templateUrl: './update-projet.component.html',
