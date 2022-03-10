@@ -27,7 +27,7 @@ export class CreateSprintComponent implements OnInit {
   project: Projet;
 
   _project_id: number;
-   //Getter and Setters
+  //Getter and Setters
   get projectId() { return this._project_id };
   set projectId(value: number) { this._project_id = value; }
 
@@ -76,9 +76,7 @@ export class CreateSprintComponent implements OnInit {
         sdateFin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
       });
 
-
       this.getRefProject();
-
 
       this.projetService.getProjectByReference(this._selectedPRef)
         .subscribe(data => {
@@ -103,7 +101,7 @@ export class CreateSprintComponent implements OnInit {
 
   saveSprint() {
     this.sprint = this.form.value;
-    this.sprintService.createSprint( this._project_id, this.sprint)
+    this.sprintService.createSprint(this._project_id, this.sprint)
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Sprint ' + this.sprint.stitre + ' is saved', 'info')
@@ -135,10 +133,10 @@ export class CreateSprintComponent implements OnInit {
     this.saveSprint();
   }
 
- /*  onReset(): void {
-    this.submitted = false;
-    this.form.reset();
-  } */
+  /*  onReset(): void {
+     this.submitted = false;
+     this.form.reset();
+   } */
 
- 
+
 }

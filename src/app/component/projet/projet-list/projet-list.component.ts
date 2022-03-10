@@ -24,21 +24,19 @@ export class ProjetListComponent implements OnInit {
   constructor(private projectService: ProjectService, private router: Router, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-    
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
-      
+
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllProject();
-      
-    }
-   
 
+    }
   }
 
 
@@ -57,8 +55,8 @@ export class ProjetListComponent implements OnInit {
   }
 
 
-   // navigate to page update project
-   detailsProject(id: number) {
+  // navigate to page update project
+  detailsProject(id: number) {
     this.router.navigate(['/detailsproject', id]);
   }
   // navigate to page update project
@@ -144,16 +142,16 @@ export class ProjetListComponent implements OnInit {
           'success'
         ),
 
-        this.projectService.deleteAllProjects()
-          .subscribe(data => {
-            console.log(data);
-            this.getAllProject();
-          },
-            err => {
-              this.msgError = err.error.message;
-              Swal.fire('Hey!', this.msgError, 'warning')
-              console.error(this.msgError);
-            })
+          this.projectService.deleteAllProjects()
+            .subscribe(data => {
+              console.log(data);
+              this.getAllProject();
+            },
+              err => {
+                this.msgError = err.error.message;
+                Swal.fire('Hey!', this.msgError, 'warning')
+                console.error(this.msgError);
+              })
 
       } else if (
         /* Read more about handling dismissals below */

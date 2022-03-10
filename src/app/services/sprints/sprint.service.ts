@@ -51,6 +51,11 @@ export class SprintService {
   createSprint(projetid: number, sprint: Sprint): Observable<Object> {
     return this.httpClient.post(`${baseUrl}` + "/projects/" + `${projetid}` + "/sprints", sprint, httpOptions);
   }
+
+  // update sprint by id
+  updateSprintById(id: number, sprint: Sprint): Observable<Object>{
+    return this.httpClient.put(`${baseUrl}` + '/sprints/' + `${id}`, sprint, httpOptions);
+  }
   /*
    // get project by id
    getProjectById(id: number): Observable<Sprint> {

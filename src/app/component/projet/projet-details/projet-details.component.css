@@ -11,19 +11,24 @@
    display: flex ;
   }
  
+  .detailsp .text-secondary,  .detailsp .col-sm-9  {
+   color: #091827!important;
+}
+
 .without-table-tag{
-    margin-top: 15px;
+    margin-top: 15px; 
 }
 .without-table-tag .table{
     display:table;
     width:100%;
     text-align: center;
     overflow-x: auto;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
  }
  
+
 .without-table-tag .row{
     display:table-row;
-    
  }
  .without-table-tag .bold{
      font-weight: bold;
@@ -32,7 +37,7 @@
 .without-table-tag .col{
      display:table-cell;
      padding-top: 15px;
-    border:1px solid rgb(132, 137, 156);
+   
  }
  
 .without-table-tag .c50{

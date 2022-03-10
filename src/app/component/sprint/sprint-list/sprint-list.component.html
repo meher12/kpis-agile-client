@@ -44,16 +44,17 @@
                             <td>{{sprint.sdescription}}</td>
                             <td>{{sprint.sdateDebut}}</td>
                             <td>{{sprint.sdateFin}}</td>
-                            <td>{{sprint.projet?.titre}}</td>
-                            <!-- <td>
-                        <div class="nowrap btn-group">
-                            <button class="btn btn-success" (click)="detailsProject(project.id)">Details</button>
-                            <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info" (click)="updateProject(project.id)">Update</button>
-                            <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
-                                (click)="confirmDeleteById(project.id)">Delete</button>
-                        </div>
+                            <td>
+                                <div class="nowrap btn-group">
+                                    <!-- <button class="btn btn-success"
+                                        (click)="detailsProject(project.id)">Details</button> -->
+                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info"
+                                        (click)="updateSprint(sprint.id)">Update</button>
+                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
+                                        (click)="confirmDeleteById(project.id)">Delete</button>
+                                </div>
 
-                    </td> -->
+                            </td>
                         </tr>
                     </tbody>
                 </table>

@@ -18,8 +18,6 @@ export class SprintListComponent implements OnInit {
   sprints: Sprint[];
 
 
-  projet_id: string;
-
   msgError = "";
   isLoggedIn = false;
   showPOBoard = false;
@@ -27,13 +25,9 @@ export class SprintListComponent implements OnInit {
 
   roles: string[] = [];
 
-  message:string="";
-  refprodect: string ;
-
   constructor(private sprintService: SprintService, private router: Router, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
@@ -48,7 +42,6 @@ export class SprintListComponent implements OnInit {
 
   // find sprint by project reference
   cgetAllSprintsByProjectRef(event: any) {
-
     //Set refprodect in component 1
     this.sprintService.changePReference(event.target.value);
 
@@ -62,6 +55,12 @@ export class SprintListComponent implements OnInit {
           Swal.fire('Hey!', 'Insert ref project to display list of sprints now is: ' + this.msgError, 'warning')
           console.error(this.msgError);
         });
+  }
+
+
+  // navigate to update sprint
+  updateSprint(id: number){
+   this.router.navigate(['updatesprint', id]);
   }
 
 
