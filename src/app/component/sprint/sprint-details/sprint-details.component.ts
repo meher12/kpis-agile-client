@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Projet } from 'src/app/models/projet.model';
+import { ActivatedRoute } from '@angular/router';
 import { Sprint } from 'src/app/models/sprint.model';
-import { ProjectService } from 'src/app/services/projects/project.service';
+import { Story } from 'src/app/models/story.model';
+import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-projet-details',
-  templateUrl: './projet-details.component.html',
-  styleUrls: ['./projet-details.component.css']
+  selector: 'app-sprint-details',
+  templateUrl: './sprint-details.component.html',
+  styleUrls: ['./sprint-details.component.css']
 })
-export class ProjetDetailsComponent implements OnInit {
-
+export class SprintDetailsComponent implements OnInit {
 
   isLoggedIn = false;
   showPOBoard = false;
@@ -22,10 +21,10 @@ export class ProjetDetailsComponent implements OnInit {
   msgError = "";
 
   id: number;
-  
-  project: Projet;
-  sprintList: Sprint[];
-  constructor(private projectService: ProjectService,  private route: ActivatedRoute,
+  sprint: Sprint;
+  stories: Story[];
+
+  constructor(private sprintService: SprintService,  private route: ActivatedRoute,
     private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
@@ -39,13 +38,13 @@ export class ProjetDetailsComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-      this.project = new Projet();
+      this.sprint = new Sprint();
       this.id = this.route.snapshot.params['id'];
-      this.projectService.getProjectById(this.id)
+      this.sprintService.getSprintById(this.id)
         .subscribe(data => {
-          this.project = data;
-          this.sprintList = this.project.sprints;
-          console.log(this.project);
+          this.sprint = data;
+          this.stories = this.sprint.stories;
+          console.log(this.sprint);
 
         },
           err => {

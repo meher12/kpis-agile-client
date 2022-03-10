@@ -23,6 +23,7 @@ import { UpdateProjetComponent } from './component/projet/update-projet/update-p
 import { ProjetDetailsComponent } from './component/projet/projet-details/projet-details.component';
 import { SprintListComponent } from './component/sprint/sprint-list/sprint-list.component';
 import { UpdateSprintComponent } from './component/sprint/update-sprint/update-sprint.component';
+import { SprintDetailsComponent } from './component/sprint/sprint-details/sprint-details.component';
 
 
 
@@ -47,6 +48,7 @@ import { UpdateSprintComponent } from './component/sprint/update-sprint/update-s
     ProjetDetailsComponent,
     SprintListComponent,
     UpdateSprintComponent,
+    SprintDetailsComponent,
 
 
 

@@ -90,7 +90,7 @@ export class SprintListComponent implements OnInit {
       },
         err => {
           this.msgError = err.error.message;
-          Swal.fire('Hey!', 'Insert ref project to display list of sprints now is: ' + this.msgError, 'warning')
+          Swal.fire('Hey!', 'Choose project to display list of sprints now is: ' + this.msgError, 'warning')
           console.error(this.msgError);
         });
   }
@@ -99,6 +99,10 @@ export class SprintListComponent implements OnInit {
   // navigate to update sprint
   updateSprint(id: number) {
     this.router.navigate(['updatesprint', id]);
+  }
+
+  detailSprint(id: number){
+    this.router.navigate(['detailssprint', id]);
   }
 
 

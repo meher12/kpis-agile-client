@@ -8,6 +8,7 @@ import { ProjetDetailsComponent } from './component/projet/projet-details/projet
 import { ProjetListComponent } from './component/projet/projet-list/projet-list.component';
 import { UpdateProjetComponent } from './component/projet/update-projet/update-projet.component';
 import { CreateSprintComponent } from './component/sprint/create-sprint/create-sprint.component';
+import { SprintDetailsComponent } from './component/sprint/sprint-details/sprint-details.component';
 import { SprintListComponent } from './component/sprint/sprint-list/sprint-list.component';
 import { UpdateSprintComponent } from './component/sprint/update-sprint/update-sprint.component';
 import { HomeComponent } from './home/home.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'sprintList', component: SprintListComponent},
   {path: 'createsprint', component: CreateSprintComponent},
   {path: 'updatesprint/:id', component: UpdateSprintComponent},
+  {path: 'detailssprint/:id', component: SprintDetailsComponent},
   
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

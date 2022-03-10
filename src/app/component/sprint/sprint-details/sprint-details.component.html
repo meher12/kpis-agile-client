@@ -1,0 +1,84 @@
+<div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
+    <h3 class="text-center"> View Sprint Details</h3>
+  
+    <div class="col-md-12 detailsp">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Reference:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{sprint.sReference}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Title:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{sprint.stitre}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Description:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{sprint.sdescription}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Start Date:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{sprint.sdateDebut}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0"> End Date:</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{sprint.sdateFin}}
+            </div>
+          </div>
+  
+          <div class="without-table-tag" *ngIf="stories?.length > 0; else noStoriesList">
+            <h3> List Story of {{sprint.titre}} sprint: </h3>
+            <br>
+            <div class="table">
+              <div class="row bold">
+                <div class="col c5 border">Reference</div>
+                <div class="col c25 border">Title</div>
+                <div class="col c50 border">Description</div>
+                <div class="col c30 border">Start Date</div>
+                <div class="col clast border">End Date</div>
+              </div>
+              <div class="row" *ngFor="let story of sprint.stories">
+                <div class="col c5 border">{{story.sReference}}</div>
+                <div class="col c25 border">{{story.stitre}}</div>
+                <div class="col c50 border">{{story.sdescription}}</div>
+                <div class="col c30 border">{{story.sdateDebut}}</div>
+                <div class="col clast border">{{story.sdateFin}}</div>
+              </div>
+            </div>
+          </div>
+  
+          <ng-template #noStoriesList>
+            <div class="text-danger font-weight-bold" style="padding-top: 10px;">
+              <h3>There is no Story for this sprint!!</h3>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+  </ng-template>

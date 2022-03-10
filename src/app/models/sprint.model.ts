@@ -1,4 +1,5 @@
 import { Projet } from "./projet.model";
+import { Story } from "./story.model";
 
 
 export class Sprint {
@@ -10,4 +11,5 @@ export class Sprint {
     public sdateDebut: Date;
     public sdateFin: Date;
     public projet: Projet;
+    public stories: Story[];
 }
