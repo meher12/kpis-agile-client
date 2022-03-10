@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Projet } from 'src/app/models/projet.model';
 import { Sprint } from 'src/app/models/sprint.model';
+import { ProjectService } from 'src/app/services/projects/project.service';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -16,7 +17,7 @@ import Swal from 'sweetalert2';
 export class SprintListComponent implements OnInit {
 
   sprints: Sprint[];
-
+  project: Projet;
 
   msgError = "";
   isLoggedIn = false;
@@ -25,7 +26,8 @@ export class SprintListComponent implements OnInit {
 
   roles: string[] = [];
 
-  constructor(private sprintService: SprintService, private router: Router, private tokenStorageService: TokenStorageService) { }
+  constructor(private sprintService: SprintService, private router: Router, private tokenStorageService: TokenStorageService,
+    private projectService: ProjectService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -35,20 +37,42 @@ export class SprintListComponent implements OnInit {
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
-     
-      
+      this.cgetAllSprints();
+
     }
+  }
+
+  //  get all Sprints
+  cgetAllSprints() {
+    this.sprintService.getAllSprints()
+      .subscribe(data => {
+        this.sprints = data;
+        console.log(this.sprints);
+      },
+
+        err => {
+          this.msgError = err.error.message;
+          Swal.fire('Hey!', this.msgError, 'warning')
+          console.error(this.msgError);
+        });
   }
 
   // find sprint by project reference
   cgetAllSprintsByProjectRef(event: any) {
+
     //Set refprodect in component 1
     this.sprintService.changePReference(event.target.value);
+
+    //get project name
+    this.projectService.getProjectByReference(event.target.value)
+      .subscribe(data => {
+        this.project = data;
+      })
 
     this.sprintService.getAllSprintsByProjectRef(event.target.value)
       .subscribe(data => {
         this.sprints = data;
-       // console.log(this.sprints);
+        // console.log(this.sprints);
       },
         err => {
           this.msgError = err.error.message;
@@ -59,8 +83,110 @@ export class SprintListComponent implements OnInit {
 
 
   // navigate to update sprint
-  updateSprint(id: number){
-   this.router.navigate(['updatesprint', id]);
+  updateSprint(id: number) {
+    this.router.navigate(['updatesprint', id]);
+  }
+
+
+  // delete project by Id
+  confirmDeleteById(id: number) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your sprint ' + id + ' has been deleted.',
+          'success'
+        )
+
+        this.sprintService.deleteSprint(id)
+          .subscribe(data => {
+            console.log(data);
+            this.cgetAllSprints();
+          },
+            err => {
+              this.msgError = err.error.message;
+              Swal.fire('Hey!', this.msgError, 'warning')
+              console.error(this.msgError);
+            })
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary sprint is safe :)',
+          'error'
+        )
+      }
+    })
+  }
+
+  // delete all Sprint By projectId
+  confirmDeleteAll() {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'All sprints has been deleted.',
+          'success'
+        ),
+
+          this.sprintService.deleteAllSprintByProjectId(this.project.id)
+            .subscribe(data => {
+              console.log(data);
+              this.cgetAllSprints();
+            },
+              err => {
+                this.msgError = err.error.message;
+                Swal.fire('Hey!', this.msgError, 'warning')
+                console.error(this.msgError);
+              })
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary sprints is safe :)',
+          'error'
+        )
+      }
+    })
+
   }
 
 
@@ -75,25 +201,6 @@ export class SprintListComponent implements OnInit {
 
 
 
-
-
-
-  // // get all Sprints By ProjectId
-  /*  cgetAllSprints() {
-     this.sprintService.getAllSprints()
-       .subscribe(data => {
-         this.sprints = data;
-         console.log(this.sprints);
-         console.log(JSON.parse(JSON.stringify(this.sprints)));
-       },
-        
-         
-         err => {
-           this.msgError = err.error.message;
-           Swal.fire('Hey!', this.msgError, 'warning')
-           console.error(this.msgError);
-         });
-   } */
 
 }
 

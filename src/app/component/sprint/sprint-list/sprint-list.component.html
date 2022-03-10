@@ -1,7 +1,7 @@
 <div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
     <h3 style="text-align: center;">Sprint List</h3>
     <div class="container text-center">
-        <h1>Sprint Search Using Project Reference</h1>
+        <h5>Sprint Search Using Project Reference</h5>
     </div>
 
     <div class="container container-search-sprints">
@@ -11,20 +11,24 @@
                 placeholder="&#61442; Searching sprint list by project reference, press 'Enter' to show List"
                 [(ngModel)]="searchRef">
         </div>
-
-        <div *ngIf="searchRef">
+        <!-- *ngIf="searchRef" -->
+        <div >
             <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
-                <div class="btn-group btn-group-toggle" role="group">
+                <div *ngIf="searchRef" class="btn-group btn-group-toggle" role="group">
                     <button routerLink="/createsprint" class="btn btn-outline-primary">Add Sprint</button>
                     <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete
                         All
                         Sprint</button>
 
                 </div>
+                <div class="row titre" *ngIf="searchRef">
+                    <h3>Project title: {{project?.titre}}</h3>
+                </div>
             </div>
-
+          
             <div class="table-responsive" style="text-align: center;">
+
                 <table class="table table-striped">
                     <thead class="bg-none bgc-default-tp1">
                         <tr>
@@ -50,8 +54,9 @@
                                         (click)="detailsProject(project.id)">Details</button> -->
                                     <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info"
                                         (click)="updateSprint(sprint.id)">Update</button>
+
                                     <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
-                                        (click)="confirmDeleteById(project.id)">Delete</button>
+                                        (click)="confirmDeleteById(sprint.id)">Delete</button>
                                 </div>
 
                             </td>

@@ -117,7 +117,6 @@ export class ProjetListComponent implements OnInit {
 
   // delete all project
   confirmDeleteAll() {
-
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',

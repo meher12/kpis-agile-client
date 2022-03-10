@@ -53,29 +53,20 @@ export class SprintService {
   }
 
   // update sprint by id
-  updateSprintById(id: number, sprint: Sprint): Observable<Object>{
+  updateSprintById(id: number, sprint: Sprint): Observable<Object> {
     return this.httpClient.put(`${baseUrl}` + '/sprints/' + `${id}`, sprint, httpOptions);
   }
-  /*
-   // get project by id
-   getProjectById(id: number): Observable<Sprint> {
-     return this.httpClient.get<Sprint>(`${baseUrl}/${id}`, httpOptions);
-   }
- 
-   // update project by id
-   updateProject(id: number, sprint: Sprint): Observable<Object> {
-     return this.httpClient.put(`${baseUrl}/${id}`, sprint, httpOptions);
-   }
- 
-   // delete project by id
-   deleteProject(id: number): Observable<Object> {
-     return this.httpClient.delete(`${baseUrl}/${id}`, httpOptions);
-   } 
- 
-    // delete project by id
-    deleteAllProjects(): Observable<any> {
-     return this.httpClient.delete(`${baseUrl}`,  httpOptions);
-   } 
-  */
+
+  // delete sprint by id
+  deleteSprint(id: number): Observable<Object> {
+    return this.httpClient.delete(`${baseUrl}` + '/sprints/' + `${id}`, httpOptions);
+  }
+
+
+  // delete project by id
+  deleteAllSprintByProjectId(project_id: number): Observable<any> {
+    return this.httpClient.delete(`${baseUrl}` + '/projects/' + `${project_id}` + '/sprints', httpOptions);
+  }
+
 
 }
