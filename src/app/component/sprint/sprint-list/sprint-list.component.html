@@ -6,27 +6,38 @@
 
     <div class="container container-search-sprints">
         <div class="search-sprints">
-            <input class="form-control" type="text" name="search" (keypress)="cgetAllSprintsByProjectRef($event)"
+            <!--   <input class="form-control" type="text" name="search" (keypress)="cgetAllSprintsByProjectRef($event)"
                 autocomplete="off"
                 placeholder="&#61442; Searching sprint list by project reference, press 'Enter' to show List"
-                [(ngModel)]="searchRef">
+                [(ngModel)]="searchRef"> -->
+
+            <!-- Start -->
+            <select  class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
+             [(ngModel)]="selected" name="valueCheck" (change)="cgetAllSprintsByProjectRef($event)">
+                <option [ngValue]="undefined" disabled>Select Any </option>
+                <option   *ngFor="let project of projects" [value]="project.pReference" [selected]="project == selected">
+                    {{project.titre}}
+                </option>
+            </select>
+
+            <!-- End -->
         </div>
         <!-- *ngIf="searchRef" -->
-        <div >
+        <div>
             <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
-                <div *ngIf="searchRef" class="btn-group btn-group-toggle" role="group">
+                <div *ngIf="selected" class="btn-group btn-group-toggle" role="group">
                     <button routerLink="/createsprint" class="btn btn-outline-primary">Add Sprint</button>
                     <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete
                         All
                         Sprint</button>
 
                 </div>
-                <div class="row titre" *ngIf="searchRef">
+                <div class="row titre" *ngIf="selected">
                     <h3>Project title: {{project?.titre}}</h3>
                 </div>
             </div>
-          
+
             <div class="table-responsive" style="text-align: center;">
 
                 <table class="table table-striped">

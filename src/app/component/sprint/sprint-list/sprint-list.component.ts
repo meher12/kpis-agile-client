@@ -16,6 +16,9 @@ import Swal from 'sweetalert2';
 })
 export class SprintListComponent implements OnInit {
 
+  projects: Projet[];
+  selected;
+
   sprints: Sprint[];
   project: Projet;
 
@@ -37,6 +40,8 @@ export class SprintListComponent implements OnInit {
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+
+      this.getTitleProjects();
       this.cgetAllSprints();
 
     }
@@ -56,6 +61,15 @@ export class SprintListComponent implements OnInit {
           console.error(this.msgError);
         });
   }
+
+  // Get All projects
+   getTitleProjects(){
+    this.projectService.getProjectList()
+    .subscribe(data => {
+      this.projects= data;
+    })
+   }
+  /* ******* */
 
   // find sprint by project reference
   cgetAllSprintsByProjectRef(event: any) {
