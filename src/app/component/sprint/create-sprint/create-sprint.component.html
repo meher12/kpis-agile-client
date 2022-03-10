@@ -1,3 +1,78 @@
-<div class="container">
-    
+<div class="row"  *ngIf="showPOBoard;else BadCredentials">
+    <div class="col-md-12">
+        
+        <div class="card card-container">
+            <h3 style="text-align: center;"> Create Sprint</h3>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <!-- Title -->
+
+                <div class="form-group">
+                    <label class="form-label">Title*</label>
+                    <input type="text" formControlName="stitre" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['stitre'].errors }" />
+                    <div *ngIf="submitted && fctl['stitre'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['stitre'].errors['required']">Title is required</div>
+                    </div>
+                </div>
+
+
+                <!-- Unique Id -->
+                <div class="form-group">
+                    <label class="form-label">Reference*</label>
+
+                    <input type="text" formControlName="sReference" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['sReference'].errors }" disabled="" />
+                    <div *ngIf="submitted && fctl['sReference'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['sReference'].errors['required']">Reference is required</div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="form-label">Description*</label>
+                    <textarea type="text" formControlName="sdescription" class="form-control md-textarea"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['sdescription'].errors }"
+                        rows="3"></textarea>
+                    <div *ngIf="submitted && fctl['sdescription'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['sdescription'].errors['required']">Description is required</div>
+                    </div>
+                </div>
+
+                <!-- Date Debut -->
+                <div class="form-group">
+                    <label class="form-label">Start Date*</label>
+                    <input type="date" formControlName="sdateDebut" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['sdateDebut'].errors }">
+                    <div *ngIf="submitted && fctl['sdateDebut'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['sdateDebut'].errors['required']">Date is required</div>
+                    </div>
+                </div>
+
+                <!-- Date Fin -->
+                <div class="form-group">
+                    <label class="form-label">End Date*</label>
+                    <input type="date" formControlName="sdateFin" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['sdateFin'].errors }">
+                    <div *ngIf="submitted && fctl['sdateFin'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['sdateFin'].errors['required']">Date is required</div>
+                    </div>
+                </div>
+
+
+
+                <!-- Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <!-- <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+                        Reset
+                    </button> -->
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+<ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3> 
+   </ng-template>

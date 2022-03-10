@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {  Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Projet } from 'src/app/models/projet.model';
 
@@ -23,7 +23,7 @@ export class ProjectService {
   }
 
   // create new project
-   createProject(project: Projet): Observable<Object> {
+  createProject(project: Projet): Observable<Object> {
     return this.httpClient.post(`${baseUrl}`, project, httpOptions);
   }
 
@@ -32,6 +32,11 @@ export class ProjectService {
     return this.httpClient.get<Projet>(`${baseUrl}/${id}`, httpOptions);
   }
 
+  // get project by reference
+  getProjectByReference(preference: string): Observable<Projet> {
+    return this.httpClient.get<Projet>(`${baseUrl}/${preference}/`, httpOptions);
+  }
+  
   // update project by id
   updateProject(id: number, project: Projet): Observable<Object> {
     return this.httpClient.put(`${baseUrl}/${id}`, project, httpOptions);
@@ -40,11 +45,11 @@ export class ProjectService {
   // delete project by id
   deleteProject(id: number): Observable<Object> {
     return this.httpClient.delete(`${baseUrl}/${id}`, httpOptions);
-  } 
+  }
 
-   // delete project by id
-   deleteAllProjects(): Observable<any> {
-    return this.httpClient.delete(`${baseUrl}`,  httpOptions);
-  } 
+  // delete project by id
+  deleteAllProjects(): Observable<any> {
+    return this.httpClient.delete(`${baseUrl}`, httpOptions);
+  }
 
 }

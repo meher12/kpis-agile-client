@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { now } from 'moment';
+
 import { Projet } from 'src/app/models/projet.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -25,7 +25,7 @@ export class CreateProjetComponent implements OnInit {
   submitted = false;
   projet: Projet = new Projet();
 
-  constructor(private projectService: ProjectService, private router: Router, private formBuilder: FormBuilder, 
+  constructor(private projectService: ProjectService, private router: Router, private formBuilder: FormBuilder,
     private tokenStorageService: TokenStorageService) { }
 
 
@@ -45,17 +45,17 @@ export class CreateProjetComponent implements OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
-      
+
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
 
-    this.form = this.formBuilder.group({
-      titre: ['', Validators.required],
-      pReference: [("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase(), Validators.required],
-      descriptionProject: ['', Validators.required],
-      dateDebut: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
-      dateFin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
-    });
-    
+      this.form = this.formBuilder.group({
+        titre: ['', Validators.required],
+        pReference: [("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase(), Validators.required],
+        descriptionProject: ['', Validators.required],
+        dateDebut: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
+        dateFin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
+      });
+
     }
 
   }
@@ -65,7 +65,7 @@ export class CreateProjetComponent implements OnInit {
     this.projectService.createProject(this.projet)
       .subscribe(data => {
         console.log(data);
-        Swal.fire('Hey!', 'Project '+ this.projet.titre + ' is saved', 'info')
+        Swal.fire('Hey!', 'Project ' + this.projet.titre + ' is saved', 'info')
         this.gotToProjectList();
       },
         err => {
@@ -97,15 +97,19 @@ export class CreateProjetComponent implements OnInit {
   onReset(): void {
     this.submitted = false;
     this.form.reset();
+    this.refresh();
   }
 
- /*  onGenerateId(event: any){
-
-     event.target.value = ("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase();
-
-    this.form.setValue({
-      uniqueID: ("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase()
-    });  
-  } */
+  refresh(): void {
+    window.location.reload();
+  }
+  /*  onGenerateId(event: any){
+ 
+      event.target.value = ("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase();
+ 
+     this.form.setValue({
+       uniqueID: ("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase()
+     });  
+   } */
 
 }

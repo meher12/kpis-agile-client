@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Projet } from 'src/app/models/projet.model';
 import { Sprint } from 'src/app/models/sprint.model';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+
 
 import Swal from 'sweetalert2';
 
@@ -17,7 +18,7 @@ export class SprintListComponent implements OnInit {
   sprints: Sprint[];
 
 
-  projet_id: number;
+  projet_id: string;
 
   msgError = "";
   isLoggedIn = false;
@@ -26,36 +27,39 @@ export class SprintListComponent implements OnInit {
 
   roles: string[] = [];
 
+  message:string="";
+  refprodect: string ;
+
   constructor(private sprintService: SprintService, private router: Router, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
-
      
+      
     }
-
   }
 
-
+  // find sprint by project reference
   cgetAllSprintsByProjectRef(event: any) {
-    
+
+    //Set refprodect in component 1
+    this.sprintService.changePReference(event.target.value);
+
     this.sprintService.getAllSprintsByProjectRef(event.target.value)
       .subscribe(data => {
         this.sprints = data;
-        console.log(this.sprints);
-
+       // console.log(this.sprints);
       },
         err => {
           this.msgError = err.error.message;
-          Swal.fire('Hey!', 'Insert ref project to display list of sprints now is: '+ this.msgError, 'warning')
+          Swal.fire('Hey!', 'Insert ref project to display list of sprints now is: ' + this.msgError, 'warning')
           console.error(this.msgError);
         });
   }
@@ -73,24 +77,24 @@ export class SprintListComponent implements OnInit {
 
 
 
-  
 
-    // // get all Sprints By ProjectId
-   /*  cgetAllSprints() {
-      this.sprintService.getAllSprints()
-        .subscribe(data => {
-          this.sprints = data;
-          console.log(this.sprints);
-          console.log(JSON.parse(JSON.stringify(this.sprints)));
-        },
+
+  // // get all Sprints By ProjectId
+  /*  cgetAllSprints() {
+     this.sprintService.getAllSprints()
+       .subscribe(data => {
+         this.sprints = data;
+         console.log(this.sprints);
+         console.log(JSON.parse(JSON.stringify(this.sprints)));
+       },
+        
          
-          
-          err => {
-            this.msgError = err.error.message;
-            Swal.fire('Hey!', this.msgError, 'warning')
-            console.error(this.msgError);
-          });
-    } */
+         err => {
+           this.msgError = err.error.message;
+           Swal.fire('Hey!', this.msgError, 'warning')
+           console.error(this.msgError);
+         });
+   } */
 
 }
 
