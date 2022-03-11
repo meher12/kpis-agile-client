@@ -16,6 +16,15 @@ import { DateValidator } from '../../date.validator';
 })
 export class UpdateSprintComponent implements OnInit {
 
+
+   //Get value in component 2
+   _selectedPRef: any;
+   //Getter and Setters
+   get selectedPRef() { return this._selectedPRef };
+   set selectedPRef(value: string) { //debugger;
+     this._selectedPRef = value;
+   }
+
   isLoggedIn = false;
   showPOBoard = false;
   roles: string[] = [];
@@ -72,6 +81,25 @@ export class UpdateSprintComponent implements OnInit {
     }
   }
 
+
+
+ // Get projectRef in create sprint from sprint list
+ getRefProject() {
+  this.sprintService.currentrefProject
+    .subscribe(projectRef => {
+      this.selectedPRef = projectRef;
+
+      //localStorage of ref project
+        localStorage.setItem('refproject', this.selectedPRef);
+    }); //<= Always get current value!
+}
+
+/* sendRefProjectParams(){
+  //Set refprodect in component 1
+  this.sprintService.changePReference(this.selectedPRef);
+} */
+
+
   onSubmitUpdateSprint() {
     this.sprint = this.form.value;
     this.sprintService.updateSprintById(this.id, this.sprint)
@@ -89,7 +117,7 @@ export class UpdateSprintComponent implements OnInit {
   }
 
   gotToSprintList() {
-    this.router.navigate(['/sprintList']);
+    this.router.navigate(['/sprintListBypre']);
   }
 
   get fctl(): { [key: string]: AbstractControl } {

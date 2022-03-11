@@ -77,6 +77,7 @@ export class SprintListComponent implements OnInit {
     //Set refprodect in component 1
     this.sprintService.changePReference(event.target.value);
 
+
     //get project name
     this.projectService.getProjectByReference(event.target.value)
       .subscribe(data => {

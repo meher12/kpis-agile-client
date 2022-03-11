@@ -76,6 +76,10 @@ export class CreateSprintComponent implements OnInit {
         sdateFin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
       });
 
+     
+      // storage of ref sprint
+      localStorage.setItem('refsprint', this.form.controls.sReference.value );
+      
       this.getRefProject();
 
       this.projetService.getProjectByReference(this._selectedPRef)
@@ -96,8 +100,17 @@ export class CreateSprintComponent implements OnInit {
     this.sprintService.currentrefProject
       .subscribe(projectRef => {
         this.selectedPRef = projectRef;
+
+        //localStorage of ref project
+        localStorage.setItem('refproject', this.selectedPRef);
       }); //<= Always get current value!
   }
+
+ /*  sendRefProjectParams(){
+    //Set refprodect in component 1
+    this.sprintService.changePReference(this.selectedPRef);
+  } */
+ 
 
   saveSprint() {
     this.sprint = this.form.value;
@@ -116,7 +129,7 @@ export class CreateSprintComponent implements OnInit {
   }
 
   gotToSprintList() {
-    this.router.navigate(['/sprintList']);
+    this.router.navigate(['/sprintListBypre']);
   }
 
   get fctl(): { [key: string]: AbstractControl } {
@@ -133,10 +146,14 @@ export class CreateSprintComponent implements OnInit {
     this.saveSprint();
   }
 
-  /*  onReset(): void {
+   onReset(): void {
      this.submitted = false;
      this.form.reset();
-   } */
-
+     this.refresh()
+     localStorage.getItem('refsprint');
+   }
+   refresh(): void {
+    window.location.reload();
+  }
 
 }
