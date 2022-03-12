@@ -26,17 +26,19 @@ export class CreateSprintComponent implements OnInit {
   sprint: Sprint = new Sprint();
   project: Projet;
 
+
+
   _project_id: number;
   //Getter and Setters
   get projectId() { return this._project_id };
   set projectId(value: number) { this._project_id = value; }
 
   //Get value in component 2
-  _selectedPRef: any;
+  _sselectedPRef: any;
   //Getter and Setters
-  get selectedPRef() { return this._selectedPRef };
+  get selectedPRef() { return this._sselectedPRef };
   set selectedPRef(value: string) { //debugger;
-    this._selectedPRef = value;
+    this._sselectedPRef= value;
   }
 
   //how to use from another component
@@ -78,11 +80,15 @@ export class CreateSprintComponent implements OnInit {
 
      
       // storage of ref sprint
-      localStorage.setItem('refsprint', this.form.controls.sReference.value );
+      //localStorage of ref project
+     
+      //localStorage.setItem('refsprint', this.form.controls.sReference.value );
+      //window.sessionStorage.removeItem('refproject');
+      //window.sessionStorage.removeItem('refsprint');
       
       this.getRefProject();
 
-      this.projetService.getProjectByReference(this._selectedPRef)
+      this.projetService.getProjectByReference(this._sselectedPRef)
         .subscribe(data => {
           this.project = data;
           this._project_id = this.project.id
@@ -99,17 +105,17 @@ export class CreateSprintComponent implements OnInit {
   getRefProject() {
     this.sprintService.currentrefProject
       .subscribe(projectRef => {
-        this.selectedPRef = projectRef;
-
-        //localStorage of ref project
-        localStorage.setItem('refproject', this.selectedPRef);
+        this._sselectedPRef = projectRef;
+    // set local storage
+      localStorage.setItem('refprojectforsprintlist', this._sselectedPRef);
       }); //<= Always get current value!
   }
 
- /*  sendRefProjectParams(){
+  sendRefProjectParams(){
     //Set refprodect in component 1
-    this.sprintService.changePReference(this.selectedPRef);
-  } */
+    this.sprintService.changePReference( this._sselectedPRef);
+      
+  }
  
 
   saveSprint() {
@@ -117,8 +123,9 @@ export class CreateSprintComponent implements OnInit {
     this.sprintService.createSprint(this._project_id, this.sprint)
       .subscribe(data => {
         console.log(data);
-        Swal.fire('Hey!', 'Sprint ' + this.sprint.stitre + ' is saved', 'info')
-        this.gotToSprintList();
+        Swal.fire('Hey!', 'Sprint ' + this.sprint.stitre + ' is saved', 'info');
+        console.log("*********"+ this._project_id)
+        this.gotToSprintListBypref();
       },
         err => {
           this.msgError = err.error.message;
@@ -128,7 +135,7 @@ export class CreateSprintComponent implements OnInit {
       )
   }
 
-  gotToSprintList() {
+  gotToSprintListBypref() {
     this.router.navigate(['/sprintListBypre']);
   }
 
@@ -149,8 +156,8 @@ export class CreateSprintComponent implements OnInit {
    onReset(): void {
      this.submitted = false;
      this.form.reset();
-     this.refresh()
-     localStorage.getItem('refsprint');
+     //this.refresh()
+     //localStorage.getItem('refsprint');
    }
    refresh(): void {
     window.location.reload();

@@ -49,6 +49,7 @@ export class UpdateSprintComponent implements OnInit {
 
   ngOnInit(): void {
 
+   
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -89,15 +90,18 @@ export class UpdateSprintComponent implements OnInit {
     .subscribe(projectRef => {
       this.selectedPRef = projectRef;
 
+      // set local storage
+      localStorage.setItem('refprojectforsprintlist', this.selectedPRef);
+
       //localStorage of ref project
-        localStorage.setItem('refproject', this.selectedPRef);
+       // localStorage.setItem('refproject', this.selectedPRef);
     }); //<= Always get current value!
 }
 
-/* sendRefProjectParams(){
+sendRefProjectParams(){
   //Set refprodect in component 1
   this.sprintService.changePReference(this.selectedPRef);
-} */
+}
 
 
   onSubmitUpdateSprint() {
@@ -106,7 +110,7 @@ export class UpdateSprintComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Sprint ' + this.sprint.stitre + ' updated', 'info')
-        this.gotToSprintList();
+        this.gotToSprintListBypref();
       },
         err => {
           this.msgError = err.error.message;
@@ -116,7 +120,7 @@ export class UpdateSprintComponent implements OnInit {
       )
   }
 
-  gotToSprintList() {
+  gotToSprintListBypref() {
     this.router.navigate(['/sprintListBypre']);
   }
 

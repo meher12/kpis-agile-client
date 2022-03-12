@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Projet } from 'src/app/models/projet.model';
 
-const baseUrl = 'http://localhost:8080/api/projects';
+const baseUrl = 'http://localhost:8081/api';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,32 +19,32 @@ export class ProjectService {
 
   // get all project
   getProjectList(): Observable<Projet[]> {
-    return this.httpClient.get<Projet[]>(`${baseUrl}`, httpOptions);
+    return this.httpClient.get<Projet[]>(`${baseUrl}` + '/projects/', httpOptions);
   }
 
   // create new project
   createProject(project: Projet): Observable<Object> {
-    return this.httpClient.post(`${baseUrl}`, project, httpOptions);
+    return this.httpClient.post(`${baseUrl}` + '/projects/', project, httpOptions);
   }
 
   // get project by id
   getProjectById(id: number): Observable<Projet> {
-    return this.httpClient.get<Projet>(`${baseUrl}/${id}`, httpOptions);
+    return this.httpClient.get<Projet>(`${baseUrl}` +'/projects/'+ `${id}`, httpOptions);
   }
 
   // get project by reference
   getProjectByReference(preference: string): Observable<Projet> {
-    return this.httpClient.get<Projet>(`${baseUrl}/${preference}/`, httpOptions);
+    return this.httpClient.get<Projet>(`${baseUrl}` +'/projects/'+ `${preference}/`, httpOptions);
   }
   
   // update project by id
   updateProject(id: number, project: Projet): Observable<Object> {
-    return this.httpClient.put(`${baseUrl}/${id}`, project, httpOptions);
+    return this.httpClient.put(`${baseUrl}` +'/projects/'+ `${id}`, project, httpOptions);
   }
 
   // delete project by id
   deleteProject(id: number): Observable<Object> {
-    return this.httpClient.delete(`${baseUrl}/${id}`, httpOptions);
+    return this.httpClient.delete(`${baseUrl}` +'/projects/'+ `${id}`, httpOptions);
   }
 
   // delete project by id

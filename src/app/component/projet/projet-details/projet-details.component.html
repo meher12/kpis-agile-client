@@ -9,7 +9,7 @@
             <h6 class="mb-0">Reference:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            {{project.pReference}}
+            {{projectdetails.pReference}}
           </div>
         </div>
         <hr>
@@ -18,7 +18,7 @@
             <h6 class="mb-0">Title:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            {{project.titre}}
+            {{projectdetails.titre}}
           </div>
         </div>
         <hr>
@@ -27,7 +27,7 @@
             <h6 class="mb-0">Description:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            {{project.descriptionProject}}
+            {{projectdetails.descriptionProject}}
           </div>
         </div>
         <hr>
@@ -36,7 +36,7 @@
             <h6 class="mb-0">Start Date:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            {{project.dateDebut}}
+            {{projectdetails.dateDebut}}
           </div>
         </div>
         <hr>
@@ -45,12 +45,12 @@
             <h6 class="mb-0"> End Date:</h6>
           </div>
           <div class="col-sm-9 text-secondary">
-            {{project.dateFin}}
+            {{projectdetails.dateFin}}
           </div>
         </div>
 
         <div class="without-table-tag" *ngIf="sprintList?.length > 0; else noSprintList">
-          <h3> List Sprints of {{project.titre}} project: </h3>
+          <h3> List Sprints of {{projectdetails.titre}} project: </h3>
           <br>
           <div class="table">
             <div class="row bold">
@@ -60,7 +60,7 @@
               <div class="col c30 border">Start Date</div>
               <div class="col clast border">End Date</div>
             </div>
-            <div class="row" *ngFor="let sprint of project.sprints">
+            <div class="row" *ngFor="let sprint of projectdetails.sprints">
               <div class="col c5 border">{{sprint.sReference}}</div>
               <div class="col c25 border">{{sprint.stitre}}</div>
               <div class="col c50 border">{{sprint.sdescription}}</div>

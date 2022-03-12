@@ -23,7 +23,7 @@ export class ProjetDetailsComponent implements OnInit {
 
   id: number;
   
-  project: Projet;
+  projectdetails: Projet;
   sprintList: Sprint[];
   constructor(private projectService: ProjectService,  private route: ActivatedRoute,
     private tokenStorageService: TokenStorageService) { }
@@ -39,19 +39,19 @@ export class ProjetDetailsComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-      this.project = new Projet();
+      this.projectdetails = new Projet();
       this.id = this.route.snapshot.params['id'];
       this.projectService.getProjectById(this.id)
         .subscribe(data => {
-          this.project = data;
-          this.sprintList = this.project.sprints;
-          console.log(this.project);
+          this.projectdetails = data;
+          this.sprintList = this.projectdetails.sprints;
+          console.log(this.projectdetails);
 
         },
           err => {
            this.msgError = err.error.message;
            Swal.fire('Hey!', this.msgError, 'warning');
-          console.error(this.msgError);
+          console.error("***************************"+this.msgError);
           });
     }
   }
