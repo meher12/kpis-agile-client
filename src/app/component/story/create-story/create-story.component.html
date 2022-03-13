@@ -1,0 +1,78 @@
+<div class="row"  *ngIf="showPOBoard;else BadCredentials">
+    <div class="col-md-12">
+        
+        <div class="card card-container">
+            <h3 style="text-align: center;"> Create Story</h3>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <!-- Title -->
+
+                <div class="form-group">
+                    <label class="form-label">Title*</label>
+                    <input type="text" formControlName="stname" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['stname'].errors }" />
+                    <div *ngIf="submitted && fctl['stname'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['stname'].errors['required']">Title is required</div>
+                    </div>
+                </div>
+
+
+                <!-- Unique Id -->
+                <div class="form-group">
+                    <label class="form-label">Reference*</label>
+
+                    <input type="text" formControlName="stReference" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['stReference'].errors }" disabled="" />
+                    <div *ngIf="submitted && fctl['stReference'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['stReference'].errors['required']">Reference is required</div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="form-label">Description*</label>
+                    <textarea type="text" formControlName="stdescription" class="form-control md-textarea"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['stdescription'].errors }"
+                        rows="3"></textarea>
+                    <div *ngIf="submitted && fctl['stdescription'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['stdescription'].errors['required']">Description is required</div>
+                    </div>
+                </div>
+
+                <!-- story Point -->
+                <div class="form-group">
+                    <label class="form-label">Story points*</label>
+                    <input type="number" formControlName="storyPoint" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['storyPoint'].errors }">
+                    <div *ngIf="submitted && fctl['storyPoint'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['storyPoint'].errors['required']">Story points is required</div>
+                    </div>
+                </div>
+
+                <!-- Priority -->
+                <div class="form-group">
+                    <label class="form-label">Priority*</label>
+                    <input type="number" formControlName="priority" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['priority'].errors }">
+                    <div *ngIf="submitted && fctl['priority'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['priority'].errors['required']">Priority is required</div>
+                    </div>
+                </div>
+
+
+
+                <!-- Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+                        Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3> 
+   </ng-template>

@@ -50,6 +50,11 @@ export class SprintService {
     return this.httpClient.get<Sprint>(`${this.baseUrl}` + '/sprints/sprints/' + `${id}`, httpOptions);
   }
 
+  // get project by reference
+  getSprintByReference(sreference: string): Observable<Sprint> {
+    return this.httpClient.get<Sprint>(`${this.baseUrl}` + '/sprints/' + `${sreference}/`, httpOptions);
+  }
+
   // create new sprint
   createSprint(projetid: number, sprint: Sprint): Observable<Object> {
     return this.httpClient.post(`${this.baseUrl}` + "/sprints/projects/" + `${projetid}` + "/sprints", sprint, httpOptions);

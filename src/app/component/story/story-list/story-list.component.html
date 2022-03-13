@@ -1,0 +1,77 @@
+<div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
+    <h3 style="text-align: center;">Sprint List</h3>
+    <div class="container text-center">
+        <h5>Story Search By Sprint Title</h5>
+    </div>
+
+    <div class="container container-search-sprints">
+        <div class="search-sprints">
+
+            <!-- Start -->
+            <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
+                [(ngModel)]="selected" name="valueCheck" (change)="cgetAllStoryBySprintRef($event)">
+                <option [ngValue]="undefined" disabled>Choose your sprint title...</option>
+                <option *ngFor="let sprint of sprints" [value]="sprint.sReference" [selected]="sprint == selected">
+                    {{sprint.stitre}}
+                </option>
+            </select>
+
+            <!-- End -->
+        </div>
+        <!-- *ngIf="searchRef" -->
+        <div>
+            <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
+
+                <div *ngIf="selected" class="btn-group btn-group-toggle" role="group">
+                    <button routerLink="/createstory" class="btn btn-outline-primary">Add Story</button>
+                    <button style="margin-left: 2px" class="btn btn-outline-danger" (click)="confirmDeleteAll()">Delete
+                        All Story</button>
+                </div>
+                <div class="row titre" *ngIf="selected">
+                    <h3>Sprint title: {{sprint?.stitre}}</h3>
+                </div>
+            </div>
+
+            <div class="table-responsive" style="text-align: center;">
+
+                <table class="table table-striped">
+                    <thead class="bg-none bgc-default-tp1">
+                        <tr>
+                            <th>Reference</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Story Point</th>
+                            <th>Priority</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let story of stories">
+                            <td>{{story.stReference}}</td>
+                            <td> {{story.stname}}</td>
+                            <td>{{story.stdescription}}</td>
+                            <td>{{story.storyPoint}}</td>
+                            <td>{{story.priority}}</td>
+                            <td>
+                                <div class="nowrap btn-group">
+                                    <button class="btn btn-success" (click)="detailStory(story.id)">Details</button>
+                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info"
+                                        (click)="updateStory(story.id)">Update</button>
+
+                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
+                                        (click)="confirmDeleteById(story.id)">Delete</button>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>
