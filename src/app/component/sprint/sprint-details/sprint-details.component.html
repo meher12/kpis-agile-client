@@ -57,15 +57,15 @@
                 <div class="col c5 border">Reference</div>
                 <div class="col c25 border">Title</div>
                 <div class="col c50 border">Description</div>
-                <div class="col c30 border">Start Date</div>
-                <div class="col clast border">End Date</div>
+                <div class="col c30 border">Story points</div>
+                <div class="col clast border">Priority</div>
               </div>
               <div class="row" *ngFor="let story of sprint.stories">
-                <div class="col c5 border">{{story.sReference}}</div>
-                <div class="col c25 border">{{story.stitre}}</div>
-                <div class="col c50 border">{{story.sdescription}}</div>
-                <div class="col c30 border">{{story.sdateDebut}}</div>
-                <div class="col clast border">{{story.sdateFin}}</div>
+                <div class="col c5 border">{{story.stReference}}</div>
+                <div class="col c25 border">{{story.stname}}</div>
+                <div class="col c50 border">{{story.stdescription}}</div>
+                <div class="col c30 border">{{story.storyPoint}}</div>
+                <div class="col clast border">{{story.priorite}}</div>
               </div>
             </div>
           </div>
