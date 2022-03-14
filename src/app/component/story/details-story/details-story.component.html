@@ -60,7 +60,8 @@
                 <div class="col c30 border">Estimation</div>
                 <div class="col c30 border">Start Date</div>
                 <div class="col c30 border">End Date</div>
-                <div class="col clast border">Statut</div>
+                <div class="col c30 border">Statut</div>
+                <div class="col clast border">Type</div>
               </div>
               <div class="row" *ngFor="let task of story.tasks">
                 <div class="col c5 border">{{task.tReference}}</div>
@@ -69,7 +70,8 @@
                 <div class="col c30 border">{{task.testimation}}</div>
                 <div class="col c30 border">{{task.tdateDebut}}</div>
                 <div class="col c30 border">{{task.tdateFin}}</div>
-                <div class="col clast border">{{task.statut}}</div>
+                <div class="col c30 border">{{task.statut}}</div>
+                <div class="col clast border">{{task.typeTask}}</div>
               </div>
             </div>
           </div>

@@ -1,6 +1,11 @@
 export enum ETask{
-
-    NOT_STARTED,
+    SCHEDULED,
     IN_PROGRESS,
-    DONE,
+    COMPLETED,
+}
+
+export enum ETypeTask{
+    TODO,
+    BUG,
+    MORE,
 }
