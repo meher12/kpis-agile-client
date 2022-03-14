@@ -8,7 +8,7 @@ import { StoryService } from 'src/app/services/story/story.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 import Swal from 'sweetalert2';
-import { DateValidator } from '../../date.validator';
+
 @Component({
   selector: 'app-create-story',
   templateUrl: './create-story.component.html',
@@ -56,6 +56,8 @@ export class CreateStoryComponent implements OnInit {
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
+    localStorage.setItem('refsprint', this.form.controls.stReference.value );
+
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
@@ -86,8 +88,6 @@ export class CreateStoryComponent implements OnInit {
     }
   }
 
-
-
    // Get projectRef in create sprint from sprint list
    getRefSprint() {
     this.storyService.currentrefSprint
@@ -112,7 +112,7 @@ export class CreateStoryComponent implements OnInit {
         console.log(data);
         Swal.fire('Hey!', 'Story ' + this.story.stname + ' is saved', 'info');
         //console.log("*********"+ this._sprint_id)
-        //this.gotToSprintListBypref();
+        this.gotToStoryListBysref();
       },
         err => {
           this.msgError = err.error.message;
@@ -122,9 +122,9 @@ export class CreateStoryComponent implements OnInit {
       )
   }
 
- /*  gotToSprintListBypref() {
-    this.router.navigate(['/sprintListBypre']);
-  } */
+  gotToStoryListBysref() {
+    this.router.navigate(['/storylistByspr']);
+  }
 
   get fctl(): { [key: string]: AbstractControl } {
     return this.form.controls;
@@ -142,15 +142,15 @@ export class CreateStoryComponent implements OnInit {
 
    onReset(): void {
      this.submitted = false;
+     localStorage.getItem('sprintrefTostorylist');
      this.form.reset();
-     //this.refresh()
-     //localStorage.getItem('refsprint');
+     this.refresh()
+     
    }
+
    refresh(): void {
     window.location.reload();
   }
-
-
 
 
 }

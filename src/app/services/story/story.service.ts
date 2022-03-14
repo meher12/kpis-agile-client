@@ -48,7 +48,12 @@ export class StoryService {
 
   // get story by id
   getStoryById(id: number): Observable<Story> {
-    return this.httpClient.get<Story>(`${this.baseUrl}` + '/story/' + `${id}`, httpOptions);
+    return this.httpClient.get<Story>(`${this.baseUrl}` + '/stories/story/' + `${id}`, httpOptions);
+  }
+
+   // get story by reference
+   getStoryByReference(streference: string): Observable<Story> {
+    return this.httpClient.get<Story>(`${this.baseUrl}` + '/stories/' + `${streference}`, httpOptions);
   }
 
   // create new story
@@ -58,7 +63,7 @@ export class StoryService {
 
   // update story by id
   updateStoryById(id: number, story: Story): Observable<Object> {
-    return this.httpClient.put(`${this.baseUrl}` + '/story/' + `${id}`, story, httpOptions);
+    return this.httpClient.put(`${this.baseUrl}` + "/story/" + `${id}`, story, httpOptions);
   }
 
   // delete story by id

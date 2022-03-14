@@ -9,18 +9,21 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-story-list',
-  templateUrl: './story-list.component.html',
-  styleUrls: ['./story-list.component.css']
+  selector: 'app-list-story-by-sprint',
+  templateUrl: './list-story-by-sprint.component.html',
+  styleUrls: ['./list-story-by-sprint.component.css']
 })
-export class StoryListComponent implements OnInit {
+export class ListStoryBySprintComponent implements OnInit {
 
 
-  sprints: Sprint[];
-  selected;
 
-  stories: Story[];
-  sprint: Sprint;
+  //Get value in component 2
+  _getsselectedSRef: any;
+  //Getter and Setters
+  get getsselectedSRef() { return this._getsselectedSRef };
+  set getselectedSRef(value: string) { //debugger;
+    this._getsselectedSRef = value;
+  }
 
   msgError = "";
   isLoggedIn = false;
@@ -28,8 +31,16 @@ export class StoryListComponent implements OnInit {
   showScrumMBoard = false;
   roles: string[] = [];
 
-  constructor(private storyService: StoryService, private router: Router, private tokenStorageService: TokenStorageService,
-    private sprintService: SprintService) { }
+
+  stories: Story[];
+  sprint: Sprint;
+  id: number;
+
+  store_local_ref_sprint;
+
+
+  constructor(private storyService: StoryService, private sprintService: SprintService, private router: Router, 
+    private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
 
@@ -41,52 +52,39 @@ export class StoryListComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-      this.getTitleSprint();
-      this.cgetAllStory(); 
 
+      //localStorage of ref project
+      this.store_local_ref_sprint = localStorage.getItem('sprintrefTostorylist');
+
+      this.getRefSprint()
+      this.getTitleSprint()
+      this.cgetAllStoryBySprintRef()
     }
   }
 
-
-   //  get all Story
-   cgetAllStory() {
-    this.storyService.getAllStory()
-      .subscribe(data => {
-        this.stories = data;
-        console.log(this.stories);
-      },
-        err => {
-          this.msgError = err.error.message;
-          Swal.fire('Hey!', this.msgError, 'warning')
-          console.error(this.msgError);
-        });
+  // Get projectRef in create sprint from sprint list
+  getRefSprint() {
+    this.storyService.currentrefSprint
+      .subscribe(sprintRef => {
+        this._getsselectedSRef = sprintRef;
+      }); //<= Always get current value!
   }
 
-  // Get All Sprint for select option
-   getTitleSprint(){
-    this.sprintService.getAllSprints()
-    .subscribe(data => {
-      this.sprints= data;
-    })
-   }
-
-  // find story by sprint reference
-  cgetAllStoryBySprintRef(event: any) {
-
-    //Set refprodect in component 1
-    this.storyService.changeSReference(event.target.value);
-
-
-    //get sprint name
-    this.sprintService.getSprintByReference(event.target.value)
+  // Get All projects by ref id
+  getTitleSprint() {
+    this.sprintService.getSprintByReference(this.store_local_ref_sprint)
       .subscribe(data => {
         this.sprint = data;
       })
+      console.log("*Ref sp*"+this.store_local_ref_sprint)
+  }
 
-    this.storyService.getAllStoryBySprintRef(event.target.value)
+  // find sprint by project reference
+  cgetAllStoryBySprintRef() {
+    this.storyService.getAllStoryBySprintRef(this.store_local_ref_sprint)
       .subscribe(data => {
         this.stories = data;
-        console.log(this.stories);
+        // console.log(this.sprints);
       },
         err => {
           this.msgError = err.error.message;
@@ -96,17 +94,18 @@ export class StoryListComponent implements OnInit {
   }
 
 
-  // navigate to update story
+
+  // navigate to update sprint
   updateStory(id: number) {
     this.router.navigate(['updatestory', id]);
   }
 
-  detailStory(id: number){
+  detailStory(id: number) {
     this.router.navigate(['detailsstory', id]);
   }
 
 
-  // delete story by Id
+  // delete project by Id
   confirmDeleteById(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -128,14 +127,14 @@ export class StoryListComponent implements OnInit {
       if (result.isConfirmed) {
         swalWithBootstrapButtons.fire(
           'Deleted!',
-          'Your story ' + id + ' has been deleted.',
+          'Your sprint ' + id + ' has been deleted.',
           'success'
         )
 
         this.storyService.deleteStory(id)
           .subscribe(data => {
             console.log(data);
-            this.cgetAllStory();
+            this.cgetAllStoryBySprintRef();
           },
             err => {
               this.msgError = err.error.message;
@@ -149,7 +148,7 @@ export class StoryListComponent implements OnInit {
       ) {
         swalWithBootstrapButtons.fire(
           'Cancelled',
-          'Your imaginary story is safe :)',
+          'Your imaginary sprint is safe :)',
           'error'
         )
       }
@@ -185,7 +184,7 @@ export class StoryListComponent implements OnInit {
           this.storyService.deleteAllStoryBySprintId(this.sprint.id)
             .subscribe(data => {
               console.log(data);
-              this.cgetAllStory();
+              this.cgetAllStoryBySprintRef();
             },
               err => {
                 this.msgError = err.error.message;
@@ -206,6 +205,7 @@ export class StoryListComponent implements OnInit {
     })
 
   }
+
 
 
 }

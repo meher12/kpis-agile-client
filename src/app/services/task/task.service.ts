@@ -47,7 +47,12 @@ export class TaskService {
 
   // get task by id
   getTaskById(id: number): Observable<Task> {
-    return this.httpClient.get<Task>(`${this.baseUrl}` + '/task/' + `${id}`, httpOptions);
+    return this.httpClient.get<Task>(`${this.baseUrl}` + '/tasks/task/' + `${id}`, httpOptions);
+  }
+
+   // get story by reference
+   getTaskByReference(treference: string): Observable<Task> {
+    return this.httpClient.get<Task>(`${this.baseUrl}` + '/task/' + `${treference}/`, httpOptions);
   }
 
   // create new task

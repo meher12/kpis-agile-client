@@ -2,8 +2,8 @@
     <div class="col-md-12">
         
         <div class="card card-container">
-            <h3 style="text-align: center;"> Create Story</h3>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <h3 style="text-align: center;"> Update Story</h3>
+            <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
 
                 <!-- Title -->
 
@@ -63,10 +63,8 @@
 
                 <!-- Button -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Register</button>
-                   <!--  <button type="button" (click)="onReset()" class="btn btn-warning float-right">
-                        Reset
-                    </button> -->
+                    <button type="submit" class="btn btn-primary">Update</button>
+
                 </div>
             </form>
         </div>

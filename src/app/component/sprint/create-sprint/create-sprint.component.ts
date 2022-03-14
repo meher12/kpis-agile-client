@@ -27,7 +27,6 @@ export class CreateSprintComponent implements OnInit {
   project: Projet;
 
 
-
   _project_id: number;
   //Getter and Setters
   get projectId() { return this._project_id };
@@ -63,7 +62,6 @@ export class CreateSprintComponent implements OnInit {
 
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
@@ -82,7 +80,7 @@ export class CreateSprintComponent implements OnInit {
       // storage of ref sprint
       //localStorage of ref project
      
-      //localStorage.setItem('refsprint', this.form.controls.sReference.value );
+    
       //window.sessionStorage.removeItem('refproject');
       //window.sessionStorage.removeItem('refsprint');
       
@@ -156,8 +154,8 @@ export class CreateSprintComponent implements OnInit {
    onReset(): void {
      this.submitted = false;
      this.form.reset();
-     //this.refresh()
-     //localStorage.getItem('refsprint');
+     this.refresh()
+     
    }
    refresh(): void {
     window.location.reload();

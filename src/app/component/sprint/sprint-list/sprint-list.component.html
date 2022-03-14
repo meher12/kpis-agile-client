@@ -1,7 +1,6 @@
 <div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
-    <h3 style="text-align: center;">Sprint List</h3>
     <div class="container text-center">
-        <h5>Sprint Search Using Project Reference</h5>
+        <h3>Sprint Search Using Project title</h3>
     </div>
 
     <div class="container container-search-sprints">
@@ -22,8 +21,7 @@
 
             <!-- End -->
         </div>
-        <!-- *ngIf="searchRef" -->
-        <div>
+        <div *ngIf="selected">
             <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
                 <div *ngIf="selected" class="btn-group btn-group-toggle" role="group">

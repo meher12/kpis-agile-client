@@ -13,7 +13,10 @@ import { SprintListByProjectComponent } from './component/sprint/sprint-list-by-
 import { SprintListComponent } from './component/sprint/sprint-list/sprint-list.component';
 import { UpdateSprintComponent } from './component/sprint/update-sprint/update-sprint.component';
 import { CreateStoryComponent } from './component/story/create-story/create-story.component';
+import { DetailsStoryComponent } from './component/story/details-story/details-story.component';
+import { ListStoryBySprintComponent } from './component/story/list-story-by-sprint/list-story-by-sprint.component';
 import { StoryListComponent } from './component/story/story-list/story-list.component';
+import { UpdateStoryComponent } from './component/story/update-story/update-story.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SigninComponent } from './signin/signin.component';
@@ -45,6 +48,9 @@ const routes: Routes = [
   // Story Router
   {path: 'storyList', component: StoryListComponent},
   {path: 'createstory', component: CreateStoryComponent},
+  {path: 'updatestory/:id', component: UpdateStoryComponent},
+  {path: 'detailsstory/:id', component: DetailsStoryComponent},
+  {path: 'storylistByspr', component: ListStoryBySprintComponent},
   
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

@@ -28,6 +28,9 @@ import { SprintListByProjectComponent } from './component/sprint/sprint-list-by-
 import { StoryListComponent } from './component/story/story-list/story-list.component';
 import { TaskListComponent } from './component/task/task-list/task-list.component';
 import { CreateStoryComponent } from './component/story/create-story/create-story.component';
+import { ListStoryBySprintComponent } from './component/story/list-story-by-sprint/list-story-by-sprint.component';
+import { DetailsStoryComponent } from './component/story/details-story/details-story.component';
+import { UpdateStoryComponent } from './component/story/update-story/update-story.component';
 
 
 
@@ -57,6 +60,9 @@ import { CreateStoryComponent } from './component/story/create-story/create-stor
     StoryListComponent,
     TaskListComponent,
     CreateStoryComponent,
+    ListStoryBySprintComponent,
+    DetailsStoryComponent,
+    UpdateStoryComponent,
 
 
 

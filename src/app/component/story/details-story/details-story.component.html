@@ -1,5 +1,5 @@
 <div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
-    <h3 class="text-center"> View Sprint Details</h3>
+    <h3 class="text-center"> View Story Details</h3>
   
     <div class="col-md-12 detailsp">
       <div class="card mb-3">
@@ -9,7 +9,7 @@
               <h6 class="mb-0">Reference:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{sprint.sReference}}
+              {{story.stReference}}
             </div>
           </div>
           <hr>
@@ -18,7 +18,7 @@
               <h6 class="mb-0">Title:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{sprint.stitre}}
+              {{story.stname}}
             </div>
           </div>
           <hr>
@@ -27,52 +27,56 @@
               <h6 class="mb-0">Description:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{sprint.sdescription}}
+              {{story.stdescription}}
             </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="mb-0">Start Date:</h6>
+              <h6 class="mb-0">Story points:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{sprint.sdateDebut}}
+              {{story.storyPoint}}
             </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="mb-0">End Date:</h6>
+              <h6 class="mb-0">Priority:</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              {{sprint.sdateFin}}
+              {{story.priority}}
             </div>
           </div>
   
-          <div class="without-table-tag" *ngIf="stories?.length > 0; else noStoriesList">
-            <h3> List Story of {{sprint.titre}} sprint: </h3>
+          <div class="without-table-tag" *ngIf="tasks?.length > 0; else noTasksList">
+            <h3> List Task of {{story.stname}} story: </h3>
             <br>
             <div class="table">
               <div class="row bold">
                 <div class="col c5 border">Reference</div>
                 <div class="col c25 border">Title</div>
                 <div class="col c50 border">Description</div>
-                <div class="col c30 border">Story points</div>
-                <div class="col clast border">Priority</div>
+                <div class="col c30 border">Estimation</div>
+                <div class="col c30 border">Start Date</div>
+                <div class="col c30 border">End Date</div>
+                <div class="col clast border">Statut</div>
               </div>
-              <div class="row" *ngFor="let story of sprint.stories">
-                <div class="col c5 border">{{story.stReference}}</div>
-                <div class="col c25 border">{{story.stname}}</div>
-                <div class="col c50 border">{{story.stdescription}}</div>
-                <div class="col c30 border">{{story.storyPoint}}</div>
-                <div class="col clast border">{{story.priorite}}</div>
+              <div class="row" *ngFor="let task of story.tasks">
+                <div class="col c5 border">{{task.tReference}}</div>
+                <div class="col c25 border">{{task.tname}}</div>
+                <div class="col c50 border">{{task.tdescription}}</div>
+                <div class="col c30 border">{{task.testimation}}</div>
+                <div class="col c30 border">{{task.tdateDebut}}</div>
+                <div class="col c30 border">{{task.tdateFin}}</div>
+                <div class="col clast border">{{task.statut}}</div>
               </div>
             </div>
           </div>
   
-          <ng-template #noStoriesList>
+          <ng-template #noTasksList>
             <div class="text-danger font-weight-bold" style="padding-top: 10px;">
-              <h3>There is no Story for this sprint!!</h3>
+              <h3>There is no task for this story!!</h3>
             </div>
           </ng-template>
         </div>

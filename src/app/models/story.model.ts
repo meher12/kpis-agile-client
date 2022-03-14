@@ -10,7 +10,7 @@ export class Story{
     public priority: number;
     public stdescription: string;
     public sprint: Sprint;
-    public task: Task[];
+    public tasks: Task[];
 
 
 }
