@@ -31,6 +31,7 @@ import { CreateStoryComponent } from './component/story/create-story/create-stor
 import { ListStoryBySprintComponent } from './component/story/list-story-by-sprint/list-story-by-sprint.component';
 import { DetailsStoryComponent } from './component/story/details-story/details-story.component';
 import { UpdateStoryComponent } from './component/story/update-story/update-story.component';
+import { CreateTaskComponent } from './component/task/create-task/create-task.component';
 
 
 
@@ -63,6 +64,7 @@ import { UpdateStoryComponent } from './component/story/update-story/update-stor
     ListStoryBySprintComponent,
     DetailsStoryComponent,
     UpdateStoryComponent,
+    CreateTaskComponent,
 
 
 

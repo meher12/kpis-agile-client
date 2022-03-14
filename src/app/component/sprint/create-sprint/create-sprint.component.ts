@@ -75,14 +75,6 @@ export class CreateSprintComponent implements OnInit {
         sdateDebut: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
         sdateFin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
       });
-
-     
-      // storage of ref sprint
-      //localStorage of ref project
-     
-    
-      //window.sessionStorage.removeItem('refproject');
-      //window.sessionStorage.removeItem('refsprint');
       
       this.getRefProject();
 
@@ -112,7 +104,6 @@ export class CreateSprintComponent implements OnInit {
   sendRefProjectParams(){
     //Set refprodect in component 1
     this.sprintService.changePReference( this._sselectedPRef);
-      
   }
  
 

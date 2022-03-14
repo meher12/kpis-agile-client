@@ -1,1 +1,81 @@
-<p>task-list works!</p>
+<div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
+    <div class="container text-center">
+        <h3>task Search By Story Title</h3>
+    </div>
+
+    <div class="container container-search-sprints">
+        <div class="search-sprints">
+
+            <!-- Start -->
+            <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
+                [(ngModel)]="selected" name="valueCheck" (change)="cgetAllTaskByStoryRef($event)">
+                <option [ngValue]="undefined" disabled>Choose your sprint title...</option>
+                <option *ngFor="let story of stories" [value]="story.stReference" [selected]="story == selected">
+                    {{story.stname}}
+                </option>
+            </select>
+
+            <!-- End -->
+        </div>
+        <div *ngIf="selected">
+            <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
+
+                <div *ngIf="selected" class="btn-group btn-group-toggle" role="group">
+                    <button routerLink="/createtask" class="btn btn-outline-primary">Add Task</button>
+                    <button style="margin-left: 2px" class="btn btn-outline-danger" (click)="confirmDeleteAll()">Delete
+                        All Task</button>
+                </div>
+                <div class="row titre" *ngIf="selected">
+                    <h3>Story title: {{story?.stname}}</h3>
+                </div>
+            </div>
+
+            <div class="table-responsive" style="text-align: center;">
+
+                <table class="table table-striped">
+                    <thead class="bg-none bgc-default-tp1">
+                        <tr>
+                            <th>Reference</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Estimation</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Statut</th>
+                            <th>Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let task of tasks">
+                            <td>{{task.tReference}}</td>
+                            <td>{{task.tname}}</td>
+                            <td>{{task.tdescription}}</td>
+                            <td>{{task.testimation}}</td>
+                            <td>{{task.tdateDebut}}</td>
+                            <td>{{task.tdateFin}}</td>
+                            <td>{{task.statut}}</td>
+                            <td>{{task.typeTask}}</td>
+                            <td>
+                                <div class="nowrap btn-group">
+                                    <button class="btn btn-success" (click)="detailTask(task.id)">Details</button>
+                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info"
+                                        (click)="updateTask(task.id)">Update</button>
+
+                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
+                                        (click)="confirmDeleteById(task.id)">Delete</button>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>

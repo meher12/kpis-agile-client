@@ -42,14 +42,14 @@ export class StoryListComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getTitleSprint();
-      this.cgetAllStory(); 
+      this.cgetAllStory();
 
     }
   }
 
 
-   //  get all Story
-   cgetAllStory() {
+  //  get all Story
+  cgetAllStory() {
     this.storyService.getAllStory()
       .subscribe(data => {
         this.stories = data;
@@ -63,12 +63,12 @@ export class StoryListComponent implements OnInit {
   }
 
   // Get All Sprint for select option
-   getTitleSprint(){
+  getTitleSprint() {
     this.sprintService.getAllSprints()
-    .subscribe(data => {
-      this.sprints= data;
-    })
-   }
+      .subscribe(data => {
+        this.sprints = data;
+      })
+  }
 
   // find story by sprint reference
   cgetAllStoryBySprintRef(event: any) {
@@ -101,7 +101,7 @@ export class StoryListComponent implements OnInit {
     this.router.navigate(['updatestory', id]);
   }
 
-  detailStory(id: number){
+  detailStory(id: number) {
     this.router.navigate(['detailsstory', id]);
   }
 
@@ -204,7 +204,6 @@ export class StoryListComponent implements OnInit {
         )
       }
     })
-
   }
 
 

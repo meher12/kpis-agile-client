@@ -24,10 +24,10 @@ export class TaskService {
 
   // Sharing data between not related components:
   //private preferenceSource = new BehaviorSubject('Basic ref is required!');
-  currentrefSprint = sreferenceSource.asObservable();
+  currentrefStory = sreferenceSource.asObservable();
 
-  changeSReference(sprintRef: string) {
-    sreferenceSource.next(sprintRef)
+  changeSTReference(storyRef: string) {
+    sreferenceSource.next(storyRef)
   }
 
   // get All task By StoryId
