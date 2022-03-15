@@ -5,7 +5,7 @@ export enum ETask{
 }
 
 export enum ETypeTask{
-    TODO,
+    New,
     BUG,
     MORE,
 }
