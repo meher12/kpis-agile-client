@@ -42,13 +42,14 @@ export class UpdateTaskComponent implements OnInit {
   }
 
   selectedValue;
-  items = [
+  etypetask = [
     {name: 'TODO', value: ETypeTask[0]},
+    {name: 'BUG', value: ETypeTask[1]},
     {name: 'MORE', value:  ETypeTask[2]},
   ];
 
   selectedValue2;
-  items2 = [
+  estatus = [
     {name: 'SCHEDULED', value: ETask[0]},
     {name: 'IN_PROGRESS', value: ETask[1]},
     {name: 'COMPLETED', value: ETask[2]},
@@ -64,7 +65,7 @@ export class UpdateTaskComponent implements OnInit {
     testimation: new FormControl(),
     tdateDebut: new FormControl(),
     tdateFin: new FormControl(),
-    statut: new FormControl(),
+    status: new FormControl(),
     typeTask: new FormControl(),
   });
 
@@ -84,15 +85,14 @@ export class UpdateTaskComponent implements OnInit {
         .subscribe(data => {
 
           this.task = data;
-          console.log("***---" + this.task.statut);
+          //console.log("***---" + this.task.status);
           this.form = this.formBuilder.group({
             tReference: [this.task.tReference, Validators.required],
             tname: [this.task.tname, Validators.required],
             tdescription: [this.task.tdescription, Validators.required],
             tdateDebut: [this.task.tdateDebut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
             tdateFin: [this.task.tdateFin, Validators.compose([Validators.required, DateValidator.dateVaidator])],
-            testimation: [this.task.testimation, Validators.required],
-            statut: [this.task.statut, Validators.required],
+            status: [this.task.status, Validators.required],
             typeTask: [this.task.typeTask, Validators.required],
           });
         },

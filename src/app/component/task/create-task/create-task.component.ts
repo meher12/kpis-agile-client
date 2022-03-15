@@ -29,15 +29,14 @@ export class CreateTaskComponent implements OnInit {
 
 
   selectedValue;
-
-  items = [
+  etypetask = [
     {name: 'TODO', value: ETypeTask[0]},
+    {name: 'BUG', value: ETypeTask[1]},
     {name: 'MORE', value:  ETypeTask[2]},
   ];
 
   selectedValue2;
-
-  items2 = [
+  estatus = [
     {name: 'SCHEDULED', value: ETask[0]},
     {name: 'IN_PROGRESS', value: ETask[1]},
     {name: 'COMPLETED', value: ETask[2]},

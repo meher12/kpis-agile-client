@@ -62,7 +62,7 @@
                 <div class="form-group">
                     <label class="form-label" style="font-weight: bold;">Task type*: </label>
                     <div class="continput">
-                        <div *ngFor="let item of items">
+                        <div *ngFor="let item of etypetask">
 
                             <input type="radio" formControlName="typeTask" [value]="item.value"
                                 [ngClass]="{ 'is-invalid': submitted && fctl['typeTask'].errors }"
@@ -72,7 +72,7 @@
                                 <div *ngIf="fctl['typeTask'].errors['required']">Task type is required</div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -80,14 +80,14 @@
                 <div class="form-group">
                     <label class="form-label" style="font-weight: bold;">Status*: </label>
                     <div class="continput">
-                        <div *ngFor="let item of items2">
+                        <div *ngFor="let item of estatus">
 
-                            <input type="radio" formControlName="statut" [value]="item.value"
-                                [ngClass]="{ 'is-invalid': submitted && fctl['statut'].errors }"
+                            <input type="radio" formControlName="status" [value]="item.value"
+                                [ngClass]="{ 'is-invalid': submitted && fctl['status'].errors }"
                                 [(ngModel)]="selectedValue2">
                             {{item.value}}
-                            <div *ngIf="submitted && fctl['statut'].errors" class="invalid-feedback">
-                                <div *ngIf="fctl['statut'].errors['required']">statut is required</div>
+                            <div *ngIf="submitted && fctl['status'].errors" class="invalid-feedback">
+                                <div *ngIf="fctl['status'].errors['required']">status is required</div>
                             </div>
                         </div>
                     </div>

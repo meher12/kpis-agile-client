@@ -36,14 +36,16 @@
 .continput input[type=radio]{
   margin: 0 7px 0 7px;
 }
-input[type=radio]:checked ~ .check {
+.continput input[type=radio]:checked ~ .check {
       border: 5px solid #059cf3;
 }
     
-input[type=radio]:checked ~ .check::before{
+.continput input[type=radio]:checked ~ .check::before{
       background: #059cf3;
 }
     
-input[type=radio]:checked ~  label{
+.continput input[type=radio]:checked ~  label{
       color: #059cf3;
 }
+
+ 
