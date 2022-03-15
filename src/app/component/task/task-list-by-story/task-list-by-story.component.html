@@ -1,23 +1,11 @@
 <div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
     <div class="container text-center">
-        <h3>task Search By Story Title</h3>
+        <h3>List task</h3>
     </div>
 
     <div class="container container-search-sprints">
-        <div class="search-sprints">
+       
 
-            <!-- Start -->
-            <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
-                [(ngModel)]="selected" name="valueCheck" (change)="cgetAllTaskByStoryRef($event)">
-                <option [ngValue]="undefined" disabled>Choose your sprint title...</option>
-                <option *ngFor="let story of stories" [value]="story.stReference" [selected]="story == selected">
-                    {{story.stname}}
-                </option>
-            </select>
-
-            <!-- End -->
-        </div>
-        <div *ngIf="selected">
             <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
                 <div *ngIf="selected" class="btn-group btn-group-toggle" role="group">
@@ -31,7 +19,9 @@
             </div>
 
             <div class="table-responsive" style="text-align: center;">
-
+                <div class="col-md-12 titre" style="text-align: justify;">
+                    <h3>Story title: {{story?.stname}}</h3>
+                </div>
                 <table class="table table-striped">
                     <thead class="bg-none bgc-default-tp1">
                         <tr>
@@ -71,7 +61,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        
     </div>
 
 </div>

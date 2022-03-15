@@ -98,9 +98,6 @@ export class TaskListComponent implements OnInit {
     this.router.navigate(['updatetask', id]);
   }
 
-  detailTask(id: number) {
-    this.router.navigate(['detailstask', id]);
-  }
 
    // delete task by Id
    confirmDeleteById(id: number) {

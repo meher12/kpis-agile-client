@@ -58,17 +58,38 @@
                     </div>
                 </div>
 
+                <!-- Task type -->
+                <div class="form-group">
+                    <label class="form-label" style="font-weight: bold;">Task type*: </label>
+                    <div class="continput">
+                        <div *ngFor="let item of items">
+
+                            <input type="radio" formControlName="typeTask" [value]="item.value"
+                                [ngClass]="{ 'is-invalid': submitted && fctl['typeTask'].errors }"
+                                [(ngModel)]="selectedValue">
+                            {{item.value}}
+                            <div *ngIf="submitted && fctl['typeTask'].errors" class="invalid-feedback">
+                                <div *ngIf="fctl['typeTask'].errors['required']">Task type is required</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
                 <!-- Status -->
                 <div class="form-group">
-                    <label class="form-label">Type Task*</label>
-                    <div *ngFor="let item of items">
-                        <input type="radio" formControlName="typeTask" class="form-check-input"
-                        [value]="item.value" [ngClass]="{ 'is-invalid': submitted && fctl['typeTask'].errors }"
-                         [(ngModel)]="selectedValue">  {{item.value}}
-                    </div>
-                    {{selectedValue}}
-                    <div *ngIf="submitted && fctl['typeTask'].errors" class="invalid-feedback">
-                        <div *ngIf="fctl['typeTask'].errors['required']">Type task is required</div>
+                    <label class="form-label" style="font-weight: bold;">Status*: </label>
+                    <div class="continput">
+                        <div *ngFor="let item of items2">
+
+                            <input type="radio" formControlName="statut" [value]="item.value"
+                                [ngClass]="{ 'is-invalid': submitted && fctl['statut'].errors }"
+                                [(ngModel)]="selectedValue2">
+                            {{item.value}}
+                            <div *ngIf="submitted && fctl['statut'].errors" class="invalid-feedback">
+                                <div *ngIf="fctl['statut'].errors['required']">statut is required</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

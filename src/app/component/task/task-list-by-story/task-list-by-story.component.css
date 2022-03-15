@@ -1,0 +1,39 @@
+.nowrap{white-space: nowrap;}
+
+.card {
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   display: flex ;
+  }
+
+  .search-sprints {
+    width: auto;
+    padding-bottom: 50px;
+    margin:auto;
+  }
+  
+  .form-control {
+    box-shadow: 0 10px 40px 0 #B0C1D9;
+  }
+  
+  .form-control::placeholder  {
+    font-family: FontAwesome;
+  }
+
+.container-search-sprints .row {
+    display: block;
+}
+ .titre {
+margin-top: 15px;
+margin-bottom: 15px;
+ }
+.titre h3 {
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}

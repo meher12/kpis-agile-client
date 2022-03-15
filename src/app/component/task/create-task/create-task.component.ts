@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ETypeTask } from 'src/app/models/etask.enum';
+import { ETask, ETypeTask } from 'src/app/models/etask.enum';
 import { Story } from 'src/app/models/story.model';
 import { Task } from 'src/app/models/task.model';
 import { StoryService } from 'src/app/services/story/story.service';
@@ -36,8 +36,16 @@ export class CreateTaskComponent implements OnInit {
   selectedValue;
 
   items = [
-    {groupName: 'groupA', value: ETypeTask[0]},
-    {groupName: 'groupA', value:  ETypeTask[2]},
+    {name: 'TODO', value: ETypeTask[0]},
+    {name: 'MORE', value:  ETypeTask[2]},
+  ];
+
+  selectedValue2;
+
+  items2 = [
+    {name: 'TODO', value: ETask[0]},
+    {name: 'TODO', value: ETask[1]},
+    {name: 'TODO', value: ETask[2]},
   ];
 
   
@@ -125,7 +133,6 @@ export class CreateTaskComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Task ' + this.task.tname + ' is saved', 'info');
-        //console.log("*********"+ this._story_id)
         this.gotToTaskListBystref();
       },
         err => {
@@ -137,7 +144,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   gotToTaskListBystref() {
-    this.router.navigate(['/taskListBystre']);
+    this.router.navigate(['taskListBystre']);
   }
 
   get fctl(): { [key: string]: AbstractControl } {
