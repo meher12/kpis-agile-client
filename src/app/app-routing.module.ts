@@ -20,6 +20,7 @@ import { UpdateStoryComponent } from './component/story/update-story/update-stor
 import { CreateTaskComponent } from './component/task/create-task/create-task.component';
 import { TaskListByStoryComponent } from './component/task/task-list-by-story/task-list-by-story.component';
 import { TaskListComponent } from './component/task/task-list/task-list.component';
+import { UpdateTaskComponent } from './component/task/update-task/update-task.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SigninComponent } from './signin/signin.component';
@@ -58,6 +59,7 @@ const routes: Routes = [
   // Task Router
   {path: 'taskList', component: TaskListComponent},
   {path: 'createtask', component: CreateTaskComponent},
+  {path: 'updatetask/:id', component: UpdateTaskComponent},
   {path: 'taskListBystre', component: TaskListByStoryComponent},
   
   { path: '', redirectTo: 'home', pathMatch: 'full' }

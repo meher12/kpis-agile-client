@@ -61,7 +61,6 @@ export class UpdateStoryComponent implements OnInit {
       this.storyService.getStoryById(this.id)
       .subscribe(data => {
           this.story = data;
-          console.log("----"+ this.story)
 
           this.form = this.formBuilder.group({
             stname: [this.story.stname, Validators.required],
@@ -73,7 +72,7 @@ export class UpdateStoryComponent implements OnInit {
         },
           err => {
             this.msgError = err.error.message;
-            console.error("errrorrr"+this.msgError);
+            console.error("err: "+this.msgError);
           }
         )
 

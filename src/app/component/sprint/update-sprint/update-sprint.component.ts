@@ -93,8 +93,7 @@ export class UpdateSprintComponent implements OnInit {
       // set local storage
       localStorage.setItem('refprojectforsprintlist', this.selectedPRef);
 
-      //localStorage of ref project
-       // localStorage.setItem('refproject', this.selectedPRef);
+     
     }); //<= Always get current value!
 }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ETask, ETypeTask } from 'src/app/models/etask.enum';
 import { Story } from 'src/app/models/story.model';
 import { Task } from 'src/app/models/task.model';
@@ -12,11 +12,11 @@ import Swal from 'sweetalert2';
 import { DateValidator } from '../../date.validator';
 
 @Component({
-  selector: 'app-create-task',
-  templateUrl: './create-task.component.html',
-  styleUrls: ['./create-task.component.css']
+  selector: 'app-update-task',
+  templateUrl: './update-task.component.html',
+  styleUrls: ['./update-task.component.css']
 })
-export class CreateTaskComponent implements OnInit {
+export class UpdateTaskComponent implements OnInit {
 
   isLoggedIn = false;
   showPOBoard = false;
@@ -27,24 +27,7 @@ export class CreateTaskComponent implements OnInit {
   task: Task = new Task();
   story: Story;
 
-
-  selectedValue;
-
-  items = [
-    {name: 'TODO', value: ETypeTask[0]},
-    {name: 'MORE', value:  ETypeTask[2]},
-  ];
-
-  selectedValue2;
-
-  items2 = [
-    {name: 'SCHEDULED', value: ETask[0]},
-    {name: 'IN_PROGRESS', value: ETask[1]},
-    {name: 'COMPLETED', value: ETask[2]},
-  ];
-
-  
-
+  id: number;
   _story_id: number;
   //Getter and Setters
   get storyId() { return this._story_id };
@@ -58,45 +41,60 @@ export class CreateTaskComponent implements OnInit {
     this._sselectedSTRef = value;
   }
 
-  constructor(private storyService: StoryService, private router: Router, private formBuilder: FormBuilder,
-    private tokenStorageService: TokenStorageService, private taskService: TaskService) { }
+  selectedValue;
+  items = [
+    {name: 'TODO', value: ETypeTask[0]},
+    {name: 'MORE', value:  ETypeTask[2]},
+  ];
 
+  selectedValue2;
+  items2 = [
+    {name: 'SCHEDULED', value: ETask[0]},
+    {name: 'IN_PROGRESS', value: ETask[1]},
+    {name: 'COMPLETED', value: ETask[2]},
+  ];
+
+  constructor(private storyService: StoryService, private router: Router, private formBuilder: FormBuilder,
+    private tokenStorageService: TokenStorageService, private taskService: TaskService, private route: ActivatedRoute) { }
 
   form: FormGroup = new FormGroup({
-    tReference: new FormControl(''),
-    tname: new FormControl(''),
-    tdescription: new FormControl(''),
-    tdateDebut: new FormControl(''),
-    tdateFin: new FormControl(''),
-    status: new FormControl(''),
-    typeTask: new FormControl(''),
+    tReference: new FormControl(),
+    tname: new FormControl(),
+    tdescription: new FormControl(),
+    testimation: new FormControl(),
+    tdateDebut: new FormControl(),
+    tdateFin: new FormControl(),
+    statut: new FormControl(),
+    typeTask: new FormControl(),
   });
 
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
 
-      this.form = this.formBuilder.group({
-        tname: ['', Validators.required],
-        tReference: [("TUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase(), Validators.required],
-        tdescription: ['', Validators.required],
-        tdateDebut: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
-        tdateFin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
-        status: ['', Validators.required],
-        typeTask: ['', Validators.required],
-      });
-
-      this.getRefStory();
-
-      this.storyService.getStoryByReference(this._sselectedSTRef)
+      // get id from task list
+      this.id = this.route.snapshot.params['id'];
+      this.taskService.getTaskById(this.id)
         .subscribe(data => {
-          this.story = data;
-          this._story_id = this.story.id
+
+          this.task = data;
+          console.log("***---" + this.task.statut);
+          this.form = this.formBuilder.group({
+            tReference: [this.task.tReference, Validators.required],
+            tname: [this.task.tname, Validators.required],
+            tdescription: [this.task.tdescription, Validators.required],
+            tdateDebut: [this.task.tdateDebut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
+            tdateFin: [this.task.tdateFin, Validators.compose([Validators.required, DateValidator.dateVaidator])],
+            testimation: [this.task.testimation, Validators.required],
+            statut: [this.task.statut, Validators.required],
+            typeTask: [this.task.typeTask, Validators.required],
+          });
         },
           err => {
             this.msgError = err.error.message;
@@ -105,28 +103,29 @@ export class CreateTaskComponent implements OnInit {
     }
   }
 
-
-  // Get storyRef in create task from story list
+  // Get projectRef in create sprint from sprint list
   getRefStory() {
     this.taskService.currentrefStory
       .subscribe(storyRef => {
         this._sselectedSTRef = storyRef;
         // set local storage
         localStorage.setItem('refstoryfortasklist', this._sselectedSTRef);
+
       }); //<= Always get current value!
   }
 
-  sendRefStoryParams(){
+  sendRefStoryParams() {
     //Set refprodect in component 1
-    this.taskService.changeSTReference( this._sselectedSTRef);
+    this.taskService.changeSTReference(this._sselectedSTRef);
   }
 
-  saveTask() {
+
+  onSubmitUpdateTask() {
     this.task = this.form.value;
-    this.taskService.createTask(this._story_id, this.task)
+    this.taskService.updateTaskById(this.id, this.task)
       .subscribe(data => {
         console.log(data);
-        Swal.fire('Hey!', 'Task ' + this.task.tname + ' is saved', 'info');
+        Swal.fire('Hey!', 'Task ' + this.task.tname + ' updated', 'info')
         this.gotToTaskListBystref();
       },
         err => {
@@ -145,24 +144,16 @@ export class CreateTaskComponent implements OnInit {
     return this.form.controls;
   }
 
-  onSubmit(): void {
-
+  onSubmitUpdate(): void {
     this.submitted = true;
     if (this.form.invalid) {
       return;
     }
     console.log(this.task);
-    this.saveTask();
-  }
-
-   onReset(): void {
-     this.submitted = false;
-     this.form.reset();
-     this.refresh()
-     
-   }
-   refresh(): void {
-    window.location.reload();
+    this.onSubmitUpdateTask();
   }
 
 }
+
+
+

@@ -8,10 +8,9 @@ export class Task {
     public tReference: string;
     public tname: string;
     public tdescription: string;
-    public testimation: number;
     public tdateDebut: Date;
     public tdateFin: Date;
-    public statut: ETask ;
+    public status: ETask ;
     public typeTask: ETypeTask;
     public story: Story;
 }

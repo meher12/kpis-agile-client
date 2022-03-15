@@ -33,6 +33,7 @@ import { DetailsStoryComponent } from './component/story/details-story/details-s
 import { UpdateStoryComponent } from './component/story/update-story/update-story.component';
 import { CreateTaskComponent } from './component/task/create-task/create-task.component';
 import { TaskListByStoryComponent } from './component/task/task-list-by-story/task-list-by-story.component';
+import { UpdateTaskComponent } from './component/task/update-task/update-task.component';
 
 
 
@@ -67,6 +68,7 @@ import { TaskListByStoryComponent } from './component/task/task-list-by-story/ta
     UpdateStoryComponent,
     CreateTaskComponent,
     TaskListByStoryComponent,
+    UpdateTaskComponent,
 
 
 

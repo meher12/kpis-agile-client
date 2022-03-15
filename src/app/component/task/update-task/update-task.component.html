@@ -1,0 +1,111 @@
+<div class="row" *ngIf="showPOBoard;else BadCredentials">
+    <div class="col-md-12">
+
+        <div class="card card-container">
+            <h3 style="text-align: center;"> Update Task</h3>
+            <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
+
+                <!-- Title -->
+
+                <div class="form-group">
+                    <label class="form-label">Title*</label>
+                    <input type="text" formControlName="tname" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['tname'].errors }" />
+                    <div *ngIf="submitted && fctl['tname'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['tname'].errors['required']">Title is required</div>
+                    </div>
+                </div>
+
+
+                <!-- Unique Id -->
+                <div class="form-group">
+                    <label class="form-label">Reference*</label>
+
+                    <input type="text" formControlName="tReference" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['tReference'].errors }" disabled="" />
+                    <div *ngIf="submitted && fctl['tReference'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['tReference'].errors['required']">Reference is required</div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="form-label">Description*</label>
+                    <textarea type="text" formControlName="tdescription" class="form-control md-textarea"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['tdescription'].errors }" rows="3"></textarea>
+                    <div *ngIf="submitted && fctl['tdescription'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['tdescription'].errors['required']">Description is required</div>
+                    </div>
+                </div>
+
+                <!-- Date Debut -->
+                <div class="form-group">
+                    <label class="form-label">Start Date*</label>
+                    <input type="date" formControlName="tdateDebut" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['tdateDebut'].errors }">
+                    <div *ngIf="submitted && fctl['tdateDebut'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['tdateDebut'].errors['required']">Date is required</div>
+                    </div>
+                </div>
+
+                <!-- Date Fin -->
+                <div class="form-group">
+                    <label class="form-label">End Date*</label>
+                    <input type="date" formControlName="tdateFin" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['tdateFin'].errors }">
+                    <div *ngIf="submitted && fctl['tdateFin'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['tdateFin'].errors['required']">Date is required</div>
+                    </div>
+                </div>
+
+                <!-- Task type -->
+                <div class="form-group">
+                    <label class="form-label" style="font-weight: bold;">Task type*: </label>
+                    <div class="continput">
+                        <div *ngFor="let item of items">
+
+                            <input type="radio" formControlName="typeTask" [value]="item.value"
+                                [ngClass]="{ 'is-invalid': submitted && fctl['typeTask'].errors }"
+                                [(ngModel)]="selectedValue">
+                            {{item.value}}
+                            <div *ngIf="submitted && fctl['typeTask'].errors" class="invalid-feedback">
+                                <div *ngIf="fctl['typeTask'].errors['required']">Task type is required</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="form-group">
+                    <label class="form-label" style="font-weight: bold;">Status*: </label>
+                    <div class="continput">
+                        <div *ngFor="let item of items2">
+
+                            <input type="radio" formControlName="statut" [value]="item.value"
+                                [ngClass]="{ 'is-invalid': submitted && fctl['statut'].errors }"
+                                [(ngModel)]="selectedValue2">
+                            {{item.value}}
+                            <div *ngIf="submitted && fctl['statut'].errors" class="invalid-feedback">
+                                <div *ngIf="fctl['statut'].errors['required']">statut is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <!--  <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+                        Reset
+                    </button> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>
