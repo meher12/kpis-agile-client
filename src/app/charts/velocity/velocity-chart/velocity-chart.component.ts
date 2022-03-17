@@ -1,5 +1,5 @@
-import { AUTO_STYLE } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import * as ApexCharts from 'apexcharts';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -14,11 +14,15 @@ import {
   ApexTooltip,
   ApexTitleSubtitle
 } from "ng-apexcharts";
+
+import { Projet } from 'src/app/models/projet.model';
 import { Sprint } from 'src/app/models/sprint.model';
+import { ProjectService } from 'src/app/services/projects/project.service';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 export type ChartOptions = {
- // series: ApexAxisChartSeries;
+  // series: ApexAxisChartSeries;
   chart: ApexChart;
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
@@ -45,34 +49,76 @@ export class VelocityChartComponent implements OnInit {
   public chartOptions: Partial<any>;
 
   sprints: Sprint[];
-  workCommitment:number[] = [] ;
-  workCompleted:number[] = [] ;
-  sprintName: String[] = [] ;
+  projects: Projet[];
+
+  isLoggedIn = false;
+  showPOBoard = false;
+  showScrumMBoard = false;
+
+  roles: string[] = [];
+
+  workCommitment: number[] = [];
+  workCompleted: number[] = [];
+  sprintName: String[] = [];
+
   msgError = "";
-  constructor(private sprintService: SprintService) { }
+
+  selected;
+
+  constructor(private sprintService: SprintService, private projectService: ProjectService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-  this.cgetAllSprints();
-   
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+
+      this.getAllproject();
+      this.updateTablesprint();
+      
+    }
+
   }
 
-   //  get all Sprints
-   cgetAllSprints() {
-    this.sprintService.getAllSprintsByProjectRef("PUID19F7D")
+  // update work Commitment and work Completed in sprint
+  updateTablesprint(){
+    this.sprintService.updateStoryPointInSprint()
+    .subscribe(data => console.log(data));
+  }
+
+  getAllproject() {
+    this.projectService.getProjectList()
+      .subscribe(data => {
+        this.projects = data;
+      },
+      err => {
+        this.msgError = err.error.message;
+        Swal.fire('Hey!', this.msgError, 'warning')
+        console.error(this.msgError);
+      });
+  }
+
+
+  //  get all Sprints by project reference
+  getVelocityChartByProject(event: any) {
+   
+    this.sprintService.getAllSprintsByProjectRef(event.target.value)
       .subscribe(data => {
         this.sprints = data;
         console.log(this.sprints);
 
         var arraySize = Object.keys(this.sprints).length;
         for (var i = 0; i < arraySize; i++) {
-         
           this.workCommitment[i] = this.sprints[i].workCommitment;
           this.workCompleted[i] = this.sprints[i].workCompleted;
-          this.sprintName[''+i] = this.sprints[i].stitre;
-         
-       }
-
-       this.velocityChart(this.workCommitment, this.workCompleted, this.sprintName);
+          this.sprintName['' + i] = this.sprints[i].stitre;
+        }
+        
+        this.velocityChart(this.workCommitment, this.workCompleted, this.sprintName);
       },
 
         err => {
@@ -80,10 +126,12 @@ export class VelocityChartComponent implements OnInit {
           Swal.fire('Hey!', this.msgError, 'warning')
           console.error(this.msgError);
         });
-  }
-
-// velocity Chart
+  } 
+ 
+  // velocity Chart
   velocityChart(wCommitment: number[], wCompleted: number[], xSprintName: String[]) {
+
+
     this.chartOptions = {
       series: [
         {
@@ -107,10 +155,10 @@ export class VelocityChartComponent implements OnInit {
         offsetY: 0,
         floating: false,
         style: {
-          fontSize:  '24px',
-          fontWeight:  'bold',
-          fontFamily:  'Helvetica, Arial, sans-serif',
-          color:  '#263238'
+          fontSize: '24px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          color: '#263238'
         },
       },
       plotOptions: {
@@ -132,33 +180,33 @@ export class VelocityChartComponent implements OnInit {
         categories: this.sprintName,
         tickPlacement: 'on',
         labels: {
-          style: { 
-              colors: [],
-              fontSize: '15px',
-              fontFamily: 'Helvetica, Arial, sans-serif',
-              fontWeight: 'bold',
-              cssClass: 'apexcharts-xaxis-label',
+          style: {
+            colors: [],
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
           }
         }
       },
       yaxis: {
         title: {
           text: "Story points",
-          style: { 
+          style: {
             colors: [],
             fontSize: '15px',
             fontFamily: 'Helvetica, Arial, sans-serif',
             fontWeight: 'bold',
             cssClass: 'apexcharts-xaxis-label',
-        }
+          }
         },
         labels: {
-          style: { 
-              colors: [],
-              fontSize: '15px',
-              fontFamily: 'Helvetica, Arial, sans-serif',
-              fontWeight: 'bold',
-              cssClass: 'apexcharts-xaxis-label',
+          style: {
+            colors: [],
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
           }
         }
 
@@ -174,6 +222,8 @@ export class VelocityChartComponent implements OnInit {
         }
       }
     };
+
+
   }
 
 }

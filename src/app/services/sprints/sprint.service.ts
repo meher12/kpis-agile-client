@@ -76,5 +76,11 @@ export class SprintService {
     return this.httpClient.delete(`${this.baseUrl}` + '/sprints/projects/' + `${project_id}` + '/sprints', httpOptions);
   }
 
+  // update work Commitment and work Completed in sprint
+  updateStoryPointInSprint(): Observable<Sprint[]> {
+    return this.httpClient.get<Sprint[]>(`${this.baseUrl}` + '/sprints/updatesp', httpOptions);
+  }
+
+
 
 }
