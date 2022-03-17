@@ -24,18 +24,25 @@
         <div *ngIf="selected">
             <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
-                <div *ngIf="selected" class="btn-group btn-group-toggle" role="group">
+                <div *ngIf="selectedListOption" class="btn-group btn-group-toggle" role="group">
                     <button routerLink="/createsprint" class="btn btn-outline-primary">Add Sprint</button>
                     <button style="margin-left: 2px" class="btn btn-outline-danger" (click)="confirmDeleteAll()">Delete
                         All Sprint</button>
 
                 </div>
                 <div class="row titre" *ngIf="selected">
-                    <h3>Project title: {{project?.titre}}</h3>
+                    <h3>Project: {{project?.pReference}} -- {{project?.titre}}</h3>
                 </div>
             </div>
 
             <div class="table-responsive" style="text-align: center;">
+
+                <div class="search-boxs">
+                    <input class="form-control" type="text" name="search" autocomplete="off"
+                        placeholder="&#61442; Start searching for a sprint by any item"
+                        [(ngModel)]="searchRef">
+                </div>
+
 
                 <table class="table table-striped">
                     <thead class="bg-none bgc-default-tp1">
@@ -50,7 +57,7 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let sprint of sprints">
+                        <tr *ngFor="let sprint of sprints | filter:searchRef">
                             <td>{{sprint.sReference}}</td>
                             <td> {{sprint.stitre}}</td>
                             <td>{{sprint.sdescription}}</td>

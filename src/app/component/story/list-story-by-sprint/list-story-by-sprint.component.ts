@@ -72,11 +72,11 @@ export class ListStoryBySprintComponent implements OnInit {
 
   // Get All projects by ref id
   getTitleSprint() {
-    this.sprintService.getSprintByReference(this.store_local_ref_sprint)
+    this.sprintService.getSprintByReference(this._getsselectedSRef)
       .subscribe(data => {
         this.sprint = data;
       })
-      console.log("*Ref sp*"+this.store_local_ref_sprint)
+      console.log("*Ref sp*"+this._getsselectedSRef)
   }
 
   // find sprint by project reference

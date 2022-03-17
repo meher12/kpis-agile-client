@@ -20,7 +20,7 @@ export class ProjetListComponent implements OnInit {
   roles: string[] = [];
   msgError = "";
   projects: Projet[];
-  dprojects: Projet[];
+  searchRef;
   constructor(private projectService: ProjectService, private router: Router, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {

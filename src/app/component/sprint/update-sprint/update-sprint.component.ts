@@ -109,7 +109,7 @@ sendRefProjectParams(){
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Sprint ' + this.sprint.stitre + ' updated', 'info')
-        this.gotToSprintListBypref();
+        this.gotToSprintList();
       },
         err => {
           this.msgError = err.error.message;
@@ -117,6 +117,10 @@ sendRefProjectParams(){
           console.error(this.msgError);
         }
       )
+  }
+
+  gotToSprintList() {
+    this.router.navigate(['/sprintList']);
   }
 
   gotToSprintListBypref() {

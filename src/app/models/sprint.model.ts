@@ -8,6 +8,8 @@ export class Sprint {
     public stitre: String;
     public sReference: String;
     public sdescription: String;
+    public workCommitment: number;
+    public workCompleted: number;
     public sdateDebut: Date;
     public sdateFin: Date;
     public projet: Projet;

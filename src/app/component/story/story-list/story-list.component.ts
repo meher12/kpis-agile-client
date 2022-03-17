@@ -18,7 +18,9 @@ export class StoryListComponent implements OnInit {
 
   sprints: Sprint[];
   selected;
-
+  selectedListOption;
+  searchRef;
+  
   stories: Story[];
   sprint: Sprint;
 
@@ -43,6 +45,7 @@ export class StoryListComponent implements OnInit {
 
       this.getTitleSprint();
       this.cgetAllStory();
+      this.selected=true;
 
     }
   }
@@ -73,6 +76,7 @@ export class StoryListComponent implements OnInit {
   // find story by sprint reference
   cgetAllStoryBySprintRef(event: any) {
 
+    this.selectedListOption= true;
     //Set refprodect in component 1
     this.storyService.changeSReference(event.target.value);
 

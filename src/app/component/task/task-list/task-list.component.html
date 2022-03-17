@@ -9,9 +9,9 @@
             <!-- Start -->
             <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
                 [(ngModel)]="selected" name="valueCheck" (change)="cgetAllTaskByStoryRef($event)">
-                <option [ngValue]="undefined" disabled>Choose your sprint title...</option>
+                <option [ngValue]="undefined" disabled>Choose your story by unique id...</option>
                 <option *ngFor="let story of stories" [value]="story.stReference" [selected]="story == selected">
-                    {{story.stname}}
+                    {{story.stReference}} -- {{story.stname}}
                 </option>
             </select>
 
@@ -20,18 +20,21 @@
         <div *ngIf="selected">
             <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
-                <div *ngIf="selected" class="btn-group btn-group-toggle" role="group">
+                <div *ngIf="selectedListOption" class="btn-group btn-group-toggle" role="group">
                     <button routerLink="/createtask" class="btn btn-outline-primary">Add Task</button>
                     <button style="margin-left: 2px" class="btn btn-outline-danger" (click)="confirmDeleteAll()">Delete
                         All Task</button>
                 </div>
                 <div class="row titre" *ngIf="selected">
-                    <h3>Story title: {{story?.stname}}</h3>
+                    <h3>Story: {{story?.stReference}} -- {{story?.stname}}</h3>
                 </div>
             </div>
 
             <div class="table-responsive" style="text-align: center;">
-
+                <div class="search-boxs">
+                    <input class="form-control" type="text" name="search" autocomplete="off"
+                        placeholder="&#61442; Start searching for a sprint by any item" [(ngModel)]="searchRef">
+                </div>
                 <table class="table table-striped">
                     <thead class="bg-none bgc-default-tp1">
                         <tr>
@@ -47,7 +50,7 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let task of tasks">
+                        <tr *ngFor="let task of tasks  | filter:searchRef">
                             <td>{{task.tReference}}</td>
                             <td>{{task.tname}}</td>
                             <td>{{task.tdescription}}</td>

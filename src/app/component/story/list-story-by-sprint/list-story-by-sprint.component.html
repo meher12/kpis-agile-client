@@ -19,7 +19,7 @@
             <div class="table-responsive" style="text-align: center;">
 
                 <div class="col-md-12 titre" style="text-align: justify;">
-                    <h3>Sprint title: {{sprint?.stitre}}</h3>
+                    <h3>Sprint : {{sprint?.sReference}} -- {{sprint?.stitre}}</h3>
                 </div>
                 <table class="table table-striped">
                     <thead class="bg-none bgc-default-tp1">
@@ -28,6 +28,7 @@
                             <th>Title</th>
                             <th>Description</th>
                             <th>Story Point</th>
+                            <th>SP Completed</th>
                             <th>Priority</th>
                             <th>Action</th>
                         </tr>
@@ -39,6 +40,7 @@
                             <td> {{story.stname}}</td>
                             <td>{{story.stdescription}}</td>
                             <td>{{story.storyPoint}}</td>
+                            <td>{{story.spCompleted}}</td>
                             <td>{{story.priority}}</td>
                             <td>
                                 <div class="nowrap btn-group">

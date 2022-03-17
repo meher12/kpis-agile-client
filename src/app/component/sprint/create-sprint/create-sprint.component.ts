@@ -97,6 +97,7 @@ export class CreateSprintComponent implements OnInit {
       .subscribe(projectRef => {
         this._sselectedPRef = projectRef;
     // set local storage
+      localStorage.removeItem('refprojectforsprintlist');
       localStorage.setItem('refprojectforsprintlist', this._sselectedPRef);
       }); //<= Always get current value!
   }
@@ -114,7 +115,7 @@ export class CreateSprintComponent implements OnInit {
         console.log(data);
         Swal.fire('Hey!', 'Sprint ' + this.sprint.stitre + ' is saved', 'info');
         console.log("*********"+ this._project_id)
-        this.gotToSprintListBypref();
+        this.gotToSprintList();
       },
         err => {
           this.msgError = err.error.message;
@@ -127,6 +128,12 @@ export class CreateSprintComponent implements OnInit {
   gotToSprintListBypref() {
     this.router.navigate(['/sprintListBypre']);
   }
+
+  gotToSprintList() {
+    this.router.navigate(['sprintList']);
+  }
+
+
 
   get fctl(): { [key: string]: AbstractControl } {
     return this.form.controls;

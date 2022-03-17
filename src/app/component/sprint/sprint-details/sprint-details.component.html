@@ -58,6 +58,7 @@
                 <div class="col c25 border">Title</div>
                 <div class="col c50 border">Description</div>
                 <div class="col c30 border">Story points</div>
+                <div class="col c30 border">SP Completed</div>
                 <div class="col clast border">Priority</div>
               </div>
               <div class="row" *ngFor="let story of sprint.stories">
@@ -65,7 +66,8 @@
                 <div class="col c25 border">{{story.stname}}</div>
                 <div class="col c50 border">{{story.stdescription}}</div>
                 <div class="col c30 border">{{story.storyPoint}}</div>
-                <div class="col clast border">{{story.priorite}}</div>
+                <div class="col c30 border">{{story.spCompleted}}</div>
+                <div class="col clast border">{{story.priority}}</div>
               </div>
             </div>
           </div>

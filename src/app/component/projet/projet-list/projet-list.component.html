@@ -1,8 +1,8 @@
-<div class="card"  *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
+<div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
     <h3 style="text-align: center;">Project List</h3>
 
     <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
-        <div  class="btn-group btn-group-toggle" role="group">
+        <div class="btn-group btn-group-toggle" role="group">
             <button routerLink="/createproject" class="btn btn-outline-primary">Add Project</button>
             <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete All
                 project</button>
@@ -12,6 +12,13 @@
 
 
     <div class="table-responsive" style="text-align: center;">
+
+
+        <div class="search-boxs">
+            <input class="form-control" type="text" name="search" autocomplete="off"
+                placeholder="&#61442; Start searching for a project by any item" [(ngModel)]="searchRef">
+        </div>
+
         <table class="table table-striped">
             <thead class="bg-none bgc-default-tp1">
                 <tr>
@@ -25,7 +32,7 @@
             </thead>
 
             <tbody>
-                <tr *ngFor="let project of projects">
+                <tr *ngFor="let project of projects | filter:searchRef">
                     <td>{{project.pReference}}</td>
                     <td> {{project.titre}}</td>
                     <td>{{project.descriptionProject}}</td>
@@ -34,7 +41,8 @@
                     <td>
                         <div class="nowrap btn-group">
                             <button class="btn btn-success" (click)="detailsProject(project.id)">Details</button>
-                            <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info" (click)="updateProject(project.id)">Update</button>
+                            <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info"
+                                (click)="updateProject(project.id)">Update</button>
                             <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
                                 (click)="confirmDeleteById(project.id)">Delete</button>
                         </div>

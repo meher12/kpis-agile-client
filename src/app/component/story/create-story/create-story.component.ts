@@ -55,7 +55,7 @@ export class CreateStoryComponent implements OnInit {
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-
+    localStorage.removeItem('refsprint');
     localStorage.setItem('refsprint', this.form.controls.stReference.value );
 
     if (this.isLoggedIn) {
@@ -94,6 +94,7 @@ export class CreateStoryComponent implements OnInit {
       .subscribe(sprintRef => {
         this._sselectedSRef = sprintRef;
     // set local storage
+      localStorage.removeItem('sprintrefTostorylist');
       localStorage.setItem('sprintrefTostorylist', this._sselectedSRef);
       }); //<= Always get current value!
   }
@@ -112,7 +113,7 @@ export class CreateStoryComponent implements OnInit {
         console.log(data);
         Swal.fire('Hey!', 'Story ' + this.story.stname + ' is saved', 'info');
         //console.log("*********"+ this._sprint_id)
-        this.gotToStoryListBysref();
+        this.gotToStoryList();
       },
         err => {
           this.msgError = err.error.message;
@@ -122,9 +123,12 @@ export class CreateStoryComponent implements OnInit {
       )
   }
 
-  gotToStoryListBysref() {
-    this.router.navigate(['/storylistByspr']);
+  gotToStoryList() {
+    this.router.navigate(['storyList']);
   }
+ /*  gotToStoryListBysref() {
+    this.router.navigate(['/storylistByspr']);
+  } */
 
   get fctl(): { [key: string]: AbstractControl } {
     return this.form.controls;

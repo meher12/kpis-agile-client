@@ -16,7 +16,9 @@ export class TaskListComponent implements OnInit {
 
   stories: Story[];
   selected;
-
+  selectedListOption;
+  searchRef;
+  
   tasks: Task[];
   story: Story;
 
@@ -42,6 +44,8 @@ export class TaskListComponent implements OnInit {
 
       this.getTitleStory();
       this.cgetAllTask();
+      this.selected=true;
+
 
     }
   }
@@ -71,6 +75,7 @@ export class TaskListComponent implements OnInit {
   // find tasks by story reference
   cgetAllTaskByStoryRef(event: any) {
 
+    this.selectedListOption = true;
     //Set refprodect in component 1
     this.taskService.changeSTReference(event.target.value);
 
@@ -99,8 +104,8 @@ export class TaskListComponent implements OnInit {
   }
 
 
-   // delete task by Id
-   confirmDeleteById(id: number) {
+  // delete task by Id
+  confirmDeleteById(id: number) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',

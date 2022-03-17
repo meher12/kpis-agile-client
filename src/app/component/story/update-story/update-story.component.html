@@ -49,6 +49,16 @@
                     </div>
                 </div>
 
+                  <!-- Story points Completed -->
+                  <div class="form-group">
+                    <label class="form-label">Story points Completed*</label>
+                    <input type="number" formControlName="spCompleted" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['spCompleted'].errors }">
+                    <div *ngIf="submitted && fctl['spCompleted'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['spCompleted'].errors['required']">Story points Completed is required</div>
+                    </div>
+                </div>
+
                 <!-- Priority -->
                 <div class="form-group">
                     <label class="form-label">Priority*</label>

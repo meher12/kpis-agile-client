@@ -74,7 +74,7 @@ export class SprintListByProjectComponent implements OnInit {
       .subscribe(data => {
         this.project = data;
       })
-      console.log("*****ffffffffff***"+this.store_local_ref_project)
+      console.log("******"+this.store_local_ref_project)
   }
 
   // find sprint by project reference

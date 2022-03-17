@@ -18,6 +18,8 @@ export class SprintListComponent implements OnInit {
 
   projects: Projet[];
   selected;
+  selectedListOption;
+  searchRef;
 
   sprints: Sprint[];
   project: Projet;
@@ -28,6 +30,7 @@ export class SprintListComponent implements OnInit {
   showScrumMBoard = false;
 
   roles: string[] = [];
+
 
   constructor(private sprintService: SprintService, private router: Router, private tokenStorageService: TokenStorageService,
     private projectService: ProjectService) { }
@@ -43,16 +46,18 @@ export class SprintListComponent implements OnInit {
 
       this.getTitleProjects();
       this.cgetAllSprints();
+      this.selected= true;
 
     }
   }
 
+ 
   //  get all Sprints
   cgetAllSprints() {
     this.sprintService.getAllSprints()
       .subscribe(data => {
         this.sprints = data;
-        console.log(this.sprints);
+        //console.log(this.sprints
       },
 
         err => {
@@ -74,6 +79,7 @@ export class SprintListComponent implements OnInit {
   // find sprint by project reference
   cgetAllSprintsByProjectRef(event: any) {
 
+    this.selectedListOption= true;
     //Set refprodect in component 1
     this.sprintService.changePReference(event.target.value);
 
@@ -87,7 +93,6 @@ export class SprintListComponent implements OnInit {
     this.sprintService.getAllSprintsByProjectRef(event.target.value)
       .subscribe(data => {
         this.sprints = data;
-        // console.log(this.sprints);
       },
         err => {
           this.msgError = err.error.message;

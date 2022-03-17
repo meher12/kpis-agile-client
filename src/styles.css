@@ -9,3 +9,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .table {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   }
+
+  .search-boxs {
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin:auto;
+  }

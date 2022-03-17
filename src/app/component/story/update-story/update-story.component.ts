@@ -42,6 +42,7 @@ export class UpdateStoryComponent implements OnInit {
     stReference: new FormControl(),
     stdescription: new FormControl(),
     storyPoint: new FormControl(),
+    spCompleted: new FormControl(),
     priority: new FormControl(),
   });
 
@@ -67,6 +68,7 @@ export class UpdateStoryComponent implements OnInit {
             stReference: [this.story.stReference, Validators.required],
             stdescription: [this.story.stdescription, Validators.required],
             storyPoint: [this.story.storyPoint, Validators.required],
+            spCompleted: [this.story.spCompleted, Validators.required],
             priority: [this.story.priority, Validators.required],
           });
         },
@@ -88,10 +90,9 @@ export class UpdateStoryComponent implements OnInit {
         this._sselectedSRef = sprintRef;
 
         // set local storage
-        //localStorage.setItem('sprintrefTostorylist', this._sselectedSRef);
+        localStorage.removeItem('sprintrefTostorylist');
+        localStorage.setItem('sprintrefTostorylist', this._sselectedSRef);
 
-        //localStorage of ref project
-        // localStorage.setItem('refproject', this.selectedPRef);
       }); //<= Always get current value!
   }
 
@@ -107,7 +108,7 @@ export class UpdateStoryComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Story ' + this.story.stname + ' updated', 'info')
-        this.gotToStoryListBysref();
+        this.gotToStoryList();
       },
         err => {
           this.msgError = err.error.message;
@@ -115,6 +116,10 @@ export class UpdateStoryComponent implements OnInit {
           console.error(this.msgError);
         }
       )
+  }
+
+  gotToStoryList() {
+    this.router.navigate(['storyList']);
   }
 
   gotToStoryListBysref() {

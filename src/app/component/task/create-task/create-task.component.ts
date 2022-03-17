@@ -111,6 +111,7 @@ export class CreateTaskComponent implements OnInit {
       .subscribe(storyRef => {
         this._sselectedSTRef = storyRef;
         // set local storage
+        localStorage.removeItem('refstoryfortasklist');
         localStorage.setItem('refstoryfortasklist', this._sselectedSTRef);
       }); //<= Always get current value!
   }
@@ -126,7 +127,7 @@ export class CreateTaskComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Task ' + this.task.tname + ' is saved', 'info');
-        this.gotToTaskListBystref();
+        this.gotToTaskList();
       },
         err => {
           this.msgError = err.error.message;
@@ -134,6 +135,10 @@ export class CreateTaskComponent implements OnInit {
           console.error(this.msgError);
         }
       )
+  }
+
+  gotToTaskList() {
+    this.router.navigate(['taskList']);
   }
 
   gotToTaskListBystref() {

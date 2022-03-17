@@ -7,6 +7,7 @@ export class Story{
     public stReference: string;
     public stname: string;
     public storyPoint: number;
+    public spCompleted: number;
     public priority: number;
     public stdescription: string;
     public sprint: Sprint;

@@ -34,6 +34,9 @@ import { UpdateStoryComponent } from './component/story/update-story/update-stor
 import { CreateTaskComponent } from './component/task/create-task/create-task.component';
 import { TaskListByStoryComponent } from './component/task/task-list-by-story/task-list-by-story.component';
 import { UpdateTaskComponent } from './component/task/update-task/update-task.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { VelocityChartComponent } from './charts/velocity/velocity-chart/velocity-chart.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -69,6 +72,7 @@ import { UpdateTaskComponent } from './component/task/update-task/update-task.co
     CreateTaskComponent,
     TaskListByStoryComponent,
     UpdateTaskComponent,
+    VelocityChartComponent,
 
 
 
@@ -79,7 +83,8 @@ import { UpdateTaskComponent } from './component/task/update-task/update-task.co
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    //Ng2SearchPipeModule
+    NgApexchartsModule,
+    Ng2SearchPipeModule
 
 
   ],
