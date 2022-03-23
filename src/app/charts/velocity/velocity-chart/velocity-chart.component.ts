@@ -79,6 +79,7 @@ export class VelocityChartComponent implements OnInit {
 
       this.getAllproject();
       this.updateTablesprint();
+      this.iniVelocityChart();
       
     }
 
@@ -222,8 +223,99 @@ export class VelocityChartComponent implements OnInit {
         }
       }
     };
-
-
   }
+  
+   // init velocity Chart
+   iniVelocityChart() {
+    this.chartOptions = {
+      series: [
+        {
+          name: "Commitment",
+          data: [45, 40, 35, 30, ]
+        },
+        {
+          name: "Work completed",
+          data: [43, 38, 35, 28, ]
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 'auto',
+      },
+      title: {
+        text: 'Velocity Chart',
+        align: 'center',
+        margin: 30,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize: '24px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          color: '#263238'
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "55%",
+          /* borderRadius: 10 */
+        }
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"]
+      },
+      xaxis: {
+        categories: ["Sprint 1", "Sprint 2", "Sprint 3", "Sprint 4",],
+        tickPlacement: 'on',
+        labels: {
+          style: {
+            colors: [],
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        }
+      },
+      yaxis: {
+        title: {
+          text: "Story points",
+          style: {
+            colors: [],
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        },
+        labels: {
+          style: {
+            colors: [],
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        }
 
+      },
+      fill: {
+        opacity: 1,
+      },
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            return "" + val + " Story points";
+          }
+        }
+      }
+    };
+  }
 }

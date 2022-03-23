@@ -4,7 +4,7 @@
     <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
         <div class="btn-group btn-group-toggle" role="group">
             <button routerLink="/createproject" class="btn btn-outline-primary">Add Project</button>
-            <button style="margin-left: 2px" class="btn btn-outline-danger" (click)=" confirmDeleteAll()">Delete All
+            <button style="margin-left: 2px" class="btn btn-outline-danger" (click)="confirmDeleteAll()">Delete All
                 project</button>
 
         </div>
@@ -16,7 +16,7 @@
 
         <div class="search-boxs">
             <input class="form-control" type="text" name="search" autocomplete="off"
-                placeholder="&#61442; Start searching for a project by any item" [(ngModel)]="searchRef">
+                placeholder="&#61442; Start searching for a sprint by any item" [(ngModel)]="searchRef">
         </div>
 
         <table class="table table-striped">

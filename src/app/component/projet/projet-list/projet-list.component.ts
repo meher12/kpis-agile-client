@@ -145,6 +145,7 @@ export class ProjetListComponent implements OnInit {
             .subscribe(data => {
               console.log(data);
               this.getAllProject();
+              this. refresh();
             },
               err => {
                 this.msgError = err.error.message;

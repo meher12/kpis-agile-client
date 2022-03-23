@@ -37,6 +37,7 @@ import { UpdateTaskComponent } from './component/task/update-task/update-task.co
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { VelocityChartComponent } from './charts/velocity/velocity-chart/velocity-chart.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { BurndownComponent } from './charts/burndown/burndown.component';
 
 
 
@@ -73,6 +74,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     TaskListByStoryComponent,
     UpdateTaskComponent,
     VelocityChartComponent,
+    BurndownComponent,
 
 
 

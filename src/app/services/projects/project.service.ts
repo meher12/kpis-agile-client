@@ -53,7 +53,7 @@ export class ProjectService {
 
   // delete project by id
   deleteAllProjects(): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}`, httpOptions);
+    return this.httpClient.delete(`${this.baseUrl}`+'/projects/', httpOptions);
   }
 
 }
