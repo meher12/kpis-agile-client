@@ -7,6 +7,7 @@ import { CreateProjetComponent } from './component/projet/create-projet/create-p
 import { ProjetDetailsComponent } from './component/projet/projet-details/projet-details.component';
 import { ProjetListComponent } from './component/projet/projet-list/projet-list.component';
 import { UpdateProjetComponent } from './component/projet/update-projet/update-projet.component';
+import { AddSpCompletedComponent } from './component/sprint/add-sp-completed/add-sp-completed.component';
 import { CreateSprintComponent } from './component/sprint/create-sprint/create-sprint.component';
 import { SprintDetailsComponent } from './component/sprint/sprint-details/sprint-details.component';
 import { SprintListByProjectComponent } from './component/sprint/sprint-list-by-project/sprint-list-by-project.component';
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: 'updatesprint/:id', component: UpdateSprintComponent},
   {path: 'detailssprint/:id', component: SprintDetailsComponent},
   {path: 'sprintListBypre', component: SprintListByProjectComponent},
+  {path: 'addspcompleted/:id', component: AddSpCompletedComponent, outlet: 'addspPopup'},
 
   // Story Router
   {path: 'storyList', component: StoryListComponent},

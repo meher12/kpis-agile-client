@@ -59,3 +59,26 @@
     width:15%;
  }
 
+
+ /* css model */ 
+ @media (min-width: 400px){
+   .modal-dialog {
+      max-width: 750px;
+      margin: 1.75rem auto;
+      height: auto;
+      transform: scale(1);
+      box-shadow: 0 0 0 50vmax rgba(0,0,0,.5);
+  }
+  }
+  
+  .reveal-modal {
+      position: relative;
+      margin: 0 auto;
+      top: 15%;
+  }
+  
+  
+  .modal { 
+      overflow-y: visible !important;  
+     /*background-color: rgba(241, 231, 231, 0.3);  */
+  }

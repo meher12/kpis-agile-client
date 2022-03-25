@@ -14,6 +14,7 @@ export class Sprint {
     public sdateFin: Date;
     public daysarray: string[];
     public idealLinearray: string[];
+    public workedlarray: string[];
     public projet: Projet;
     public stories: Story[];
 }

@@ -38,6 +38,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { VelocityChartComponent } from './charts/velocity/velocity-chart/velocity-chart.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BurndownComponent } from './charts/burndown/burndown.component';
+import { AddSpCompletedComponent } from './component/sprint/add-sp-completed/add-sp-completed.component';
+
 
 
 
@@ -75,6 +77,7 @@ import { BurndownComponent } from './charts/burndown/burndown.component';
     UpdateTaskComponent,
     VelocityChartComponent,
     BurndownComponent,
+    AddSpCompletedComponent,
 
 
 

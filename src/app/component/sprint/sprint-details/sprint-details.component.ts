@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Sprint } from 'src/app/models/sprint.model';
 import { Story } from 'src/app/models/story.model';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
@@ -24,8 +24,14 @@ export class SprintDetailsComponent implements OnInit {
   sprint: Sprint;
   stories: Story[];
 
+  idealLine: string[];
+  workedLine: string[];
+  dayinsprint: string[];
+
+  displayStyle = "none";
+
   constructor(private sprintService: SprintService,  private route: ActivatedRoute,
-    private tokenStorageService: TokenStorageService) { }
+    private tokenStorageService: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -40,10 +46,22 @@ export class SprintDetailsComponent implements OnInit {
 
       this.sprint = new Sprint();
       this.id = this.route.snapshot.params['id'];
+      //localStorage.setItem('id', this.id.toString());
       this.sprintService.getSprintById(this.id)
         .subscribe(data => {
           this.sprint = data;
           this.stories = this.sprint.stories;
+
+          // arrays of brundown chart
+          this.sprint.idealLinearray.pop();
+          this.idealLine =  this.sprint.idealLinearray;
+
+          this.sprint.workedlarray.pop();
+          this. workedLine = this.sprint.workedlarray;
+
+          this.sprint.daysarray.pop();
+          this.dayinsprint = this.sprint.daysarray;
+
           console.log(this.sprint);
 
         },
@@ -54,5 +72,16 @@ export class SprintDetailsComponent implements OnInit {
           });
     }
   }
+
+  openPopup(id: number) {
+   this.router.navigate([{ outlets: { addspPopup: [ 'addspcompleted', id ] }}]); 
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
+    this.router.navigate([{ outlets: { addspPopup: null }}]);
+  }
+
+
 
 }

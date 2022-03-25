@@ -81,6 +81,21 @@ export class SprintService {
     return this.httpClient.get<Sprint[]>(`${this.baseUrl}` + '/sprints/updatesp', httpOptions);
   }
 
+  // get number of days in sprint
+  daysInSprint(): Observable<any> {
+    return this.httpClient.get<Sprint[]>(`${this.baseUrl}` + '/sprints/daysbrundownChart', httpOptions);
+  }
+
+   // get iealLine for sprint story points
+   idealLineOfSprint(): Observable<any> {
+    return this.httpClient.get<Sprint[]>(`${this.baseUrl}` + '/sprints/ideallbrundownChart', httpOptions);
+  }
+
+   // update sprint work completed
+   updateSprintWorkCompleted(id: number, sprintWorkedSP: any): Observable<any> {
+    return this.httpClient.put<any>(`${this.baseUrl}` + '/sprints/addspCompleted/'+ `${id}`, sprintWorkedSP, httpOptions);
+  }
+
 
 
 }

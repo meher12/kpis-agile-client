@@ -45,8 +45,6 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 
-
-
 export class BurndownComponent implements OnInit {
 
 
@@ -57,21 +55,8 @@ export class BurndownComponent implements OnInit {
   selected;
 
 
-
-  firstSP: number[] = [];
-  spTab: number[] = [];
+  workedStoryarray: string[];
   idealLineArray: string[];
-/*   dataarray = [];
-  dates: String[] = [];
-  getDatesBetweenDates;
-  endDate;
-  startDate;
-  totalSP;
-  SP;
-  nmuber_of_day;
-  incrementValue;
-  iterator; */
-
   dateList: String[];
 
 
@@ -140,41 +125,17 @@ export class BurndownComponent implements OnInit {
         this.sprintObject = data;
         //console.log(this.sprintObject)
 
-       /*  this.totalSP = this.sprintObject.workCommitment;
-        this.firstSP = [this.totalSP];
-
-
-        //Difference in number of days
-        this.endDate = moment(this.sprintObject.sdateFin);
-        this.startDate = moment(this.sprintObject.sdateDebut);
-        var nbrOfDay = moment.duration(this.endDate.diff(this.startDate)).asDays();
-
-
-        this.SP = this.sprintObject.workCommitment;
-        this.nmuber_of_day = Math.round(nbrOfDay);
-        this.incrementValue = Math.round(this.SP / this.nmuber_of_day);
-
-
-        for (var i = 0; i < this.nmuber_of_day; i++) {
-          this.spTab[i] = this.SP - this.incrementValue
-          this.spTab.push(this.spTab[i]);
-          this.iterator = this.spTab.values();
-          for (let elements of this.iterator) {
-            this.SP = elements;
-          }
-        }
-        this.idealLineArray = this.firstSP.concat(this.spTab);
-
-        this.dataarray = this.PositiveArray(this.idealLineArray).slice(0, -1);
-
- */
+     
         this.sprintObject.idealLinearray.pop()
-        this.idealLineArray =    this.sprintObject.idealLinearray;
+        this.idealLineArray = this.sprintObject.idealLinearray;
+
+        this.sprintObject.workedlarray.pop();
+        this.workedStoryarray =  this.sprintObject.workedlarray;
         this.sprintObject.daysarray.pop() 
-        this.dateList = this.sprintObject.daysarray //this.getDateDayInArray(this.startDate, this.endDate);
+        this.dateList = this.sprintObject.daysarray
 
 
-        this.brunDownChart(this.idealLineArray, this.idealLineArray, this.dateList);
+        this.brunDownChart(this.idealLineArray, this.workedStoryarray, this.dateList);
 
 
       },
@@ -201,7 +162,7 @@ export class BurndownComponent implements OnInit {
 
         {
           name: "work",
-          data: this.idealLineArray
+          data: this.workedStoryarray
         }
 
       ],
@@ -435,7 +396,7 @@ export class BurndownComponent implements OnInit {
   } */
 
   // return only positive array
-  PositiveArray(numbers): number[] {
+/*   PositiveArray(numbers): number[] {
   
    
     var negatives: number[] = [];
@@ -451,7 +412,7 @@ export class BurndownComponent implements OnInit {
    // this.empty(numbers);
     console.log("data lenght", positives)
     return positives;
-  }
+  } */
 
 
 
