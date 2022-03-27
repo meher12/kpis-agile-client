@@ -42,7 +42,7 @@
                 <!-- Date Debut -->
                 <div class="form-group">
                     <label class="form-label">Start Date*</label>
-                    <input type="date" formControlName="dateDebut" class="form-control"
+                    <input type="date"  formControlName="dateDebut" class="form-control" 
                         [ngClass]="{ 'is-invalid': submitted && fctl['dateDebut'].errors }">
                     <div *ngIf="submitted && fctl['dateDebut'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['dateDebut'].errors['required']">Date is required</div>
@@ -52,7 +52,7 @@
                 <!-- Date Fin -->
                 <div class="form-group">
                     <label class="form-label">End Date*</label>
-                    <input type="date" formControlName="dateFin" class="form-control"
+                    <input  type="date"  formControlName="dateFin" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && fctl['dateFin'].errors }">
                     <div *ngIf="submitted && fctl['dateFin'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['dateFin'].errors['required']">Date is required</div>

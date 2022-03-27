@@ -43,7 +43,7 @@
                         <tr>
                             <th>Reference</th>
                             <th>Title</th>
-                            <th>Description</th>
+                            <!-- <th>Description</th> -->
                             <th>Story Point</th>
                             <th>SP Completed</th>
                             <th>Priority</th>
@@ -55,7 +55,7 @@
                         <tr *ngFor="let story of stories  | filter:searchRef">
                             <td>{{story.stReference}}</td>
                             <td> {{story.stname}}</td>
-                            <td>{{story.stdescription}}</td>
+                            <!-- <td>{{story.stdescription}}</td> -->
                             <td>{{story.storyPoint}}</td>
                             <td>{{story.spCompleted}}</td>
                             <td>{{story.priority}}</td>

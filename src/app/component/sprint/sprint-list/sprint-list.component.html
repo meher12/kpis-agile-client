@@ -39,8 +39,7 @@
 
                 <div class="search-boxs">
                     <input class="form-control" type="text" name="search" autocomplete="off"
-                        placeholder="&#61442; Start searching for a sprint by any item"
-                        [(ngModel)]="searchRef">
+                        placeholder="&#61442; Start searching for a sprint by any item" [(ngModel)]="searchRef">
                 </div>
 
 
@@ -49,7 +48,7 @@
                         <tr>
                             <th>Reference</th>
                             <th>Title</th>
-                            <th>Description</th>
+                           <!--  <th>Description</th> -->
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Action</th>
@@ -60,7 +59,10 @@
                         <tr *ngFor="let sprint of sprints | filter:searchRef">
                             <td>{{sprint.sReference}}</td>
                             <td> {{sprint.stitre}}</td>
-                            <td>{{sprint.sdescription}}</td>
+                           <!--  <td>
+
+                                {{sprint.sdescription}}
+                            </td> -->
                             <td>{{sprint.sdateDebut}}</td>
                             <td>{{sprint.sdateFin}}</td>
                             <td>
