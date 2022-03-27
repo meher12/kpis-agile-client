@@ -31,10 +31,23 @@
             </div>
 
             <div class="table-responsive" style="text-align: center;">
+
                 <div class="search-boxs">
                     <input class="form-control" type="text" name="search" autocomplete="off"
                         placeholder="&#61442; Start searching for a sprint by any item" [(ngModel)]="searchRef">
                 </div>
+
+                <!-- Pagination -->
+                <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                    <div class="p-2 bd-highlight">
+                        <select (change)="onTableSizeChange($event)" class="custom-select">
+                            <option *ngFor="let size of tableSizes" [ngValue]="size">
+                                {{ size }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- End Pagination -->
                 <table class="table table-striped">
                     <thead class="bg-none bgc-default-tp1">
                         <tr>
