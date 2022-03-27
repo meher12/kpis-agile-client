@@ -38,8 +38,9 @@ export class StoryService {
 
   // get All Story
   getAllStory(): Observable<Story[]> {
-    return this.httpClient.get<Story[]>(`${this.baseUrl}` + '/stories', httpOptions);
+    return this.httpClient.get<Story[]>(`${this.baseUrl}` + '/stories' , httpOptions);
   }
+
 
   // get All Story By Sprint Ref
   getAllStoryBySprintRef(sprint_ref: string): Observable<Story[]> {

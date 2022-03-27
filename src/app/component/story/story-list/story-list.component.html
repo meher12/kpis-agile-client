@@ -30,12 +30,16 @@
                 </div>
             </div>
 
+            <!-- Paginatio -->
+
+
+            <!-- End Pagination -->
+
             <div class="table-responsive" style="text-align: center;">
 
                 <div class="search-boxs">
                     <input class="form-control" type="text" name="search" autocomplete="off"
-                        placeholder="&#61442; Start searching for a sprint by any item"
-                        [(ngModel)]="searchRef">
+                        placeholder="&#61442; Start searching for a sprint by any item" [(ngModel)]="searchRef">
                 </div>
 
                 <table class="table table-striped">
@@ -52,7 +56,11 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let story of stories  | filter:searchRef">
+                        <tr *ngFor="let story of stories  | filter:searchRef  | paginate : {
+                            itemsPerPage: tableSize,
+                            currentPage: page,
+                            totalItems: count
+                           };  let i = index ">
                             <td>{{story.stReference}}</td>
                             <td> {{story.stname}}</td>
                             <!-- <td>{{story.stdescription}}</td> -->
@@ -73,6 +81,10 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center">
+                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                    </pagination-controls>
+                </div>
             </div>
         </div>
     </div>

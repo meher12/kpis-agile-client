@@ -48,7 +48,7 @@
                         <tr>
                             <th>Reference</th>
                             <th>Title</th>
-                           <!--  <th>Description</th> -->
+                            <!--  <th>Description</th> -->
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Action</th>
@@ -56,10 +56,14 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let sprint of sprints | filter:searchRef">
+                        <tr *ngFor="let sprint of sprints | filter:searchRef | paginate : {
+                            itemsPerPage: tableSize,
+                            currentPage: page,
+                            totalItems: count
+                           };  let i = index ">
                             <td>{{sprint.sReference}}</td>
                             <td> {{sprint.stitre}}</td>
-                           <!--  <td>
+                            <!--  <td>
 
                                 {{sprint.sdescription}}
                             </td> -->
@@ -79,6 +83,10 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center">
+                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                    </pagination-controls>
+                </div>
             </div>
         </div>
     </div>

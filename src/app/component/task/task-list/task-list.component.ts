@@ -28,6 +28,12 @@ export class TaskListComponent implements OnInit {
   showScrumMBoard = false;
   roles: string[] = [];
 
+  /* Pagination */
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 7;
+  tableSizes: any = [3, 6, 9, 12];
+
   constructor(private storyService: StoryService, private router: Router, private tokenStorageService: TokenStorageService,
     private taskService: TaskService) { }
 
@@ -63,6 +69,17 @@ export class TaskListComponent implements OnInit {
           console.error(this.msgError);
         });
   }
+
+      /* Pagination */
+      onTableDataChange(event: any) {
+        this.page = event;
+        this.cgetAllTask();
+      }
+      onTableSizeChange(event: any): void {
+        this.tableSize = event.target.value;
+        this.page = 1;
+        this.cgetAllTask();
+      }
 
   // Get Stories for select option
   getTitleStory() {

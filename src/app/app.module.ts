@@ -39,6 +39,7 @@ import { VelocityChartComponent } from './charts/velocity/velocity-chart/velocit
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BurndownComponent } from './charts/burndown/burndown.component';
 import { AddSpCompletedComponent } from './component/sprint/add-sp-completed/add-sp-completed.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -89,7 +90,8 @@ import { AddSpCompletedComponent } from './component/sprint/add-sp-completed/add
     HttpClientModule,
     AppRoutingModule,
     NgApexchartsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPaginationModule
 
 
   ],

@@ -32,6 +32,13 @@ export class SprintListComponent implements OnInit {
   roles: string[] = [];
 
 
+  /* Pagination */
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 4;
+  tableSizes: any = [3, 6, 9, 12];
+
+
   constructor(private sprintService: SprintService, private router: Router, private tokenStorageService: TokenStorageService,
     private projectService: ProjectService) { }
 
@@ -46,12 +53,12 @@ export class SprintListComponent implements OnInit {
 
       this.getTitleProjects();
       this.cgetAllSprints();
-      this.selected= true;
+      this.selected = true;
 
     }
   }
 
- 
+
   //  get all Sprints
   cgetAllSprints() {
     this.sprintService.getAllSprints()
@@ -67,19 +74,31 @@ export class SprintListComponent implements OnInit {
         });
   }
 
+  /* Pagination */
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.cgetAllSprints();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.cgetAllSprints();
+  }
+
+
   // Get All projects
-   getTitleProjects(){
+  getTitleProjects() {
     this.projectService.getProjectList()
-    .subscribe(data => {
-      this.projects= data;
-    })
-   }
+      .subscribe(data => {
+        this.projects = data;
+      })
+  }
   /* ******* */
 
   // find sprint by project reference
   cgetAllSprintsByProjectRef(event: any) {
 
-    this.selectedListOption= true;
+    this.selectedListOption = true;
     //Set refprodect in component 1
     this.sprintService.changePReference(event.target.value);
 
@@ -107,7 +126,7 @@ export class SprintListComponent implements OnInit {
     this.router.navigate(['updatesprint', id]);
   }
 
-  detailSprint(id: number){
+  detailSprint(id: number) {
     this.router.navigate(['detailssprint', id]);
   }
 

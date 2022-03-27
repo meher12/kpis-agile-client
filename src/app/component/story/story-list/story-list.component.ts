@@ -20,7 +20,7 @@ export class StoryListComponent implements OnInit {
   selected;
   selectedListOption;
   searchRef;
-  
+
   stories: Story[];
   sprint: Sprint;
 
@@ -29,6 +29,12 @@ export class StoryListComponent implements OnInit {
   showPOBoard = false;
   showScrumMBoard = false;
   roles: string[] = [];
+
+  /* Pagination */
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any = [3, 6, 9, 12];
 
   constructor(private storyService: StoryService, private router: Router, private tokenStorageService: TokenStorageService,
     private sprintService: SprintService) { }
@@ -45,25 +51,39 @@ export class StoryListComponent implements OnInit {
 
       this.getTitleSprint();
       this.cgetAllStory();
-      this.selected=true;
+      this.selected = true;
 
     }
   }
 
+ 
 
   //  get all Story
   cgetAllStory() {
+
     this.storyService.getAllStory()
-      .subscribe(data => {
-        this.stories = data;
-        console.log(this.stories);
-      },
+    .subscribe(data => {
+      this.stories = data;
+    },
         err => {
           this.msgError = err.error.message;
           Swal.fire('Hey!', this.msgError, 'warning')
           console.error(this.msgError);
-        });
+        }
+      );
   }
+
+  /* Pagination */
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.cgetAllStory();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.cgetAllStory();
+  }
+
 
   // Get All Sprint for select option
   getTitleSprint() {
@@ -76,7 +96,7 @@ export class StoryListComponent implements OnInit {
   // find story by sprint reference
   cgetAllStoryBySprintRef(event: any) {
 
-    this.selectedListOption= true;
+    this.selectedListOption = true;
     //Set refprodect in component 1
     this.storyService.changeSReference(event.target.value);
 
