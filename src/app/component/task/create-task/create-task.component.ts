@@ -69,6 +69,7 @@ export class CreateTaskComponent implements OnInit {
     tdateFin: new FormControl(''),
     status: new FormControl(''),
     typeTask: new FormControl(''),
+    estimation: new FormControl(),
   });
 
   ngOnInit(): void {
@@ -88,6 +89,7 @@ export class CreateTaskComponent implements OnInit {
         tdateFin: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],
         status: ['', Validators.required],
         typeTask: ['', Validators.required],
+        estimation:  ['', Validators.required],
       });
 
       this.getRefStory();

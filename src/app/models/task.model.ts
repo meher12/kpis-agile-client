@@ -12,5 +12,6 @@ export class Task {
     public tdateFin: Date;
     public status: ETask ;
     public typeTask: ETypeTask;
+    public estimation: number;
     public story: Story;
 }
