@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
 import {
   ChartComponent,
@@ -54,6 +54,7 @@ export class BurndownComponent implements OnInit {
   msgError = "";
   selected;
 
+  @Output() datePickedB = new EventEmitter<any>();
 
   workedStoryarray: string[];
   idealLineArray: string[];
@@ -90,9 +91,7 @@ export class BurndownComponent implements OnInit {
     }
   }
 
-    //function
-    arr = [];   // set array=[]
-    empty = arr => arr.length = 0;
+  
 
 
 
@@ -134,6 +133,7 @@ export class BurndownComponent implements OnInit {
         this.sprintObject.daysarray.pop() 
         this.dateList = this.sprintObject.daysarray
 
+        this.datePickedB.emit( this.sprintObject.supdatedDate);
 
         this.brunDownChart(this.idealLineArray, this.workedStoryarray, this.dateList);
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -43,9 +43,9 @@ export class ReleaseBurndownComponent implements OnInit {
   project: Projet;
   projects: Projet[];
 
-  pMorespF: string[]  = [];
+  pMorespF: string[] = [];
   pSpCommitmentF: string[] = [];
-  pSpwrkedF: string[]= [];
+  pSpwrkedF: string[] = [];
   sprintName: String[] = [];
 
   isLoggedIn = false;
@@ -54,10 +54,11 @@ export class ReleaseBurndownComponent implements OnInit {
 
   roles: string[] = [];
 
-
-
   msgError = "";
   selected;
+
+
+  @Output() datePicked = new EventEmitter<any>();
 
   constructor(private projectService: ProjectService, private tokenStorageService: TokenStorageService) { }
 
@@ -74,6 +75,7 @@ export class ReleaseBurndownComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
+      this.initReleaseBurndownChart(); 
 
     }
 
@@ -115,6 +117,8 @@ export class ReleaseBurndownComponent implements OnInit {
         }
         this.sprintName.push("release sprint")
 
+        this.datePicked.emit(this.project.pupdatedDate);
+
         /* Start Chart*/
         this.chartOptions = {
           series: [
@@ -124,7 +128,7 @@ export class ReleaseBurndownComponent implements OnInit {
             },
             {
               name: "Completed story point",
-              data:  this.pSpwrkedF
+              data: this.pSpwrkedF
             },
             {
               name: "New task",
@@ -133,7 +137,7 @@ export class ReleaseBurndownComponent implements OnInit {
           ],
           chart: {
             type: "bar",
-            height: 350,
+            height: 'auto',
             stacked: true,
             toolbar: {
               show: true
@@ -185,7 +189,7 @@ export class ReleaseBurndownComponent implements OnInit {
 
 
   // init release brundown chart
-  /*  releaseBurndownChart() {
+   initReleaseBurndownChart() {
      this.chartOptions = {
        series: [
          {
@@ -231,14 +235,7 @@ export class ReleaseBurndownComponent implements OnInit {
        },
        xaxis: {
          type: "category",
-         categories: [
-           "01/2011",
-           "02/2011",
-           "03/2011",
-           "04/2011",
-           "05/2011",
-           "06/2011"
-         ]
+         categories: this.sprintName
        },
        legend: {
          position: "right",
@@ -250,6 +247,6 @@ export class ReleaseBurndownComponent implements OnInit {
        }
  
      };
-   } */
+   }
 
 }

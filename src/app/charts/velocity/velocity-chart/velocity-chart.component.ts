@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import * as ApexCharts from 'apexcharts';
 import {
   ApexAxisChartSeries,
@@ -62,8 +62,9 @@ export class VelocityChartComponent implements OnInit {
   sprintName: String[] = [];
 
   msgError = "";
-
   selected;
+
+  @Output() datePickedV = new EventEmitter<any>();
 
   constructor(private sprintService: SprintService, private projectService: ProjectService, private tokenStorageService: TokenStorageService) { }
 
@@ -112,12 +113,15 @@ export class VelocityChartComponent implements OnInit {
         this.sprints = data;
         console.log(this.sprints);
 
+       
         var arraySize = Object.keys(this.sprints).length;
         for (var i = 0; i < arraySize; i++) {
           this.workCommitment[i] = this.sprints[i].workCommitment;
           this.workCompleted[i] = this.sprints[i].workCompleted;
           this.sprintName['' + i] = this.sprints[i].stitre;
         }
+        this.datePickedV.emit( this.sprints[0].supdatedDate);
+
         
         this.velocityChart(this.workCommitment, this.workCompleted, this.sprintName);
       },

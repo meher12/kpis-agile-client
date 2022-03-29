@@ -8,17 +8,17 @@
 
     <h4 class="mb-4">Card Group</h4>
 
-    <div class="card-group">
+    <!-- <div class="card-group"> -->
        <div class="card">
-          <img class="card-img-top" src="../images/picture.png" alt=""> 
+          <!-- <img class="card-img-top" src="../images/picture.png" alt="">  -->
           <div class="card-body">
              <h5 class="card-title">Velocity Chart</h5>
              <p class="card-text">
-                <app-velocity-chart></app-velocity-chart>
+                <app-velocity-chart (datePickedV)="getUpdatedDateV()"></app-velocity-chart>
              </p>
           </div>
           <div class="card-footer">
-             <small class="text-muted">Last updated 3 mins ago</small>
+             <small class="text-muted">Last updated {{onDatePickedV}}</small>
           </div>
        </div>
        <div class="card">
@@ -26,26 +26,25 @@
           <div class="card-body">
              <h5 class="card-title">Brundown Chart</h5>
              <p class="card-text">
-               <app-burndown></app-burndown>
+               <app-burndown (datePickedB)="getUpdatedDateB()"></app-burndown>
              </p>
           </div>
           <div class="card-footer">
-             <small class="text-muted">Last updated 3 mins ago</small>
+             <small class="text-muted">Last updated {{onDatePickedB}}</small>
           </div>
        </div>
        <div class="card">
-         
           <div class="card-body">
              <h5 class="card-title">Release brundoun Chart</h5>
              <p class="card-text">
-               <app-release-burndown></app-release-burndown>
+               <app-release-burndown (datePicked)="getUpdatedDate()"></app-release-burndown>
              </p>
           </div>
           <div class="card-footer">
-             <small class="text-muted">Last updated 3 mins ago</small>
+             <small class="text-muted">Last updated {{onDatePicked}}</small>
           </div>
        </div>
-    </div>
+    <!-- </div> -->
 
 
     

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -9,6 +10,15 @@ import { UserService } from '../services/user.service';
 export class BoardPoComponent implements OnInit {
 
   content?: string;
+  // myupdate?: string="";
+  datePicked?: Date;
+  onDatePicked?: string;
+
+  datePickedV?: Date;
+  onDatePickedV?: string;
+
+  datePickedB?: Date;
+  onDatePickedB?: string;
 
   constructor(private userService: UserService) { }
 
@@ -21,5 +31,23 @@ export class BoardPoComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
+
+
+  }
+
+
+  public getUpdatedDateV(): void {
+    this.onDatePickedV = moment(this.datePickedV).fromNow();
+    console.log('Picked date: ', this.onDatePickedV);
+  }
+
+  public getUpdatedDateB(): void {
+    this.onDatePickedB = moment(this.datePickedB).fromNow();
+    console.log('Picked date: ', this.onDatePickedB);
+  }
+
+  public getUpdatedDate(): void {
+    this.onDatePicked = moment(this.datePicked).fromNow();
+    console.log('Picked date: ', this.onDatePicked);
   }
 }

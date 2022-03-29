@@ -9,6 +9,7 @@ export class Projet {
     public descriptionProject: string;
     public dateDebut: Date;
     public dateFin: Date;
+    public pupdatedDate: Date;
     public sprints: Sprint[]
 
     public pSpCommitment: string[];
