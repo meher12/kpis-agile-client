@@ -16,13 +16,13 @@
             <a href="/home" class="nav-link" routerLink="home">Home </a>
           </li>
           <li class="nav-item" *ngIf="showPOBoard">
-            <a href="/po" class="nav-link" routerLink="po">Product Owner Board</a>
+            <a href="/po" class="nav-link" routerLink="po">Mesurer les travaux en cours</a>
           </li>
           <li class="nav-item" *ngIf="showScrumMBoard || showPOBoard">
-            <a href="/scrm" class="nav-link" routerLink="scrm">Scrum Master Board</a>
+            <a href="/scrm" class="nav-link" routerLink="scrm">Évaluer la santé des processus</a>
           </li>
           <li class="nav-item">
-            <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev">Developer Board</a>
+            <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev">Mesurer la qualité du code</a>
           </li>
         </ul>
 
