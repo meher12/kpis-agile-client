@@ -41,8 +41,8 @@ export class UpdateStoryComponent implements OnInit {
     stname: new FormControl(),
     stReference: new FormControl(),
     stdescription: new FormControl(),
-    storyPoint: new FormControl(),
-    spCompleted: new FormControl(),
+   // storyPoint: new FormControl(),
+    //spCompleted: new FormControl(),
     priority: new FormControl(),
   });
 
@@ -67,8 +67,8 @@ export class UpdateStoryComponent implements OnInit {
             stname: [this.story.stname, Validators.required],
             stReference: [this.story.stReference, Validators.required],
             stdescription: [this.story.stdescription, Validators.required],
-            storyPoint: [this.story.storyPoint, Validators.required],
-            spCompleted: [this.story.spCompleted, Validators.required],
+           // storyPoint: [this.story.storyPoint, Validators.required],
+           // spCompleted: [this.story.spCompleted, Validators.required],
             priority: [this.story.priority, Validators.required],
           });
         },

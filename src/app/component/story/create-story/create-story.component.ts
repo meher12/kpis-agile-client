@@ -48,7 +48,7 @@ export class CreateStoryComponent implements OnInit {
     stname: new FormControl(''),
     stReference: new FormControl(''),
     stdescription: new FormControl(''),
-    storyPoint: new FormControl(''),
+   // storyPoint: new FormControl(''),
     priority: new FormControl(''),
   });
 
@@ -68,7 +68,7 @@ export class CreateStoryComponent implements OnInit {
         stname: ['', Validators.required],
         stReference: [("STUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase(), Validators.required],
         stdescription: ['', Validators.required],
-        storyPoint: ['', Validators.required],
+        //storyPoint: ['', Validators.required],
         priority: ['', Validators.required],
       });
 
