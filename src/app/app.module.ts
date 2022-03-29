@@ -41,6 +41,7 @@ import { BurndownComponent } from './charts/burndown/burndown.component';
 import { AddSpCompletedComponent } from './component/sprint/add-sp-completed/add-sp-completed.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReleaseBurndownComponent } from './charts/release-burndown/release-burndown.component';
+import { TaskDetailsComponent } from './component/task/task-details/task-details.component';
 
 
 
@@ -81,6 +82,7 @@ import { ReleaseBurndownComponent } from './charts/release-burndown/release-burn
     BurndownComponent,
     AddSpCompletedComponent,
     ReleaseBurndownComponent,
+    TaskDetailsComponent,
 
 
 

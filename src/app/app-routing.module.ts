@@ -19,6 +19,7 @@ import { ListStoryBySprintComponent } from './component/story/list-story-by-spri
 import { StoryListComponent } from './component/story/story-list/story-list.component';
 import { UpdateStoryComponent } from './component/story/update-story/update-story.component';
 import { CreateTaskComponent } from './component/task/create-task/create-task.component';
+import { TaskDetailsComponent } from './component/task/task-details/task-details.component';
 import { TaskListByStoryComponent } from './component/task/task-list-by-story/task-list-by-story.component';
 import { TaskListComponent } from './component/task/task-list/task-list.component';
 import { UpdateTaskComponent } from './component/task/update-task/update-task.component';
@@ -63,6 +64,7 @@ const routes: Routes = [
   {path: 'createtask', component: CreateTaskComponent},
   {path: 'updatetask/:id', component: UpdateTaskComponent},
   {path: 'taskListBystre', component: TaskListByStoryComponent},
+  {path: 'detailtask/:id', component: TaskDetailsComponent},
   
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

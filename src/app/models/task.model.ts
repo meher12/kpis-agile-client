@@ -1,5 +1,5 @@
 import { ETask, ETypeTask } from "./etask.enum";
-import { Story } from "./story.model";
+
 
 
 export class Task {
@@ -13,5 +13,5 @@ export class Task {
     public status: ETask ;
     public typeTask: ETypeTask;
     public estimation: number;
-    public story: Story;
+    
 }
