@@ -1,0 +1,85 @@
+<div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
+    <h3 class="text-center"> View Task Details</h3>
+
+    <div class="col-md-12 detailsp">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Reference:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{task.tReference}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Title:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{task.tname}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Description:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{task.tdescription}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Start Date:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{task.tdateDebut}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">End Date:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{task.tdateFin}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Status:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{task.status}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Task Type:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{task.typeTask}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Estimation:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{task.estimation}} Story points
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>
