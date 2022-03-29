@@ -10,5 +10,9 @@ export class Projet {
     public dateDebut: Date;
     public dateFin: Date;
     public sprints: Sprint[]
+
+    public pSpCommitment: string[];
+    public pSpwrked: string[];
+    public pMoresp: string[];
    
 }

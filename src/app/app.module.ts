@@ -40,6 +40,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BurndownComponent } from './charts/burndown/burndown.component';
 import { AddSpCompletedComponent } from './component/sprint/add-sp-completed/add-sp-completed.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ReleaseBurndownComponent } from './charts/release-burndown/release-burndown.component';
 
 
 
@@ -79,6 +80,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     VelocityChartComponent,
     BurndownComponent,
     AddSpCompletedComponent,
+    ReleaseBurndownComponent,
 
 
 

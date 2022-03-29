@@ -1,0 +1,25 @@
+<div class="container">
+
+    <!-- Start -->
+    <div class="search-sprints">
+        <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
+            (change)="getreleaseBrundownChartByProject($event)">
+            <option [ngValue]="undefined" disabled>Choose project...</option>
+            <option *ngFor="let projet of projects" [value]="projet.pReference" [selected]=" projet == selected">
+                {{projet.titre}}
+            </option>
+        </select>
+
+
+
+    </div>
+    <!-- End -->
+    <ng-container *ngIf="chartOptions">
+        <div id="releaseBurndown">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                [responsive]="chartOptions.responsive" [xaxis]="chartOptions.xaxis" [legend]="chartOptions.legend"
+                [fill]="chartOptions.fill"></apx-chart>
+        </div>
+    </ng-container>
+</div>
