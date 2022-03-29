@@ -308,8 +308,18 @@ export class BurndownComponent implements OnInit {
         dashArray: [0, 8, 5]
       },
       title: {
-        text: "Page Statistics",
-        align: "left"
+        text: 'Brundown Chart',
+        align: 'center',
+        margin: 30,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize: '24px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          color: '#263238'
+        },
       },
       legend: {
         tooltipHoverFormatter: function (val, opts) {
@@ -328,41 +338,57 @@ export class BurndownComponent implements OnInit {
         }
       },
       xaxis: {
+
+        categories: this.dateList,
+        tickPlacement: 'on',
         labels: {
-          trim: false
+          trim: false,
+          style: {
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        }
+      },
+      yaxis: {
+        title: {
+          text: "Story points",
+          style: {
+            colors: ['#000'],
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
         },
-        categories: [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
-          "9",
-          "10",
-          "11",
-          "12",
-          "13",
-          "14",
-          "15",
-          "16"
-        ]
+        labels: {
+          style: {
+            colors: [],
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        }
+
+      },
+      fill: {
+        opacity: 10,
       },
       tooltip: {
         y: [
           {
             title: {
               formatter: function (val) {
-                return val + " (mins)";
+                return val + " (sp)";
               }
             }
           },
           {
             title: {
               formatter: function (val) {
-                return val + " per session";
+                return val + " per day";
               }
             }
           },
