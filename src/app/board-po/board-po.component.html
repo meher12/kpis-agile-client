@@ -1,58 +1,82 @@
-<div class="container">
+<!-- <div class="container"> -->
 
-   <!--    <p>{{ content }}</p> -->
+<!--    <p>{{ content }}</p> -->
 
-   <div class="row" style="margin: 15px auto;">
-      <div class="col-md-4">
-      <h4 class="mb-4">Mesurer les travaux en cours</h4>
+<div class="row" style="margin: 15px auto;">
+   <div class="col-md-12">
+      <h4 class=" text-center">Mesurer les travaux en cours</h4>
+   </div>
+</div>
+
+
+
+<div class="card-group">
+
+   <div class="col p-4">
+      <div class="card h-100  border-secondary mb-4">
+         <!-- <img class="card-img-top" src="../images/picture.png" alt="">  -->
+         <div class="card-body">
+            <!-- <h5 class="card-title text-success">Velocity Chart</h5> -->
+            <p class="card-text">
+               <app-velocity-chart (datePickedV)="getUpdatedDateV()"></app-velocity-chart>
+            </p>
+         </div>
+         <div class="card-footer">
+            <small class="text-muted">Last updated {{onDatePickedV}}</small>
+         </div>
       </div>
    </div>
 
-
-
-   <!-- <div class="card-group"> -->
-   <div class="card">
-      <!-- <img class="card-img-top" src="../images/picture.png" alt="">  -->
-      <div class="card-body">
-         <h5 class="card-title">Velocity Chart</h5>
-         <p class="card-text">
-            <app-velocity-chart (datePickedV)="getUpdatedDateV()"></app-velocity-chart>
-         </p>
-      </div>
-      <div class="card-footer">
-         <small class="text-muted">Last updated {{onDatePickedV}}</small>
+   <div class="col p-4">
+      <div class="card h-100  border-secondary mb-4">
+         <div class="card-body">
+            <!-- <h5 class="card-title text-primary">Brundown Chart</h5> -->
+            <p class="card-text">
+               <app-burndown (datePickedB)="getUpdatedDateB()"></app-burndown>
+            </p>
+         </div>
+         <div class="card-footer">
+            <small class="text-muted">Last updated {{onDatePickedB}}</small>
+         </div>
       </div>
    </div>
    <hr>
    <hr>
-   <div class="card">
-      <div class="card-body">
-         <h5 class="card-title">Brundown Chart</h5>
-         <p class="card-text">
-            <app-burndown (datePickedB)="getUpdatedDateB()"></app-burndown>
-         </p>
-      </div>
-      <div class="card-footer">
-         <small class="text-muted">Last updated {{onDatePickedB}}</small>
-      </div>
-   </div>
-   <hr>
-   <hr>
-   <div class="card">
-      <div class="card-body">
-         <h5 class="card-title">Release brundoun Chart</h5>
-         <p class="card-text">
-            <app-release-burndown (datePicked)="getUpdatedDate()"></app-release-burndown>
-         </p>
-      </div>
-      <div class="card-footer">
-         <small class="text-muted">Last updated {{onDatePicked}}</small>
-      </div>
-   </div>
-   <!-- </div> -->
-
-
-
-
 
 </div>
+<div class="card-group">
+   <div class="col p-4">
+      <div class="card h-100  border-secondary mb-4">
+         <div class="card-body">
+            <!-- <h5 class="card-title">Release brundoun Chart</h5> -->
+            <p class="card-text">
+               <app-release-burndown (datePicked)="getUpdatedDate()"></app-release-burndown>
+            </p>
+         </div>
+         <div class="card-footer">
+            <small class="text-muted">Last updated {{onDatePicked}}</small>
+         </div>
+      </div>
+   </div>
+   <hr>
+   <hr>
+   <div class="col p-4">
+      <div class="card h-100 border-secondary mb-4">
+         <div class="card-body">
+            <!--  <h5 class="card-title">Story Points Completed Chart</h5> -->
+            <p class="card-text">
+               <app-sp-done-by-project></app-sp-done-by-project>
+            </p>
+         </div>
+         <div class="card-footer">
+            <small class="text-muted">Last updated {{onDatePickedB}}</small>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+
+
+<!-- </div> -->

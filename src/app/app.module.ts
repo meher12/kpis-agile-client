@@ -42,6 +42,7 @@ import { AddSpCompletedComponent } from './component/sprint/add-sp-completed/add
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReleaseBurndownComponent } from './charts/release-burndown/release-burndown.component';
 import { TaskDetailsComponent } from './component/task/task-details/task-details.component';
+import { SpDoneByProjectComponent } from './charts/sp-done-by-project/sp-done-by-project.component';
 
 
 
@@ -83,6 +84,7 @@ import { TaskDetailsComponent } from './component/task/task-details/task-details
     AddSpCompletedComponent,
     ReleaseBurndownComponent,
     TaskDetailsComponent,
+    SpDoneByProjectComponent,
 
 
 

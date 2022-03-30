@@ -8,7 +8,8 @@ import {
   ApexResponsive,
   ApexXAxis,
   ApexLegend,
-  ApexFill
+  ApexFill,
+  ApexTitleSubtitle
 } from "ng-apexcharts";
 
 import { Projet } from "src/app/models/projet.model";
@@ -26,6 +27,7 @@ export type ChartOptions = {
   xaxis: ApexXAxis;
   legend: ApexLegend;
   fill: ApexFill;
+  title: ApexTitleSubtitle;
 };
 
 
@@ -75,6 +77,8 @@ export class ReleaseBurndownComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
+      this.projectService.updateStoryPointsInproject();
+      this.projectService.releasebdchart();
       this.initReleaseBurndownChart(); 
 
     }
@@ -146,6 +150,20 @@ export class ReleaseBurndownComponent implements OnInit {
               enabled: true
             }
           },
+          title: {
+            text: 'Release brundoun Chart',
+            align: 'center',
+            margin: 30,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+              fontSize: '24px',
+              fontWeight: 'bold',
+              fontFamily: 'Helvetica, Arial, sans-serif',
+              color: '#263238'
+            },
+          },
           responsive: [
             {
               breakpoint: 480,
@@ -216,6 +234,20 @@ export class ReleaseBurndownComponent implements OnInit {
            enabled: true
          }
        },
+       title: {
+        text: 'Release brundoun Chart',
+        align: 'center',
+        margin: 30,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize: '24px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          color: '#263238'
+        },
+      },
        responsive: [
          {
            breakpoint: 480,

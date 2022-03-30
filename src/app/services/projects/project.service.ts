@@ -56,4 +56,20 @@ export class ProjectService {
     return this.httpClient.delete(`${this.baseUrl}`+'/projects/', httpOptions);
   }
 
+  // percentage sp by project 
+   percentageSpCByproject(): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}`+'/projects/percentageSpcChart', httpOptions);
+  }
+
+  // releasebdchart project by id
+  releasebdchart(): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}`+'/projects/releasebdchart', httpOptions);
+  }
+
+  // updateStoryPointsInproject
+  updateStoryPointsInproject(): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}`+'/projects/sumspbyproject', httpOptions);
+  }
 }
+
+

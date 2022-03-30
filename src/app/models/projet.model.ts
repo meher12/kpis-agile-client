@@ -6,6 +6,7 @@ export class Projet {
     public id: number;
     public pReference: string
     public titre: string;
+    public totalspCommitment: number;
     public descriptionProject: string;
     public dateDebut: Date;
     public dateFin: Date;
@@ -15,5 +16,6 @@ export class Projet {
     public pSpCommitment: string[];
     public pSpwrked: string[];
     public pMoresp: string[];
+    public percentage_spc: string[];
    
 }
