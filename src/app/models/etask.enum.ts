@@ -1,11 +1,8 @@
-export enum ETask{
-    SCHEDULED,
-    IN_PROGRESS,
-    COMPLETED,
+export enum ETask {
+    Scheduled, In_progress, Cancelled, Failed, Completed, Succeeded,
 }
 
-export enum ETypeTask{
-    New,
-    BUG,
-    MORE,
+export enum ETypeTask {
+    Default_task,
+    More_task,
 }

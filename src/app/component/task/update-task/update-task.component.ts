@@ -43,19 +43,21 @@ export class UpdateTaskComponent implements OnInit {
 
   selectedValue;
   etypetask = [
-    {name: 'TODO', value: ETypeTask[0]},
-    {name: 'BUG', value: ETypeTask[1]},
-    {name: 'MORE', value:  ETypeTask[2]},
+    {name: 'Default_task', value: ETypeTask[0]},
+    {name: 'More_task', value:  ETypeTask[1]},
   ];
 
   selectedValue2;
   estatus = [
-    {name: 'SCHEDULED', value: ETask[0]},
-    {name: 'IN_PROGRESS', value: ETask[1]},
-    {name: 'COMPLETED', value: ETask[2]},
+    {name: 'Scheduled', value: ETask[0]},
+    {name: 'In_progress', value: ETask[1]},
+    {name: 'Cancelled', value: ETask[2]},
+    {name: 'Failed', value: ETask[3]},
+    {name: 'Completed', value: ETask[4]},
+    {name: 'Succeeded', value: ETask[5]},
   ];
 
-  constructor(private storyService: StoryService, private router: Router, private formBuilder: FormBuilder,
+  constructor( private router: Router, private formBuilder: FormBuilder,
     private tokenStorageService: TokenStorageService, private taskService: TaskService, private route: ActivatedRoute) { }
 
   form: FormGroup = new FormGroup({
