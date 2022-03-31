@@ -15,7 +15,7 @@
     </div>
     <!-- End -->
 
-
+    <div *ngIf="selected;else selectList">
     <ng-container *ngIf="chartOptions">
         <div id="storyPointsCChart">
             <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
@@ -24,4 +24,12 @@
             </apx-chart>
         </div>
     </ng-container>
+</div>
+
+<ng-template #selectList>
+  <div class="msgList">
+    <h4 class="text-info" style="text-align: center;"> Choose your item from list to display the
+      chart </h4>
+  </div>
+</ng-template>
 </div>

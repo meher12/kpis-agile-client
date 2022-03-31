@@ -28,6 +28,17 @@
                     </div>
                 </div>
 
+                 <!-- Totalstorypointsinitiallycounts -->
+                 <div class="form-group">
+                    <label class="form-label">Total story points initially counts*</label>
+
+                    <input type="number" formControlName="Totalstorypointsinitiallycounts" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['Totalstorypointsinitiallycounts'].errors }" />
+                    <div *ngIf="submitted && fctl['Totalstorypointsinitiallycounts'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['Totalstorypointsinitiallycounts'].errors['required']">Total story points initially counts is required</div>
+                    </div>
+                </div>
+
                 <!-- Description -->
                 <div class="form-group">
                     <label class="form-label">Description*</label>

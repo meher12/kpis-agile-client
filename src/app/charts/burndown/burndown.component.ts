@@ -87,7 +87,7 @@ export class BurndownComponent implements OnInit {
       this.idealLineForSprint();
      
       this.updateTablesprint();
-      this.initBrundownChart();
+     // this.initBrundownChart();
 
     }
   }

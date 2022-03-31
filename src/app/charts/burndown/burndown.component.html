@@ -16,15 +16,23 @@
 
   </div>
   <!-- End -->
+  <div *ngIf="selected;else selectList">
+    <ng-container *ngIf="chartOptions">
+      <div id="brundownChart">
+        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+          [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels"
+          [legend]="chartOptions.legend" [markers]="chartOptions.markers" [grid]="chartOptions.grid"
+          [yaxis]="chartOptions.yaxis" [title]="chartOptions.title" [plotOptions]="chartOptions.plotOptions"
+          [fill]="chartOptions.fill" [xaxis]="chartOptions.xaxis"></apx-chart>
 
-  <ng-container *ngIf="chartOptions">
-    <div id="brundownChart">
-      <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
-        [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels"
-        [legend]="chartOptions.legend" [markers]="chartOptions.markers" [grid]="chartOptions.grid"
-        [yaxis]="chartOptions.yaxis" [title]="chartOptions.title" [plotOptions]="chartOptions.plotOptions"
-        [fill]="chartOptions.fill" [xaxis]="chartOptions.xaxis"></apx-chart>
+      </div>
+    </ng-container>
+  </div>
 
+  <ng-template #selectList>
+    <div class="msgList">
+      <h4 class="text-info" style="text-align: center;"> Choose your item from list to display the
+        chart </h4>
     </div>
-  </ng-container>
+  </ng-template>
 </div>

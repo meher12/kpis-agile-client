@@ -80,7 +80,7 @@ export class VelocityChartComponent implements OnInit {
 
       this.getAllproject();
       this.updateTablesprint();
-      this.iniVelocityChart();
+     // this.iniVelocityChart();
       
     }
 

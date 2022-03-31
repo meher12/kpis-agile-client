@@ -74,7 +74,7 @@ export class SpDoneByProjectComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
-      this.initStoryPointsCChart();
+     // this.initStoryPointsCChart();
       this.projectService.percentageSpCByproject();
 
     }

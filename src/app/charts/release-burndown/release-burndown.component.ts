@@ -79,7 +79,7 @@ export class ReleaseBurndownComponent implements OnInit {
 
       this.getAllproject();
       this.pReleaseBurndownChart();
-      this.initReleaseBurndownChart();
+     // this.initReleaseBurndownChart();
 
     }
 
@@ -136,16 +136,8 @@ export class ReleaseBurndownComponent implements OnInit {
           
           this.sprintName['' + i] = this.project.sprints[i].stitre;
         }
-        this.sprintName.push("release sprint")
-       // const found = this.pSpCommitmentF.find(element => element == '0');
-
-         /*  if (found == '0') {
-            console.log("Last iteration with item : " + found);
-            this.sprintName.pop();
-          }  */
-        
-
-
+        this.sprintName.push("release sprint");
+      
         this.datePicked.emit(this.project.pupdatedDate);
 
         /* Start Chart*/
@@ -207,7 +199,7 @@ export class ReleaseBurndownComponent implements OnInit {
             }
           },
           xaxis: {
-           // type: "category",
+            type: "category",
             categories: this.sprintName,
             tickPlacement: 'on',
           },
@@ -216,8 +208,8 @@ export class ReleaseBurndownComponent implements OnInit {
             offsetY: 40
           },
           fill: {
-            opacity: 1,
-            colors: ['#B40404', '#01DF3A', '#D7DF01']
+           // opacity: 1,
+            colors: ['#003366', '#01DF3A', '#D7DF01']
           }
 
         };
