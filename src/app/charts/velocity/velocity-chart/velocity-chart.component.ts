@@ -108,6 +108,7 @@ export class VelocityChartComponent implements OnInit {
   //  get all Sprints by project reference
   getVelocityChartByProject(event: any) {
    
+    this.updateTablesprint();
     this.sprintService.getAllSprintsByProjectRef(event.target.value)
       .subscribe(data => {
         this.sprints = data;

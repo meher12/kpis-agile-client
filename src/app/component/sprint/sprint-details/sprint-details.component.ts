@@ -30,7 +30,7 @@ export class SprintDetailsComponent implements OnInit {
 
   displayStyle = "none";
 
-  constructor(private sprintService: SprintService,  private route: ActivatedRoute,
+  constructor(private sprintService: SprintService, private route: ActivatedRoute,
     private tokenStorageService: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {
@@ -54,10 +54,10 @@ export class SprintDetailsComponent implements OnInit {
 
           // arrays of brundown chart
           this.sprint.idealLinearray.pop();
-          this.idealLine =  this.sprint.idealLinearray;
+          this.idealLine = this.sprint.idealLinearray;
 
           this.sprint.workedlarray.pop();
-          this. workedLine = this.sprint.workedlarray;
+          this.workedLine = this.sprint.workedlarray;
 
           this.sprint.daysarray.pop();
           this.dayinsprint = this.sprint.daysarray;
@@ -66,20 +66,36 @@ export class SprintDetailsComponent implements OnInit {
 
         },
           err => {
-           this.msgError = err.error.message;
-           Swal.fire('Hey!', this.msgError, 'warning');
-          console.error(this.msgError);
+            this.msgError = err.error.message;
+            Swal.fire('Hey!', this.msgError, 'warning');
+            console.error(this.msgError);
           });
+
+      this.daysNumberInSprint();
+      this.idealLineForSprint();
     }
   }
 
+  //  get number of days in sprint
+  daysNumberInSprint() {
+    this.sprintService.daysInSprint()
+      .subscribe(data => console.log(data));
+  }
+
+  //  get number of days in sprint
+  idealLineForSprint() {
+    this.sprintService.idealLineOfSprint()
+      .subscribe(data => console.log(data));
+  }
+
+
   openPopup(id: number) {
-   this.router.navigate([{ outlets: { addspPopup: [ 'addspcompleted', id ] }}]); 
+    this.router.navigate([{ outlets: { addspPopup: ['addspcompleted', id] } }]);
     this.displayStyle = "block";
   }
   closePopup() {
     this.displayStyle = "none";
-    this.router.navigate([{ outlets: { addspPopup: null }}]);
+    this.router.navigate([{ outlets: { addspPopup: null } }]);
   }
 
 

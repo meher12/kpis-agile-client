@@ -47,8 +47,6 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 export class BurndownComponent implements OnInit {
 
-
-
   sprints: Sprint[];
   sprintObject: Sprint;
   msgError = "";
@@ -85,6 +83,9 @@ export class BurndownComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
       this.getAllSprint();
+      this.daysNumberInSprint();
+      this.idealLineForSprint();
+     
       this.updateTablesprint();
       this.initBrundownChart();
 
@@ -99,6 +100,18 @@ export class BurndownComponent implements OnInit {
   // update work Commitment and work Completed in sprint
   updateTablesprint() {
     this.sprintService.updateStoryPointInSprint()
+      .subscribe(data => console.log(data));
+  }
+
+  //  get number of days in sprint
+  daysNumberInSprint() {
+    this.sprintService.daysInSprint()
+      .subscribe(data => console.log(data));
+  }
+
+  //  get number of days in sprint
+  idealLineForSprint() {
+    this.sprintService.idealLineOfSprint()
       .subscribe(data => console.log(data));
   }
 
@@ -118,6 +131,9 @@ export class BurndownComponent implements OnInit {
 
   // get sprint from select list and // generate data brundown chart
   generateDataChart(event: any) {
+
+    this.daysNumberInSprint();
+    this.idealLineForSprint();
 
     this.sprintService.getSprintByReference(event.target.value)
       .subscribe(data => {

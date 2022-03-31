@@ -67,9 +67,9 @@ export class ProjectService {
   }
 
   // updateStoryPointsInproject
-  updateStoryPointsInproject(): Observable<any> {
+ /*  updateStoryPointsInproject(): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}`+'/projects/sumspbyproject', httpOptions);
-  }
+  } */
 }
 
 
