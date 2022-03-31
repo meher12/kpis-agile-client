@@ -146,6 +146,7 @@ export class BurndownComponent implements OnInit {
 
         this.sprintObject.workedlarray.pop();
         this.workedStoryarray =  this.sprintObject.workedlarray;
+
         this.sprintObject.daysarray.pop() 
         this.dateList = this.sprintObject.daysarray
 
@@ -296,132 +297,6 @@ export class BurndownComponent implements OnInit {
   }
 
 
-  // init brundown Chart
-  initBrundownChart() {
-    this.chartOptions = {
-      series: [
-        {
-          name: "ideal",
-          data: [75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0]
-        },
-
-        {
-          name: "work",
-          data: [65, 60, 55, 50, 38, 25, 10, 8, 5, 28, 23, 18, 13, 9, 4, 0]
-        }
-
-      ],
-      chart: {
-        height: 350,
-        type: "line"
-      },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        width: 5,
-        curve: "straight",
-        dashArray: [0, 8, 5]
-      },
-      title: {
-        text: 'Brundown Chart',
-        align: 'center',
-        margin: 30,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-          fontSize: '24px',
-          fontWeight: 'bold',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          color: '#263238'
-        },
-      },
-      legend: {
-        tooltipHoverFormatter: function (val, opts) {
-          return (
-            val +
-            " <strong>" +
-            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
-            "</strong>"
-          );
-        }
-      },
-      markers: {
-        size: 0,
-        hover: {
-          sizeOffset: 6
-        }
-      },
-      xaxis: {
-
-        categories: this.dateList,
-        tickPlacement: 'on',
-        labels: {
-          trim: false,
-          style: {
-            fontSize: '15px',
-            fontFamily: 'Helvetica, Arial, sans-serif',
-            fontWeight: 'bold',
-            cssClass: 'apexcharts-xaxis-label',
-          }
-        }
-      },
-      yaxis: {
-        title: {
-          text: "Story points",
-          style: {
-            colors: ['#000'],
-            fontSize: '15px',
-            fontFamily: 'Helvetica, Arial, sans-serif',
-            fontWeight: 'bold',
-            cssClass: 'apexcharts-xaxis-label',
-          }
-        },
-        labels: {
-          style: {
-            colors: [],
-            fontSize: '15px',
-            fontFamily: 'Helvetica, Arial, sans-serif',
-            fontWeight: 'bold',
-            cssClass: 'apexcharts-xaxis-label',
-          }
-        }
-
-      },
-      fill: {
-        opacity: 10,
-      },
-      tooltip: {
-        y: [
-          {
-            title: {
-              formatter: function (val) {
-                return val + " (sp)";
-              }
-            }
-          },
-          {
-            title: {
-              formatter: function (val) {
-                return val + " per day";
-              }
-            }
-          },
-          {
-            title: {
-              formatter: function (val) {
-                return val;
-              }
-            }
-          }
-        ]
-      },
-      grid: {
-        borderColor: "#f1f1f1"
-      }
-    };
-  }
 
 
   // getDaysBetweenDates

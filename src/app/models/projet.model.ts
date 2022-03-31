@@ -7,6 +7,7 @@ export class Projet {
     public pReference: string
     public titre: string;
     public totalspCommitment: number;
+    public totalstorypointsinitiallycounts: number;
     public descriptionProject: string;
     public dateDebut: Date;
     public dateFin: Date;

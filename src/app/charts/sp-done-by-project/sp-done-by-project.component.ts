@@ -48,7 +48,7 @@ export class SpDoneByProjectComponent implements OnInit {
   roles: string[] = [];
 
   percentageArray: any[];
-  sprintName: any[] = [];
+  sprintName: string[] = [];
 
   msgError = "";
   selected;
@@ -74,8 +74,7 @@ export class SpDoneByProjectComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
-     // this.initStoryPointsCChart();
-      this.projectService.percentageSpCByproject();
+      this.getArrayOfPercentage();
 
     }
 
@@ -93,8 +92,16 @@ export class SpDoneByProjectComponent implements OnInit {
         });
   }
 
+  getArrayOfPercentage(){
+    this.projectService.percentageSpCByproject()
+    .subscribe(data => console.log(data));
+  
+  }
+
 // get chart by project
 getStoryPointsCChart(event: any) {
+
+  this.getArrayOfPercentage();
 
   this.projectService.getProjectByReference(event.target.value)
   .subscribe(data => {
@@ -106,10 +113,10 @@ getStoryPointsCChart(event: any) {
 
    var arraySize = Object.keys(this.project.sprints).length;
    for (var i = 0; i < arraySize; i++) {
-     this.sprintName[i] = this.project.sprints[i].stitre;
+     this.sprintName[""+i] = this.project.sprints[i].stitre;
    }
 
-  this._totalsp = this.project.totalspCommitment;
+  this._totalsp = this.project.totalstorypointsinitiallycounts;
 
   this.radioChartByPr(this.percentageArray, this.sprintName, this._totalsp);
  
@@ -122,7 +129,7 @@ getStoryPointsCChart(event: any) {
 }
 
 // Chart by project
-radioChartByPr(percentageArray: any[], sprintName: any[],  totalsp: string){
+radioChartByPr(percentageTab: any[], sprintNom: string[],  totalsp: string){
 
    /* Start Chart */
    this.chartOptions = {
@@ -171,7 +178,7 @@ radioChartByPr(percentageArray: any[], sprintName: any[],  totalsp: string){
 
         offsetY: 0,
         startAngle: 0,
-        //endAngle: 220,
+        endAngle: 270,
         hollow: {
           margin: 5,
           size: "30%",
@@ -187,7 +194,7 @@ radioChartByPr(percentageArray: any[], sprintName: any[],  totalsp: string){
       show: true,
       floating: true,
       fontSize: "15px",
-      position: "bottom",
+      position: "left",
       offsetX: 10,
       offsetY: 30,
       labels: {
@@ -214,102 +221,5 @@ radioChartByPr(percentageArray: any[], sprintName: any[],  totalsp: string){
   };
      /* End Chart */
 }
-// init chart
-  initStoryPointsCChart() {
-    this.chartOptions = {
-      series: [40.83, 25, 50.5, 45.67, 65],
-      chart: {
-        height: 'auto',
-        type: "radialBar",
-        toolbar: {
-          show: true,
-         /*  offsetX: 10,
-          offsetY: 10,
-          tools: {
-            download: true,
-            selection: true,
-            zoom: true,
-            zoomin: true,
-            zoomout: true,
-            pan: true,
-          } */
-        }
-      },
-      title: {
-        text: 'Story Points Completed Chart',
-        align: 'center',
-        margin: 30,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-          fontSize: '24px',
-          fontWeight: 'bold',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          color: '#263238'
-        },
-      },
-      plotOptions: {
-        radialBar: {
-          dataLabels: {
-            name: {
-              fontSize: "20px",
-              show: true
-            },
-            value: {
-              fontSize: "16px",
-              show: true
-            },
-            total: {
-              show: true,
-              label: "Total",
-              formatter: function (w) {
-                return "120";
-              }
-            }
-          },
 
-          offsetY: 0,
-          startAngle: 0,
-          //endAngle: 220,
-          hollow: {
-            margin: 5,
-            size: "30%",
-            background: "transparent",
-            image: undefined
-          },
-
-        }
-      },
-      // colors: ["#AA4A44", "#0084ff", "#39539E", "#0077B5"],
-      labels:  this.sprintName, 
-      legend: {
-        show: true,
-        floating: false,
-        fontSize: "10px",
-        position: "left",
-        offsetX: 50,
-        offsetY: 50,
-        labels: {
-          useSeriesColors: true
-        },
-        formatter: function (seriesName, opts) {
-          return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex];
-        },
-        itemMargin: {
-          horizontal: 3
-        }
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            legend: {
-              show: false
-            }
-          }
-        }
-      ]
-    };
-  }
 }
