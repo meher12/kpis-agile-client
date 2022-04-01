@@ -20,3 +20,9 @@ export class Sprint {
     public projet: Projet;
     public stories: Story[];
 }
+
+export interface Velocity {
+    numberSprint: number,
+    averageVelocity: number,
+    capacityStoryPointsInNextSprint: number,
+  }

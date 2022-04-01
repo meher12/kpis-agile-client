@@ -16,7 +16,7 @@ import {
 } from "ng-apexcharts";
 
 import { Projet } from 'src/app/models/projet.model';
-import { Sprint } from 'src/app/models/sprint.model';
+import { Sprint, Velocity } from 'src/app/models/sprint.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -64,10 +64,9 @@ export class VelocityChartComponent implements OnInit {
   msgError = "";
   selected;
 
-  average_velocity_front: number;
-  number_sprint_front: number;
-  capacity_story_points_in_next_sprint_front: number;
+  velocity: Velocity;
 
+  @Output() velocityChange = new EventEmitter<Velocity>()
   @Output() datePickedV = new EventEmitter<any>();
 
   constructor(private sprintService: SprintService, private projectService: ProjectService, private tokenStorageService: TokenStorageService) { }
@@ -84,15 +83,15 @@ export class VelocityChartComponent implements OnInit {
 
       this.getAllproject();
       this.updateTablesprint();
-      
+
     }
 
   }
 
   // update work Commitment and work Completed in sprint
-  updateTablesprint(){
+  updateTablesprint() {
     this.sprintService.updateStoryPointInSprint()
-    .subscribe(data => console.log(data));
+      .subscribe(data => console.log(data));
   }
 
   getAllproject() {
@@ -100,31 +99,30 @@ export class VelocityChartComponent implements OnInit {
       .subscribe(data => {
         this.projects = data;
       },
-      err => {
-        this.msgError = err.error.message;
-        Swal.fire('Hey!', this.msgError, 'warning')
-        console.error(this.msgError);
-      });
+        err => {
+          this.msgError = err.error.message;
+          Swal.fire('Hey!', this.msgError, 'warning')
+          console.error(this.msgError);
+        });
   }
 
 
   //  get all Sprints by project reference
   getVelocityChartByProject(event: any) {
-   
+
     this.updateTablesprint();
 
-    // number of sprint by avg velocity
+    // tools of sprint by avg velocity
     this.sprintService.getNumberOfSprintByVelocity(event.target.value)
-    .subscribe( response => {
-      this.average_velocity_front = response[0].average_velocity;
-      this.capacity_story_points_in_next_sprint_front = response[1].capacity_story_points_in_next_sprint;
-      this.number_sprint_front = response[2].number_sprint;
-      console.log("this.average_velocity",this.average_velocity_front, "this.number_sprint", this.number_sprint_front, "capacity_story_points_in_next_sprint",
-      this.capacity_story_points_in_next_sprint_front);
-    },
-    error => {
-      console.log(error);
-    });
+      .subscribe(response => {
+        this.velocity = response;
+        this.velocityChange.emit(this.velocity);
+        console.log("velocity Info: ", this.velocity);
+
+      },
+        error => {
+          console.log(error);
+        });
 
 
     // get bar chart sprint velocity 
@@ -133,16 +131,16 @@ export class VelocityChartComponent implements OnInit {
         this.sprints = data;
         console.log(this.sprints);
 
-       
+
         var arraySize = Object.keys(this.sprints).length;
         for (var i = 0; i < arraySize; i++) {
           this.workCommitment[i] = this.sprints[i].workCommitment;
           this.workCompleted[i] = this.sprints[i].workCompleted;
           this.sprintName['' + i] = this.sprints[i].stitre;
         }
-        this.datePickedV.emit( this.sprints[0].supdatedDate);
+        this.datePickedV.emit(this.sprints[0].supdatedDate);
 
-        
+
         this.velocityChart(this.workCommitment, this.workCompleted, this.sprintName);
       },
 
@@ -151,8 +149,8 @@ export class VelocityChartComponent implements OnInit {
           Swal.fire('Hey!', this.msgError, 'warning')
           console.error(this.msgError);
         });
-  } 
- 
+  }
+
   // velocity Chart
   velocityChart(wCommitment: number[], wCompleted: number[], xSprintName: String[]) {
 
@@ -248,18 +246,18 @@ export class VelocityChartComponent implements OnInit {
       }
     };
   }
-  
-   // init velocity Chart
-   iniVelocityChart() {
+
+  // init velocity Chart
+  iniVelocityChart() {
     this.chartOptions = {
       series: [
         {
           name: "Commitment",
-          data: [45, 40, 35, 30, ]
+          data: [45, 40, 35, 30,]
         },
         {
           name: "Work completed",
-          data: [43, 38, 35, 28, ]
+          data: [43, 38, 35, 28,]
         }
       ],
       chart: {

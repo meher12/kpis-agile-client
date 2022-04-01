@@ -19,7 +19,7 @@
                      <div class="row">
                         <div class="col">
                            <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
-                           <span class="h2 font-weight-bold mb-0">350,897</span>
+                           <span class="h2 font-weight-bold mb-0">350,897 {{numberSprint}} </span>
                         </div>
                         <div class="col-auto">
                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -108,7 +108,7 @@
                <div class="card-body">
                   <!-- <h5 class="card-title text-success">Velocity Chart</h5> -->
                   <p class="card-text">
-                     <app-velocity-chart (datePickedV)="getUpdatedDateV()"></app-velocity-chart>
+                     <app-velocity-chart (datePickedV)="getUpdatedDateV()" (velocityChange)="getInfoVelocity($event)"></app-velocity-chart>
                   </p>
                </div>
                <div class="card-footer">

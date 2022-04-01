@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { Velocity } from '../models/sprint.model';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -20,6 +21,13 @@ export class BoardPoComponent implements OnInit {
   datePickedB?: Date;
   onDatePickedB?: string;
 
+  newInfoVelocity: Velocity;
+
+  numberSprint: number;
+  averageVelocity: number;
+  capacitySPNextSprint: number;
+
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -38,16 +46,29 @@ export class BoardPoComponent implements OnInit {
 
   public getUpdatedDateV(): void {
     this.onDatePickedV = moment(this.datePickedV).fromNow();
-    console.log('Picked date: ', this.onDatePickedV);
+   // console.log('Picked date: ', this.onDatePickedV);
   }
 
   public getUpdatedDateB(): void {
     this.onDatePickedB = moment(this.datePickedB).fromNow();
-    console.log('Picked date: ', this.onDatePickedB);
+   // console.log('Picked date: ', this.onDatePickedB);
   }
 
   public getUpdatedDate(): void {
     this.onDatePicked = moment(this.datePicked).fromNow();
-    console.log('Picked date: ', this.onDatePicked);
+   // console.log('Picked date: ', this.onDatePicked);
+  }
+
+  //get velocity info
+  getInfoVelocity(event: Velocity){
+
+    this.newInfoVelocity = event;
+
+    
+    this.averageVelocity =  this.newInfoVelocity[0].average_velocity;
+    this.capacitySPNextSprint = this.newInfoVelocity[1].capacity_story_points_in_next_sprint;
+    this.numberSprint = this.newInfoVelocity[2].number_sprint;
+
+    console.log("New Velocity ***********", this.averageVelocity , this.capacitySPNextSprint , this.numberSprint);
   }
 }
