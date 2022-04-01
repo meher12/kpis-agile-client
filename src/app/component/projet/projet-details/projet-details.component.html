@@ -48,6 +48,25 @@
             {{projectdetails.dateFin}}
           </div>
         </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h6 class="mb-0"> Total current Story points :</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{projectdetails.totalspCommitment}}
+          </div>
+        </div>
+
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h6 class="mb-0"> Total initial Story points :</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{projectdetails.totalstorypointsinitiallycounts}}
+          </div>
+        </div>
 
         <div class="without-table-tag" *ngIf="sprintList?.length > 0; else noSprintList">
           <h3> List Sprints of {{projectdetails.titre}} project: </h3>

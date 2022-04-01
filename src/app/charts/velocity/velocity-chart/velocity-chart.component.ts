@@ -64,6 +64,10 @@ export class VelocityChartComponent implements OnInit {
   msgError = "";
   selected;
 
+  average_velocity_front: number;
+  number_sprint_front: number;
+  capacity_story_points_in_next_sprint_front: number;
+
   @Output() datePickedV = new EventEmitter<any>();
 
   constructor(private sprintService: SprintService, private projectService: ProjectService, private tokenStorageService: TokenStorageService) { }
@@ -80,7 +84,6 @@ export class VelocityChartComponent implements OnInit {
 
       this.getAllproject();
       this.updateTablesprint();
-     // this.iniVelocityChart();
       
     }
 
@@ -109,6 +112,22 @@ export class VelocityChartComponent implements OnInit {
   getVelocityChartByProject(event: any) {
    
     this.updateTablesprint();
+
+    // number of sprint by avg velocity
+    this.sprintService.getNumberOfSprintByVelocity(event.target.value)
+    .subscribe( response => {
+      this.average_velocity_front = response[0].average_velocity;
+      this.capacity_story_points_in_next_sprint_front = response[1].capacity_story_points_in_next_sprint;
+      this.number_sprint_front = response[2].number_sprint;
+      console.log("this.average_velocity",this.average_velocity_front, "this.number_sprint", this.number_sprint_front, "capacity_story_points_in_next_sprint",
+      this.capacity_story_points_in_next_sprint_front);
+    },
+    error => {
+      console.log(error);
+    });
+
+
+    // get bar chart sprint velocity 
     this.sprintService.getAllSprintsByProjectRef(event.target.value)
       .subscribe(data => {
         this.sprints = data;

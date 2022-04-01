@@ -96,6 +96,11 @@ export class SprintService {
     return this.httpClient.put<any>(`${this.baseUrl}` + '/sprints/addspCompleted/'+ `${id}`, sprintWorkedSP, httpOptions);
   }
 
+  //  Number of sprint By velocity average
+  getNumberOfSprintByVelocity(sreference: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}` + '/sprints/' + `${sreference}/` + 'nbrSprintByVelocity', httpOptions);
+  }
+
 
 
 }
