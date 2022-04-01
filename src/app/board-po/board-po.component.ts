@@ -69,6 +69,6 @@ export class BoardPoComponent implements OnInit {
     this.capacitySPNextSprint = this.newInfoVelocity[1].capacity_story_points_in_next_sprint;
     this.numberSprint = this.newInfoVelocity[2].number_sprint;
 
-    console.log("New Velocity ***********", this.averageVelocity , this.capacitySPNextSprint , this.numberSprint);
+    //console.log("New Velocity ***********", this.averageVelocity , this.capacitySPNextSprint , this.numberSprint);
   }
 }
