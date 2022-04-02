@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Story } from 'src/app/models/story.model';
 import { Task } from 'src/app/models/task.model';
 import { StoryService } from 'src/app/services/story/story.service';
@@ -35,11 +35,12 @@ export class TaskListByStoryComponent implements OnInit {
   story: Story;
   id: number;
 
-  refstoryfortasklist;
+  store_ref_story
+  store_ref;
 
 
   constructor(private storyService: StoryService, private taskService: TaskService, private router: Router, 
-    private tokenStorageService: TokenStorageService) { }
+    private tokenStorageService: TokenStorageService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -50,9 +51,10 @@ export class TaskListByStoryComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-
+      this.store_ref_story = this.route.snapshot.params['refstory'];
       //localStorage of ref project
-      this.refstoryfortasklist = localStorage.getItem('refstoryfortasklist');
+      localStorage.setItem("refStory", this.store_ref_story);
+      this.store_ref = localStorage.getItem("refStory");
 
       this.getRefStory()
       this.getTitleStory()
@@ -70,16 +72,16 @@ export class TaskListByStoryComponent implements OnInit {
 
   // Get All projects by ref id
   getTitleStory() {
-    this.storyService.getStoryByReference(this.refstoryfortasklist)
+    this.storyService.getStoryByReference(this.store_ref_story)
       .subscribe(data => {
         this.story = data;
       })
-      console.log("*Ref st*"+this.refstoryfortasklist)
+      console.log("*Ref st*"+this.store_ref)
   }
 
   // find task by story reference
   cgetAllTaskByStoryRef() {
-    this.taskService.getAllTaskByStoryRef(this.refstoryfortasklist)
+    this.taskService.getAllTaskByStoryRef(this.store_ref)
       .subscribe(data => {
         this.tasks = data;
         // console.log(this.sprints);

@@ -51,7 +51,7 @@ export class CreateProjetComponent implements OnInit {
 
       this.form = this.formBuilder.group({
         titre: ['', Validators.required],
-        Totalstorypointsinitiallycounts: ['', Validators.required],
+        totalstorypointsinitiallycounts: ['', Validators.required],
         pReference: [("PUID" + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(0)).toUpperCase(), Validators.required],
         descriptionProject: ['', Validators.required],
         dateDebut: ['', Validators.compose([Validators.required, DateValidator.dateVaidator])],

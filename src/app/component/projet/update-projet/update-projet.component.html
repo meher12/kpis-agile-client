@@ -1,6 +1,6 @@
-<div class="row"  *ngIf="showPOBoard;else BadCredentials">
+<div class="row" *ngIf="showPOBoard;else BadCredentials">
     <div class="col-md-12">
-        
+
         <div class="card card-container">
             <h3 style="text-align: center;"> Update Projet</h3>
             <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
@@ -9,8 +9,7 @@
 
                 <div class="form-group">
                     <label class="form-label">Title*</label>
-                    <input type="text" formControlName="titre" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && fctl['titre'].errors }" />
+                    <input type="text" formControlName="titre" class="form-control" [ngClass]="{ 'is-invalid': submitted && fctl['titre'].errors }" />
                     <div *ngIf="submitted && fctl['titre'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['titre'].errors['required']">Title is required</div>
                     </div>
@@ -21,29 +20,25 @@
                 <div class="form-group">
                     <label class="form-label">Reference</label>
 
-                    <input type="text" formControlName="pReference" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && fctl['pReference'].errors }" disabled="" />
+                    <input type="text" formControlName="pReference" class="form-control" [ngClass]="{ 'is-invalid': submitted && fctl['pReference'].errors }" disabled="" />
                     <div *ngIf="submitted && fctl['pReference'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['pReference'].errors['required']">UniqueID is required</div>
                     </div>
                 </div>
 
-                 <!-- Totalstorypointsinitiallycounts -->
-                 <div class="form-group">
+                <!-- Totalstorypointsinitiallycounts -->
+                <div class="form-group">
                     <label class="form-label">Total story points initially counts*</label>
-                    <input type="number" formControlName="Totalstorypointsinitiallycounts" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && fctl['Totalstorypointsinitiallycounts'].errors }" />
-                    <div *ngIf="submitted && fctl['Totalstorypointsinitiallycounts'].errors" class="invalid-feedback">
-                        <div *ngIf="fctl['Totalstorypointsinitiallycounts'].errors['required']">Total story points initially counts is required</div>
+                    <input type="number" formControlName="totalstorypointsinitiallycounts" class="form-control" [ngClass]="{ 'is-invalid': submitted && fctl['totalstorypointsinitiallycounts'].errors }" />
+                    <div *ngIf="submitted && fctl['totalstorypointsinitiallycounts'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['totalstorypointsinitiallycounts'].errors['required']">Total story points initially counts is required</div>
                     </div>
                 </div>
 
                 <!-- Description -->
                 <div class="form-group">
                     <label class="form-label">Description*</label>
-                    <textarea type="text" formControlName="descriptionProject" class="form-control md-textarea"
-                        [ngClass]="{ 'is-invalid': submitted && fctl['descriptionProject'].errors }"
-                        rows="3"></textarea>
+                    <textarea type="text" formControlName="descriptionProject" class="form-control md-textarea" [ngClass]="{ 'is-invalid': submitted && fctl['descriptionProject'].errors }" rows="3"></textarea>
                     <div *ngIf="submitted && fctl['descriptionProject'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['descriptionProject'].errors['required']">Description is required</div>
                     </div>
@@ -52,8 +47,7 @@
                 <!-- Date Debut -->
                 <div class="form-group">
                     <label class="form-label">Start Date*</label>
-                    <input type="date" formControlName="dateDebut" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && fctl['dateDebut'].errors }">
+                    <input type="date" formControlName="dateDebut" class="form-control" [ngClass]="{ 'is-invalid': submitted && fctl['dateDebut'].errors }">
                     <div *ngIf="submitted && fctl['dateDebut'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['dateDebut'].errors['required']">Date is required</div>
                     </div>
@@ -62,8 +56,7 @@
                 <!-- Date Fin -->
                 <div class="form-group">
                     <label class="form-label">End Date*</label>
-                    <input type="date" formControlName="dateFin" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && fctl['dateFin'].errors }">
+                    <input type="date" formControlName="dateFin" class="form-control" [ngClass]="{ 'is-invalid': submitted && fctl['dateFin'].errors }">
                     <div *ngIf="submitted && fctl['dateFin'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['dateFin'].errors['required']">Date is required</div>
                     </div>
@@ -74,7 +67,7 @@
                 <!-- Button -->
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Update</button>
-                   
+
                 </div>
             </form>
         </div>
@@ -82,5 +75,5 @@
 </div>
 
 <ng-template #BadCredentials>
-    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3> 
-   </ng-template>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>

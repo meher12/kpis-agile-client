@@ -48,7 +48,7 @@ export class UpdateStoryComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+   
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -75,9 +75,9 @@ export class UpdateStoryComponent implements OnInit {
           err => {
             this.msgError = err.error.message;
             console.error("err: "+this.msgError);
-          }
-        )
+          })
 
+          this.getRefSprint();
     }
   }
 
@@ -88,10 +88,6 @@ export class UpdateStoryComponent implements OnInit {
     this.storyService.currentrefSprint
       .subscribe(sprintRef => {
         this._sselectedSRef = sprintRef;
-
-        // set local storage
-        localStorage.removeItem('sprintrefTostorylist');
-        localStorage.setItem('sprintrefTostorylist', this._sselectedSRef);
 
       }); //<= Always get current value!
   }
@@ -108,7 +104,7 @@ export class UpdateStoryComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Story ' + this.story.stname + ' updated', 'info')
-        this.gotToStoryList();
+        this.gotToStoryListBysref();
       },
         err => {
           this.msgError = err.error.message;
@@ -123,7 +119,7 @@ export class UpdateStoryComponent implements OnInit {
   }
 
   gotToStoryListBysref() {
-    this.router.navigate(['/storylistByspr']);
+    this.router.navigate(['storylistByspr', this._sselectedSRef]);
   }
 
   get fctl(): { [key: string]: AbstractControl } {

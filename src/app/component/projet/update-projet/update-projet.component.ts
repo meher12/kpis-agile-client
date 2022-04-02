@@ -36,7 +36,7 @@ export class UpdateProjetComponent implements OnInit {
     descriptionProject: new FormControl(),
     dateDebut: new FormControl(),
     dateFin: new FormControl(),
-    Totalstorypointsinitiallycounts: new FormControl(),
+    totalstorypointsinitiallycounts: new FormControl(),
   });
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class UpdateProjetComponent implements OnInit {
         this.form = this.formBuilder.group({
           titre: [this.projet.titre, Validators.required],
           pReference: [this.projet.pReference, Validators.required],
-          Totalstorypointsinitiallycounts: [this.projet.totalstorypointsinitiallycounts, Validators.required],
+          totalstorypointsinitiallycounts: [this.projet.totalstorypointsinitiallycounts, Validators.required],
           descriptionProject: [this.projet.descriptionProject, Validators.required],
           dateDebut: [this.projet.dateDebut, Validators.compose([Validators.required, DateValidator.dateVaidator])],
           dateFin: [this.projet.dateFin, Validators.compose([Validators.required, DateValidator.dateVaidator])],

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Sprint } from 'src/app/models/sprint.model';
 import { Story } from 'src/app/models/story.model';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
@@ -38,9 +38,12 @@ export class ListStoryBySprintComponent implements OnInit {
 
   store_local_ref_sprint;
 
+  store_ref_sprint;
+  ref;
+
 
   constructor(private storyService: StoryService, private sprintService: SprintService, private router: Router, 
-    private tokenStorageService: TokenStorageService) { }
+    private tokenStorageService: TokenStorageService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -52,9 +55,10 @@ export class ListStoryBySprintComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-
+      this.store_ref_sprint = this.route.snapshot.params['refsprint'];
       //localStorage of ref project
-      this.store_local_ref_sprint = localStorage.getItem('sprintrefTostorylist');
+     localStorage.setItem("ref", this.store_ref_sprint);
+     this.ref= localStorage.getItem("ref");
 
       this.getRefSprint()
       this.getTitleSprint()
@@ -72,7 +76,7 @@ export class ListStoryBySprintComponent implements OnInit {
 
   // Get All projects by ref id
   getTitleSprint() {
-    this.sprintService.getSprintByReference(this._getsselectedSRef)
+    this.sprintService.getSprintByReference(this.store_ref_sprint)
       .subscribe(data => {
         this.sprint = data;
       })
@@ -81,7 +85,8 @@ export class ListStoryBySprintComponent implements OnInit {
 
   // find sprint by project reference
   cgetAllStoryBySprintRef() {
-    this.storyService.getAllStoryBySprintRef(this.store_local_ref_sprint)
+   // this.storyService.getAllStoryBySprintRef(this.store_local_ref_sprint)
+   this.storyService.getAllStoryBySprintRef( this.ref /* this._getsselectedSRef */)
       .subscribe(data => {
         this.stories = data;
         // console.log(this.sprints);

@@ -76,9 +76,8 @@ export class UpdateSprintComponent implements OnInit {
         err => {
           this.msgError = err.error.message;
           console.error(this.msgError);
-        }
-      )
-
+        } )
+        this.getRefProject();
     }
   }
 
@@ -90,10 +89,6 @@ export class UpdateSprintComponent implements OnInit {
     .subscribe(projectRef => {
       this.selectedPRef = projectRef;
 
-      // set local storage
-      localStorage.setItem('refprojectforsprintlist', this.selectedPRef);
-
-     
     }); //<= Always get current value!
 }
 
@@ -109,7 +104,7 @@ sendRefProjectParams(){
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Sprint ' + this.sprint.stitre + ' updated', 'info')
-        this.gotToSprintList();
+        this.gotToSprintListBypref();
       },
         err => {
           this.msgError = err.error.message;
@@ -124,7 +119,7 @@ sendRefProjectParams(){
   }
 
   gotToSprintListBypref() {
-    this.router.navigate(['/sprintListBypre']);
+    this.router.navigate(['sprintListBypre', this.selectedPRef]);
   }
 
   get fctl(): { [key: string]: AbstractControl } {

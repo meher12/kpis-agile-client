@@ -104,6 +104,8 @@ export class UpdateTaskComponent implements OnInit {
             this.msgError = err.error.message;
             console.error(this.msgError);
           });
+
+          this.getRefStory();
     }
   }
 
@@ -112,9 +114,6 @@ export class UpdateTaskComponent implements OnInit {
     this.taskService.currentrefStory
       .subscribe(storyRef => {
         this._sselectedSTRef = storyRef;
-        // set local storage
-        localStorage.removeItem('refstoryfortasklist');
-        localStorage.setItem('refstoryfortasklist', this._sselectedSTRef);
 
       }); //<= Always get current value!
   }
@@ -131,7 +130,7 @@ export class UpdateTaskComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         Swal.fire('Hey!', 'Task ' + this.task.tname + ' updated', 'info')
-        this.gotToTaskList();
+        this.gotToTaskListBystref();
       },
         err => {
           this.msgError = err.error.message;
@@ -146,7 +145,7 @@ export class UpdateTaskComponent implements OnInit {
   }
 
   gotToTaskListBystref() {
-    this.router.navigate(['taskListBystre']);
+    this.router.navigate(['taskListBystre', this._sselectedSTRef]);
   }
 
   get fctl(): { [key: string]: AbstractControl } {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Projet } from 'src/app/models/projet.model';
 import { Sprint } from 'src/app/models/sprint.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
@@ -35,10 +35,12 @@ export class SprintListByProjectComponent implements OnInit {
   project: Projet;
   id: number;
 
-  store_local_ref_project;
+  store_ref_project;
+  ref_proj
 
 
-  constructor(private sprintService: SprintService, private projectService: ProjectService, private router: Router, private tokenStorageService: TokenStorageService) { }
+  constructor(private sprintService: SprintService, private projectService: ProjectService, private router: Router,
+     private tokenStorageService: TokenStorageService, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
 
@@ -50,9 +52,12 @@ export class SprintListByProjectComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-
+      this.store_ref_project = this.route.snapshot.params['refproject'];
       //localStorage of ref project
-      this.store_local_ref_project = localStorage.getItem('refprojectforsprintlist');
+     localStorage.setItem("refproject", this.store_ref_project);
+     this.ref_proj = localStorage.getItem("refproject");
+
+
 
       this.getRefProject()
       this.getTitleProjects()
@@ -70,16 +75,16 @@ export class SprintListByProjectComponent implements OnInit {
 
   // Get All projects by ref id
   getTitleProjects() {
-    this.projectService.getProjectByReference(this.store_local_ref_project)
+    this.projectService.getProjectByReference(this.ref_proj)
       .subscribe(data => {
         this.project = data;
       })
-      console.log("******"+this.store_local_ref_project)
+      console.log("******"+this.ref_proj)
   }
 
   // find sprint by project reference
   cgetAllSprintsByProjectRef() {
-    this.sprintService.getAllSprintsByProjectRef(this.store_local_ref_project)
+    this.sprintService.getAllSprintsByProjectRef(this.ref_proj)
       .subscribe(data => {
         this.sprints = data;
         // console.log(this.sprints);
@@ -179,7 +184,7 @@ export class SprintListByProjectComponent implements OnInit {
           'success'
         ),
 
-          this.projectService.getProjectByReference(this.store_local_ref_project)
+          this.projectService.getProjectByReference(this.ref_proj)
             .subscribe(data => {
               this.project = data;
             })

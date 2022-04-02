@@ -6,7 +6,7 @@ import { AppConstants } from '../AppConstants';
 
 
 
-const sreferenceSource = new BehaviorSubject('Basic ref is required!');
+const sreferenceSource = new BehaviorSubject('Basic reference is required!');
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

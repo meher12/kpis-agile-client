@@ -53,7 +53,7 @@ export class CreateStoryComponent implements OnInit {
   });
 
   ngOnInit(): void {
-
+   
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     localStorage.removeItem('refsprint');
     localStorage.setItem('refsprint', this.form.controls.stReference.value );
@@ -73,8 +73,8 @@ export class CreateStoryComponent implements OnInit {
       });
 
 
+     
       this.getRefSprint();
-
       this.sprintService.getSprintByReference(this._sselectedSRef)
         .subscribe(data => {
           this.sprint = data;
@@ -85,6 +85,8 @@ export class CreateStoryComponent implements OnInit {
             console.error(this.msgError);
           });
 
+         
+
     }
   }
 
@@ -93,15 +95,12 @@ export class CreateStoryComponent implements OnInit {
     this.storyService.currentrefSprint
       .subscribe(sprintRef => {
         this._sselectedSRef = sprintRef;
-    // set local storage
-      localStorage.removeItem('sprintrefTostorylist');
-      localStorage.setItem('sprintrefTostorylist', this._sselectedSRef);
       }); //<= Always get current value!
   }
 
   sendRefSprintParams(){
     //Set refprodect in component 1
-    this.storyService.changeSReference( this._sselectedSRef);
+    this.storyService.changeSReference(this._sselectedSRef);
       
   }
  
@@ -113,7 +112,7 @@ export class CreateStoryComponent implements OnInit {
         console.log(data);
         Swal.fire('Hey!', 'Story ' + this.story.stname + ' is saved', 'info');
         //console.log("*********"+ this._sprint_id)
-        this.gotToStoryList();
+        this.gotToStoryListBysref();
       },
         err => {
           this.msgError = err.error.message;
@@ -126,9 +125,9 @@ export class CreateStoryComponent implements OnInit {
   gotToStoryList() {
     this.router.navigate(['storyList']);
   }
- /*  gotToStoryListBysref() {
-    this.router.navigate(['/storylistByspr']);
-  } */
+  gotToStoryListBysref() {
+    this.router.navigate(['storylistByspr', this._sselectedSRef]);
+  }
 
   get fctl(): { [key: string]: AbstractControl } {
     return this.form.controls;
@@ -146,7 +145,6 @@ export class CreateStoryComponent implements OnInit {
 
    onReset(): void {
      this.submitted = false;
-     localStorage.getItem('sprintrefTostorylist');
      this.form.reset();
      this.refresh()
      

@@ -49,7 +49,7 @@ const routes: Routes = [
   {path: 'createsprint', component: CreateSprintComponent},
   {path: 'updatesprint/:id', component: UpdateSprintComponent},
   {path: 'detailssprint/:id', component: SprintDetailsComponent},
-  {path: 'sprintListBypre', component: SprintListByProjectComponent},
+  {path: 'sprintListBypre/:refproject', component: SprintListByProjectComponent},
   {path: 'addspcompleted/:id', component: AddSpCompletedComponent, outlet: 'addspPopup'},
 
   // Story Router
@@ -57,13 +57,13 @@ const routes: Routes = [
   {path: 'createstory', component: CreateStoryComponent},
   {path: 'updatestory/:id', component: UpdateStoryComponent},
   {path: 'detailsstory/:id', component: DetailsStoryComponent},
-  {path: 'storylistByspr', component: ListStoryBySprintComponent},
+  {path: 'storylistByspr/:refsprint', component: ListStoryBySprintComponent},
 
   // Task Router
   {path: 'taskList', component: TaskListComponent},
   {path: 'createtask', component: CreateTaskComponent},
   {path: 'updatetask/:id', component: UpdateTaskComponent},
-  {path: 'taskListBystre', component: TaskListByStoryComponent},
+  {path: 'taskListBystre/:refstory', component: TaskListByStoryComponent},
   {path: 'detailtask/:id', component: TaskDetailsComponent},
   
   { path: '', redirectTo: 'home', pathMatch: 'full' }

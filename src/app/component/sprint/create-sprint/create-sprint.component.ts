@@ -115,7 +115,7 @@ export class CreateSprintComponent implements OnInit {
         console.log(data);
         Swal.fire('Hey!', 'Sprint ' + this.sprint.stitre + ' is saved', 'info');
         console.log("*********"+ this._project_id)
-        this.gotToSprintList();
+        this.gotToSprintListBypref();
       },
         err => {
           this.msgError = err.error.message;
@@ -126,7 +126,7 @@ export class CreateSprintComponent implements OnInit {
   }
 
   gotToSprintListBypref() {
-    this.router.navigate(['/sprintListBypre']);
+    this.router.navigate(['/sprintListBypre', this._sselectedPRef]);
   }
 
   gotToSprintList() {
