@@ -2,7 +2,7 @@
 
     <!-- Start -->
     <div class="search-sprints">
-        <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
+        <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck" 
         (change)="getStoryPointsCChart($event)" > 
             <option [ngValue]="undefined" disabled>Choose project...</option>
             <option *ngFor="let projet of projects" [value]="projet.pReference" [selected]=" projet == selected">
@@ -16,19 +16,17 @@
     <!-- End -->
 
     <div *ngIf="selected;else selectList">
-    <ng-container *ngIf="chartOptions">
-        <div id="storyPointsCChart">
-            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
-                [plotOptions]="chartOptions.plotOptions" [labels]="chartOptions.labels" [legend]="chartOptions.legend"
-                [colors]="chartOptions.colors" [responsive]="chartOptions.responsive" [title]="chartOptions.title">
-            </apx-chart>
-        </div>
-    </ng-container>
-</div>
+        <ng-container *ngIf="chartOptions">
+            <div id="storyPointsCChart">
+                <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [plotOptions]="chartOptions.plotOptions" [labels]="chartOptions.labels" [legend]="chartOptions.legend" [colors]="chartOptions.colors" [responsive]="chartOptions.responsive" [title]="chartOptions.title">
+                </apx-chart>
+            </div>
+        </ng-container>
+    </div>
 
-<ng-template #selectList>
-  <div class="msgList">
-    <h4 class="text-info" style="text-align: center;"> Choose your item from list to display story Points Completed Chart </h4>
-  </div>
-</ng-template>
+    <ng-template #selectList>
+        <div class="msgList">
+            <h4 class="text-info" style="text-align: center;"> Choose your item from list to display story Points Completed Chart </h4>
+        </div>
+    </ng-template>
 </div>

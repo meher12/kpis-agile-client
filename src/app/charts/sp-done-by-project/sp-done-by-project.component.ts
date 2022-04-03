@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 
 import {
   ApexNonAxisChartSeries,
@@ -32,7 +32,7 @@ export type ChartOptions = {
   templateUrl: './sp-done-by-project.component.html',
   styleUrls: ['./sp-done-by-project.component.scss']
 })
-export class SpDoneByProjectComponent implements OnInit {
+export class SpDoneByProjectComponent implements AfterViewInit {
 
   @ViewChild("storyPointsCChart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -61,9 +61,14 @@ export class SpDoneByProjectComponent implements OnInit {
     this._totalsp= value;
   }
 
-  constructor(private sprintService: SprintService, private projectService: ProjectService, private tokenStorageService: TokenStorageService) { }
+  constructor(private sprintService: SprintService, private projectService: ProjectService, private tokenStorageService: TokenStorageService) {
+    
+      this.percentageArray = [];
+      this.sprintName = []; 
+    
+   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -74,6 +79,9 @@ export class SpDoneByProjectComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
+
+      
+ 
       //this.getArrayOfPercentage();
 
     }
@@ -118,7 +126,10 @@ getStoryPointsCChart(event: any) {
 
   this._totalsp = this.project.totalstorypointsinitiallycounts;
 
+
   this.radioChartByPr(this.percentageArray, this.sprintName, this._totalsp);
+  
+   
  
     },
     err => {
@@ -132,6 +143,7 @@ getStoryPointsCChart(event: any) {
 radioChartByPr(percentageTab: any[], sprintNom: string[],  totalsp: string){
 
    /* Start Chart */
+   
    this.chartOptions = {
     series: this.percentageArray,
     chart: {
@@ -219,7 +231,11 @@ radioChartByPr(percentageTab: any[], sprintNom: string[],  totalsp: string){
       }
     ]
   };
-     /* End Chart */
+   /* End Chart */
 }
 
+
+
 }
+
+
