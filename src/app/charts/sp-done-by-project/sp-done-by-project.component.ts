@@ -74,7 +74,7 @@ export class SpDoneByProjectComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
-      this.getArrayOfPercentage();
+      //this.getArrayOfPercentage();
 
     }
 
@@ -92,8 +92,8 @@ export class SpDoneByProjectComponent implements OnInit {
         });
   }
 
-  getArrayOfPercentage(){
-    this.projectService.percentageSpCByproject()
+  getArrayOfPercentage(refproject: string){
+    this.projectService.percentageSpCByproject(refproject)
     .subscribe(data => console.log(data));
   
   }
@@ -101,7 +101,7 @@ export class SpDoneByProjectComponent implements OnInit {
 // get chart by project
 getStoryPointsCChart(event: any) {
 
-  this.getArrayOfPercentage();
+  this.getArrayOfPercentage(event.target.value);
 
   this.projectService.getProjectByReference(event.target.value)
   .subscribe(data => {

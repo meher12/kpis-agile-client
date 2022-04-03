@@ -4,62 +4,59 @@
     </div>
 
     <div class="container container-search-sprints">
-       
 
-            <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
-                <div *ngIf="selected" class="btn-group btn-group-toggle" role="group">
-                    <button routerLink="/createtask" class="btn btn-outline-primary">Add Task</button>
-                    <button style="margin-left: 2px" class="btn btn-outline-danger" (click)="confirmDeleteAll()">Delete
+        <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
+
+            <div class="btn-group btn-group-toggle" role="group">
+                <button routerLink="/createtask" class="btn btn-outline-primary">Add Task</button>
+                <button style="margin-left: 2px" class="btn btn-outline-danger" (click)="confirmDeleteAll()">Delete
                         All Task</button>
-                </div>
-                <div class="row titre" *ngIf="selected">
-                    <h3>Story title: {{story?.stname}}</h3>
-                </div>
             </div>
 
-            <div class="table-responsive" style="text-align: center;">
-                <div class="col-md-12 titre" style="text-align: justify;">
-                    <h3>Story: {{story?.stReference}} -- {{story?.stname}}</h3>
-                </div>
-                <table class="table table-striped">
-                    <thead class="bg-none bgc-default-tp1">
-                        <tr>
-                            <th>Reference</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Status</th>
-                            <th>Type</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
+        </div>
 
-                    <tbody>
-                        <tr *ngFor="let task of tasks">
-                            <td>{{task.tReference}}</td>
-                            <td>{{task.tname}}</td>
-                            <td>{{task.tdescription}}</td>
-                            <td>{{task.tdateDebut}}</td>
-                            <td>{{task.tdateFin}}</td>
-                            <td>{{task.status}}</td>
-                            <td>{{task.typeTask}}</td>
-                            <td>
-                                <div class="nowrap btn-group">
-                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info"
-                                        (click)="updateTask(task.id)">Update</button>
-
-                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
-                                        (click)="confirmDeleteById(task.id)">Delete</button>
-                                </div>
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="table-responsive" style="text-align: center;">
+            <div class="col-md-12 titre" style="text-align: justify;">
+                <h3>Story: {{story?.stReference}} -- {{story?.stname}}</h3>
             </div>
-        
+            <table class="table table-striped">
+                <thead class="bg-none bgc-default-tp1">
+                    <tr>
+                        <th>Reference</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Type</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let task of tasks">
+                        <td>{{task.tReference}}</td>
+                        <td>{{task.tname}}</td>
+                        <td>{{task.tdescription}}</td>
+                        <td>{{task.tdateDebut}}</td>
+                        <td>{{task.tdateFin}}</td>
+                        <td>{{task.status}}</td>
+                        <td>{{task.typeTask}}</td>
+                        <td>
+                            <div class="nowrap btn-group">
+                                <button class="btn btn-success" (click)="detailsTask(task.id)">Details</button>
+                                <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info" (click)="updateTask(task.id)">Update</button>
+
+                                <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger" (click)="confirmDeleteById(task.id)">Delete</button>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
 </div>

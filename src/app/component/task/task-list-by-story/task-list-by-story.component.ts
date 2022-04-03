@@ -98,6 +98,11 @@ export class TaskListByStoryComponent implements OnInit {
     this.router.navigate(['updatetask', id]);
   }
 
+   // navigate to deatils task story
+   detailsTask(id: number) {
+    this.router.navigate(['detailtask', id]);
+  }
+
     // delete task by Id
     confirmDeleteById(id: number) {
       const swalWithBootstrapButtons = Swal.mixin({

@@ -78,7 +78,7 @@ export class ReleaseBurndownComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
-      this.pReleaseBurndownChart();
+     // this.pReleaseBurndownChart();
      // this.initReleaseBurndownChart();
 
     }
@@ -86,8 +86,8 @@ export class ReleaseBurndownComponent implements OnInit {
   }
 
   // brundown chart update data in backend
-  pReleaseBurndownChart() {
-    this.projectService.releasebdchart()
+  pReleaseBurndownChart(refproject: string) {
+    this.projectService.releasebdchart(refproject)
       .subscribe(data => console.log(data));
   }
 
@@ -107,7 +107,7 @@ export class ReleaseBurndownComponent implements OnInit {
   //  get release Brundown Chart project reference
   getreleaseBrundownChartByProject(event: any) {
 
-    this.pReleaseBurndownChart();
+    this.pReleaseBurndownChart(event.target.value);
 
     this.projectService.getProjectByReference(event.target.value)
       .subscribe(data => {

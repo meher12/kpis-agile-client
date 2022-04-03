@@ -57,13 +57,13 @@ export class ProjectService {
   }
 
   // percentage sp by project 
-   percentageSpCByproject(): Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}`+'/projects/percentageSpcChart', httpOptions);
+   percentageSpCByproject(preference: string): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}`+'/projects/percentageSpcChart/'+ `${preference}`, httpOptions);
   }
 
-  // releasebdchart project by id
-  releasebdchart(): Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}`+'/projects/releasebdchart', httpOptions);
+  // releasebdchart project by preference
+  releasebdchart(preference: string): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}`+'/projects/releasebdchart/'+ `${preference}`, httpOptions);
   }
 
   // updateStoryPointsInproject
