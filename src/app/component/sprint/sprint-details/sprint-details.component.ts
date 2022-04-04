@@ -71,11 +71,17 @@ export class SprintDetailsComponent implements OnInit {
             console.error(this.msgError);
           });
 
+      this.updateTablesprint();
       this.daysNumberInSprint();
       this.idealLineForSprint();
     }
   }
 
+  
+  updateTablesprint() {
+     this.sprintService.updateStoryPointInSprint()
+       .subscribe(data => console.log(data));
+   }
   //  get number of days in sprint
   daysNumberInSprint() {
     this.sprintService.daysInSprint()

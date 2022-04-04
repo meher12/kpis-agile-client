@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Story } from 'src/app/models/story.model';
 import { Task } from 'src/app/models/task.model';
+import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { StoryService } from 'src/app/services/story/story.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -25,7 +26,7 @@ export class DetailsStoryComponent implements OnInit {
   tasks: Task[];
 
   constructor(private storyService: StoryService,  private route: ActivatedRoute,
-    private tokenStorageService: TokenStorageService) { }
+    private tokenStorageService: TokenStorageService, private sprintService: SprintService) { }
 
   ngOnInit(): void {
 
@@ -52,7 +53,14 @@ export class DetailsStoryComponent implements OnInit {
            Swal.fire('Hey!', this.msgError, 'warning');
           console.error(this.msgError);
           });
+
+          this.updateTablesprint();
     }
+  }
+
+  updateTablesprint() {
+    this.sprintService.updateStoryPointInSprint()
+      .subscribe(data => console.log(data));
   }
 
 }

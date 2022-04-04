@@ -21,6 +21,19 @@
                 <div class="col-md-12 titre" style="text-align: justify;">
                     <h3>Sprint : {{sprint?.sReference}} -- {{sprint?.stitre}}</h3>
                 </div>
+
+                  <!-- Pagination -->
+                  <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                    <div class="p-2 bd-highlight">
+                        <select (change)="onTableSizeChange($event)" class="custom-select">
+                            <option *ngFor="let size of tableSizes" [ngValue]="size">
+                                {{ size }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- End Pagination -->
+
                 <table class="table table-striped">
                     <thead class="bg-none bgc-default-tp1">
                         <tr>
@@ -35,7 +48,11 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let story of stories">
+                        <tr *ngFor="let story of stories | paginate : {
+                            itemsPerPage: tableSize,
+                            currentPage: page,
+                            totalItems: count
+                           };  let i = index ">
                             <td>{{story.stReference}}</td>
                             <td> {{story.stname}}</td>
                            <!--  <td>{{story.stdescription}}</td> -->
@@ -56,6 +73,10 @@
                         </tr>
                     </tbody>
                 </table>
+            <div class="d-flex justify-content-center">
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+            </div>
             </div>
         </div>
 

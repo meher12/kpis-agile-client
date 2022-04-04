@@ -41,6 +41,11 @@ export class ListStoryBySprintComponent implements OnInit {
   store_ref_sprint;
   ref;
 
+   /* Pagination */
+   page: number = 1;
+   count: number = 0;
+   tableSize: number = 4;
+   tableSizes: any = [3, 6, 9, 12];
 
   constructor(private storyService: StoryService, private sprintService: SprintService, private router: Router, 
     private tokenStorageService: TokenStorageService, private route: ActivatedRoute) { }
@@ -99,6 +104,17 @@ export class ListStoryBySprintComponent implements OnInit {
   }
 
 
+     /* Pagination */
+     onTableDataChange(event: any) {
+      this.page = event;
+      this.cgetAllStoryBySprintRef();
+    }
+    onTableSizeChange(event: any): void {
+      this.tableSize = event.target.value;
+      this.page = 1;
+      this.cgetAllStoryBySprintRef();
+    }
+    
 
   // navigate to update sprint
   updateStory(id: number) {

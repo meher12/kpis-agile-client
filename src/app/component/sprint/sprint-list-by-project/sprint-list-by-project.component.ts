@@ -38,6 +38,11 @@ export class SprintListByProjectComponent implements OnInit {
   store_ref_project;
   ref_proj
 
+   /* Pagination */
+   page: number = 1;
+   count: number = 0;
+   tableSize: number = 4;
+   tableSizes: any = [3, 6, 9, 12];
 
   constructor(private sprintService: SprintService, private projectService: ProjectService, private router: Router,
      private tokenStorageService: TokenStorageService, private route: ActivatedRoute ) { }
@@ -96,7 +101,16 @@ export class SprintListByProjectComponent implements OnInit {
         });
   }
 
-
+   /* Pagination */
+   onTableDataChange(event: any) {
+    this.page = event;
+    this.cgetAllSprintsByProjectRef();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.cgetAllSprintsByProjectRef();
+  }
 
   // navigate to update sprint
   updateSprint(id: number) {

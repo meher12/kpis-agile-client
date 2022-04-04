@@ -38,6 +38,11 @@ export class TaskListByStoryComponent implements OnInit {
   store_ref_story
   store_ref;
 
+   /* Pagination */
+   page: number = 1;
+   count: number = 0;
+   tableSize: number = 4;
+   tableSizes: any = [3, 6, 9, 12];
 
   constructor(private storyService: StoryService, private taskService: TaskService, private router: Router, 
     private tokenStorageService: TokenStorageService, private route: ActivatedRoute) { }
@@ -93,6 +98,17 @@ export class TaskListByStoryComponent implements OnInit {
         });
   }
 
+     /* Pagination */
+     onTableDataChange(event: any) {
+      this.page = event;
+      this.cgetAllTaskByStoryRef();
+    }
+    onTableSizeChange(event: any): void {
+      this.tableSize = event.target.value;
+      this.page = 1;
+      this.cgetAllTaskByStoryRef();
+    }
+    
    // navigate to update sprint
    updateTask(id: number) {
     this.router.navigate(['updatetask', id]);
