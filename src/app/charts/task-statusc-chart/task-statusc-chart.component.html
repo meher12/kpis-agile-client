@@ -1,10 +1,32 @@
-<div id="taskStatusChart">
-    <apx-chart
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [labels]="chartOptions.labels"
-      [title]="chartOptions.title"
-      [theme]="chartOptions.theme"
-      [responsive]="chartOptions.responsive"
-    ></apx-chart>
+<div class="container">
+
+  <!-- Start -->
+  <div class="search-sprints">
+    <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
+      (change)="taskStatusChart($event)">
+      <option [ngValue]="undefined" disabled>Choose project...</option>
+      <option *ngFor="let projet of projects" [value]="projet.pReference" [selected]=" projet == selected">
+        {{projet.titre}}
+      </option>
+    </select>
+
   </div>
+  <!-- End -->
+  <div *ngIf="selected;else selectList">
+    <ng-container *ngIf="chartOptions">
+
+      <div id="taskStatusChart">
+        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
+          [title]="chartOptions.title" [theme]="chartOptions.theme" [responsive]="chartOptions.responsive"></apx-chart>
+      </div>
+    </ng-container>
+  </div>
+
+  <ng-template #selectList>
+    <div class="msgList">
+      <h4 class="text-info" style="text-align: center;"> Choose your item from list to display the
+        Velocity Chart </h4>
+    </div>
+  </ng-template>
+
+</div>

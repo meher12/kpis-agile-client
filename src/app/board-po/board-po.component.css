@@ -37,13 +37,7 @@ strong {
     font-weight: bolder;
 }
 
-caption {
-    /*  padding-top: 1rem;
-    padding-bottom: 1rem;
-    caption-side: bottom;
-    text-align: left;
-    color: #8898aa; */
-}
+
 
 h2,
 h5,
@@ -63,7 +57,8 @@ h2,
 
 h5,
 .h5 {
-    font-size: .8125rem;
+    font-size: .9825rem;
+    color:#32325d !important;
 }
 
 .container-fluid {

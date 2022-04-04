@@ -61,12 +61,7 @@ export class SpDoneByProjectComponent implements AfterViewInit {
     this._totalsp= value;
   }
 
-  constructor(private sprintService: SprintService, private projectService: ProjectService, private tokenStorageService: TokenStorageService) {
-    
-      this.percentageArray = [];
-      this.sprintName = []; 
-    
-   }
+  constructor(private sprintService: SprintService, private projectService: ProjectService, private tokenStorageService: TokenStorageService) { }
 
   ngAfterViewInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -140,18 +135,17 @@ getStoryPointsCChart(event: any) {
 }
 
 // Chart by project
-radioChartByPr(percentageTab: any[], sprintNom: string[],  totalsp: string){
+radioChartByPr(percentageTab: any[], sprintNom: any[],  totalsp: any){
 
    /* Start Chart */
    
    this.chartOptions = {
-    series: this.percentageArray,
+    series: percentageTab,
     chart: {
       height: 'auto',
       type: "radialBar",
       toolbar: {
         show: true,
-    
       }
     },
     title: {
@@ -182,7 +176,7 @@ radioChartByPr(percentageTab: any[], sprintNom: string[],  totalsp: string){
           total: {
             show: true,
             label: "Total",
-            formatter: function (num: any) {
+            formatter: function (w) {
               return  totalsp;
             }
           }
@@ -201,7 +195,7 @@ radioChartByPr(percentageTab: any[], sprintNom: string[],  totalsp: string){
       }
     },
     // colors: ["#AA4A44", "#0084ff", "#39539E", "#0077B5"],
-    labels:  this.sprintName, 
+    labels:  sprintNom, 
     legend: {
       show: true,
       floating: true,

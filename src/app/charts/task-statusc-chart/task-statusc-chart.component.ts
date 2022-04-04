@@ -33,13 +33,12 @@ export class TaskStatuscChartComponent implements OnInit {
   @ViewChild("taskStatusChart") chart: ChartComponent;
   public chartOptions: Partial<any>;
 
-  project: Projet;
+  pairArrays: Object;
   projects: Projet[];
 
-  pMorespF: string[] = [];
-  pSpCommitmentF: any[] = [];
-  pSpwrkedF: string[] = [];
-  sprintName: String[] = [];
+  keyArr: any[] = [];
+  valueArr: any[] = [];
+
 
   isLoggedIn = false;
   showPOBoard = false;
@@ -66,7 +65,7 @@ export class TaskStatuscChartComponent implements OnInit {
       this.getAllproject();
       this.taskStatusChartService('PUID10E1E');
       //this.taskStatusChart();
-   
+
 
     }
 
@@ -88,28 +87,62 @@ export class TaskStatuscChartComponent implements OnInit {
       .subscribe(data => console.log(data));
   }
 
-  taskStatusChart() {
+  taskStatusChart(event: any) {
+
+    this.projectService.getListtaskByStatus(event.target.value)
+      .subscribe(
+        {
+          next: (data) => {
+            const { KeyArr, ValueArr } = data;
+
+            this.keyArr = KeyArr 
+            this.valueArr = ValueArr 
+            //console.log("two arrays", this.keyArr);
+            //console.log("**** rays", this.valueArr);
+
+            let valArrtoNumber = this.valueArr.map(i=>Number(i));
+            console.log(valArrtoNumber);
+
+            this.getChartStatus(this.keyArr, valArrtoNumber)
+          },
+
+          error: err => console.error(err),
+          //complete: () => console.log('DONE!')
+
+
+        })
+  
+  }
+
+  getChartStatus(statusTask: any[], countStatus: any[]){
     this.chartOptions = {
-      series: [25, 15, 44, 55, 41, 17],
+      series: countStatus,
       chart: {
         width: "100%",
-        type: "pie"
+        type: "pie",
+        toolbar: {
+          show: true,
+        }
       },
-      labels: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
+      labels: statusTask,
       theme: {
         monochrome: {
           enabled: false
         }
       },
       title: {
-        text: "Number of leads"
+        text: "Percentage Status of task",
+        align: 'center',
+        margin: 30,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize: '24px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          color: '#263238'
+        },
       },
       responsive: [
         {
