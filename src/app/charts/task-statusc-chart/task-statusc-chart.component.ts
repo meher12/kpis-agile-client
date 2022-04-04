@@ -83,7 +83,7 @@ export class TaskStatuscChartComponent implements OnInit {
   }
 
   taskStatusChartService(refproject: string) {
-    this.projectService.getListtaskByStatus('PUID10E1E')
+    this.projectService.getListtaskByStatus(refproject)
       .subscribe(data => console.log(data));
   }
 

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import * as moment from "moment";
+import { asapScheduler } from "rxjs";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -39,11 +40,14 @@ export type ChartOptions = {
 })
 export class ReleaseBurndownComponent implements OnInit {
 
+
   @ViewChild("releaseBurndown") chart: ChartComponent;
+
   public chartOptions: Partial<any>;
 
 
-  project: Projet;
+
+  project: Projet = new Projet();
   projects: Projet[];
 
   pMorespF: string[] = [];
@@ -59,6 +63,8 @@ export class ReleaseBurndownComponent implements OnInit {
 
   msgError = "";
   selected;
+
+
 
 
   @Output() datePicked = new EventEmitter<any>();
@@ -78,8 +84,9 @@ export class ReleaseBurndownComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
-     // this.pReleaseBurndownChart();
-     // this.initReleaseBurndownChart();
+
+      // this.pReleaseBurndownChart();
+      // this.initReleaseBurndownChart();
 
     }
 
@@ -90,6 +97,8 @@ export class ReleaseBurndownComponent implements OnInit {
     this.projectService.releasebdchart(refproject)
       .subscribe(data => console.log(data));
   }
+
+
 
   getAllproject() {
     this.projectService.getProjectList()
@@ -109,13 +118,14 @@ export class ReleaseBurndownComponent implements OnInit {
 
     this.pReleaseBurndownChart(event.target.value);
 
+
     this.projectService.getProjectByReference(event.target.value)
       .subscribe(data => {
         this.project = data;
         console.log(this.project);
 
         this.project.pSpCommitment.pop();
-       // this.project.pSpCommitment.pop();
+        // this.project.pSpCommitment.pop();
         this.pSpCommitmentF = this.project.pSpCommitment;
 
         this.project.pSpwrked.pop();
@@ -131,90 +141,18 @@ export class ReleaseBurndownComponent implements OnInit {
 
         // get sprint length
         var arraySize = Object.keys(newarr).length;
-
+        
+        this.sprintName.length = 0;
         for (var i = 0; i < arraySize; i++) {
-          
-          this.sprintName['' + i] = this.project.sprints[i].stitre;
+
+          this.sprintName[i] = this.project.sprints[i].stitre;
         }
-        this.sprintName.push("release sprint");
-      
+        
+
         this.datePicked.emit(this.project.pupdatedDate);
 
-        /* Start Chart*/
-        this.chartOptions = {
-          series: [
-            {
-              name: "Total story points",
-              data: this.pSpCommitmentF
-            },
-            {
-              name: "Completed story point",
-              data: this.pSpwrkedF
-            },
-            {
-              name: "New task",
-              data: this.pMorespF
-            }
-          ],
-          chart: {
-            type: "bar",
-            height: 'auto',
-            stacked: true,
-            toolbar: {
-              show: true
-            },
-            zoom: {
-              enabled: true
-            }
-          },
-          title: {
-            text: 'Release brundoun Chart',
-            align: 'center',
-            margin: 30,
-            offsetX: 0,
-            offsetY: 0,
-            floating: false,
-            style: {
-              fontSize: '24px',
-              fontWeight: 'bold',
-              fontFamily: 'Helvetica, Arial, sans-serif',
-              color: '#263238'
-            },
-          },
-          responsive: [
-            {
-              breakpoint: 480,
-              options: {
-                legend: {
-                  position: "bottom",
-                  offsetX: -10,
-                  offsetY: 0
-                }
-              }
-            }
-          ],
-          plotOptions: {
-            bar: {
-              horizontal: false
-            }
-          },
-          xaxis: {
-            type: "category",
-            categories: this.sprintName,
-            tickPlacement: 'on',
-          },
-          legend: {
-            position: "right",
-            offsetY: 40
-          },
-          fill: {
-           // opacity: 1,
-            colors: ['#003366', '#01DF3A', '#D7DF01']
-          }
+        this.relaseBrundounChart(this.pSpCommitmentF, this.pSpwrkedF, this.pMorespF, this.sprintName)
 
-        };
-
-        /* End Chart */
       },
         err => {
           this.msgError = err.error.message;
@@ -223,27 +161,29 @@ export class ReleaseBurndownComponent implements OnInit {
         });
   }
 
-
-  // init release brundown chart
-  initReleaseBurndownChart() {
+  relaseBrundounChart(spcommitment: any[], spworked: any[], spmore: any[], sprintname: any[]) {
+   
+    sprintname.push("release sprint");
+    
+    /* Start Chart*/
     this.chartOptions = {
       series: [
         {
           name: "Total story points",
-          data: [100, 90, 85, 75, 40, 35, 15]
+          data: spcommitment
         },
         {
           name: "Completed story point",
-          data: [10, 10, 10, 10, 10, 10, 10]
+          data: spworked
         },
         {
           name: "New task",
-          data: [0, 0, 0, 15, 0, 0]
+          data: spmore
         }
       ],
       chart: {
         type: "bar",
-        height: 350,
+        height: 'auto',
         stacked: true,
         toolbar: {
           show: true
@@ -285,18 +225,28 @@ export class ReleaseBurndownComponent implements OnInit {
       },
       xaxis: {
         type: "category",
-        categories: this.sprintName
+        categories: sprintname,
+        tickPlacement: 'on',
+
       },
       legend: {
         position: "right",
         offsetY: 40
       },
       fill: {
-        opacity: 1,
-        colors: ['#B40404', '#01DF3A', '#D7DF01']
+        // opacity: 1,
+        colors: ['#003366', '#01DF3A', '#D7DF01']
       }
 
     };
+
+
   }
+
+  /* End Chart */
+
+
+
+
 
 }

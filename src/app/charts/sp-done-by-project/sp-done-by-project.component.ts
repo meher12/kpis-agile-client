@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import * as moment from 'moment';
 
 import {
   ApexNonAxisChartSeries,
@@ -48,7 +49,7 @@ export class SpDoneByProjectComponent implements AfterViewInit {
   roles: string[] = [];
 
   percentageArray: any[];
-  sprintName: string[] = [];
+  sprintName: any[] = [];
 
   msgError = "";
   selected;
@@ -114,10 +115,19 @@ getStoryPointsCChart(event: any) {
    this.project.percentage_spc.pop();
    this.percentageArray = this.project.percentage_spc;
 
-   var arraySize = Object.keys(this.project.sprints).length;
-   for (var i = 0; i < arraySize; i++) {
-     this.sprintName[""+i] = this.project.sprints[i].stitre;
-   }
+     // sort sprints array
+     const newarr = this.project.sprints.sort((a, b) => {
+      return moment(a.sdateDebut).diff(b.sdateDebut);
+    });
+
+    // get sprint length
+    var arraySize = Object.keys(newarr).length;
+    
+    this.sprintName.length = 0;
+    for (var i = 0; i < arraySize; i++) {
+
+      this.sprintName[i] = this.project.sprints[i].stitre;
+    }
 
   this._totalsp = this.project.totalstorypointsinitiallycounts;
 
