@@ -55,7 +55,7 @@ export class BurndownComponent implements OnInit {
   @Output() datePickedB = new EventEmitter<any>();
 
   workedStoryarray: string[];
-  idealLineArray: string[];
+  idealLineArray: any[];
   dateList: String[];
 
 
@@ -143,6 +143,10 @@ export class BurndownComponent implements OnInit {
      
         this.sprintObject.idealLinearray.pop()
         this.idealLineArray = this.sprintObject.idealLinearray;
+
+      /*  for (var i=0; i<this.idealLineArray.length; i++){
+        this.idealLineArray[i] = Math.round(this.idealLineArray[i])
+       } */
 
         this.sprintObject.workedlarray.pop();
         this.workedStoryarray =  this.sprintObject.workedlarray;

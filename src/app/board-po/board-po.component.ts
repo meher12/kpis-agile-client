@@ -65,9 +65,9 @@ export class BoardPoComponent implements OnInit {
     this.newInfoVelocity = event;
 
     
-    this.averageVelocity =  this.newInfoVelocity[0].average_velocity;
-    this.capacitySPNextSprint = this.newInfoVelocity[1].capacity_story_points_in_next_sprint;
-    this.numberSprint = this.newInfoVelocity[2].number_sprint;
+    this.averageVelocity =  Math.round(this.newInfoVelocity[0].average_velocity);
+    this.capacitySPNextSprint = Math.round(this.newInfoVelocity[1].capacity_story_points_in_next_sprint);
+    this.numberSprint = Math.round(this.newInfoVelocity[2].number_sprint);
 
     //console.log("New Velocity ***********", this.averageVelocity , this.capacitySPNextSprint , this.numberSprint);
   }
