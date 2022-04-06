@@ -53,22 +53,32 @@ export class ProjectService {
 
   // delete project by id
   deleteAllProjects(): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}`+'/projects/', httpOptions);
+    return this.httpClient.delete(`${this.baseUrl}` + '/projects/', httpOptions);
   }
 
   // percentage sp by project 
-   percentageSpCByproject(preference: string): Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}`+'/projects/percentageSpcChart/'+ `${preference}`, httpOptions);
+  percentageSpCByproject(preference: string): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}` + '/projects/percentageSpcChart/' + `${preference}`, httpOptions);
   }
 
   // releasebdchart project by preference
   releasebdchart(preference: string): Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}`+'/projects/releasebdchart/'+ `${preference}`, httpOptions);
+    return this.httpClient.get(`${this.baseUrl}` + '/projects/releasebdchart/' + `${preference}`, httpOptions);
   }
 
   // task status chart by project  preference
   getListtaskByStatus(preference: string): Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}`+'/projects/percentTaskStatuscChart/'+ `${preference}`, httpOptions);
+    return this.httpClient.get(`${this.baseUrl}` + '/projects/percentTaskStatuscChart/' + `${preference}`, httpOptions);
+  }
+
+  /* // task status chart by project  preference
+  getEfficacityByStartDateTask(preference: string, startDateObject: any): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}` + '/projects/getEfficacity/' + `${preference}`, startDateObject, httpOptions);
+  } */
+
+  // task status chart by project  preference
+  getEfficacityByStartDateTask(preference: string): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}` + '/projects/getEfficacity/' + `${preference}`,  httpOptions);
   }
 }
 

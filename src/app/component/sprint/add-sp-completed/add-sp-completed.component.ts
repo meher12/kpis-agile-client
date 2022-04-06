@@ -95,7 +95,7 @@ export class AddSpCompletedComponent implements OnInit {
   this.sprintService.updateSprintWorkCompleted(this.id,  this.tableauwkline)
      .subscribe(data => {
       console.log(data);
-      console.log("-------", Object.values(this.tableauwkline));
+      //console.log("-------", Object.values(this.tableauwkline));
    
     },
       err => {

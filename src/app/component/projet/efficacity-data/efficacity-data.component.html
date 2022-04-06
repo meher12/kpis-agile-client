@@ -1,0 +1,38 @@
+<div class="container">
+  
+    
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      
+      <p>
+        <label for="name">Project Reference:</label>
+        <input type="text" id="name" name="name" formControlName="name" [value]="refproject" class="form-control" disabled="">
+        
+      </p>
+    
+      <table class="table table-bordered" formArrayName="quantities">
+        <tr>
+          <th colspan="2">Add Multiple Date:</th>
+          <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
+        </tr>
+        <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+          <td>
+              Start Date :
+              <input type="text" formControlName="qty" class="form-control">
+          </td>
+          <td>
+            End Date:
+              <input type="text" formControlName="price" class="form-control">
+          </td>
+          <td>
+              <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+          </td>
+        </tr>
+      </table>
+     
+      <button type="submit" class="btn btn-success">Submit</button>
+      
+    </form>
+      
+    <br/>
+    {{this.productForm.value | json}}
+  </div>

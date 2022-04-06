@@ -1,6 +1,30 @@
 <div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
   <h3 class="text-center"> View Project Details</h3>
 
+   <!-- Start button popup -->
+   <button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary" (click)="openPopup(projectdetails.id)">Add
+    Efficacity data
+  </button>
+
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog reveal-modal" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Multiple Start date</h4>
+        </div>
+        <div class="modal-body">
+          <app-efficacity-data></app-efficacity-data>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closePopup()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End button popup -->
+
   <div class="col-md-12 detailsp">
     <div class="card mb-3">
       <div class="card-body">

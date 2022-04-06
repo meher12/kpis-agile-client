@@ -4,6 +4,7 @@ import { BoardDevComponent } from './board-dev/board-dev.component';
 import { BoardPoComponent } from './board-po/board-po.component';
 import { BoardScrmComponent } from './board-scrm/board-scrm.component';
 import { CreateProjetComponent } from './component/projet/create-projet/create-projet.component';
+import { EfficacityDataComponent } from './component/projet/efficacity-data/efficacity-data.component';
 import { ProjetDetailsComponent } from './component/projet/projet-details/projet-details.component';
 import { ProjetListComponent } from './component/projet/projet-list/projet-list.component';
 import { UpdateProjetComponent } from './component/projet/update-projet/update-projet.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path: 'createproject', component: CreateProjetComponent},
   {path: 'detailsproject/:id', component: ProjetDetailsComponent},
   {path: 'updateproject/:id', component: UpdateProjetComponent},
+  {path: 'efficacitydata/:id', component: EfficacityDataComponent,  outlet: 'efficacityPopup'},
 
   // Sprint Router
   {path: 'sprintList', component: SprintListComponent},

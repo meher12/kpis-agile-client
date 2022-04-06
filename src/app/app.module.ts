@@ -44,6 +44,7 @@ import { ReleaseBurndownComponent } from './charts/release-burndown/release-burn
 import { TaskDetailsComponent } from './component/task/task-details/task-details.component';
 import { SpDoneByProjectComponent } from './charts/sp-done-by-project/sp-done-by-project.component';
 import { TaskStatuscChartComponent } from './charts/task-statusc-chart/task-statusc-chart.component';
+import { EfficacityDataComponent } from './component/projet/efficacity-data/efficacity-data.component';
 
 
 
@@ -87,6 +88,7 @@ import { TaskStatuscChartComponent } from './charts/task-statusc-chart/task-stat
     TaskDetailsComponent,
     SpDoneByProjectComponent,
     TaskStatuscChartComponent,
+    EfficacityDataComponent,
 
 
 
