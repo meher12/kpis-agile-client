@@ -71,15 +71,17 @@ export class ProjectService {
     return this.httpClient.get(`${this.baseUrl}` + '/projects/percentTaskStatuscChart/' + `${preference}`, httpOptions);
   }
 
-  /* // task status chart by project  preference
-  getEfficacityByStartDateTask(preference: string, startDateObject: any): Observable<any> {
-    return this.httpClient.put(`${this.baseUrl}` + '/projects/getEfficacity/' + `${preference}`, startDateObject, httpOptions);
-  } */
+   // select tdate_debut in task by project ref
+   getListTaskStartDateBypRef(preference: string): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}` + '/projects/listStartDateTask/' + `${preference}`, httpOptions);
+  }
 
   // task status chart by project  preference
-  getEfficacityByStartDateTask(preference: string): Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}` + '/projects/getEfficacity/' + `${preference}`,  httpOptions);
+  getEfficacityByStartDateTask(preference: string, startDateObject: any): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}` + '/projects/getEfficacity/' + `${preference}`, startDateObject, httpOptions);
   }
+
+ 
 }
 
 

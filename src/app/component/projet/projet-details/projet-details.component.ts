@@ -27,7 +27,6 @@ export class ProjetDetailsComponent implements OnInit {
   projectdetails: Projet;
   sprintList: Sprint[];
 
-  displayStyle = "none";
 
   constructor(private projectService: ProjectService,  private route: ActivatedRoute,
     private tokenStorageService: TokenStorageService, private router: Router) { }
@@ -49,9 +48,9 @@ export class ProjetDetailsComponent implements OnInit {
         .subscribe(data => {
           this.projectdetails = data;
           this.sprintList = this.projectdetails.sprints;
-          this.preference = this.projectdetails.pReference;
+         // this.preference = this.projectdetails.pReference;
           //console.log(this.projectdetails);
-          console.log(this.preference);
+          //console.log(this.preference);
 
         },
           err => {
@@ -60,15 +59,6 @@ export class ProjetDetailsComponent implements OnInit {
           console.error("*******"+this.msgError);
           });
     }
-  }
-
-  openPopup(id: number) {
-    this.router.navigate([{ outlets: { efficacityPopup: ['efficacitydata', this.id] }}]);
-    this.displayStyle = "block";
-  }
-  closePopup() {
-    this.displayStyle = "none";
-    this.router.navigate([{ outlets: { efficacitydataPopup: null } }]);
   }
 
 }

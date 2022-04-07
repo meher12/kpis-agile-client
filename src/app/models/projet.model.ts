@@ -20,3 +20,9 @@ export class Projet {
     public percentage_spc: string[];
    
 }
+
+export interface Efficacity {
+    KeyArr: any[],
+    FloatArr: any[],
+    
+  }

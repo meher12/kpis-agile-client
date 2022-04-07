@@ -1,0 +1,39 @@
+<div class="container">
+
+    <!-- Start -->
+    <div class="search-sprints">
+        <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
+            (change)="getModelByProjectRef($event)">
+            <option [ngValue]="undefined" disabled>Choose project...</option>
+            <option *ngFor="let projet of projects" [value]="projet.pReference" [selected]=" projet == selected">
+                {{projet.titre}}
+            </option>
+        </select>
+    </div>
+    <!-- End -->
+
+    <!-- Start button popup -->
+    <button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary"
+        (click)="openPopup(id)" *ngIf="selected">Add Efficacity data
+    </button>
+   
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}"> 
+        <div class="modal-dialog reveal-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Multiple Start date</h4>
+                </div>
+                <div class="modal-body">
+                    <app-efficacity-data [projectSent]="project.pReference" (efficacityChange)="getInfoEfficacity($event)"></app-efficacity-data>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="closePopup()">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End button popup -->
+
+</div>
