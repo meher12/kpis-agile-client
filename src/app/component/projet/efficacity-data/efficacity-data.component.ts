@@ -45,6 +45,7 @@ export class EfficacityDataComponent implements OnChanges, OnInit {
         .subscribe({
           next: data => {
             this.listsStartDate = data;
+            this.listsStartDate = [...new Set(this.listsStartDate)];
           }
         })
     }

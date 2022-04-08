@@ -46,6 +46,7 @@ import { SpDoneByProjectComponent } from './charts/sp-done-by-project/sp-done-by
 import { TaskStatuscChartComponent } from './charts/task-statusc-chart/task-statusc-chart.component';
 import { EfficacityDataComponent } from './component/projet/efficacity-data/efficacity-data.component';
 import { EfficacityChartComponent } from './charts/efficacity-chart/efficacity-chart.component';
+import { CurrentSpInProjectChartComponent } from './charts/current-sp-in-project-chart/current-sp-in-project-chart.component';
 
 
 
@@ -91,6 +92,7 @@ import { EfficacityChartComponent } from './charts/efficacity-chart/efficacity-c
     TaskStatuscChartComponent,
     EfficacityDataComponent,
     EfficacityChartComponent,
+    CurrentSpInProjectChartComponent,
 
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Efficacity, Projet } from 'src/app/models/projet.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
@@ -59,6 +59,7 @@ export class EfficacityChartComponent implements OnInit {
 
   displayStyle = "none";
 
+  @Output() currentTotalSpChange = new EventEmitter<number>();
   constructor(private projectService: ProjectService, private tokenStorageService: TokenStorageService, private router: Router) { }
 
 
@@ -95,6 +96,7 @@ export class EfficacityChartComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.project = data;
+          this.currentTotalSpChange.emit(this.project.totalspCommitment);
           // console.log("----",this.project);
           // this.id = this.project.id;
           // console.log("----",this.id);
@@ -112,10 +114,13 @@ export class EfficacityChartComponent implements OnInit {
     this.newEfficacityArrays = event;
     this.dateArray = this.newEfficacityArrays.KeyArr;
     this.efficacityArray = this.newEfficacityArrays.FloatArr;
-    console.log("efficacity ***********", this.efficacityArray);
-    console.log("Date ***********", this.dateArray);
+    //console.log("efficacity ***********", this.efficacityArray);
+    //console.log("Date ***********", this.dateArray);
 
-    this.efficacityChart(this.dateArray, this.efficacityArray);
+    let efficacityArrayNumber = this.efficacityArray.map(i=>Math.round(i));
+    //console.log(" ***********", efficacityArrayNumber);
+    this.efficacityChart(this.dateArray, efficacityArrayNumber);
+    
   }
 
   efficacityChart(dateReq: any[], efficacityReq: any[]){
@@ -131,13 +136,21 @@ export class EfficacityChartComponent implements OnInit {
         type: "line",
         zoom: {
           enabled: false
-        }
+        },
+        dropShadow: {
+          enabled: true,
+          color: "#000",
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2
+        },
       },
       dataLabels: {
-        enabled: false
+        enabled: true
       },
       stroke: {
-        curve: "straight"
+        curve: "smooth"
       },
       title: {
         text: 'Efficacity Chart',
@@ -160,7 +173,8 @@ export class EfficacityChartComponent implements OnInit {
         }
       },
       xaxis: {
-        categories: dateReq 
+        categories: dateReq, 
+        
       },
       yaxis: {
         title: {

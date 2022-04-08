@@ -101,7 +101,7 @@ export class TaskStatuscChartComponent implements OnInit {
             //console.log("**** rays", this.valueArr);
 
             let valArrtoNumber = this.valueArr.map(i=>Number(i));
-            console.log(valArrtoNumber);
+            //console.log(valArrtoNumber);
 
             this.getChartStatus(this.keyArr, valArrtoNumber)
           },

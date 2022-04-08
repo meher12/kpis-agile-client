@@ -13,7 +13,7 @@
     <!-- End -->
     <div *ngIf="selected;else selectList">
     <!-- Start button popup -->
-    <button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary" (click)="openPopup()"
+    <button style="margin: 20px auto;" type="button" class="btn btn-primary" (click)="openPopup()"
         *ngIf="selected">Add  date
     </button>
 
@@ -21,7 +21,7 @@
         <div class="modal-dialog reveal-modal" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Multiple Start date</h4>
+                    <h4 class="modal-title">Add multiple date</h4>
                 </div>
                 <div class="modal-body">
                     <app-efficacity-data [projectSent]="project.pReference"
