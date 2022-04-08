@@ -1,0 +1,131 @@
+import { Component, Input, OnChanges, OnInit, ViewChild, SimpleChanges } from '@angular/core';
+
+import {
+  ApexNonAxisChartSeries,
+  ApexPlotOptions,
+  ApexChart,
+  ApexFill,
+  ChartComponent,
+  ApexStroke
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  labels: string[];
+  plotOptions: ApexPlotOptions;
+  fill: ApexFill;
+  stroke: ApexStroke;
+};
+
+@Component({
+  selector: 'app-current-sp-in-project-chart',
+  templateUrl: './current-sp-in-project-chart.component.html',
+  styleUrls: ['./current-sp-in-project-chart.component.scss']
+})
+export class CurrentSpInProjectChartComponent implements OnChanges, OnInit {
+
+  @ViewChild("chartProgressSp") chart: ChartComponent;
+  public chartOptions: Partial<any>;
+
+  @Input() progressSptotal;
+  constructor() { }
+
+  ngOnInit(): void {
+    //this.progressChart(this.progressSptotal);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.progressSptotal){
+      let precentagesp = (this.progressSptotal*100)/86
+    this.progressChart(precentagesp);
+    }
+  }
+
+  progressChart(progre: number){
+    this.chartOptions = {
+      series: [progre],
+      chart: {
+        height: 'auto',
+        type: "radialBar",
+        offsetY: -10
+      
+        
+      },
+      plotOptions: {
+        radialBar: {
+          startAngle: -90,
+          endAngle: 90,
+          dataLabels: {
+            name: {
+              fontSize: "16px",
+              color: "#228B22",
+              fontWeight: 'bold',
+              offsetY: 40,
+              
+            },
+            value: {
+              offsetY: 0,
+              fontSize: "16px",
+              color: 'red',
+              fontWeight: 'bold',
+              formatter: function (val) {
+                return val + "%";
+              }
+            }
+          }
+        }
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          type: "horizontal",
+          shadeIntensity: 1,
+          opacityFrom: 0.7,
+          opacityTo: 0.9,
+          colorStops: [
+            {
+              offset: 0,
+              color: "#8A0808",
+              opacity: 1
+            },
+            {
+              offset: 20,
+              color: "#FE2E2E",
+              opacity: 1
+            },
+            {
+              offset: 60,
+              color: "#FFBF00",
+              opacity: 1
+            },
+            {
+              offset: 100,
+              color: "#74DF00",
+              opacity: 1
+            }
+          ] 
+        }
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+              height: 200,
+
+            },
+            
+          }
+        }
+      ],
+      stroke: {
+        dashArray: 5
+      },
+      labels: ["Progress"]
+    };
+  }
+
+}
