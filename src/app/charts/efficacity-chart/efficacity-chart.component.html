@@ -11,20 +11,21 @@
         </select>
     </div>
     <!-- End -->
-
+    <div *ngIf="selected;else selectList">
     <!-- Start button popup -->
-    <button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary"
-        (click)="openPopup(id)" *ngIf="selected">Add Efficacity data
+    <button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary" (click)="openPopup()"
+        *ngIf="selected">Add  date
     </button>
-   
-    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}"> 
+
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
         <div class="modal-dialog reveal-modal" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Multiple Start date</h4>
                 </div>
                 <div class="modal-body">
-                    <app-efficacity-data [projectSent]="project.pReference" (efficacityChange)="getInfoEfficacity($event)"></app-efficacity-data>
+                    <app-efficacity-data [projectSent]="project.pReference"
+                        (efficacityChange)="getInfoEfficacity($event)"></app-efficacity-data>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" (click)="closePopup()">
@@ -36,4 +37,19 @@
     </div>
     <!-- End button popup -->
 
+    <!-- Chart -->
+    <ng-container *ngIf="chartOptions">
+        <div id="efficacityChart">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+                [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid" [stroke]="chartOptions.stroke"
+                [title]="chartOptions.title" [yaxis]="chartOptions.yaxis"></apx-chart>
+        </div>
+    </ng-container>
+</div>
+<ng-template #selectList>
+    <div class="msgList">
+      <h4 class="text-info" style="text-align: center;"> Choose your item from list to display the
+        Efficacity Chart </h4>
+    </div>
+  </ng-template>
 </div>

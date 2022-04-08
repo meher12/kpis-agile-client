@@ -1,8 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Efficacity, Projet } from 'src/app/models/projet.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexDataLabels,
+  ApexTitleSubtitle,
+  ApexStroke,
+  ApexGrid
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  dataLabels: ApexDataLabels;
+  grid: ApexGrid;
+  stroke: ApexStroke;
+  title: ApexTitleSubtitle;
+  yaxis: ApexYAxis;
+};
 
 @Component({
   selector: 'app-efficacity-chart',
@@ -10,6 +32,9 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./efficacity-chart.component.scss']
 })
 export class EfficacityChartComponent implements OnInit {
+
+  @ViewChild("efficacityChart") chart: ChartComponent;
+  public chartOptions: Partial<any>;
 
   project: Projet = new Projet();
   projects: Projet[];
@@ -29,8 +54,8 @@ export class EfficacityChartComponent implements OnInit {
   id: number;
 
   newEfficacityArrays: Efficacity;
- 
-
+  dateArray: any[];
+  efficacityArray: any[];
 
   displayStyle = "none";
 
@@ -70,9 +95,9 @@ export class EfficacityChartComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.project = data;
-         // console.log("----",this.project);
-         // this.id = this.project.id;
-         // console.log("----",this.id);
+          // console.log("----",this.project);
+          // this.id = this.project.id;
+          // console.log("----",this.id);
         },
         error: err => {
           this.msgError = err.error.message;
@@ -81,21 +106,92 @@ export class EfficacityChartComponent implements OnInit {
       });
   }
 
-    //get velocity info
-    getInfoEfficacity(event: Efficacity){
+  //get velocity info
+  getInfoEfficacity(event: Efficacity) {
 
-      this.newEfficacityArrays = event;
+    this.newEfficacityArrays = event;
+    this.dateArray = this.newEfficacityArrays.KeyArr;
+    this.efficacityArray = this.newEfficacityArrays.FloatArr;
+    console.log("efficacity ***********", this.efficacityArray);
+    console.log("Date ***********", this.dateArray);
 
-      console.log("New Velocity ***********", this.newEfficacityArrays.FloatArr);
-    }
-  openPopup(id: number) {
-  //  this.router.navigate([{ outlets: { efficacityPopup: ['efficacitydata', this.id] } }]);
+    this.efficacityChart(this.dateArray, this.efficacityArray);
+  }
+
+  efficacityChart(dateReq: any[], efficacityReq: any[]){
+    this.chartOptions = {
+      series: [
+        {
+          name: "Efficacity",
+          data: efficacityReq
+        }
+      ],
+      chart: {
+        height: 'auto',
+        type: "line",
+        zoom: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: "straight"
+      },
+      title: {
+        text: 'Efficacity Chart',
+        align: 'center',
+        margin: 30,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize: '24px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          color: '#263238'
+        }
+      },
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          opacity: 0.5
+        }
+      },
+      xaxis: {
+        categories: dateReq 
+      },
+      yaxis: {
+        title: {
+          text: "Efficacity",
+          style: {
+            colors: [],
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        },
+        labels: {
+          style: {
+            colors: [],
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        }
+
+      },
+    };
+  }
+  openPopup() {
     this.displayStyle = "block";
   }
 
   closePopup() {
     this.displayStyle = "none";
-    //this.router.navigate([{ outlets: { efficacitydataPopup: null } }]);
   }
 
 }
