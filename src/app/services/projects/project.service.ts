@@ -81,6 +81,11 @@ export class ProjectService {
     return this.httpClient.put(`${this.baseUrl}` + '/projects/getEfficacity/' + `${preference}`, startDateObject, httpOptions);
   }
 
+  //  select work completed in task by project reference
+  getPercentageStoryPointsInProject(preference: string): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}` + '/projects/percentageStoryPointsInProject/' + `${preference}`,  httpOptions);
+  }
+
  
 }
 

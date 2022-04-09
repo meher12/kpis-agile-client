@@ -59,7 +59,7 @@ export class EfficacityChartComponent implements OnInit {
 
   displayStyle = "none";
 
-  @Output() currentTotalSpChange = new EventEmitter<number>();
+  @Output() totalSpChange = new EventEmitter<number>();
   constructor(private projectService: ProjectService, private tokenStorageService: TokenStorageService, private router: Router) { }
 
 
@@ -96,7 +96,14 @@ export class EfficacityChartComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.project = data;
-          this.currentTotalSpChange.emit(this.project.totalspCommitment);
+          this.projectService.getPercentageStoryPointsInProject(event.target.value)
+          .subscribe( {
+            next: (data) => {
+            
+            this.totalSpChange.emit(data);
+
+          }})
+          
           // console.log("----",this.project);
           // this.id = this.project.id;
           // console.log("----",this.id);

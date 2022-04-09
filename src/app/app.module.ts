@@ -47,6 +47,7 @@ import { TaskStatuscChartComponent } from './charts/task-statusc-chart/task-stat
 import { EfficacityDataComponent } from './component/projet/efficacity-data/efficacity-data.component';
 import { EfficacityChartComponent } from './charts/efficacity-chart/efficacity-chart.component';
 import { CurrentSpInProjectChartComponent } from './charts/current-sp-in-project-chart/current-sp-in-project-chart.component';
+import { CommitmentSpInProjectChartComponent } from './charts/commitment-sp-in-project-chart/commitment-sp-in-project-chart.component';
 
 
 
@@ -93,6 +94,7 @@ import { CurrentSpInProjectChartComponent } from './charts/current-sp-in-project
     EfficacityDataComponent,
     EfficacityChartComponent,
     CurrentSpInProjectChartComponent,
+    CommitmentSpInProjectChartComponent,
 
 
 

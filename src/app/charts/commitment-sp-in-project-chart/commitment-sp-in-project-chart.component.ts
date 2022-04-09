@@ -18,39 +18,41 @@ export type ChartOptions = {
   stroke: ApexStroke;
 };
 
-@Component({
-  selector: 'app-current-sp-in-project-chart',
-  templateUrl: './current-sp-in-project-chart.component.html',
-  styleUrls: ['./current-sp-in-project-chart.component.scss']
-})
-export class CurrentSpInProjectChartComponent implements OnChanges, OnInit {
 
-  @ViewChild("chartProgressSp") chart: ChartComponent;
+@Component({
+  selector: 'app-commitment-sp-in-project-chart',
+  templateUrl: './commitment-sp-in-project-chart.component.html',
+  styleUrls: ['./commitment-sp-in-project-chart.component.scss']
+})
+export class CommitmentSpInProjectChartComponent implements OnChanges, OnInit {
+
+  @ViewChild("chartProgressCommitmentSp") chart: ChartComponent;
   public chartOptions: Partial<any>;
 
-  @Input() progressSptotal;
+  @Input() progressCommitmentSptotal;
 
   constructor() { }
 
   ngOnInit(): void { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.progressSptotal){
-    //console.log("SPCCD"+ this.progressSptotal)
-    this.progressChartSpCompleted(this.progressSptotal);
+    if (this.progressCommitmentSptotal) {
+      // console.log("CCCCCC"+this.progressCommitmentSptotal)
+      this.progressChartSpCommitment(this.progressCommitmentSptotal)
     }
   }
 
-  
-  progressChartSpCompleted(progressCompleted: any){
+
+
+  progressChartSpCommitment(progressComitment: any) {
     this.chartOptions = {
-      series: [progressCompleted],
+      series: [progressComitment],
       chart: {
         height: 'auto',
         type: "radialBar",
         offsetY: -10
-      
-        
+
+
       },
       plotOptions: {
         radialBar: {
@@ -62,7 +64,7 @@ export class CurrentSpInProjectChartComponent implements OnChanges, OnInit {
               color: "#228B22",
               fontWeight: 'bold',
               offsetY: 40,
-              
+
             },
             value: {
               offsetY: 0,
@@ -87,12 +89,8 @@ export class CurrentSpInProjectChartComponent implements OnChanges, OnInit {
           colorStops: [
             {
               offset: 0,
-              color: "#8A0808",
-              opacity: 1
-            },
-            {
-              offset: 20,
-              color: "#FE2E2E",
+              color: "#74DF00",
+
               opacity: 1
             },
             {
@@ -101,11 +99,16 @@ export class CurrentSpInProjectChartComponent implements OnChanges, OnInit {
               opacity: 1
             },
             {
+              offset: 70,
+              color: "#FE2E2E",
+              opacity: 1
+            },
+            {
               offset: 100,
-              color: "#74DF00",
+              color: "#8A0808",
               opacity: 1
             }
-          ] 
+          ]
         }
       },
       responsive: [
@@ -115,7 +118,7 @@ export class CurrentSpInProjectChartComponent implements OnChanges, OnInit {
             chart: {
               width: 200,
             },
-            
+
           }
         }
       ],

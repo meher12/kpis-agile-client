@@ -9,22 +9,20 @@ import { UserService } from '../services/user.service';
 export class BoardScrmComponent implements OnInit {
 
   content?: string;
-  currenttotalSp: number;
+  currenttotalSp: any;
+  commitmenttotalSp: any;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-   /*  this.userService.getScrummBoard().subscribe(
-      data => {
-        this.content = data;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    ); */
+  
   }
 
-  getCurrenttotalsp(event){
-    this.currenttotalSp = event;
+  getTotalsp(event){
+    this.currenttotalSp = event.SpCompleted;
+    this.commitmenttotalSp = event.SpCommitment;
+   /* console.log("--object d--", event);
     console.log("--this.currenttotalSp--", this.currenttotalSp);
+    console.log("--commitmenttotalSp--", this.commitmenttotalSp);*/
   }
+
 }

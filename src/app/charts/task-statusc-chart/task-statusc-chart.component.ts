@@ -63,10 +63,8 @@ export class TaskStatuscChartComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
-      this.taskStatusChartService('PUID10E1E');
-      //this.taskStatusChart();
-
-
+     // this.taskStatusChartService('PUID10E1E');
+      
     }
 
   }
@@ -82,10 +80,10 @@ export class TaskStatuscChartComponent implements OnInit {
         });
   }
 
-  taskStatusChartService(refproject: string) {
+ /*  taskStatusChartService(refproject: string) {
     this.projectService.getListtaskByStatus(refproject)
       .subscribe(data => console.log(data));
-  }
+  } */
 
   taskStatusChart(event: any) {
 
