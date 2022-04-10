@@ -48,6 +48,7 @@ import { EfficacityDataComponent } from './component/projet/efficacity-data/effi
 import { EfficacityChartComponent } from './charts/efficacity-chart/efficacity-chart.component';
 import { CurrentSpInProjectChartComponent } from './charts/current-sp-in-project-chart/current-sp-in-project-chart.component';
 import { CommitmentSpInProjectChartComponent } from './charts/commitment-sp-in-project-chart/commitment-sp-in-project-chart.component';
+import { RadarSattusTaskChartComponent } from './charts/radar-sattus-task-chart/radar-sattus-task-chart.component';
 
 
 
@@ -95,6 +96,7 @@ import { CommitmentSpInProjectChartComponent } from './charts/commitment-sp-in-p
     EfficacityChartComponent,
     CurrentSpInProjectChartComponent,
     CommitmentSpInProjectChartComponent,
+    RadarSattusTaskChartComponent,
 
 
 

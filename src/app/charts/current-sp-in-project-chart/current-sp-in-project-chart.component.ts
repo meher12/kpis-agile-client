@@ -46,6 +46,86 @@ export class CurrentSpInProjectChartComponent implements OnChanges, OnInit {
     this.chartOptions = {
       series: [progressCompleted],
       chart: {
+        height: 350,
+        type: "radialBar",
+        offsetY: -10,
+        toolbar: {
+          show: true
+        },
+      },
+      plotOptions: {
+        radialBar: {
+          startAngle: -90,
+          endAngle: 90,
+          dataLabels: {
+            name: {
+              fontSize: "16px",
+              color: undefined,
+              offsetY: 40
+            },
+            value: {
+              offsetY: 0,
+              fontSize: "22px",
+              color: 'red',
+              formatter: function (val) {
+                return val + "%";
+              }
+            }
+          }
+        }
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          type: "verticle",
+          shadeIntensity: 0.15,
+          inverseColors: true,
+          gradientToColors: ["#FF6258", "#FFBC00"],
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 50, 100],
+          colorStops: [
+            [
+              {
+                offset: 0,
+                color: "#FF6258",
+                opacity: 1
+              },
+              {
+                offset: 51,
+                color: "#FFBC00",
+                opacity: 50
+              },
+              {
+                offset: 100,
+                color: "#77C579",
+                opacity: 1
+              }
+            ]
+          ]
+        }
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            
+          }
+        }
+      ],
+      stroke: {
+        dashArray: 0,
+        colors: ["grey"]
+      },
+      labels: ["Story point completed"]
+    };
+   /*  this.chartOptions = {
+      series: [progressCompleted],
+      chart: {
         height: 'auto',
         type: "radialBar",
         offsetY: -10
@@ -123,6 +203,6 @@ export class CurrentSpInProjectChartComponent implements OnChanges, OnInit {
         dashArray: 5
       },
       labels: ["Progress"]
-    };
+    }; */
   }
 }

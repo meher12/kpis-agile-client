@@ -1,4 +1,12 @@
-<div id="chartProgressCommitmentSp">
+<!-- <div id="chartProgressCommitmentSp">
   <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [plotOptions]="chartOptions.plotOptions"
     [labels]="chartOptions.labels" [fill]="chartOptions.fill" [stroke]="chartOptions.stroke"></apx-chart>
+</div> -->
+
+<div id="chartProgressCommitmentSp">
+  <div id="chart">
+    <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [legend]="chartOptions.legend"
+      [dataLabels]="chartOptions.dataLabels" [colors]="chartOptions.colors" [plotOptions]="chartOptions.plotOptions">
+    </apx-chart>
+  </div>
 </div>

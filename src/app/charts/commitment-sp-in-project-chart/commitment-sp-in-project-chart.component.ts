@@ -1,21 +1,21 @@
 import { Component, Input, OnChanges, OnInit, ViewChild, SimpleChanges } from '@angular/core';
 
 import {
-  ApexNonAxisChartSeries,
-  ApexPlotOptions,
+  ApexAxisChartSeries,
   ApexChart,
-  ApexFill,
   ChartComponent,
-  ApexStroke
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexLegend
 } from "ng-apexcharts";
 
 export type ChartOptions = {
-  series: ApexNonAxisChartSeries;
+  series: ApexAxisChartSeries;
   chart: ApexChart;
-  labels: string[];
+  dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
-  fill: ApexFill;
-  stroke: ApexStroke;
+  legend: ApexLegend;
+  colors: string[];
 };
 
 
@@ -29,23 +29,105 @@ export class CommitmentSpInProjectChartComponent implements OnChanges, OnInit {
   @ViewChild("chartProgressCommitmentSp") chart: ChartComponent;
   public chartOptions: Partial<any>;
 
-  @Input() progressCommitmentSptotal;
+  @Input() progressSptotal;
 
   constructor() { }
 
   ngOnInit(): void { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.progressCommitmentSptotal) {
-      // console.log("CCCCCC"+this.progressCommitmentSptotal)
-      this.progressChartSpCommitment(this.progressCommitmentSptotal)
+    if (this.progressSptotal) {
+       //console.log("CCCCCC"+this.progressSptotal.totalspcompleted)
+       //console.log("rrrrr"+this.progressSptotal.totalstorypointsinitiallycounts)
+      this.progressChartSpCommitment(this.progressSptotal.totalspcompleted, this.progressSptotal.totalstorypointsinitiallycounts)
     }
   }
 
 
 
-  progressChartSpCommitment(progressComitment: any) {
+  progressChartSpCommitment(progressCompleted: any, totalinitialzed: any) {
+
     this.chartOptions = {
+      series: [
+        {
+          name: "Realized",
+          data: [
+            {
+              x: "Story Points",
+              y: progressCompleted,
+              goals: [
+                {
+                  name: "Planned",
+                  value: totalinitialzed,
+                  strokeWidth: 50,
+                  strokeHeight: 15,
+                  strokeColor: "#0868F1"
+                }
+              ]
+            },
+          ]
+        }
+      ],
+      chart: {
+        height: 'auto',
+        type: "bar",
+      },
+     
+      plotOptions: {
+        bar: {
+          columnWidth: "10"
+        }
+      },
+      colors: ["#19D44E"],
+      dataLabels: {
+        enabled: true,
+        
+      },
+      legend: {
+        show: true,
+        showForSingleSeries: true,
+        fontFamily: 'Poppins',
+        fontWeight: 600,
+        customLegendItems: ["Realized", "Planned"],
+        markers: {
+          fillColors: ["#19D44E", "#0868F1"]
+        }
+      }
+    };
+
+  /*   this.chartOptions = {
+      series: [44, 30],
+      chart: {
+        width: 380,
+        type: "donut"
+      },
+      plotOptions: {
+        pie: {
+          startAngle: -90,
+          endAngle: 90,
+          offsetY: 10
+        }
+      },
+      grid: {
+        padding: {
+          bottom: -80
+        }
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      ]
+    }; */
+ /*    this.chartOptions = {
       series: [progressComitment],
       chart: {
         height: 'auto',
@@ -126,6 +208,6 @@ export class CommitmentSpInProjectChartComponent implements OnChanges, OnInit {
         dashArray: 5
       },
       labels: ["Progress"]
-    };
+    }; */
   }
 }

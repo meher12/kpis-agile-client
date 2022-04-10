@@ -10,7 +10,7 @@ export class BoardScrmComponent implements OnInit {
 
   content?: string;
   currenttotalSp: any;
-  commitmenttotalSp: any;
+  SpObject: any;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -19,9 +19,10 @@ export class BoardScrmComponent implements OnInit {
 
   getTotalsp(event){
     this.currenttotalSp = event.SpCompleted;
-    this.commitmenttotalSp = event.SpCommitment;
-   /* console.log("--object d--", event);
-    console.log("--this.currenttotalSp--", this.currenttotalSp);
+   // this.commitmenttotalSp = event.SpCommitment;
+   this.SpObject = event;
+    console.log("--object d--", event);
+   /* console.log("--this.currenttotalSp--", this.currenttotalSp);
     console.log("--commitmenttotalSp--", this.commitmenttotalSp);*/
   }
 

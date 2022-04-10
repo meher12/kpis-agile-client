@@ -27,6 +27,8 @@ export class BoardPoComponent implements OnInit {
   averageVelocity: number;
   capacitySPNextSprint: number;
 
+  statusBox;
+
 
   constructor(private userService: UserService) { }
 
@@ -63,7 +65,7 @@ export class BoardPoComponent implements OnInit {
   getInfoVelocity(event: Velocity){
 
     this.newInfoVelocity = event;
-
+    this.statusBox = true;
     
     this.averageVelocity =  Math.round(this.newInfoVelocity[0].average_velocity);
     this.capacitySPNextSprint = Math.round(this.newInfoVelocity[1].capacity_story_points_in_next_sprint);
