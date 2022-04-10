@@ -124,27 +124,28 @@ export class RadarSattusTaskChartComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-         // name: "Series 1",
+          
           data: countStatus
         }
       ],
       chart: {
         height: 350,
-        type: "radar"
+        type: "radar",
+  
       },
       dataLabels: {
         enabled: true
       },
       plotOptions: {
         radar: {
-          size: 140,
+          size: 150,
           polygons: {
             strokeColor: "#e9e9e9",
             fill: {
               colors: ["#f8f8f8", "#fff"]
             }
           }
-          
+
         }
       },
 
@@ -165,16 +166,14 @@ export class RadarSattusTaskChartComponent implements OnInit {
       xaxis: {
         categories: statusTask,
         labels: {
-          show: true,
           style: {
             colors: [],
-              fontSize: '15px',
-              fontFamily: 'Helvetica, Arial, sans-serif',
-              fontWeight: 400,
-              cssClass: 'apexcharts-xaxis-label',
-          }, 
-      },
-
+            fontSize: '15px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 400,
+            //cssClass: 'apexcharts-xaxis-label',
+          },
+        },
 
       },
       yaxis: {
