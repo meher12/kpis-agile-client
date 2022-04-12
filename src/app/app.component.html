@@ -16,13 +16,13 @@
             <a href="/home" class="nav-link" routerLink="home">Home </a>
           </li>
           <li class="nav-item" *ngIf="showPOBoard">
-            <a href="/po" class="nav-link" routerLink="po">Mesurer les travaux en cours</a>
+            <a href="/po" class="nav-link" routerLink="po">Measuring work in progress</a>
           </li>
           <li class="nav-item" *ngIf="showScrumMBoard || showPOBoard">
-            <a href="/scrm" class="nav-link" routerLink="scrm">Évaluer la santé des processus</a>
+            <a href="/scrm" class="nav-link" routerLink="scrm">process health and finding bottlenecks</a>
           </li>
           <li class="nav-item">
-            <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev">Mesurer la qualité du code</a>
+            <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev">Measuring code quality</a>
           </li>
         </ul>
 
