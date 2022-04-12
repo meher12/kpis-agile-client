@@ -56,6 +56,10 @@ export class ProjectService {
     return this.httpClient.delete(`${this.baseUrl}` + '/projects/', httpOptions);
   }
 
+  //update all story points
+   updateAllSp(): Observable<Object> {
+    return this.httpClient.get<any>(`${this.baseUrl}` + '/projects/updateallsp', httpOptions);
+  }
   // percentage sp by project 
   percentageSpCByproject(preference: string): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}` + '/projects/percentageSpcChart/' + `${preference}`, httpOptions);

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
 import * as moment from "moment";
 import { asapScheduler } from "rxjs";
 import {
@@ -19,6 +19,7 @@ import { ProjectService } from "src/app/services/projects/project.service";
 import { TokenStorageService } from "src/app/services/token-storage.service";
 
 import Swal from 'sweetalert2';
+import { SprintService } from "src/app/services/sprints/sprint.service";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -38,7 +39,7 @@ export type ChartOptions = {
   templateUrl: './release-burndown.component.html',
   styleUrls: ['./release-burndown.component.scss']
 })
-export class ReleaseBurndownComponent implements OnInit {
+export class ReleaseBurndownComponent implements OnChanges, OnInit {
 
 
   @ViewChild("releaseBurndown") chart: ChartComponent;
@@ -69,9 +70,13 @@ export class ReleaseBurndownComponent implements OnInit {
 
   @Output() datePicked = new EventEmitter<any>();
 
-  constructor(private projectService: ProjectService, private tokenStorageService: TokenStorageService) { }
+  constructor(private projectService: ProjectService, private sprintService: SprintService, private tokenStorageService: TokenStorageService) { }
 
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateTablesprint()
+    this.getUpdateAllsp()
+  }
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -84,12 +89,21 @@ export class ReleaseBurndownComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
-
-      // this.pReleaseBurndownChart();
-      // this.initReleaseBurndownChart();
+     
+     
 
     }
 
+  }
+
+  //update all sp
+  getUpdateAllsp(){
+    this.projectService.updateAllSp().subscribe(data => console.log(data));
+  }
+   // update work Commitment and work Completed in sprint
+   updateTablesprint() {
+    this.sprintService.updateStoryPointInSprint()
+      .subscribe(data => console.log(data));
   }
 
   // brundown chart update data in backend

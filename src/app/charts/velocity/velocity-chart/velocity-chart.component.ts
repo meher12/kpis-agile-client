@@ -133,6 +133,7 @@ export class VelocityChartComponent implements OnInit {
 
 
         var arraySize = Object.keys(this.sprints).length;
+        this.sprintName.length = 0;
         for (var i = 0; i < arraySize; i++) {
           this.workCommitment[i] = this.sprints[i].workCommitment;
           this.workCompleted[i] = this.sprints[i].workCompleted;
