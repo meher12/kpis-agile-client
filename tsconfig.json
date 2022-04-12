@@ -15,7 +15,17 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    /*   If you want to include a polyfill, you need to:
+        - add a fallback 'resolve.fallback: { "stream": require.resolve("stream-browserify") }'
+        - install 'stream-browserify'  If you don't want to include a polyfill, you can use an empty module like this:
+        resolve.fallback: { "stream": false } */
+    //npm install stream-browserify.
+    "paths": {
+      "stream": [
+        "./node_modules/stream-browserify"
+      ]
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false

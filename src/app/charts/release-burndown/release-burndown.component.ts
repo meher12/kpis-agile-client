@@ -39,7 +39,7 @@ export type ChartOptions = {
   templateUrl: './release-burndown.component.html',
   styleUrls: ['./release-burndown.component.scss']
 })
-export class ReleaseBurndownComponent implements OnChanges, OnInit {
+export class ReleaseBurndownComponent implements OnInit {
 
 
   @ViewChild("releaseBurndown") chart: ChartComponent;
@@ -73,10 +73,7 @@ export class ReleaseBurndownComponent implements OnChanges, OnInit {
   constructor(private projectService: ProjectService, private sprintService: SprintService, private tokenStorageService: TokenStorageService) { }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.updateTablesprint()
-    this.getUpdateAllsp()
-  }
+
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -89,7 +86,8 @@ export class ReleaseBurndownComponent implements OnChanges, OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
-     
+      this.updateTablesprint()
+      this.getUpdateAllsp()
      
 
     }

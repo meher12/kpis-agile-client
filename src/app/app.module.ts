@@ -49,6 +49,8 @@ import { EfficacityChartComponent } from './charts/efficacity-chart/efficacity-c
 import { CurrentSpInProjectChartComponent } from './charts/current-sp-in-project-chart/current-sp-in-project-chart.component';
 import { CommitmentSpInProjectChartComponent } from './charts/commitment-sp-in-project-chart/commitment-sp-in-project-chart.component';
 import { RadarSattusTaskChartComponent } from './charts/radar-sattus-task-chart/radar-sattus-task-chart.component';
+import { JacocoParseComponent } from './component/jacoco-parse/jacoco-parse.component';
+import { UploadFilesComponent } from './component/upload-files/upload-files.component';
 
 
 
@@ -97,6 +99,8 @@ import { RadarSattusTaskChartComponent } from './charts/radar-sattus-task-chart/
     CurrentSpInProjectChartComponent,
     CommitmentSpInProjectChartComponent,
     RadarSattusTaskChartComponent,
+    JacocoParseComponent,
+    UploadFilesComponent,
 
 
 

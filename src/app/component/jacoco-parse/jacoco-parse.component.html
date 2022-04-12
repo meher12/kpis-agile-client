@@ -1,0 +1,23 @@
+<div class="container">   
+    <div class="row">
+        <div class="col-md-12">
+          <h4 class=" text-center">Coverage and Analysis of jacoco report</h4>
+        </div>
+      </div> 
+    <table class="table table-bordered table-striped ">    
+      <tr>    
+        <th>Type</th>   
+        <th>Covered</th>   
+        <th>Missed</th>    
+        <th>Percentage</th>    
+      </tr>    
+      <tr *ngFor="let item of xmlItems">   
+        <td>{{item.type}}</td>   
+        <td>{{item.covered}}</td>  
+        <td>{{item.missed}}</td>    
+        <td>{{item.percentage}}</td>  
+         
+      </tr>    
+    </table> 
+
+  </div>  
