@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FileUploadService } from 'src/app/services/file-upload.service';
@@ -9,9 +9,13 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
   templateUrl: './upload-files.component.html',
   styleUrls: ['./upload-files.component.scss']
 })
-export class UploadFilesComponent implements OnInit {
-  ngOnInit(): void {
+export class UploadFilesComponent implements OnChanges, OnInit {
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.fileInfos = this.uploadService.getFiles();
+  }
+  ngOnInit(): void {
+   // this.fileInfos = this.uploadService.getFiles();
   }
 
   selectedFiles?: FileList;
@@ -23,13 +27,13 @@ export class UploadFilesComponent implements OnInit {
   constructor(private uploadService: FileUploadService) { }
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
-    this.fileName = event.target.files[0].name;
   }
   upload(): void {
     this.progress = 0;
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
+        this.fileName = file.name;
         this.currentFile = file;
         this.uploadService.upload(this.currentFile).subscribe({
           next: (event: any) => {

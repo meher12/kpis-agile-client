@@ -4,6 +4,7 @@
           <h4 class=" text-center">Coverage and Analysis of jacoco report</h4>
         </div>
       </div> 
+      <h3>Project Name: {{this.projectName}}</h3>
     <table class="table table-bordered table-striped ">    
       <tr>    
         <th>Type</th>   
@@ -11,7 +12,7 @@
         <th>Missed</th>    
         <th>Percentage</th>    
       </tr>    
-      <tr *ngFor="let item of xmlItems">   
+      <tr *ngFor="let item of dataArray">  
         <td>{{item.type}}</td>   
         <td>{{item.covered}}</td>  
         <td>{{item.missed}}</td>    

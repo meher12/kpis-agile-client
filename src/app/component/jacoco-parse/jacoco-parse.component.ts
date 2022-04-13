@@ -14,13 +14,16 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
   @Input() getfileName;
 
+  projectName;
+  dataArray: any[];
+
+
   ngOnChanges(changes: SimpleChanges): void {
     if (this.getfileName) {
-      // console.log("----fffff--", this.getfileName);
-      // this. loadXML(this.getfileName);
+      //console.log("----fffff--", );
+      //this. loadXML(this.getfileName);
 
       // console.log('http://localhost:8081/api/files/'+this.getfileName)
-
       this._http.get('http://localhost:8081/api/files/' + this.getfileName,
         {
           headers: new HttpHeaders()
@@ -33,6 +36,9 @@ export class JacocoParseComponent implements OnChanges, OnInit {
         .subscribe((data) => {
           this.parseXML(data).then((data) => {
             this.xmlItems = data;
+            this.dataArray = this.xmlItems[0];
+            this.projectName = this.xmlItems[1];
+            console.log("this.xmlItems", this.xmlItems)
           });
 
         });
@@ -45,9 +51,8 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   constructor(private _http: HttpClient) { /* this.loadXML(); */ }
 
   /*  loadXML(fileName) {
-     console.log('http://localhost:8081/api/files/'+fileName)
-     let arr = []
-     this._http.get('http://localhost:8081/api/files/'+fileName,
+     console.log('http://localhost:8081/api/files/'+this.getfileName)
+     this._http.get('http://localhost:8081/api/files/'+this.getfileName,
        {
          headers: new HttpHeaders()
            .set('Content-Type', 'text/xml')
@@ -67,6 +72,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   parseXML(data) {
     return new Promise(resolve => {
       var k: string | number,
+        projectName: string,
         jacocoArray = [],
         parser = new xml2js.Parser(
           {
@@ -75,9 +81,11 @@ export class JacocoParseComponent implements OnChanges, OnInit {
           });
       parser.parseString(data, function (err, result) {
         var obj = result.report;
-        for (var i = 0; i < obj.counter.length; i++) {
+        projectName = obj.$.name;
+
+        /* for (var i = 0; i < obj.counter.length; i++) {
           console.log(obj.counter[i].$.type)
-        }
+        } */
 
         for (k in obj.counter) {
 
@@ -88,6 +96,10 @@ export class JacocoParseComponent implements OnChanges, OnInit {
           var sum = coveredNumber + missedNumber
 
           var percentage = (100 * coveredNumber) / sum
+         // percentageArray.push({ percentage });
+         // console.log("percentageArray", percentageArray)
+
+        //  Object.keys(percentageArray).forEach(e =>  console.log(e + ' = ' + Object.values(percentageArray[e])));
 
           jacocoArray.push({
             type: item.type,
@@ -97,7 +109,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
           });
         }
-        resolve(jacocoArray);
+        resolve([jacocoArray, projectName]);
       });
     });
   }
