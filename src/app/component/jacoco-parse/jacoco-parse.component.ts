@@ -16,9 +16,11 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
   projectName;
   dataArray: any[];
-
+  retrievedObject;
 
   ngOnChanges(changes: SimpleChanges): void {
+
+
     if (this.getfileName) {
       //console.log("----fffff--", );
       //this. loadXML(this.getfileName);
@@ -36,9 +38,11 @@ export class JacocoParseComponent implements OnChanges, OnInit {
         .subscribe((data) => {
           this.parseXML(data).then((data) => {
             this.xmlItems = data;
-            this.dataArray = this.xmlItems[0];
-            this.projectName = this.xmlItems[1];
-            console.log("this.xmlItems", this.xmlItems)
+            localStorage.setItem("xmlContent", JSON.stringify(this.xmlItems));
+            this.retrievedObject = JSON.parse(localStorage.getItem("xmlContent"));
+            this.dataArray = this.retrievedObject[0];
+            this.projectName = this.retrievedObject[1];
+            console.log((this.retrievedObject));
           });
 
         });
@@ -74,6 +78,8 @@ export class JacocoParseComponent implements OnChanges, OnInit {
       var k: string | number,
         projectName: string,
         jacocoArray = [],
+        percentageArray = [],
+
         parser = new xml2js.Parser(
           {
             trim: true,
@@ -96,10 +102,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
           var sum = coveredNumber + missedNumber
 
           var percentage = (100 * coveredNumber) / sum
-         // percentageArray.push({ percentage });
-         // console.log("percentageArray", percentageArray)
-
-        //  Object.keys(percentageArray).forEach(e =>  console.log(e + ' = ' + Object.values(percentageArray[e])));
+           percentageArray.push({ percentage });
 
           jacocoArray.push({
             type: item.type,
@@ -109,6 +112,16 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
           });
         }
+
+        // sum percentage coverage
+      /*   var collectPrecentage = Object.keys(percentageArray);
+        let totalPercentage
+        for (var i= 0; i < collectPrecentage.length; i++) {
+
+          totalPercentage = percentageArray[collectPrecentage[i]];
+          //console.log(percentageArray[collectPrecentage[i]]);
+        } */
+
         resolve([jacocoArray, projectName]);
       });
     });

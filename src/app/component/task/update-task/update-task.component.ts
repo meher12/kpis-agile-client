@@ -70,6 +70,7 @@ export class UpdateTaskComponent implements OnInit {
     status: new FormControl(),
     typeTask: new FormControl(),
     estimation: new  FormControl(),
+    bugs: new  FormControl(),
   });
 
   ngOnInit(): void {
@@ -98,6 +99,7 @@ export class UpdateTaskComponent implements OnInit {
             status: [this.task.status, Validators.required],
             typeTask: [this.task.typeTask, Validators.required],
             estimation: [this.task.estimation, Validators.required],
+            bugs: [this.task.bugs, Validators.required],
           });
         },
           err => {

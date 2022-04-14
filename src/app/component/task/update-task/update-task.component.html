@@ -38,16 +38,25 @@
                     </div>
                 </div>
 
-                   <!-- Estimation -->
-                   <div class="form-group">
+                <!-- Estimation -->
+                <div class="form-group">
                     <label class="form-label">Estimation*</label>
-                    <input type="text" formControlName="estimation" class="form-control"
-                     [ngClass]="{ 'is-invalid': submitted && fctl['estimation'].errors }" />
+                    <input type="number" formControlName="estimation" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['estimation'].errors }" />
                     <div *ngIf="submitted && fctl['estimation'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['estimation'].errors['required']">Estimation is required</div>
                     </div>
                 </div>
-
+                
+                  <!-- Bugs -->
+                  <div class="form-group">
+                    <label class="form-label">Bugs*</label>
+                    <input type="number" formControlName="bugs" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && fctl['bugs'].errors }" />
+                    <div *ngIf="submitted && fctl['bugs'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['bugs'].errors['required']">Bug is required</div>
+                    </div>
+                </div>
                 <!-- Date Debut -->
                 <div class="form-group">
                     <label class="form-label">Start Date*</label>

@@ -13,5 +13,5 @@ export class Task {
     public status: ETask ;
     public typeTask: ETypeTask;
     public estimation: number;
-    
+    public bugs: number;
 }
