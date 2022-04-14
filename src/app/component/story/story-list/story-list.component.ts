@@ -122,7 +122,12 @@ export class StoryListComponent implements OnInit {
 
   // navigate to update story
   updateStory(id: number) {
-    this.router.navigate(['updatestory', id]);
+    if(this.selectedListOption){
+      this.router.navigate(['updatestory', id]);
+      } 
+      else{
+        Swal.fire('Hey!', 'Select Sprint first', 'warning');
+      }
   }
 
   detailStory(id: number) {

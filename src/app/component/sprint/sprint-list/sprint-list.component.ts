@@ -123,7 +123,12 @@ export class SprintListComponent implements OnInit {
 
   // navigate to update sprint
   updateSprint(id: number) {
-    this.router.navigate(['updatesprint', id]);
+    if (this.selectedListOption) {
+      this.router.navigate(['updatesprint', id]);
+    }
+    else {
+      Swal.fire('Hey!', 'Select Project first', 'warning');
+    }
   }
 
   detailSprint(id: number) {

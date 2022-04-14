@@ -117,7 +117,12 @@ export class TaskListComponent implements OnInit {
 
   // navigate to update story
   updateTask(id: number) {
+    if(this.selectedListOption){
     this.router.navigate(['updatetask', id]);
+    } 
+    else{
+      Swal.fire('Hey!', 'Select Story first', 'warning');
+    }
   }
 
    // navigate to deatils task story
