@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { AppConstants } from './AppConstants';
 
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,7 @@ export class FileUploadService {
   upload(file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
     formData.append('file', file);
-    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData, {
+    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData,  {
       reportProgress: true,
       responseType: 'json'
     });
@@ -29,4 +32,25 @@ export class FileUploadService {
   getFiles(): Observable<any> {
     return this.http.get(`${this.baseUrl}/files`);
   }
+
+
+  // delete file by id
+  deleteFileById(id: string): Observable<Object> {
+    return this.http.delete(`${this.baseUrl}` + '/files/' + `${id}`, httpOptions);
+  }
+
+   // delete file by id
+   deleteFileByName(filename: string, id: string): Observable<Object> {
+    return this.http.delete(`${this.baseUrl}` + '/files/upload/' + `${filename}/${id}`, httpOptions);
+  }
+/* 
+  downfile(file: any): Observable<HttpEvent<any>>{
+
+    const formData: FormData = new FormData();
+    return this.http.post(`${this.baseUrl}/files` , formData, {
+      responseType: "blob", reportProgress: true, observe: "events", headers: new HttpHeaders(
+        { 'Content-Type': 'application/json' },
+      )
+    });
+  } */
 }

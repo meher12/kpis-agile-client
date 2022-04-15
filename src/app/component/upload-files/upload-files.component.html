@@ -22,9 +22,15 @@
     <div class="card-header">List of Files</div>
     <ul class="list-group list-group-flush" *ngFor="let file of fileInfos | async">
       <li class="list-group-item">
-        <a href="{{ file.url }}">{{ file.name }}</a>
+       <!--   href="{{ file.url }}"  -->
+        <span>{{ file.name }}
+           <!--  <button  style="margin-left: 2px" class="btn btn-danger" (click)="deleteFile(file.url)">Delete from db</button> -->
+          <button  style="margin-left: 2px" class="btn btn-danger" (click)="deleteFilebyName(file)">Delete</button> 
+        </span>
+
       </li>
     </ul>
+
     <div *ngIf="fileInfos">
       <app-jacoco-parse [getfileName]="fileName"></app-jacoco-parse>
     </div>

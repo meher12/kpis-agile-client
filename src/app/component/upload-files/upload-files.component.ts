@@ -15,7 +15,7 @@ export class UploadFilesComponent implements OnChanges, OnInit {
     this.fileInfos = this.uploadService.getFiles();
   }
   ngOnInit(): void {
-   // this.fileInfos = this.uploadService.getFiles();
+    // this.fileInfos = this.uploadService.getFiles();
   }
 
   selectedFiles?: FileList;
@@ -24,6 +24,7 @@ export class UploadFilesComponent implements OnChanges, OnInit {
   message = '';
   fileInfos?: Observable<any>;
   fileName;
+
   constructor(private uploadService: FileUploadService) { }
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
@@ -34,6 +35,7 @@ export class UploadFilesComponent implements OnChanges, OnInit {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.fileName = file.name;
+
         this.currentFile = file;
         this.uploadService.upload(this.currentFile).subscribe({
           next: (event: any) => {
@@ -59,4 +61,25 @@ export class UploadFilesComponent implements OnChanges, OnInit {
       this.selectedFiles = undefined;
     }
   }
+
+  deleteFile(url: string) {
+    var path = url;
+    var directories = path.split("/");
+    var lastDirecotry = directories[(directories.length - 1)];
+    this.uploadService.deleteFileById(lastDirecotry)
+    .subscribe(data => {console.log(data)})
+    this.fileInfos = this.uploadService.getFiles();
+  }
+
+  deleteFilebyName(file: any) {
+    var path = file.url;
+    var directories = path.split("/");
+    var id = directories[(directories.length - 1)];
+    this.uploadService.deleteFileByName(file.name, id)
+    .subscribe(data => {console.log(data)})
+    this.fileInfos = this.uploadService.getFiles();
+  }
+
+ 
+
 }

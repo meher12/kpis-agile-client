@@ -18,7 +18,13 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   dataArray: any[];
   retrievedObject;
 
+  public xmlItems: any;
+  constructor(private _http: HttpClient) { localStorage.clear(); /* this.loadXML(); */ }
+
   ngOnChanges(changes: SimpleChanges): void {
+
+    localStorage.setItem("filename", this.getfileName)
+    var localstoragefileName = localStorage.getItem("filename");
 
 
     if (this.getfileName) {
@@ -38,11 +44,11 @@ export class JacocoParseComponent implements OnChanges, OnInit {
         .subscribe((data) => {
           this.parseXML(data).then((data) => {
             this.xmlItems = data;
-            localStorage.setItem("xmlContent", JSON.stringify(this.xmlItems));
-            this.retrievedObject = JSON.parse(localStorage.getItem("xmlContent"));
-            this.dataArray = this.retrievedObject[0];
-            this.projectName = this.retrievedObject[1];
-            console.log((this.retrievedObject));
+           // localStorage.setItem("xmlContent", JSON.stringify(this.xmlItems));
+           // this.retrievedObject = JSON.parse(localStorage.getItem("xmlContent"));
+            this.dataArray = this.xmlItems[0];
+            this.projectName = this.xmlItems[1];
+            //console.log((this.retrievedObject));
           });
 
         });
@@ -50,9 +56,6 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void { }
-
-  public xmlItems: any;
-  constructor(private _http: HttpClient) { /* this.loadXML(); */ }
 
   /*  loadXML(fileName) {
      console.log('http://localhost:8081/api/files/'+this.getfileName)
@@ -69,7 +72,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
          this.parseXML(data).then((data) => {
            this.xmlItems = data;
          });
- 
+   
        });
    } */
 
@@ -102,7 +105,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
           var sum = coveredNumber + missedNumber
 
           var percentage = (100 * coveredNumber) / sum
-           percentageArray.push({ percentage });
+          percentageArray.push({ percentage });
 
           jacocoArray.push({
             type: item.type,
@@ -114,13 +117,13 @@ export class JacocoParseComponent implements OnChanges, OnInit {
         }
 
         // sum percentage coverage
-      /*   var collectPrecentage = Object.keys(percentageArray);
-        let totalPercentage
-        for (var i= 0; i < collectPrecentage.length; i++) {
-
-          totalPercentage = percentageArray[collectPrecentage[i]];
-          //console.log(percentageArray[collectPrecentage[i]]);
-        } */
+        /*   var collectPrecentage = Object.keys(percentageArray);
+          let totalPercentage
+          for (var i= 0; i < collectPrecentage.length; i++) {
+   
+            totalPercentage = percentageArray[collectPrecentage[i]];
+            //console.log(percentageArray[collectPrecentage[i]]);
+          } */
 
         resolve([jacocoArray, projectName]);
       });
