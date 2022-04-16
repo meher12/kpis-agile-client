@@ -98,11 +98,7 @@ export class TaskBugsChartComponent implements OnInit {
     this.projectService.getProjectByReference(event.target.value)
       .subscribe({
         next: (data) => {
-          this.project = data;
-          // console.log("----",this.project);
-          // this.id = this.project.id;
-          // console.log("----",this.id);
-        
+          this.project = data;    
         },
         error: err => {
           this.msgError = err.error.message;
