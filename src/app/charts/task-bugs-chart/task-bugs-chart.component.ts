@@ -1,8 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { Efficacity, Projet } from 'src/app/models/projet.model';
-import { ProjectService } from 'src/app/services/projects/project.service';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {
   ChartComponent,
@@ -10,36 +6,43 @@ import {
   ApexChart,
   ApexXAxis,
   ApexDataLabels,
-  ApexTitleSubtitle,
   ApexStroke,
-  ApexGrid
+  ApexMarkers,
+  ApexYAxis,
+  ApexGrid,
+  ApexTitleSubtitle,
+  ApexLegend
 } from "ng-apexcharts";
+import { Projet, TaskBugs } from 'src/app/models/projet.model';
+import { ProjectService } from 'src/app/services/projects/project.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
-  dataLabels: ApexDataLabels;
-  grid: ApexGrid;
   stroke: ApexStroke;
-  title: ApexTitleSubtitle;
+  dataLabels: ApexDataLabels;
+  markers: ApexMarkers;
+  colors: string[];
   yaxis: ApexYAxis;
+  grid: ApexGrid;
+  legend: ApexLegend;
+  title: ApexTitleSubtitle;
 };
 
 @Component({
-  selector: 'app-efficacity-chart',
-  templateUrl: './efficacity-chart.component.html',
-  styleUrls: ['./efficacity-chart.component.scss']
+  selector: 'app-task-bugs-chart',
+  templateUrl: './task-bugs-chart.component.html',
+  styleUrls: ['./task-bugs-chart.component.scss']
 })
-export class EfficacityChartComponent implements OnInit {
+export class TaskBugsChartComponent implements OnInit {
 
-  @ViewChild("efficacityChart") chart: ChartComponent;
+  @ViewChild("taskBugchart") chart: ChartComponent;
   public chartOptions: Partial<any>;
 
   project: Projet = new Projet();
   projects: Projet[];
-
-
 
   isLoggedIn = false;
   showPOBoard = false;
@@ -49,15 +52,16 @@ export class EfficacityChartComponent implements OnInit {
 
   msgError = "";
   selected;
-  id: number;
 
-  newEfficacityArrays: Efficacity;
+
+  taskBugsArrays: TaskBugs;
   dateArray: any[];
-  efficacityArray: any[];
+  bugIntaskArray: any[];
+  tasksafeArray: any[];
+ 
 
   displayStyle = "none";
 
-  @Output() totalSpChange = new EventEmitter<number>();
   constructor(private projectService: ProjectService, private tokenStorageService: TokenStorageService) { }
 
 
@@ -73,6 +77,7 @@ export class EfficacityChartComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
+     
 
     }
   }
@@ -94,17 +99,10 @@ export class EfficacityChartComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.project = data;
-          this.projectService.getPercentageStoryPointsInProject(event.target.value)
-          .subscribe( {
-            next: (data) => {
-            
-            this.totalSpChange.emit(data);
-
-          }})
-          
           // console.log("----",this.project);
           // this.id = this.project.id;
           // console.log("----",this.id);
+        
         },
         error: err => {
           this.msgError = err.error.message;
@@ -113,35 +111,33 @@ export class EfficacityChartComponent implements OnInit {
       });
   }
 
-  //get velocity info
-  getInfoEfficacity(event: Efficacity) {
+    //get taskbug info
+    getInfotaskBug(event: TaskBugs) {
 
-    this.newEfficacityArrays = event;
-    this.dateArray = this.newEfficacityArrays.KeyArr;
-    this.efficacityArray = this.newEfficacityArrays.FloatArr;
-    //console.log("efficacity ***********", this.efficacityArray);
-    //console.log("Date ***********", this.dateArray);
+      this.taskBugsArrays = event;
+     // console.log(" ***********", this.taskBugsArrays);
+      this.dateArray = this.taskBugsArrays.endDateArray;
+      this.bugIntaskArray = this.taskBugsArrays.taskBugsArray;
+      this.tasksafeArray = this.taskBugsArrays.taskSafe;
+      this.taskBugChart(this.dateArray, this.bugIntaskArray, this.tasksafeArray );
+      
+    }
 
-    let efficacityArrayNumber = this.efficacityArray.map(i=>Math.round(i));
-    //console.log(" ***********", efficacityArrayNumber);
-    this.efficacityChart(this.dateArray, efficacityArrayNumber);
-    
-  }
-
-  efficacityChart(dateReq: any[], efficacityReq: any[]){
+  taskBugChart(date: any[], bug: any[], tasksafe: any[]){
     this.chartOptions = {
       series: [
         {
-          name: "Efficacity",
-          data: efficacityReq
+          name: "Tasks",
+          data: tasksafe
+        },
+        {
+          name: "Bugs",
+          data: bug
         }
       ],
       chart: {
         height: 'auto',
         type: "line",
-        zoom: {
-          enabled: false
-        },
         dropShadow: {
           enabled: true,
           color: "#000",
@@ -150,7 +146,11 @@ export class EfficacityChartComponent implements OnInit {
           blur: 10,
           opacity: 0.2
         },
+        toolbar: {
+          show: false
+        }
       },
+      colors: ["#77B6EA", "#545454"],
       dataLabels: {
         enabled: true
       },
@@ -158,53 +158,40 @@ export class EfficacityChartComponent implements OnInit {
         curve: "smooth"
       },
       title: {
-        text: 'Efficacity Chart',
-        align: 'center',
-        margin: 30,
-        offsetX: 0,
-        offsetY: 0,
-        floating: false,
-        style: {
-          fontSize: '24px',
-          fontWeight: 'bold',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          color: '#263238'
-        }
+        text: "Cycle Time by period",
+        align: "left"
       },
       grid: {
+        borderColor: "#e7e7e7",
         row: {
           colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
           opacity: 0.5
         }
       },
+      
       xaxis: {
-        categories: dateReq, 
-        
+        categories: date,
+        title: {
+         // text: "Month"
+        }
       },
       yaxis: {
         title: {
-          text: "Efficacity",
-          style: {
-            colors: [],
-            fontSize: '15px',
-            fontFamily: 'Helvetica, Arial, sans-serif',
-            fontWeight: 'bold',
-            cssClass: 'apexcharts-xaxis-label',
-          }
+          text: "Task"
         },
-        labels: {
-          style: {
-            colors: [],
-            fontSize: '15px',
-            fontFamily: 'Helvetica, Arial, sans-serif',
-            fontWeight: 'bold',
-            cssClass: 'apexcharts-xaxis-label',
-          }
-        }
-
+       /*  min: 0,
+        max: 20 */
       },
+      legend: {
+        position: "top",
+        horizontalAlign: "right",
+        floating: true,
+        offsetY: -25,
+        offsetX: -5
+      }
     };
   }
+
   openPopup() {
     this.displayStyle = "block";
   }
@@ -212,5 +199,6 @@ export class EfficacityChartComponent implements OnInit {
   closePopup() {
     this.displayStyle = "none";
   }
+
 
 }

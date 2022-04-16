@@ -26,3 +26,10 @@ export interface Efficacity {
     FloatArr: any[],
     
   }
+
+  export interface TaskBugs {
+    endDateArray: any[],
+    taskBugsArray: any[],
+    taskSafe: any[],
+    
+  }

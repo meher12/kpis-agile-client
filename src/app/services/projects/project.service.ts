@@ -90,6 +90,12 @@ export class ProjectService {
     return this.httpClient.get(`${this.baseUrl}` + '/projects/percentageStoryPointsInProject/' + `${preference}`,  httpOptions);
   }
 
+
+   // task status chart by project  preference
+   getTaskBugsByStartDateTask(preference: string, startDateObject: any): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}` + '/projects/gettaskbugs/' + `${preference}`, startDateObject, httpOptions);
+  }
+
  
 }
 

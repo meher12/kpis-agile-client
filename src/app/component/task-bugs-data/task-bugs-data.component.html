@@ -1,0 +1,44 @@
+<div class="container">
+  
+    <!-- <ul><li *ngFor="let log of changelog;"> {{ log }}</li></ul>  -->
+      
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        
+        <p>
+          <label for="name">Project Reference:</label>
+          <input type="text" id="name" name="name" formControlName="name" [value]="this.projectSent" class="form-control" disabled="">
+        </p>
+      
+        <table class="table table-bordered" formArrayName="quantities">
+          <tr>
+            <th colspan="2">Add Multiple Date:</th>
+            <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
+          </tr>
+          <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+            <td>
+                Start Date :
+               <!--  <input type="text" formControlName="qty" class="form-control"> -->
+               <select  formControlName="startDate" class="form-control"> 
+                <option *ngFor="let date2 of listsStartDate" [value]="date2">{{date2}}</option>
+            </select>
+            </td>
+            <td>
+              End Date:
+               <!--  <input type="text" formControlName="price" class="form-control"> -->
+                <select  formControlName="endDate" class="form-control"> 
+                  <option *ngFor="let date of listsStartDate" [value]="date">{{date}}</option>
+              </select>
+            </td>
+            <td>
+                <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+            </td>
+          </tr>
+        </table>
+       
+        <button type="submit" class="btn btn-success">Submit</button>
+        
+      </form>
+        
+      <br/>
+     <!--  {{this.productForm.value | json}} -->
+    </div>

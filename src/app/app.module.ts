@@ -51,6 +51,8 @@ import { CommitmentSpInProjectChartComponent } from './charts/commitment-sp-in-p
 import { RadarSattusTaskChartComponent } from './charts/radar-sattus-task-chart/radar-sattus-task-chart.component';
 import { JacocoParseComponent } from './component/jacoco-parse/jacoco-parse.component';
 import { UploadFilesComponent } from './component/upload-files/upload-files.component';
+import { TaskBugsChartComponent } from './charts/task-bugs-chart/task-bugs-chart.component';
+import { TaskBugsDataComponent } from './component/task-bugs-data/task-bugs-data.component';
 
 
 
@@ -101,6 +103,8 @@ import { UploadFilesComponent } from './component/upload-files/upload-files.comp
     RadarSattusTaskChartComponent,
     JacocoParseComponent,
     UploadFilesComponent,
+    TaskBugsChartComponent,
+    TaskBugsDataComponent,
 
 
 

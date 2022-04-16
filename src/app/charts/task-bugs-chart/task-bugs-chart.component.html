@@ -1,0 +1,65 @@
+<div class="container">
+
+    <!-- Start -->
+    <div class="search-sprints">
+        <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
+            (change)="getModelByProjectRef($event)">
+            <option [ngValue]="undefined" disabled>Choose project...</option>
+            <option *ngFor="let projet of projects" [value]="projet.pReference" [selected]=" projet == selected">
+                {{projet.titre}}
+            </option>
+        </select>
+    </div>
+    <!-- End -->
+    <div *ngIf="selected;else selectList">
+    <!-- Start button popup -->
+    <button style="margin: 20px auto;" type="button" class="btn btn-primary" (click)="openPopup()"
+        *ngIf="selected">Add  date
+    </button>
+
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+        <div class="modal-dialog reveal-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add multiple date</h4>
+                </div>
+                <div class="modal-body">
+                    <app-task-bugs-data [projectSent]="project.pReference"
+                        (taskbugsChange)="getInfotaskBug($event)"></app-task-bugs-data>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="closePopup()">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End button popup -->
+
+    <!-- Chart -->
+    <ng-container *ngIf="chartOptions">
+        <div id="taskBugchart">
+            <apx-chart
+              [series]="chartOptions.series"
+              [chart]="chartOptions.chart"
+              [xaxis]="chartOptions.xaxis"
+              [stroke]="chartOptions.stroke"
+              [colors]="chartOptions.colors"
+              [dataLabels]="chartOptions.dataLabels"
+              [legend]="chartOptions.legend"
+              [markers]="chartOptions.markers"
+              [grid]="chartOptions.grid"
+              [yaxis]="chartOptions.yaxis"
+              [title]="chartOptions.title"
+            ></apx-chart>
+          </div>
+    </ng-container>
+</div>
+<ng-template #selectList>
+    <div class="msgList">
+      <h4 class="text-info" style="text-align: center;"> Choose your item from list to display the
+         Chart </h4>
+    </div>
+  </ng-template>
+</div>
