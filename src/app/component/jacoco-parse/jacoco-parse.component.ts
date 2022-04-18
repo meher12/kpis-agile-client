@@ -4,6 +4,8 @@ declare const require;
 const xml2js = require("xml2js");
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { JacocoReportService } from 'src/app/services/jacoco-report.service';
+import { JacocoReport } from 'src/app/models/jacoco.model';
 
 @Component({
   selector: 'app-jacoco-parse',
@@ -14,24 +16,25 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
   @Input() getfileName;
 
+  jacocoReports: JacocoReport[];
+  jacocoReport: JacocoReport[];
   projectName;
-  dataArray: any[];
-  retrievedObject;
+
+
+  dataSave: Object[];
+  dataHTML: any[]
+
+  selected;
+  nameselected;
+  arrayProjectName: string[];
+
 
   public xmlItems: any;
-  constructor(private _http: HttpClient) { localStorage.clear(); /* this.loadXML(); */ }
+  constructor(private _http: HttpClient, private jacoreportService: JacocoReportService) { localStorage.clear(); /* this.loadXML(); */ }
 
   ngOnChanges(changes: SimpleChanges): void {
-
-    localStorage.setItem("filename", this.getfileName)
-    var localstoragefileName = localStorage.getItem("filename");
-
-
     if (this.getfileName) {
-      //console.log("----fffff--", );
-      //this. loadXML(this.getfileName);
 
-      // console.log('http://localhost:8081/api/files/'+this.getfileName)
       this._http.get('http://localhost:8081/api/files/' + this.getfileName,
         {
           headers: new HttpHeaders()
@@ -44,19 +47,62 @@ export class JacocoParseComponent implements OnChanges, OnInit {
         .subscribe((data) => {
           this.parseXML(data).then((data) => {
             this.xmlItems = data;
-           // localStorage.setItem("xmlContent", JSON.stringify(this.xmlItems));
-           // this.retrievedObject = JSON.parse(localStorage.getItem("xmlContent"));
-            this.dataArray = this.xmlItems[0];
+
+            // localStorage.setItem("xmlContent", JSON.stringify(this.xmlItems));
+            // this.retrievedObject = JSON.parse(localStorage.getItem("xmlContent"));
+            this.dataHTML = this.xmlItems[0];
             this.projectName = this.xmlItems[1];
             //console.log((this.retrievedObject));
+
+            //dynamically build list of objects
+            const myobj = { data: [] };
+            for (let index = 0; index < this.xmlItems[0].length; index++) {
+              myobj.data.push({ xmlData: this.xmlItems[0][index], id: this.xmlItems[1] })
+            }
+
+            var array = myobj.data
+            var array2 = myobj.data
+            this.dataSave = array.map(element => element.xmlData);
+
+
+            var newArray2 = array2.map(element => element.id);
+            for (var i = 0; i < this.dataSave.length; i++) {
+              this.dataSave[i]['projectname'] = newArray2[0]
+            }
+            this.jacoreportService.createReport(this.dataSave).subscribe(data => { console.log(data) })
+
           });
 
         });
     }
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getAllProjectName()
 
+  }
+
+  getAllProjectName() {
+    this.jacoreportService.getReportList()
+      .subscribe({
+        next: (data) => {
+          this.jacocoReports = data;
+          this.arrayProjectName = [...new Set(this.jacocoReports.map(elem => elem.projectname))];
+          console.log(this.arrayProjectName)
+        }
+      })
+  }
+
+  getreportByName(event: any) {
+    this.nameselected = event.target.value;
+    this.jacoreportService.getReportListByPName(event.target.value)
+      .subscribe({
+        next: (data) => {
+          this.jacocoReport = data;
+
+        }
+      })
+  }
   /*  loadXML(fileName) {
      console.log('http://localhost:8081/api/files/'+this.getfileName)
      this._http.get('http://localhost:8081/api/files/'+this.getfileName,
@@ -81,8 +127,6 @@ export class JacocoParseComponent implements OnChanges, OnInit {
       var k: string | number,
         projectName: string,
         jacocoArray = [],
-        percentageArray = [],
-
         parser = new xml2js.Parser(
           {
             trim: true,
@@ -104,27 +148,17 @@ export class JacocoParseComponent implements OnChanges, OnInit {
           var missedNumber = Number(item.missed)
           var sum = coveredNumber + missedNumber
 
-          var percentage = (100 * coveredNumber) / sum
-          percentageArray.push({ percentage });
+          var percentageCalcul = (100 * coveredNumber) / sum
 
           jacocoArray.push({
             type: item.type,
             covered: item.covered,
             missed: item.missed,
-            percentage: percentage.toFixed(2) + "%",
+            percentage: percentageCalcul.toFixed(2),
 
           });
+
         }
-
-        // sum percentage coverage
-        /*   var collectPrecentage = Object.keys(percentageArray);
-          let totalPercentage
-          for (var i= 0; i < collectPrecentage.length; i++) {
-   
-            totalPercentage = percentageArray[collectPrecentage[i]];
-            //console.log(percentageArray[collectPrecentage[i]]);
-          } */
-
         resolve([jacocoArray, projectName]);
       });
     });

@@ -1,24 +1,51 @@
-<div class="container">   
-    <div class="row">
-        <div class="col-md-12">
-          <h4 class=" text-center">Coverage and Analysis of jacoco report</h4>
-        </div>
-      </div> 
-      <h3>Project Name: {{this.projectName}}</h3>
-    <table class="table table-bordered table-striped ">    
-      <tr>    
-        <th>Type</th>   
-        <th>Covered</th>   
-        <th>Missed</th>    
-        <th>Percentage</th>    
-      </tr>    
-      <tr *ngFor="let item of dataArray">  
-        <td>{{item.type}}</td>   
-        <td>{{item.covered}}</td>  
-        <td>{{item.missed}}</td>    
-        <td>{{item.percentage}}</td>  
-         
-      </tr>    
-    </table> 
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class=" text-center">Coverage and Analysis of jacoco report</h4>
+    </div>
+  </div>
 
-  </div>  
+  <!-- Start -->
+  <div class="search-sprints">
+    <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
+      (change)="getreportByName($event)">
+      <option [ngValue]="undefined" disabled>Choose project...</option>
+      <option *ngFor="let jacRep of arrayProjectName" [value]="jacRep" [selected]=" jacRep == selected">
+        {{jacRep}}
+      </option>
+    </select>
+  </div>
+  <!-- End -->
+
+
+
+  <div *ngIf="selected">
+    <h3>Project Name: {{nameselected}}</h3>
+    <table class="table table-bordered table-striped ">
+      <tr>
+        <!--  <th>Project Name</th> -->
+        <th>Type</th>
+        <th>Covered</th>
+        <th>Missed</th>
+        <th>Percentage</th>
+        <th>Totale percentage</th>
+        <th>Created At</th>
+
+      </tr>
+      <tr *ngFor="let itemReport of jacocoReport">
+        <!--  <td>{{itemReport.projectname}}</td> -->
+        <td>{{itemReport.type}}</td>
+        <td>{{itemReport.covered}}</td>
+        <td>{{itemReport.missed}}</td>
+        <td>{{itemReport.percentage}}%</td>
+        <td>{{itemReport.totalpercentage}}%</td>
+        <td>{{itemReport.createdAt}}</td>
+
+      </tr>
+
+    </table>
+
+  </div>
+
+
+</div>

@@ -62,20 +62,18 @@ export class UploadFilesComponent implements OnChanges, OnInit {
     }
   }
 
-  deleteFile(url: string) {
+  /* deleteFile(url: string) {
     var path = url;
     var directories = path.split("/");
     var lastDirecotry = directories[(directories.length - 1)];
     this.uploadService.deleteFileById(lastDirecotry)
     .subscribe(data => {console.log(data)})
     this.fileInfos = this.uploadService.getFiles();
-  }
+  } */
 
   deleteFilebyName(file: any) {
-    var path = file.url;
-    var directories = path.split("/");
-    var id = directories[(directories.length - 1)];
-    this.uploadService.deleteFileByName(file.name, id)
+    
+    this.uploadService.deleteFileByName(file.name)
     .subscribe(data => {console.log(data)})
     this.fileInfos = this.uploadService.getFiles();
   }

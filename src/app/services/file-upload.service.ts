@@ -35,22 +35,13 @@ export class FileUploadService {
 
 
   // delete file by id
-  deleteFileById(id: string): Observable<Object> {
+/*   deleteFileById(id: string): Observable<Object> {
     return this.http.delete(`${this.baseUrl}` + '/files/' + `${id}`, httpOptions);
-  }
+  } */
 
    // delete file by id
-   deleteFileByName(filename: string, id: string): Observable<Object> {
-    return this.http.delete(`${this.baseUrl}` + '/files/upload/' + `${filename}/${id}`, httpOptions);
+   deleteFileByName(filename: string): Observable<Object> {
+    return this.http.delete(`${this.baseUrl}` + '/files/upload/' + `${filename}`, httpOptions);
   }
-/* 
-  downfile(file: any): Observable<HttpEvent<any>>{
 
-    const formData: FormData = new FormData();
-    return this.http.post(`${this.baseUrl}/files` , formData, {
-      responseType: "blob", reportProgress: true, observe: "events", headers: new HttpHeaders(
-        { 'Content-Type': 'application/json' },
-      )
-    });
-  } */
 }
