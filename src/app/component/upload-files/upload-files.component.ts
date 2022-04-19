@@ -2,8 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FileUploadService } from 'src/app/services/file-upload.service';
-
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-upload-files',
   templateUrl: './upload-files.component.html',
@@ -24,6 +23,7 @@ export class UploadFilesComponent implements OnChanges, OnInit {
   message = '';
   fileInfos?: Observable<any>;
   fileName;
+  savefileIndb: boolean;
 
   constructor(private uploadService: FileUploadService) { }
   selectFile(event: any): void {
@@ -43,7 +43,12 @@ export class UploadFilesComponent implements OnChanges, OnInit {
               this.progress = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
               this.message = event.body.message;
+              Swal.fire('Hey!', this.message , 'success')
+              .then((value: any)=>{
+                this.savefileIndb = value;
+              }) 
               this.fileInfos = this.uploadService.getFiles();
+              this.savefileIndb= false;
             }
           },
           error: (err: any) => {
@@ -51,8 +56,12 @@ export class UploadFilesComponent implements OnChanges, OnInit {
             this.progress = 0;
             if (err.error && err.error.message) {
               this.message = err.error.message;
+              Swal.fire('Hey!', this.message , 'warning')
+              this.fileInfos = this.uploadService.getFiles();
             } else {
               this.message = 'Could not upload the file!';
+              Swal.fire('Hey!','Could not upload the file!' , 'warning')
+              
             }
             this.currentFile = undefined;
           }
@@ -72,7 +81,6 @@ export class UploadFilesComponent implements OnChanges, OnInit {
   } */
 
   deleteFilebyName(file: any) {
-    
     this.uploadService.deleteFileByName(file.name)
     .subscribe(data => {console.log(data)})
     this.fileInfos = this.uploadService.getFiles();

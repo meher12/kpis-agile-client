@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 //import xml2js from 'xml2js';  
 declare const require;
 const xml2js = require("xml2js");
@@ -7,6 +7,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JacocoReportService } from 'src/app/services/jacoco-report.service';
 import { JacocoReport } from 'src/app/models/jacoco.model';
 
+
+import {
+  ApexNonAxisChartSeries,
+  ApexPlotOptions,
+  ApexChart,
+  ApexFill,
+  ChartComponent,
+  ApexStroke
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  labels: string[];
+  plotOptions: ApexPlotOptions;
+  fill: ApexFill;
+  stroke: ApexStroke;
+};
+
 @Component({
   selector: 'app-jacoco-parse',
   templateUrl: './jacoco-parse.component.html',
@@ -14,7 +33,11 @@ import { JacocoReport } from 'src/app/models/jacoco.model';
 })
 export class JacocoParseComponent implements OnChanges, OnInit {
 
+  @ViewChild("cartradar") chart: ChartComponent;
+  public chartOptions: Partial<any>;
+
   @Input() getfileName;
+  @Input() savefiledb;
 
   jacocoReports: JacocoReport[];
   jacocoReport: JacocoReport[];
@@ -27,6 +50,10 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   selected;
   nameselected;
   arrayProjectName: string[];
+
+  booleanValue;
+
+  projectJacocoverage;
 
 
   public xmlItems: any;
@@ -69,7 +96,10 @@ export class JacocoParseComponent implements OnChanges, OnInit {
             for (var i = 0; i < this.dataSave.length; i++) {
               this.dataSave[i]['projectname'] = newArray2[0]
             }
+            if(this.savefiledb.value){
+              console.log("Input value"+this.savefiledb.value)
             this.jacoreportService.createReport(this.dataSave).subscribe(data => { console.log(data) })
+            }
 
           });
 
@@ -88,40 +118,112 @@ export class JacocoParseComponent implements OnChanges, OnInit {
         next: (data) => {
           this.jacocoReports = data;
           this.arrayProjectName = [...new Set(this.jacocoReports.map(elem => elem.projectname))];
-          console.log(this.arrayProjectName)
+          //console.log(this.arrayProjectName)
         }
       })
   }
 
   getreportByName(event: any) {
     this.nameselected = event.target.value;
-    this.jacoreportService.getReportListByPName(event.target.value)
+
+    this.jacoreportService.gettotalCoverageByPName(this.nameselected)
+      .subscribe(data => {
+        this.projectJacocoverage = data;
+        this.getRadarTatalcoverage(this.projectJacocoverage)
+      }
+      )
+
+    // get arary data coverage
+    this.jacoreportService.getReportListByPName(this.nameselected)
       .subscribe({
         next: (data) => {
           this.jacocoReport = data;
-
         }
       })
   }
-  /*  loadXML(fileName) {
-     console.log('http://localhost:8081/api/files/'+this.getfileName)
-     this._http.get('http://localhost:8081/api/files/'+this.getfileName,
-       {
-         headers: new HttpHeaders()
-           .set('Content-Type', 'text/xml')
-           .append('Access-Control-Allow-Methods', 'GET')
-           .append('Access-Control-Allow-Origin', '*')
-           .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method"),
-         responseType: 'text'
-       })
-       .subscribe((data) => {
-         this.parseXML(data).then((data) => {
-           this.xmlItems = data;
-         });
-   
-       });
-   } */
 
+  getRadarTatalcoverage(coverage: any) {
+    this.chartOptions = {
+      series: [coverage],
+      chart: {
+        height: 350,
+        type: "radialBar",
+        offsetY: -10,
+        toolbar: {
+          show: true
+        },
+      },
+      plotOptions: {
+        radialBar: {
+          startAngle: -90,
+          endAngle: 90,
+          dataLabels: {
+            name: {
+              fontSize: "16px",
+              color: undefined,
+              offsetY: 40
+            },
+            value: {
+              offsetY: 0,
+              fontSize: "22px",
+              color: 'red',
+              formatter: function (val) {
+                return val + "%";
+              }
+            }
+          }
+        }
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          type: "verticle",
+          shadeIntensity: 0.15,
+          inverseColors: true,
+          gradientToColors: ["#FF6258", "#FFBC00"],
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 50, 100],
+          colorStops: [
+            [
+              {
+                offset: 0,
+                color: "#FF6258",
+                opacity: 1
+              },
+              {
+                offset: 51,
+                color: "#FFBC00",
+                opacity: 50
+              },
+              {
+                offset: 100,
+                color: "#77C579",
+                opacity: 1
+              }
+            ]
+          ]
+        }
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+
+          }
+        }
+      ],
+      stroke: {
+        dashArray: 0,
+        colors: ["grey"]
+      },
+      labels: ["Story point completed"]
+    };
+  }
   parseXML(data) {
     return new Promise(resolve => {
       var k: string | number,
@@ -163,6 +265,43 @@ export class JacocoParseComponent implements OnChanges, OnInit {
       });
     });
   }
+
+  /* getdaa(){
+    this.booleanValue = true;
+   // get coverage total
+   this.jacoreportService.gettotalCoverageByPName(this.nameselected)
+   .subscribe(data => this.projectJacocoverage = data)
+
+   // get arary data coverage
+    this.jacoreportService.getReportListByPName( this.nameselected)
+    .subscribe({
+      next: (data) => {
+        this.jacocoReport = data;
+      }
+    })
+  } */
+  /*  loadXML(fileName) {
+     console.log('http://localhost:8081/api/files/'+this.getfileName)
+     this._http.get('http://localhost:8081/api/files/'+this.getfileName,
+       {
+         headers: new HttpHeaders()
+           .set('Content-Type', 'text/xml')
+           .append('Access-Control-Allow-Methods', 'GET')
+           .append('Access-Control-Allow-Origin', '*')
+           .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method"),
+         responseType: 'text'
+       })
+       .subscribe((data) => {
+         this.parseXML(data).then((data) => {
+           this.xmlItems = data;
+         });
+   
+       });
+   } */
+
+
+
+
 
 
   /*   parseXML(data) {  

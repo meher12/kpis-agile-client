@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h4 class=" text-center">Coverage and Analysis of jacoco report</h4>
+      <h4 class=" text-center">Coverage and Analysis Jacoco report</h4>
     </div>
   </div>
 
@@ -19,33 +19,50 @@
 
 
 
-  <div *ngIf="selected">
-    <h3>Project Name: {{nameselected}}</h3>
-    <table class="table table-bordered table-striped ">
-      <tr>
-        <!--  <th>Project Name</th> -->
-        <th>Type</th>
-        <th>Covered</th>
-        <th>Missed</th>
-        <th>Percentage</th>
-        <th>Totale percentage</th>
-        <th>Created At</th>
+  <!--  <div *ngIf="selected">
+  <button (click)="getdaa()"> get data</button>
 
-      </tr>
-      <tr *ngFor="let itemReport of jacocoReport">
-        <!--  <td>{{itemReport.projectname}}</td> -->
-        <td>{{itemReport.type}}</td>
-        <td>{{itemReport.covered}}</td>
-        <td>{{itemReport.missed}}</td>
-        <td>{{itemReport.percentage}}%</td>
-        <td>{{itemReport.totalpercentage}}%</td>
-        <td>{{itemReport.createdAt}}</td>
+  </div> -->
 
-      </tr>
+  <!--  <div *ngIf="booleanValue"> -->
+  <div class="container">
+    <div class="msgList" *ngIf="selected">
 
-    </table>
+      <div class="cartradar">
+        <ng-container *ngIf="chartOptions">
+          <div id="cartradar">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+              [plotOptions]="chartOptions.plotOptions" [labels]="chartOptions.labels" [fill]="chartOptions.fill"
+              [stroke]="chartOptions.stroke"></apx-chart>
+          </div>
+        </ng-container>
+      </div>
+      <div class="row">
+        <h3>Project Name: {{nameselected}}</h3>
+      </div>
+
+      <table class="table table-bordered table-striped ">
+        <tr>
+          <!--  <th>Project Name</th> -->
+          <th>Type</th>
+          <th>Covered</th>
+          <th>Missed</th>
+          <th>Coverage</th>
+          <th>Created At</th>
+
+        </tr>
+        <tr *ngFor="let itemReport of jacocoReport">
+          <!--  <td>{{itemReport.projectname}}</td> -->
+          <td>{{itemReport.type}}</td>
+          <td>{{itemReport.covered}}</td>
+          <td>{{itemReport.missed}}</td>
+          <td>{{itemReport.percentage}}%</td>
+          <td>{{itemReport.createdAt}}</td>
+
+        </tr>
+
+      </table>
+    </div>
 
   </div>
-
-
 </div>

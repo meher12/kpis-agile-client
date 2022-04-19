@@ -17,24 +17,24 @@
       {{ progress }}%
     </div>
   </div>
- 
-  <div  *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
-  <div class="card mt-3">
+
+  <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+  <div *ngIf="message" class="card mt-3">
     <div class="card-header">List of Files</div>
     <ul class="list-group list-group-flush" *ngFor="let file of fileInfos | async">
       <li class="list-group-item">
-       <!--   href="{{ file.url }}"  -->
+        <!--   href="{{ file.url }}"  -->
         <span>{{ file.name }}
-           <!--  <button  style="margin-left: 2px" class="btn btn-danger" (click)="deleteFile(file.url)">Delete from db</button> -->
-          <button  style="margin-left: 2px" class="btn btn-danger" (click)="deleteFilebyName(file)">Delete</button> 
+          <!--  <button  style="margin-left: 2px" class="btn btn-danger" (click)="deleteFile(file.url)">Delete from db</button> -->
+          <button style="margin-left: 2px" class="btn btn-danger" (click)="deleteFilebyName(file)">Delete</button>
         </span>
 
       </li>
     </ul>
 
-    <div *ngIf="fileInfos">
-      <app-jacoco-parse [getfileName]="fileName"></app-jacoco-parse>
-    </div>
-  </div>
 
+  </div>
+  <!--  <div *ngIf="fileInfos"> -->
+  <app-jacoco-parse [getfileName]="fileName" [savefiledb]="this.savefileIndb"></app-jacoco-parse>
+  <!--  </div> -->
 </div>
