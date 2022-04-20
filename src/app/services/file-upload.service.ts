@@ -40,8 +40,8 @@ export class FileUploadService {
   } */
 
    // delete file by id
-   deleteFileByName(filename: string): Observable<Object> {
-    return this.http.delete(`${this.baseUrl}` + '/files/upload/' + `${filename}`, httpOptions);
+   deleteFileByName(filename: string, reportName: string): Observable<Object> {
+    return this.http.delete(`${this.baseUrl}` + '/files/upload/' + `${filename}/${reportName}`, httpOptions);
   }
 
 }

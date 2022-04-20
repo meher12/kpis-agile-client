@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 //import xml2js from 'xml2js';  
 declare const require;
 const xml2js = require("xml2js");
@@ -6,7 +6,7 @@ const xml2js = require("xml2js");
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JacocoReportService } from 'src/app/services/jacoco-report.service';
 import { JacocoReport } from 'src/app/models/jacoco.model';
-
+import Swal from 'sweetalert2';
 
 import {
   ApexNonAxisChartSeries,
@@ -38,6 +38,8 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
   @Input() getfileName;
   @Input() savefiledb;
+
+  @Output() reportnameChanged = new EventEmitter<string>();
 
   jacocoReports: JacocoReport[];
   jacocoReport: JacocoReport[];
@@ -79,7 +81,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
             // this.retrievedObject = JSON.parse(localStorage.getItem("xmlContent"));
             this.dataHTML = this.xmlItems[0];
             this.projectName = this.xmlItems[1];
-            //console.log((this.retrievedObject));
+            this.reportnameChanged.emit(this.projectName);
 
             //dynamically build list of objects
             const myobj = { data: [] };
@@ -96,19 +98,27 @@ export class JacocoParseComponent implements OnChanges, OnInit {
             for (var i = 0; i < this.dataSave.length; i++) {
               this.dataSave[i]['projectname'] = newArray2[0]
             }
-            if(this.savefiledb.value){
-              console.log("Input value"+this.savefiledb.value)
-            this.jacoreportService.createReport(this.dataSave).subscribe(data => { console.log(data) })
+            if (this.savefiledb.value) {
+              //console.log("Input value"+this.savefiledb.value)
+              this.jacoreportService.createReport(this.dataSave).subscribe(data => { console.log(data) })
             }
 
-          });
+          },
+            err => {
+              var msgError = err.error.message;
+              Swal.fire('Hey!', msgError, 'warning')
+            }
+
+          );
 
         });
     }
+
+    this.getAllProjectName()
   }
 
   ngOnInit(): void {
-    this.getAllProjectName()
+
 
   }
 
@@ -221,7 +231,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
         dashArray: 0,
         colors: ["grey"]
       },
-      labels: ["Story point completed"]
+      labels: ["Coverage"]
     };
   }
   parseXML(data) {

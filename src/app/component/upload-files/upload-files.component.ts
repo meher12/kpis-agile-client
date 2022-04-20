@@ -24,6 +24,7 @@ export class UploadFilesComponent implements OnChanges, OnInit {
   fileInfos?: Observable<any>;
   fileName;
   savefileIndb: boolean;
+  reportName;
 
   constructor(private uploadService: FileUploadService) { }
   selectFile(event: any): void {
@@ -61,6 +62,7 @@ export class UploadFilesComponent implements OnChanges, OnInit {
             } else {
               this.message = 'Could not upload the file!';
               Swal.fire('Hey!','Could not upload the file!' , 'warning')
+              this.fileInfos = this.uploadService.getFiles();
               
             }
             this.currentFile = undefined;
@@ -80,8 +82,12 @@ export class UploadFilesComponent implements OnChanges, OnInit {
     this.fileInfos = this.uploadService.getFiles();
   } */
 
+  getreportName(event: any){
+    this.reportName = event;
+    //console.log( this.reportName)
+  }
   deleteFilebyName(file: any) {
-    this.uploadService.deleteFileByName(file.name)
+    this.uploadService.deleteFileByName(file.name, this.reportName)
     .subscribe(data => {console.log(data)})
     this.fileInfos = this.uploadService.getFiles();
   }
