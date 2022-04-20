@@ -44,4 +44,9 @@ export class FileUploadService {
     return this.http.delete(`${this.baseUrl}` + '/files/upload/' + `${filename}/${reportName}`, httpOptions);
   }
 
+  // update file name
+  updateFileName(filename: string, newfiletName: any): Observable<Object> {
+    return this.http.put(`${this.baseUrl}` + '/files/rename/' + `${filename}`, newfiletName,  httpOptions);
+  }
+
 }
