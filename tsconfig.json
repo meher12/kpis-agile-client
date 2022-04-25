@@ -22,6 +22,7 @@
         resolve.fallback: { "stream": false } */
     //npm install stream-browserify.
     "paths": {
+     // "stream": false
       "stream": [
         "./node_modules/stream-browserify"
       ]

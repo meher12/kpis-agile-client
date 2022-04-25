@@ -18,7 +18,9 @@ export class AppComponent {
   showDevBoard = false;
   username?: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService) {
+
+   }
 
 
   ngOnInit(): void {
