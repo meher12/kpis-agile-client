@@ -10,8 +10,30 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      require('@angular-devkit/build-angular/plugins/karma'),
+      // ********
+      //require('karma-sonarqube-unit-reporter')
+     require('karma-coverage-istanbul-reporter')
+
     ],
+
+    // ***********
+   /*  sonarQubeUnitReporter: {
+      sonarQubeVersion: 'LATEST',
+      outputFile: 'reports/ut_report.xml',
+      overrideTestDescription: true,
+      testPaths: ['./src'],
+      testFilePattern: '.spec.ts',
+      useBrowserName: false
+    },
+    reporters: ['sonarqubeUnit'], */
+
+    coverageIstanbulReporter: {
+      dir: require('path').join(__dirname, './coverage/lcov-report'),
+      reports: ['lcovonly'],
+      fixWebpackSourcePaths: true
+  },
+    // **********
     client: {
       jasmine: {
         // you can add configuration options for Jasmine here
@@ -28,8 +50,10 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/kpis-agile-client'),
       subdir: '.',
       reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
+       /*  { type: 'html' },
+        { type: 'text-summary' } */
+        { type: 'html', subdir: 'html-report' },
+        { type: 'lcov', subdir: 'lcov-report' }
       ]
     },
     reporters: ['progress', 'kjhtml'],
@@ -37,7 +61,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['Chromium'],
     singleRun: false,
     restartOnFileChange: true
   });
