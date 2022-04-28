@@ -11,5 +11,12 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'kpiswiseserver', url: 'https://github.com/meher12/kpis-agile-client.git']]])
             }
         }
+
+         stage('Checkout Frontend Done') {
+            steps {
+                script {
+                 echo '-=- Checkout Frontend Done -=-'
+            }
+        }
     }
 }
