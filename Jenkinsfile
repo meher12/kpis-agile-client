@@ -16,7 +16,7 @@ pipeline {
             steps {
               
                 sh''' echo '-=- Checkout Frontend Done -=-' '''
-            
+            }
         }
     }
 }
