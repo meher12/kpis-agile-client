@@ -5,7 +5,7 @@ pipeline {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '5')
     }
     stages {
-        stage('Checkout Frontend') {
+        stage('Start checkout Frontend') {
             steps {
                 //define scm connection for polling
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'kpiswiseserver', url: 'https://github.com/meher12/kpis-agile-client.git']]])
@@ -15,7 +15,9 @@ pipeline {
         stage('Checkout Frontend Done') {
             steps {
               
-                sh''' echo '-=- Checkout Frontend Done -=-' '''
+                sh ''' 
+                echo ' Checkout Frontend Done ' 
+                '''
             }
         }
     }
