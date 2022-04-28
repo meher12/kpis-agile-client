@@ -12,11 +12,11 @@ pipeline {
             }
         }
 
-         stage('Checkout Frontend Done') {
+        stage('Checkout Frontend Done') {
             steps {
-                script {
-                 echo '-=- Checkout Frontend Done -=-'
-            }
+              
+                sh''' echo '-=- Checkout Frontend Done -=-' '''
+            
         }
     }
 }
