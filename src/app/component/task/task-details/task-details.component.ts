@@ -16,6 +16,7 @@ export class TaskDetailsComponent implements OnInit {
   isLoggedIn = false;
   showPOBoard = false;
   showScrumMBoard = false;
+  showDevBoard: boolean = false;
   roles: string[] = [];
   msgError = "";
 
@@ -34,6 +35,7 @@ export class TaskDetailsComponent implements OnInit {
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+      this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 
       this.task = new Task();
       this.id = this.route.snapshot.params['id'];

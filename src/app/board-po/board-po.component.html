@@ -106,9 +106,9 @@
 
             <div class="col p-4">
                 <div class="card h-100  border-secondary mb-4">
-                    <!-- <img class="card-img-top" src="../images/picture.png" alt="">  -->
+                    
                     <div class="card-body">
-                        <!-- <h5 class="card-title text-success">Velocity Chart</h5> -->
+                       
                         <p class="card-text">
                             <app-velocity-chart (datePickedV)="getUpdatedDateV()"
                                 (velocityChange)="getInfoVelocity($event)"></app-velocity-chart>
@@ -123,7 +123,6 @@
             <div class="col p-4">
                 <div class="card h-100  border-secondary mb-4">
                     <div class="card-body">
-                        <!-- <h5 class="card-title text-primary">Brundown Chart</h5> -->
                         <p class="card-text">
                             <app-burndown (datePickedB)="getUpdatedDateB()"></app-burndown>
                         </p>
@@ -140,8 +139,7 @@
         <div class="card-group">
             <div class="col p-4">
                 <div class="card h-100  border-secondary mb-4">
-                    <div class="card-body">
-                        <!-- <h5 class="card-title">Release brundoun Chart</h5> -->
+                    <div class="card-body">  
                         <p class="card-text">
                             <app-release-burndown (datePicked)="getUpdatedDate()"></app-release-burndown>
                         </p>
@@ -156,7 +154,6 @@
             <div class="col p-4">
                 <div class="card h-100 border-secondary mb-4">
                     <div class="card-body">
-                        <!--  <h5 class="card-title">Story Points Completed Chart</h5> -->
                         <p class="card-text">
                             <app-sp-done-by-project></app-sp-done-by-project>
                         </p>

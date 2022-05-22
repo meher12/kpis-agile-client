@@ -1,4 +1,4 @@
-<div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
+<div class="card" *ngIf="showPOBoard || showScrumMBoard || showDevBoard;else BadCredentials">
     <div class="container text-center">
         <h3>task Search By Story Title</h3>
     </div>
@@ -80,7 +80,7 @@
                             <td>
                                 <div class="nowrap btn-group">
                                     <button class="btn btn-success" (click)="detailsTask(task.id)">Details</button>
-                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-info"
+                                    <button *ngIf="showPOBoard || showDevBoard;" style="margin-left: 2px" class="btn btn-info"
                                         (click)="updateTask(task.id)">Update</button>
 
                                     <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"

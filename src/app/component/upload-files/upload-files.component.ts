@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import Swal from 'sweetalert2';
 import * as swal from 'sweetalert2';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-upload-files',
   templateUrl: './upload-files.component.html',
@@ -11,12 +12,6 @@ import * as swal from 'sweetalert2';
 })
 export class UploadFilesComponent implements OnChanges, OnInit {
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.fileInfos = this.uploadService.getFiles();
-  }
-  ngOnInit(): void {
-    // this.fileInfos = this.uploadService.getFiles();
-  }
 
   selectedFiles?: FileList;
   currentFile?: File;
@@ -28,7 +23,37 @@ export class UploadFilesComponent implements OnChanges, OnInit {
   reportName;
   messageResponse;
 
-  constructor(private uploadService: FileUploadService) { }
+  isLoggedIn = false;
+  showPOBoard = false;
+  showScrumMBoard = false;
+  showDevBoard = false;
+  roles: string[] = [];
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    this.fileInfos = this.uploadService.getFiles();
+  }
+  ngOnInit(): void {
+    // this.fileInfos = this.uploadService.getFiles();
+
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+      this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
+
+
+
+
+    }
+
+  }
+
+
+
+  constructor(private uploadService: FileUploadService, private tokenStorageService: TokenStorageService) { }
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }

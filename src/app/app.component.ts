@@ -32,7 +32,7 @@ export class AppComponent {
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
-      this.showDevBoard =  this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
+      this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 
       this.username = user.username;
     }

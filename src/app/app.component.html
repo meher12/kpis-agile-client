@@ -11,27 +11,28 @@
       <!-- NAVIGATION MENUS -->
       <div class="menu">
         <a href="#" class="navbar-brand">KPIs Agile</a>
-        <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <!-- routerLinkActive="active" -->
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a href="/home" class="nav-link" routerLink="home">Home </a>
           </li>
-          <li class="nav-item" *ngIf="showPOBoard">
-            <a href="/po" class="nav-link" routerLink="po">Measuring work in progress</a>
+          <li class="nav-item" *ngIf="showPOBoard || showScrumMBoard" >
+            <a href="/po" class="nav-link" routerLink="po" routerLinkActive="active">Measuring work in progress</a>
           </li>
           <li class="nav-item" *ngIf="showScrumMBoard || showPOBoard">
-            <a href="/scrm" class="nav-link" routerLink="scrm">Process health and finding bottlenecks</a>
+            <a href="/scrm" class="nav-link" routerLink="scrm" routerLinkActive="active">Process health and finding bottlenecks</a>
           </li>
           <li class="nav-item">
-            <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev">Measuring code quality</a>
+            <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev" routerLinkActive="active">Measuring code quality</a>
           </li>
         </ul>
 
         <ul class="navbar-nav" *ngIf="!isLoggedIn">
           <li class="nav-item">
-            <a href="/signup" class="nav-link" routerLink="signup">Sign Up</a>
+            <a href="/signup" class="nav-link" routerLink="signup" routerLinkActive="active">Sign Up</a>
           </li>
           <li class="nav-item">
-            <a href="/signin" class="nav-link" routerLink="signin">Signin</a>
+            <a href="/signin" class="nav-link" routerLink="signin" routerLinkActive="active">Signin</a>
           </li>
         </ul>
 
@@ -54,19 +55,25 @@
   <!-- Sidebar Menu -->
   <!-- Sidebar Product Owner -->
   <div class="sidebar" *ngIf="showPOBoard">
-    <a href="/projectList" routerLinkActive="/projectList">Manage Projet</a>
-    <a href="/sprintList" routerLinkActive="/sprintList">Manage Sprint</a>
-    <a href="/storyList" routerLinkActive="/sprintList">Manage Story</a>
-    <a href="/taskList" routerLinkActive="/sprintList">Manage Task</a>
+    <a href="projectList" routerLink="projectList" routerLinkActive="active2">Manage Projet</a>
+    <a href="sprintList" routerLink="sprintList" routerLinkActive="active2">Manage Sprint</a>
+    <a href="storyList" routerLink="storyList" routerLinkActive="active2">Manage Story</a>
+    <a href="taskList" routerLink="taskList" routerLinkActive="active2">Manage Task</a>
   </div>
 
 
   <!-- Sidebar Scrum Master -->
   <div class="sidebar" *ngIf="showScrumMBoard">
-    <a href="/projectList" routerLinkActive="/projectList">List Projet</a>
-    <a href="/sprintList" routerLinkActive="/sprintList">List Sprint</a>
-    <a href="/storyList" routerLinkActive="/sprintList">List Story</a>
-    <a href="/taskList" routerLinkActive="/sprintList">List Task</a>
+    <a href="/projectList" routerLink="projectList" routerLinkActive="active2">List Projet</a>
+    <a href="/sprintList" routerLink="sprintList" routerLinkActive="active2">List Sprint</a>
+    <a href="/storyList" routerLink="storyList" routerLinkActive="active2">List Story</a>
+    <a href="/taskList" routerLink="taskList" routerLinkActive="active2">List Task</a>
+  </div>
+
+   <!-- Sidebar Scrum Master -->
+   <div class="sidebar" *ngIf="showDevBoard">
+    <a href="/storyList" routerLink="storyList" routerLinkActive="active2">List Story</a>
+    <a href="/taskList" routerLink="taskList" routerLinkActive="active2">List Task</a>
   </div>
 
   <!-- ********* Conten with Role********** -->

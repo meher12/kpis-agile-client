@@ -178,12 +178,12 @@ export class BurndownComponent implements OnInit {
       series: [
         {
           name: "ideal",
-          data: this.idealLineArray
+          data: this.idealLineArray //[50, 45, 40, 35, 30, 25, 20, 15, 10, 5,0] 
         },
 
         {
           name: "work",
-          data: this.workedStoryarray
+          data: this.workedStoryarray //[49, 43, 41, 33, 20, 10, 10, 8, 5 ]
         }
 
       ],

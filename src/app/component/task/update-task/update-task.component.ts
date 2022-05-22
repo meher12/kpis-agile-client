@@ -20,6 +20,8 @@ export class UpdateTaskComponent implements OnInit {
 
   isLoggedIn = false;
   showPOBoard = false;
+  showScrumMBoard = false;
+  showDevBoard: boolean = false;
   roles: string[] = [];
 
   msgError = "";
@@ -57,6 +59,12 @@ export class UpdateTaskComponent implements OnInit {
     {name: 'Succeeded', value: ETask[5]},
   ];
 
+  selectedValue3;
+  estatusDev = [
+    {name: 'In_progress', value: ETask[1]},
+    {name: 'Completed', value: ETask[4]},
+  ];
+
   constructor( private router: Router, private formBuilder: FormBuilder,
     private tokenStorageService: TokenStorageService, private taskService: TaskService, private route: ActivatedRoute) { }
 
@@ -82,6 +90,8 @@ export class UpdateTaskComponent implements OnInit {
       this.roles = user.roles;
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+      this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 
       // get id from task list
       this.id = this.route.snapshot.params['id'];

@@ -18,6 +18,7 @@ export class DetailsStoryComponent implements OnInit {
   isLoggedIn = false;
   showPOBoard = false;
   showScrumMBoard = false;
+  showDevBoard  = false;
   roles: string[] = [];
   msgError = "";
 
@@ -38,6 +39,7 @@ export class DetailsStoryComponent implements OnInit {
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+      this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 
       this.story = new Story();
       this.id = this.route.snapshot.params['id'];

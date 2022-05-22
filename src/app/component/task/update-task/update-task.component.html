@@ -1,4 +1,4 @@
-<div class="row" *ngIf="showPOBoard;else BadCredentials">
+<div class="row" *ngIf="showPOBoard || showDevBoard;else BadCredentials">
     <div class="col-md-12">
 
         <div class="card card-container">
@@ -78,7 +78,7 @@
                 </div>
 
                 <!-- Task type -->
-                <div class="form-group">
+                <div class="form-group" *ngIf="showPOBoard">
                     <label class="form-label" style="font-weight: bold;">Task type*: </label>
                     <div class="continput">
                         <div *ngFor="let item of etypetask">
@@ -96,7 +96,7 @@
                 </div>
 
                 <!-- Status -->
-                <div class="form-group">
+                <div class="form-group" *ngIf="showPOBoard;else taskstatusDev">
                     <label class="form-label" style="font-weight: bold;">Status*: </label>
                     <div class="continput">
                         <div *ngFor="let item of estatus">
@@ -111,6 +111,25 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Status Task for Developer-->
+                <ng-template #taskstatusDev>
+                    <div class="form-group">
+                        <label class="form-label" style="font-weight: bold;">Status*: </label>
+                        <div class="continput">
+                            <div *ngFor="let item of estatusDev">
+    
+                                <input type="radio" formControlName="status" [value]="item.value"
+                                    [ngClass]="{ 'is-invalid': submitted && fctl['status'].errors }"
+                                    [(ngModel)]="selectedValue3">
+                                {{item.value}}
+                                <div *ngIf="submitted && fctl['status'].errors" class="invalid-feedback">
+                                    <div *ngIf="fctl['status'].errors['required']">status is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
 
 
                 <!-- Button -->

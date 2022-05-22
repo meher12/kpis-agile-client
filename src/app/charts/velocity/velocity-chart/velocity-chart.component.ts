@@ -160,11 +160,11 @@ export class VelocityChartComponent implements OnInit {
       series: [
         {
           name: "Commitment",
-          data: this.workCommitment
+          data: this.workCommitment  //[40,25,45,30]
         },
         {
           name: "Work completed",
-          data: this.workCompleted
+          data: this.workCompleted //[35,25,43,29]
         }
       ],
       chart: {

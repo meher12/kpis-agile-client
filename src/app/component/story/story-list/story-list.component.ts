@@ -28,6 +28,7 @@ export class StoryListComponent implements OnInit {
   isLoggedIn = false;
   showPOBoard = false;
   showScrumMBoard = false;
+  showDevBoard = false;
   roles: string[] = [];
 
   /* Pagination */
@@ -48,6 +49,7 @@ export class StoryListComponent implements OnInit {
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+      this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 
       this.getTitleSprint();
       this.cgetAllStory();

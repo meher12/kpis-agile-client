@@ -182,15 +182,15 @@ export class ReleaseBurndownComponent implements OnInit {
       series: [
         {
           name: "Total story points",
-          data: spcommitment
+          data: spcommitment //[85, 61, 40, 18, 10]
         },
         {
           name: "Completed story point",
-          data: spworked
+          data: spworked //[24, 21, 22, 18]
         },
         {
           name: "New task",
-          data: spmore
+          data: spmore //[0, 0, 10, 0]
         }
       ],
       chart: {

@@ -14,7 +14,10 @@
   list-style: none;
  }
 
-
+.navbar .active {
+background-color: #3b73a1;
+text-decoration: solid;
+}
 
 /* NAVBAR STYLING STARTS */
 .navbar {
@@ -29,6 +32,8 @@
 
 .menu .nav-links a {
   color: #fff;
+  padding: 16px;
+  
  }
  
  /* NAVBAR MENU */
@@ -44,6 +49,7 @@
  }
  .menu li {
   padding: 5px 14px;
+  
  }
  
  /*RESPONSIVE NAVBAR MENU STARTS*/
@@ -126,19 +132,22 @@
   color: black;
   padding: 16px;
   text-decoration: none;
+  background-color: transparent;
 }
 
 /* Active/current link */
-.sidebar a.active {
+.sidebar a.active2 {
   background-color: #3b73a1;
   color: white;
 }
 
 /* Links on mouse-over */
-.sidebar a:hover:not(.active) {
+.sidebar a:hover {
   background-color: #555;
   color: white;
 }
+
+
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
@@ -168,10 +177,12 @@ div.content {
 
 
 .footer {
-  padding: 2.5rem 0;
-  background: #f7fafc;
-
 height: 100px;
+padding: 2.5rem 0;
+background: #f7fafc;
+/* bottom: 0px;
+position: fixed;
+width: 100%; */
 }
 
 .footer .copyright {

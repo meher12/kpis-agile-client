@@ -129,7 +129,7 @@ export class RadarSattusTaskChartComponent implements OnInit {
         }
       ],
       chart: {
-        height: 350,
+        height: 380,
         type: "radar",
   
       },

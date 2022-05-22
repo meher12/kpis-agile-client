@@ -17,6 +17,7 @@ import {
   ApexStroke
 } from "ng-apexcharts";
 
+
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -32,6 +33,8 @@ export type ChartOptions = {
   styleUrls: ['./jacoco-parse.component.scss']
 })
 export class JacocoParseComponent implements OnChanges, OnInit {
+
+  
 
   @ViewChild("cartradar") chart: ChartComponent;
   public chartOptions: Partial<any>;
@@ -59,7 +62,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
 
   public xmlItems: any;
-  constructor(private _http: HttpClient, private jacoreportService: JacocoReportService) { localStorage.clear(); /* this.loadXML(); */ }
+  constructor(private _http: HttpClient, private jacoreportService: JacocoReportService) { localStorage.clear(); }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.getfileName) {
@@ -118,8 +121,6 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-
-
   }
 
   getAllProjectName() {
