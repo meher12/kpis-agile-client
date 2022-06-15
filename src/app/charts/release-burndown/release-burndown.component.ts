@@ -182,15 +182,15 @@ export class ReleaseBurndownComponent implements OnInit {
       series: [
         {
           name: "Total story points",
-          data: spcommitment //[85, 61, 40, 18, 10]
+          data: spcommitment  //[85, 61, 40, 33, 0] //[85, 61, 40, 18, 10]
         },
         {
           name: "Completed story point",
-          data: spworked //[24, 21, 22, 18]
+          data: spworked //[24, 21, 22, 33]  //[24, 21, 22, 18]
         },
         {
           name: "New task",
-          data: spmore //[0, 0, 10, 0]
+          data: spmore //[0, 0, 15, 0] //[0, 0, 10, 0]
         }
       ],
       chart: {
@@ -237,7 +237,7 @@ export class ReleaseBurndownComponent implements OnInit {
       },
       xaxis: {
         type: "category",
-        categories: sprintname,
+        categories: sprintname , //['sprint 1', 'sprint 2', 'sprint 3', 'sprint 4', 'release sprint'],
         tickPlacement: 'on',
 
       },
