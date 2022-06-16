@@ -62,7 +62,7 @@ export class ListStoryBySprintComponent implements OnInit {
     }
   }, 2000);
    
-
+// Get Role
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
