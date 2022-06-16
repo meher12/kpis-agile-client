@@ -86,26 +86,35 @@ export class ReleaseBurndownComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.getAllproject();
-      this.updateTablesprint()
-      this.getUpdateAllsp()
-     
+      this.updateTablesprint();
+     // this.getUpdateAllsp();
+
 
     }
 
   }
 
   //update all sp
-  getUpdateAllsp(){
+ /*  getUpdateAllsp() {
     this.projectService.updateAllSp().subscribe(data => console.log(data));
-  }
-   // update work Commitment and work Completed in sprint
-   updateTablesprint() {
+  } */
+  // update work Commitment and work Completed in sprint
+  updateTablesprint() {
     this.sprintService.updateStoryPointInSprint()
       .subscribe(data => console.log(data));
   }
 
   // brundown chart update data in backend
   pReleaseBurndownChart(refproject: string) {
+
+    // Reload release chart
+    if (!localStorage.getItem('release_chart')) {
+      localStorage.setItem('release_chart', 'no reload')
+      location.reload()
+    } else {
+      localStorage.removeItem('release_chart')
+    }
+
     this.projectService.releasebdchart(refproject)
       .subscribe(data => console.log(data));
   }
@@ -153,13 +162,13 @@ export class ReleaseBurndownComponent implements OnInit {
 
         // get sprint length
         var arraySize = Object.keys(newarr).length;
-        
+
         this.sprintName.length = 0;
         for (var i = 0; i < arraySize; i++) {
 
           this.sprintName[i] = this.project.sprints[i].stitre;
         }
-        
+
 
         this.datePicked.emit(this.project.pupdatedDate);
 
@@ -174,9 +183,10 @@ export class ReleaseBurndownComponent implements OnInit {
   }
 
   relaseBrundounChart(spcommitment: any[], spworked: any[], spmore: any[], sprintname: any[]) {
-   
+
+
     sprintname.push("release sprint");
-    
+
     /* Start Chart*/
     this.chartOptions = {
       series: [
@@ -237,7 +247,7 @@ export class ReleaseBurndownComponent implements OnInit {
       },
       xaxis: {
         type: "category",
-        categories: sprintname , //['sprint 1', 'sprint 2', 'sprint 3', 'sprint 4', 'release sprint'],
+        categories: sprintname, //['sprint 1', 'sprint 2', 'sprint 3', 'sprint 4', 'release sprint'],
         tickPlacement: 'on',
 
       },
