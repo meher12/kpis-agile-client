@@ -35,6 +35,13 @@ export class SprintDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (!localStorage.getItem('sprint_data')) { 
+      localStorage.setItem('sprint_data', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('sprint_data') 
+    }
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {

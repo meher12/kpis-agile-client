@@ -42,6 +42,13 @@ export class StoryListComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (!localStorage.getItem('story_data')) { 
+      localStorage.setItem('story_data', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('story_data') 
+    }
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
