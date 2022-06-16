@@ -50,6 +50,8 @@ export class StoryListComponent implements OnInit {
     }
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    //update SP call 
+    this.updateTablesprint();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
@@ -65,6 +67,11 @@ export class StoryListComponent implements OnInit {
     }
   }
 
+  // update SP
+  updateTablesprint() {
+    this.sprintService.updateStoryPointInSprint()
+      .subscribe(data => console.log(data));
+  }
  
 
   //  get all Story

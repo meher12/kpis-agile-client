@@ -41,6 +41,13 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit(): void {
 
+   /*  if (!localStorage.getItem('task_data')) { 
+      localStorage.setItem('task_data', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('task_data') 
+    } */
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();

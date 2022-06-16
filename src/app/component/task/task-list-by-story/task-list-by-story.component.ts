@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Story } from 'src/app/models/story.model';
 import { Task } from 'src/app/models/task.model';
+import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { StoryService } from 'src/app/services/story/story.service';
 import { TaskService } from 'src/app/services/task/task.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -45,18 +46,20 @@ export class TaskListByStoryComponent implements OnInit {
    tableSizes: any = [3, 6, 9, 12];
 
   constructor(private storyService: StoryService, private taskService: TaskService, private router: Router, 
-    private tokenStorageService: TokenStorageService, private route: ActivatedRoute) { }
+    private tokenStorageService: TokenStorageService, private route: ActivatedRoute, private sprintService: SprintService) { }
 
   ngOnInit(): void {
 
-    if (!localStorage.getItem('task_data')) { 
+    /* if (!localStorage.getItem('task_data')) { 
       localStorage.setItem('task_data', 'no reload') 
       location.reload() 
     } else {
       localStorage.removeItem('task_data') 
-    }
+    } */
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    //update SP call 
+    this.updateTablesprint();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
@@ -73,6 +76,12 @@ export class TaskListByStoryComponent implements OnInit {
       this.getTitleStory()
       this.cgetAllTaskByStoryRef()
     }
+  }
+
+  // update SP
+  updateTablesprint() {
+    this.sprintService.updateStoryPointInSprint()
+      .subscribe(data => console.log(data));
   }
 
    // Get storyRef 
