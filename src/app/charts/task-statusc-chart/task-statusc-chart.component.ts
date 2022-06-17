@@ -85,6 +85,7 @@ export class TaskStatuscChartComponent implements OnInit {
       .subscribe(data => console.log(data));
   } */
 
+  // get status task percentage by project
   taskStatusChart(event: any) {
 
     this.projectService.getListtaskByStatus(event.target.value)
@@ -95,11 +96,11 @@ export class TaskStatuscChartComponent implements OnInit {
 
             this.keyArr = KeyArr 
             this.valueArr = ValueArr 
-            //console.log("two arrays", this.keyArr);
+            console.log("keyArr status label", this.keyArr);
             //console.log("**** rays", this.valueArr);
 
             let valArrtoNumber = this.valueArr.map(i=>Number(i));
-            //console.log(valArrtoNumber);
+            console.log("count percentage for status label",valArrtoNumber);
 
             this.getChartStatus(this.keyArr, valArrtoNumber)
           },
@@ -111,10 +112,10 @@ export class TaskStatuscChartComponent implements OnInit {
         })
   
   }
-
+// Show  status task by project
   getChartStatus(statusTask: any[], countStatus: any[]){
     this.chartOptions = {
-      series: countStatus,
+      series: countStatus, //auto percentage
       chart: {
         width: "100%",
         type: "pie",

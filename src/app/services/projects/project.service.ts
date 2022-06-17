@@ -70,7 +70,7 @@ export class ProjectService {
     return this.httpClient.get(`${this.baseUrl}` + '/projects/releasebdchart/' + `${preference}`, httpOptions);
   }
 
-  // task status chart by project  preference
+  // task status percentage chart by project  preference
   getListtaskByStatus(preference: string): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}` + '/projects/percentTaskStatuscChart/' + `${preference}`, httpOptions);
   }

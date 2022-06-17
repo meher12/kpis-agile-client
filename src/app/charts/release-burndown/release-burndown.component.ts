@@ -143,7 +143,7 @@ export class ReleaseBurndownComponent implements OnInit {
     this.projectService.getProjectByReference(event.target.value)
       .subscribe(data => {
         this.project = data;
-        console.log(this.project);
+        console.log("get release brundown chart data from project",this.project);
 
         this.project.pSpCommitment.pop();
         // this.project.pSpCommitment.pop();
@@ -160,7 +160,7 @@ export class ReleaseBurndownComponent implements OnInit {
           return moment(a.sdateDebut).diff(b.sdateDebut);
         });
 
-        // get sprint length
+        // get sprint array length
         var arraySize = Object.keys(newarr).length;
 
         this.sprintName.length = 0;

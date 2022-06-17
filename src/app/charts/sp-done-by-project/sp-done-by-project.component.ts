@@ -102,7 +102,7 @@ export class SpDoneByProjectComponent implements AfterViewInit {
   
   }
 
-// get chart by project
+// get chart percentage SP by project
 getStoryPointsCChart(event: any) {
 
   this.getArrayOfPercentage(event.target.value);
@@ -110,7 +110,7 @@ getStoryPointsCChart(event: any) {
   this.projectService.getProjectByReference(event.target.value)
   .subscribe(data => {
     this.project = data;
-    console.log(this.project);
+    console.log("percentage SP by project",this.project);
 
    this.project.percentage_spc.pop();
    this.percentageArray = this.project.percentage_spc;
@@ -131,10 +131,7 @@ getStoryPointsCChart(event: any) {
 
   this._totalsp = this.project.totalstorypointsinitiallycounts;
 
-
   this.radioChartByPr(this.percentageArray, this.sprintName, this._totalsp);
-  
-   
  
     },
     err => {
@@ -144,7 +141,7 @@ getStoryPointsCChart(event: any) {
     });
 }
 
-// Chart by project
+// Show chart percentage SP by project
 radioChartByPr(percentageTab: any[], sprintNom: any[],  totalsp: any){
 
    /* Start Chart */

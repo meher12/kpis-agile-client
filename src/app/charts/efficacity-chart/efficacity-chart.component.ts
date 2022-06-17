@@ -88,7 +88,7 @@ export class EfficacityChartComponent implements OnInit {
         });
   }
 
-  //  get release Brundown Chart project reference
+  //  Get PERCENTAGE STORY COMPLETED and STORY POINTS REALIZED data model project reference
   getModelByProjectRef(event: any) {
     this.projectService.getProjectByReference(event.target.value)
       .subscribe({
@@ -97,7 +97,7 @@ export class EfficacityChartComponent implements OnInit {
           this.projectService.getPercentageStoryPointsInProject(event.target.value)
           .subscribe( {
             next: (data) => {
-            
+            // send data to board scrm components
             this.totalSpChange.emit(data);
 
           }})
@@ -113,7 +113,7 @@ export class EfficacityChartComponent implements OnInit {
       });
   }
 
-  //get velocity info
+  //get efficacity info
   getInfoEfficacity(event: Efficacity) {
 
     this.newEfficacityArrays = event;

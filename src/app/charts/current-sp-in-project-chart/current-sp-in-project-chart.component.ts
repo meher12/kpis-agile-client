@@ -41,7 +41,7 @@ export class CurrentSpInProjectChartComponent implements OnChanges, OnInit {
     }
   }
 
-  
+  // percentage completed SP by project demi-cercle
   progressChartSpCompleted(progressCompleted: any){
     this.chartOptions = {
       series: [progressCompleted],

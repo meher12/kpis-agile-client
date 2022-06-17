@@ -93,7 +93,7 @@ export class TaskBugsChartComponent implements OnInit {
         });
   }
 
-  //  get release Brundown Chart project reference
+  //  get model popup by project reference
   getModelByProjectRef(event: any) {
     this.projectService.getProjectByReference(event.target.value)
       .subscribe({
@@ -111,7 +111,7 @@ export class TaskBugsChartComponent implements OnInit {
     getInfotaskBug(event: TaskBugs) {
 
       this.taskBugsArrays = event;
-     // console.log(" ***********", this.taskBugsArrays);
+      console.log(" *****taskBugsArrays******", this.taskBugsArrays);
       this.dateArray = this.taskBugsArrays.endDateArray;
       this.bugIntaskArray = this.taskBugsArrays.taskBugsArray;
       this.tasksafeArray = this.taskBugsArrays.taskSafe;
