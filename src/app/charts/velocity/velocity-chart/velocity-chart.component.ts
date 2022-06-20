@@ -112,7 +112,7 @@ export class VelocityChartComponent implements OnInit {
 
     this.updateTablesprint();
 
-    // tools of sprint by avg velocity
+    // get info  of sprint by avg velocity -- number_sprint, average_velocity, capacity_story_points_in_next_sprint
     this.sprintService.getNumberOfSprintByVelocity(event.target.value)
       .subscribe(response => {
         this.velocity = response;

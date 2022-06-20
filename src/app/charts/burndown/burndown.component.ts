@@ -92,10 +92,6 @@ export class BurndownComponent implements OnInit {
     }
   }
 
-  
-
-
-
 
   // update work Commitment and work Completed in sprint
   updateTablesprint() {
