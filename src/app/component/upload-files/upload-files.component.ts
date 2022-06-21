@@ -141,8 +141,15 @@ export class UploadFilesComponent implements OnChanges, OnInit {
           })
       }
     });
+  }
 
-
+  refreshdata(){
+    if (!localStorage.getItem('refresh_data')) { 
+      localStorage.setItem('refresh_data', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('refresh_data') 
+    }
   }
 
 

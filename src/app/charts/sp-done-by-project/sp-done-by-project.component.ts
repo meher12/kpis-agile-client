@@ -115,6 +115,10 @@ getStoryPointsCChart(event: any) {
    this.project.percentage_spc.pop();
    this.percentageArray = this.project.percentage_spc;
 
+   for (var i = 0; i < this.percentageArray.length; i++) {
+    this.percentageArray[i] = this.percentageArray[i].replace(',', '.');
+   }
+
      // sort sprints array
      const newarr = this.project.sprints.sort((a, b) => {
       return moment(a.sdateDebut).diff(b.sdateDebut);

@@ -116,13 +116,14 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
         });
     }
-
+    // get project name for select option to choose project
     this.getAllProjectName()
   }
 
   ngOnInit(): void {
   }
 
+  // get list of project saved in jacoco coverage table
   getAllProjectName() {
     this.jacoreportService.getReportList()
       .subscribe({
@@ -140,7 +141,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
     this.jacoreportService.gettotalCoverageByPName(this.nameselected)
       .subscribe(data => {
         this.projectJacocoverage = data;
-        this.getRadarTatalcoverage(this.projectJacocoverage)
+        this.getRadarTotalcoverage(this.projectJacocoverage)
       }
       )
 
@@ -153,9 +154,11 @@ export class JacocoParseComponent implements OnChanges, OnInit {
       })
   }
 
-  getRadarTatalcoverage(coverage: any) {
+  getRadarTotalcoverage(coverage: any) {
+    //console.log("---", coverage)
     this.chartOptions = {
-      series: [coverage],
+      //series: [(coverage).replace(',', '.')],
+      series: [(coverage)],
       chart: {
         height: 350,
         type: "radialBar",
@@ -179,7 +182,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
               fontSize: "22px",
               color: 'red',
               formatter: function (val) {
-                return val + "%";
+                return val + " %";
               }
             }
           }
