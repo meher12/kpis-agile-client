@@ -35,8 +35,13 @@ export class JacocoReportService {
     return this.httpClient.post(`${this.baseUrl}` + '/reports/add', report, httpOptions);
   }
 
-   // get  report by projectname
+   // get  total coverage by projectname
    gettotalCoverageByPName(projectname: string): Observable<any[]> {
     return this.httpClient.get<any[]>(`${this.baseUrl}` + '/reports/projectcoverage/'+`${projectname}`, httpOptions);
+  }
+
+  deletereportByReportName(reportName: string): Observable<any>{
+    return this.httpClient.delete(`${this.baseUrl}`+'/report/deleteallbyname/' + `${reportName}`, httpOptions);
+
   }
 }

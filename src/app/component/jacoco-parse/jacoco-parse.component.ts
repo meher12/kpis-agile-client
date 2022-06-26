@@ -47,7 +47,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   jacocoReports: JacocoReport[];
   jacocoReport: JacocoReport[];
   projectName;
-
+  msgError = "";
 
   dataSave: Object[];
   dataHTML: any[]
@@ -153,12 +153,78 @@ export class JacocoParseComponent implements OnChanges, OnInit {
         }
       })
   }
+//deletReportByName from table jcoverage
+  deletReportByName(reportName: string){
+   /*  this.jacoreportService.deletereportByReportName(reportName)
+    .subscribe( data => console.log(data)); */
+
+
+
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Report has been deleted.',
+          'success'
+        ),
+
+        this.jacoreportService.deletereportByReportName(reportName)
+        .subscribe(data => {
+              console.log(data);
+              setTimeout(function(){
+              if (!localStorage.getItem('reprot')) { 
+                localStorage.setItem('reprot', 'no reload') 
+                location.reload() 
+              } else {
+                localStorage.removeItem('reprot') 
+              }
+            }, 2000);
+              
+            },
+              err => {
+                this.msgError = err.error.message;
+                Swal.fire('Hey!', this.msgError, 'warning')
+                console.error(this.msgError);
+              })
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary sprints is safe :)',
+          'error'
+        )
+      }
+    })
+
+
+
+  }
 
   getRadarTotalcoverage(coverage: any) {
     //console.log("---", coverage)
     this.chartOptions = {
       //series: [(coverage).replace(',', '.')],
-      series: [(coverage)],
+      series: [(coverage).toFixed(2)],
       chart: {
         height: 350,
         type: "radialBar",
