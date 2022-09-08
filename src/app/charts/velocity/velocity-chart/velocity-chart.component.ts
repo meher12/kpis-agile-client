@@ -169,7 +169,27 @@ export class VelocityChartComponent implements OnInit {
       ],
       chart: {
         type: "bar",
-        height: 'auto',
+        //height: 'auto',
+
+
+        toolbar: {
+          export: {
+            csv: {
+              filename: "VelocityChart",
+              //headerCategory: 'Date;',
+              //columnDelimiter: ';',
+              headerCategory: 'Sprint',
+		          //headerValue: 'value'
+              
+            },
+            svg: {
+              filename: "VelocityChart",
+            },
+            png: {
+              filename: "VelocityChart",
+            }
+          },
+        }
         
       },
       title: {

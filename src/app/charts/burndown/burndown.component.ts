@@ -184,8 +184,29 @@ export class BurndownComponent implements OnInit {
 
       ],
       chart: {
-        height: 'auto',
-        type: "line"
+       // height: 'auto',
+        //type: "line",
+       
+        toolbar: {
+          export: {
+            csv: {
+              filename: "BrundownChart",
+              //headerCategory: 'Date;',
+              //columnDelimiter: ';',
+              headerCategory: 'Date',
+		          //headerValue: 'value'
+              
+            }
+          },
+        }
+
+
+
+        
+
+
+
+
       },
       dataLabels: {
         enabled: false
@@ -226,7 +247,6 @@ export class BurndownComponent implements OnInit {
         }
       },
       xaxis: {
-
         categories: this.dateList,
         tickPlacement: 'on',
         labels: {
