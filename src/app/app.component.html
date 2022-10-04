@@ -53,8 +53,8 @@
 
 
   <!-- Sidebar Menu -->
-  <!-- Sidebar Product Owner -->
-  <div class="sidebar" *ngIf="showPOBoard">
+  <!-- Sidebar Scrum Master -->
+  <div class="sidebar" *ngIf="showScrumMBoard">
     <a href="projectList" routerLink="projectList" routerLinkActive="active2">Manage Projet</a>
     <a href="sprintList" routerLink="sprintList" routerLinkActive="active2">Manage Sprint</a>
     <a href="storyList" routerLink="storyList" routerLinkActive="active2">Manage Story</a>
@@ -62,15 +62,15 @@
   </div>
 
 
-  <!-- Sidebar Scrum Master -->
-  <div class="sidebar" *ngIf="showScrumMBoard">
+  <!-- Sidebar Product Owner -->
+  <div class="sidebar" *ngIf="showPOBoard">
     <a href="/projectList" routerLink="projectList" routerLinkActive="active2">List Projet</a>
     <a href="/sprintList" routerLink="sprintList" routerLinkActive="active2">List Sprint</a>
     <a href="/storyList" routerLink="storyList" routerLinkActive="active2">List Story</a>
     <a href="/taskList" routerLink="taskList" routerLinkActive="active2">List Task</a>
   </div>
 
-   <!-- Sidebar Scrum Master -->
+   <!-- Sidebar Developer -->
    <div class="sidebar" *ngIf="showDevBoard">
     <a href="/storyList" routerLink="storyList" routerLinkActive="active2">List Story</a>
     <a href="/taskList" routerLink="taskList" routerLinkActive="active2">List Task</a>
@@ -92,7 +92,7 @@
   <div class="row align-items-center justify-content-xl-between">
     <div class="col-xl-6 m-auto text-center">
       <div class="copyright">
-        <p>Made with <a href="#" target="_blank">KPI Agile Dashboard</a> by Khemiri Meher</p>
+        <p>Made with <a href="#" target="_blank">KPI Agile Dashboard</a> by AlterCall Tunisie</p>
       </div>
     </div>
   </div>

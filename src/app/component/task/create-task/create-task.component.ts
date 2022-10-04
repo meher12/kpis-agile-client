@@ -19,7 +19,7 @@ import { DateValidator } from '../../date.validator';
 export class CreateTaskComponent implements OnInit {
 
   isLoggedIn = false;
-  showPOBoard = false;
+  showScrumMBoard = false;
   roles: string[] = [];
 
   msgError = "";
@@ -81,7 +81,7 @@ export class CreateTaskComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.form = this.formBuilder.group({
         tname: ['', Validators.required],

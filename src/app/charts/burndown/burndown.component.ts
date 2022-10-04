@@ -196,6 +196,12 @@ export class BurndownComponent implements OnInit {
               headerCategory: 'Date',
 		          //headerValue: 'value'
               
+            },
+            svg: {
+              filename: "BrundownChart",
+            },
+            png: {
+              filename: "BrundownChart",
             }
           },
         }

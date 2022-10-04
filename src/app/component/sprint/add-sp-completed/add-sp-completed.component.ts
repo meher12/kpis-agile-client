@@ -15,7 +15,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 export class AddSpCompletedComponent implements OnInit {
 
   isLoggedIn = false;
-  showPOBoard = false;
+  //showPOBoard = false;
   showScrumMBoard = false;
   roles: string[] = [];
 
@@ -44,7 +44,7 @@ export class AddSpCompletedComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      //this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
   
 

@@ -1,4 +1,4 @@
-<div class="row" *ngIf="showPOBoard || showDevBoard;else BadCredentials">
+<div class="row" *ngIf="showScrumMBoard || showDevBoard;else BadCredentials">
     <div class="col-md-12">
 
         <div class="card card-container">
@@ -78,7 +78,7 @@
                 </div>
 
                 <!-- Task type -->
-                <div class="form-group" *ngIf="showPOBoard">
+                <div class="form-group" *ngIf="showScrumMBoard">
                     <label class="form-label" style="font-weight: bold;">Task type*: </label>
                     <div class="continput">
                         <div *ngFor="let item of etypetask">
@@ -96,7 +96,7 @@
                 </div>
 
                 <!-- Status -->
-                <div class="form-group" *ngIf="showPOBoard;else taskstatusDev">
+                <div class="form-group" *ngIf="showScrumMBoard;else taskstatusDev">
                     <label class="form-label" style="font-weight: bold;">Status*: </label>
                     <div class="continput">
                         <div *ngFor="let item of estatus">

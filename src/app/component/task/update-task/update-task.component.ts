@@ -89,7 +89,7 @@ export class UpdateTaskComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      //this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
       this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 

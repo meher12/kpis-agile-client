@@ -18,7 +18,7 @@ import { DateValidator } from '../../date.validator';
 export class CreateSprintComponent implements OnInit {
 
   isLoggedIn = false;
-  showPOBoard = false;
+  showScrumMBoard = false;
   roles: string[] = [];
 
   msgError = "";
@@ -66,7 +66,7 @@ export class CreateSprintComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
       this.form = this.formBuilder.group({
         stitre: ['', Validators.required],

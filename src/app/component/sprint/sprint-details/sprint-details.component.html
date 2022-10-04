@@ -7,7 +7,7 @@
     points completed
   </button>
 
-  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal" *ngIf="showScrumMBoard" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
     <div class="modal-dialog reveal-modal" role="document">
       <div class="modal-content">
         <div class="modal-header">

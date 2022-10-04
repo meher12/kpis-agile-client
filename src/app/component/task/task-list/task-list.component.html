@@ -18,7 +18,7 @@
             <!-- End -->
         </div>
         <div *ngIf="selected">
-            <div *ngIf="showPOBoard;" class="col-md-10" style="margin-bottom: 10px;">
+            <div *ngIf="showScrumMBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
                 <div *ngIf="selectedListOption" class="btn-group btn-group-toggle" role="group">
                     <button routerLink="/createtask" class="btn btn-outline-primary">Add Task</button>
@@ -80,10 +80,10 @@
                             <td>
                                 <div class="nowrap btn-group">
                                     <button class="btn btn-success" (click)="detailsTask(task.id)">Details</button>
-                                    <button *ngIf="showPOBoard || showDevBoard;" style="margin-left: 2px" class="btn btn-info"
+                                    <button *ngIf="showScrumMBoard || showDevBoard;" style="margin-left: 2px" class="btn btn-info"
                                         (click)="updateTask(task.id)">Update</button>
 
-                                    <button *ngIf="showPOBoard;" style="margin-left: 2px" class="btn btn-danger"
+                                    <button *ngIf="showScrumMBoard;" style="margin-left: 2px" class="btn btn-danger"
                                         (click)="confirmDeleteById(task.id)">Delete</button>
                                 </div>
 
