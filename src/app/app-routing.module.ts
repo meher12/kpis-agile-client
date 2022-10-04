@@ -24,6 +24,8 @@ import { TaskDetailsComponent } from './component/task/task-details/task-details
 import { TaskListByStoryComponent } from './component/task/task-list-by-story/task-list-by-story.component';
 import { TaskListComponent } from './component/task/task-list/task-list.component';
 import { UpdateTaskComponent } from './component/task/update-task/update-task.component';
+import { TeamListComponent } from './component/team/team-list/team-list.component';
+import { UpdateMemberComponent } from './component/team/update-member/update-member.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SigninComponent } from './signin/signin.component';
@@ -38,6 +40,10 @@ const routes: Routes = [
   { path: 'dev', component: BoardDevComponent },
   { path: 'scrm', component: BoardScrmComponent },
   { path: 'po', component: BoardPoComponent },
+
+  // team Router
+  {path: 'teamList', component: TeamListComponent},
+  {path: 'updateMember/:id', component: UpdateMemberComponent},
 
 // Project Router
   {path: 'projectList', component: ProjetListComponent},

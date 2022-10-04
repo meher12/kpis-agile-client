@@ -53,6 +53,8 @@ import { JacocoParseComponent } from './component/jacoco-parse/jacoco-parse.comp
 import { UploadFilesComponent } from './component/upload-files/upload-files.component';
 import { TaskBugsChartComponent } from './charts/task-bugs-chart/task-bugs-chart.component';
 import { TaskBugsDataComponent } from './component/task-bugs-data/task-bugs-data.component';
+import { TeamListComponent } from './component/team/team-list/team-list.component';
+import { UpdateMemberComponent } from './component/team/update-member/update-member.component';
 
 
 
@@ -105,7 +107,8 @@ import { TaskBugsDataComponent } from './component/task-bugs-data/task-bugs-data
     UploadFilesComponent,
     TaskBugsChartComponent,
     TaskBugsDataComponent,
-
+    TeamListComponent,
+    UpdateMemberComponent,
 
 
   ],
