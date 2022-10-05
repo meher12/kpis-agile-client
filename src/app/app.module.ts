@@ -120,7 +120,8 @@ import { UpdateMemberComponent } from './component/team/update-member/update-mem
     AppRoutingModule,
     NgApexchartsModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+
 
 
   ],

@@ -23,6 +23,9 @@ export class UpdateMemberComponent implements OnInit {
   submitted = false;
   user: User = new User();
 
+  // show hide password
+  public showPasswordOnPress: boolean;
+  
   constructor(private teamService: TeamService, private router: Router, private formBuilder: FormBuilder,
     private route: ActivatedRoute, private tokenStorageService: TokenStorageService) { }
 
@@ -32,6 +35,7 @@ export class UpdateMemberComponent implements OnInit {
   });
 
   ngOnInit(): void {
+
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -61,6 +65,8 @@ export class UpdateMemberComponent implements OnInit {
           })
     }
   }
+  
+
 
   onSubmitUpdateUser() {
     this.user = this.form.value;

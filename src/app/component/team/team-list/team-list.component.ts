@@ -25,7 +25,7 @@ export class TeamListComponent implements OnInit {
   page: number = 1;
   count: number = 0;
   tableSize: number = 3;
-  tableSizes: any = [3, 6, 9, 12];
+  tableSizes: any = [4, 6, 9, 12];
 
   constructor(private teamService: TeamService, private router: Router, private tokenStorageService: TokenStorageService) { }
 
