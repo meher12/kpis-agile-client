@@ -1,1 +1,42 @@
-<p>update-member works!</p>
+<div class="row" *ngIf="showScrumMBoard;else BadCredentials">
+    <div class="col-md-12">
+
+        <div class="card card-container">
+            <h3 style="text-align: center;"> Update User</h3>
+            <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label class="form-label">Username*</label>
+                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && fctl['username'].errors }" />
+                    <div *ngIf="submitted && fctl['username'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['username'].errors['required']">Username is required</div>
+                    </div>
+                </div>
+
+
+               
+
+                <!-- password -->
+                <div class="form-group">
+                    <label class="form-label">Password*</label>
+                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && fctl['password'].errors }" />
+                    <div *ngIf="submitted && fctl['password'].errors" class="invalid-feedback">
+                        <div *ngIf="fctl['password'].errors['required']">Password is required</div>
+                    </div>
+                </div>
+
+              
+                <!-- Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>

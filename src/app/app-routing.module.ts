@@ -28,8 +28,8 @@ import { TeamListComponent } from './component/team/team-list/team-list.componen
 import { UpdateMemberComponent } from './component/team/update-member/update-member.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './component/team/signin/signin.component';
+import { SignupComponent } from './component/team/signup/signup.component';
 
 
 const routes: Routes = [

@@ -1,1 +1,75 @@
-<p>team-list works!</p>
+<div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
+    <h3 style="text-align: center;">Team List</h3>
+
+    <div *ngIf="showScrumMBoard;" class="col-md-10" style="margin-bottom: 10px;">
+        <div class="btn-group btn-group-toggle" role="group">
+            <button routerLink="/signup" class="btn btn-outline-primary">Add member</button>
+            <button style="margin-left: 2px" class="btn btn-outline-danger" (click)="DeleteAllUser()">Delete All
+                users</button>
+        </div>
+    </div>
+
+    <div class="table-responsive" style="text-align: center;">
+
+
+        <div class="search-boxs">
+            <input class="form-control"  type="text" name="search" autocomplete="off"
+                placeholder="&#xf002; start searching for a sprint by any item" [(ngModel)]="searchRef">
+                
+                
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex flex-row-reverse bd-highlight mb-2">
+            <div class="p-2 bd-highlight">
+                <select (change)="onTableSizeChange($event)" class="custom-select">
+                    <option *ngFor="let size of tableSizes" [ngValue]="size">
+                        {{ size }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <!-- End Pagination -->
+
+        <table class="table table-striped">
+            <thead class="bg-none bgc-default-tp1">
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let team of teams | filter:searchRef | paginate : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                   };  let i = index ">
+                    <td>{{team.username}}</td>
+                    <td> {{team.email}}</td>
+                    <td *ngFor="let role of team.roles">{{role.name}}</td>
+                    <td>
+                        
+                              <div class="nowrap btn-group">
+                            <button *ngIf="showScrumMBoard;" style="margin-left: 2px" class="btn btn-info"
+                                (click)="updateUser(team.id)">Update</button>
+                            <button *ngIf="showScrumMBoard;" style="margin-left: 2px" class="btn btn-danger"
+                                (click)="DeleteUserById(team.id)">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+            </pagination-controls>
+        </div>
+    </div>
+
+
+</div>
+<ng-template #BadCredentials>
+    <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>

@@ -22,11 +22,11 @@ export class ProjetListComponent implements OnInit {
   projects: Projet[];
   searchRef;
 
-/* Pagination */
-page: number = 1;
-count: number = 0;
-tableSize: number = 3;
-tableSizes: any = [3, 6, 9, 12];
+  /* Pagination */
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 3;
+  tableSizes: any = [3, 6, 9, 12];
 
 
 
@@ -63,19 +63,19 @@ tableSizes: any = [3, 6, 9, 12];
         });
   }
 
-      /* Pagination */
-      onTableDataChange(event: any) {
-        this.page = event;
-        this.getAllProject();
-      }
-      onTableSizeChange(event: any): void {
-        this.tableSize = event.target.value;
-        this.page = 1;
-        this.getAllProject();
-      }
+  /* Pagination */
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getAllProject();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.getAllProject();
+  }
 
 
-  // navigate to page update project
+  // navigate to page detail project
   detailsProject(id: number) {
     this.router.navigate(['/detailsproject', id]);
   }
@@ -165,7 +165,7 @@ tableSizes: any = [3, 6, 9, 12];
             .subscribe(data => {
               console.log(data);
               this.getAllProject();
-              this. refresh();
+              this.refresh();
             },
               err => {
                 this.msgError = err.error.message;
