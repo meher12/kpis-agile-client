@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 //import { AuthService } from '../services/auth.service';
 import { AuthService } from '../../../services/team/auth.service';
 
@@ -8,6 +9,10 @@ import { AuthService } from '../../../services/team/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+
+  isLoggedIn = false;
+  showScrumMBoard = false;
+  roles: string[] = [];
 
   form: any = {
     username: null,
@@ -19,9 +24,20 @@ export class SignupComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+
+    
+    }
   }
 
   onSubmit() {

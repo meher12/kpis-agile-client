@@ -48,8 +48,11 @@
             </div>
 
 
-            
-            <div class="form-group">
+
+            <div class="form-group" *ngIf="showScrumMBoard">
+                <button class="btn btn-primary btn-block">Register new member</button>
+            </div>
+            <div class="form-group" *ngIf="!showScrumMBoard">
                 <button class="btn btn-primary btn-block">Sign Up</button>
             </div>
 
@@ -58,9 +61,17 @@
             </div>
         </form>
 
-        <div class="alert alert-success" *ngIf="isSuccessful">
-            Your registration is successful!
-            <a href="/signin" routerLink="/signin">Signin</a>
+        <div *ngIf="showScrumMBoard">
+            <div class="alert alert-success" *ngIf="isSuccessful">
+                Your registration is successful!
+                <a style="text-align: center;" href="/teamList" routerLink="/teamList">Manage team</a>
+            </div>
+        </div>
+        <div *ngIf="!showScrumMBoard">
+            <div class="alert alert-success" *ngIf="isSuccessful">
+                Your registration is successful!
+                <a href="/signin" routerLink="/signin">Signin</a>
+            </div>
         </div>
     </div>
 </div>
