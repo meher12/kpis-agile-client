@@ -6,33 +6,43 @@
             <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
 
                 <!-- Username -->
-                <div class="form-group">
+                <div class="form-group inner-addon right-addon">
                     <label class="form-label">Username*</label>
+                    <div class="input-group col-12 mx-auto">
                     <input type="text" formControlName="username" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && fctl['username'].errors }" />
+                       
                     <div *ngIf="submitted && fctl['username'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['username'].errors['required']">Username is required</div>
-                    </div>
+                    </div> 
+                </div>
                 </div>
 
 
 
 
                 <!-- password -->
-                <div class="form-group">
-                    <label class="form-label">Password*</label>
-
+                <div class="form-group  inner-addon right-addon">
+                    <label class="form-label">Reset password*</label>
+                    <div class="input-group col-12 mx-auto">
                     <input name="password" [type]="showPasswordOnPress ? 'text' : 'password'" formControlName="password"
-                        class="form-control" [ngClass]="{ 'is-invalid': submitted && fctl['password'].errors }" placeholder="Enter your new password"/>
-                    <div (mousedown)="showPasswordOnPress = !showPasswordOnPress"
+                        class="form-control pwd-control" [ngClass]="{ 'is-invalid': submitted && fctl['password'].errors }" placeholder="Enter your new password"/>
+                        <div 
+                        (mousedown)="showPasswordOnPress = !showPasswordOnPress" 
                         (mouseup)="showPasswordOnPress = !showPasswordOnPress">
-                       <!-- <i alt="show" class="fas fa-eye eye-show" [class.hide]="showPasswordOnPress"></i> -->
-                        <i alt="hide" class="fas fa-eye-slash eye-hide" [class.hide]="!showPasswordOnPress"></i>
-                    </div>
+                          <i alt="show" class="fas fa-eye eye-show" 
+                          
+                          [class.hide]="showPasswordOnPress"></i>
+                          <i alt="hide" class="fas fa-eye-slash eye-hide" 
+                          
+                          [class.hide]="!showPasswordOnPress"></i>
+                        </div>
+                       
 
                     <div *ngIf="submitted && fctl['password'].errors" class="invalid-feedback">
                         <div *ngIf="fctl['password'].errors['required']">Password is required</div>
-                    </div>
+                    </div> 
+                </div>
                 </div>
 
 
