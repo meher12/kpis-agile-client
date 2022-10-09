@@ -41,12 +41,14 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
   @Input() getfileName;
   @Input() savefiledb;
+  @Input() getprojectRefer;
 
   @Output() reportnameChanged = new EventEmitter<string>();
 
   jacocoReports: JacocoReport[];
   jacocoReport: JacocoReport[];
   projectName;
+  projectRef: String;
   msgError = "";
 
   dataSave: Object[];
@@ -84,25 +86,40 @@ export class JacocoParseComponent implements OnChanges, OnInit {
             // this.retrievedObject = JSON.parse(localStorage.getItem("xmlContent"));
             this.dataHTML = this.xmlItems[0];
             this.projectName = this.xmlItems[1];
+            this.projectRef = this.xmlItems[2];
             this.reportnameChanged.emit(this.projectName);
 
             //dynamically build list of objects
             const myobj = { data: [] };
             for (let index = 0; index < this.xmlItems[0].length; index++) {
-              myobj.data.push({ xmlData: this.xmlItems[0][index], id: this.xmlItems[1] })
+              myobj.data.push({ xmlData: this.xmlItems[0][index], id: this.xmlItems[1], projRef: this.xmlItems[2] })
             }
 
             var array = myobj.data
             var array2 = myobj.data
+            var array3 = myobj.data
+
             this.dataSave = array.map(element => element.xmlData);
-
-
+           
             var newArray2 = array2.map(element => element.id);
+            var newArray3 = array3.map(element => element.projRef);
+
+
             for (var i = 0; i < this.dataSave.length; i++) {
-              this.dataSave[i]['projectname'] = newArray2[0]
+              this.dataSave[i]['projectname'] = newArray2[0];
+              
+              
             }
+            newArray3[0] = this.getprojectRefer;
+            for (var i = 0; i < this.dataSave.length; i++) {
+              this.dataSave[i]['projectRef']  = newArray3[0]
+              console.log("Project ID ---------"+ this.dataSave[i]['projectRef']);
+              
+            } 
+
+
             if (this.savefiledb.value) {
-              //console.log("Input value"+this.savefiledb.value)
+              
               this.jacoreportService.createReport(this.dataSave).subscribe(data => { console.log(data) })
             }
 
@@ -153,13 +170,11 @@ export class JacocoParseComponent implements OnChanges, OnInit {
         }
       })
   }
+
 //deletReportByName from table jcoverage
   deletReportByName(reportName: string){
    /*  this.jacoreportService.deletereportByReportName(reportName)
     .subscribe( data => console.log(data)); */
-
-
-
 
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -308,6 +323,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
     return new Promise(resolve => {
       var k: string | number,
         projectName: string,
+        projectRef: string,
         jacocoArray = [],
         parser = new xml2js.Parser(
           {
@@ -317,6 +333,8 @@ export class JacocoParseComponent implements OnChanges, OnInit {
       parser.parseString(data, function (err, result) {
         var obj = result.report;
         projectName = obj.$.name;
+
+        projectRef = "";
 
         /* for (var i = 0; i < obj.counter.length; i++) {
           console.log(obj.counter[i].$.type)
@@ -341,7 +359,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
           });
 
         }
-        resolve([jacocoArray, projectName]);
+        resolve([jacocoArray, projectName, projectRef]);
       });
     });
   }

@@ -1,4 +1,16 @@
-<div class="container">
+ <!-- Start -->
+ <div class="container"> 
+ <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
+ [(ngModel)]="selected" name="valueCheck" (change)="sendProjectRef($event)">
+ <option [ngValue]="undefined" disabled>Choose project title...</option>
+ <option *ngFor="let project of projects" [value]="project.pReference" [selected]="project == selected">
+     {{project.titre}} -- {{project.pReference}}
+ </option>
+</select>
+</div>
+<!-- End -->
+
+<div class="container" *ngIf="selectedListOption">
   <div *ngIf="showPOBoard || showScrumMBoard">
     <div class="row">
       <div class="col-8">
@@ -40,6 +52,6 @@
   </div>
   <!--  <div *ngIf="fileInfos"> -->
   <app-jacoco-parse [getfileName]="fileName" [savefiledb]="this.savefileIndb"
-    (reportnameChanged)="getreportName($event)"></app-jacoco-parse>
+    (reportnameChanged)="getreportName($event)" [getprojectRefer]="projectReference"></app-jacoco-parse>
   <!--  </div> -->
 </div>

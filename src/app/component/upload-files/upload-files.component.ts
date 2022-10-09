@@ -1,10 +1,12 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import Swal from 'sweetalert2';
 import * as swal from 'sweetalert2';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { ProjectService } from 'src/app/services/projects/project.service';
+import { Projet } from 'src/app/models/projet.model';
 @Component({
   selector: 'app-upload-files',
   templateUrl: './upload-files.component.html',
@@ -28,6 +30,14 @@ export class UploadFilesComponent implements OnChanges, OnInit {
   showScrumMBoard = false;
   showDevBoard = false;
   roles: string[] = [];
+
+
+  projects: Projet[];
+  project: Projet;
+  selectedListOption;
+  selected;
+
+  projectReference;
   
   ngOnChanges(changes: SimpleChanges): void {
     this.fileInfos = this.uploadService.getFiles();
@@ -44,7 +54,7 @@ export class UploadFilesComponent implements OnChanges, OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
       this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 
-
+      this.getTitleProjects();
 
 
     }
@@ -53,10 +63,48 @@ export class UploadFilesComponent implements OnChanges, OnInit {
 
 
 
-  constructor(private uploadService: FileUploadService, private tokenStorageService: TokenStorageService) { }
+  constructor(private uploadService: FileUploadService, private tokenStorageService: TokenStorageService, private projectService: ProjectService) { }
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
+
+
+// ************************
+
+// Get All projects
+getTitleProjects() {
+  this.projectService.getProjectList()
+    .subscribe(data => {
+      this.projects = data;
+    })
+}
+
+sendProjectRef(event: any) {
+
+  this.selectedListOption = true;
+ 
+
+
+  //get project name
+  this.projectService.getProjectByReference(event.target.value)
+    .subscribe(data => {
+      this.project = data;
+      console.log("***********-----------"+this.project.pReference);
+      this.projectReference = this.project.pReference;
+    })
+
+
+}
+
+// ************************
+
+
+
+
+
+
+
+
   upload(): void {
     this.progress = 0;
     if (this.selectedFiles) {
