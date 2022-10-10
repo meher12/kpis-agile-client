@@ -76,4 +76,9 @@ export class TaskService {
     return this.httpClient.delete(`${this.baseUrl}` + '/story/' + `${story_id}` + '/tasks', httpOptions);
   }
 
+     // add, update memeber
+     addUpdateTeamMember(id: number, teamMember: any): Observable<any> {
+      return this.httpClient.put<any>(`${this.baseUrl}` + '/task/addmember/'+ `${id}`, teamMember, httpOptions);
+    }
+
 }

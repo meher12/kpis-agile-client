@@ -10,3 +10,118 @@
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
    display: flex ;
   }
+
+
+  .detailsp .text-secondary,  .detailsp .col-sm-9  {
+    color: #091827!important;
+ }
+ 
+ .without-table-tag{
+     margin-top: 15px; 
+ }
+ .without-table-tag .table{
+     display:table;
+     width:100%;
+     text-align: center;
+     overflow-x: auto;
+     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  }
+  
+ 
+ .without-table-tag .row{
+     display:table-row;
+  }
+  .without-table-tag .bold{
+      font-weight: bold;
+  }
+  
+ .without-table-tag .col{
+      display:table-cell;
+      padding-top: 15px;
+    
+  }
+  
+ .without-table-tag .c50{
+     width:40%;
+  }
+  
+ .without-table-tag .c25{
+     width:25%;
+  }
+ 
+  .without-table-tag .c5{
+     width:10%;
+  }
+ 
+  .without-table-tag .c30{
+     width:15%;
+  }
+  .clast{
+     width:15%;
+  }
+
+ /* css model */ 
+ @media (min-width: 400px){
+    .modal-dialog {
+       max-width: 750px;
+       margin: 1.75rem auto;
+       height: auto;
+       transform: scale(1);
+       box-shadow: 0 0 0 50vmax rgba(0,0,0,.5);
+   }
+   }
+   
+   .reveal-modal {
+       position: relative;
+       margin: 0 auto;
+       top: 15%;
+   }
+   
+   
+   .modal { 
+       overflow-y: visible !important;  
+      /*background-color: rgba(241, 231, 231, 0.3);  */
+   }
+ 
+   .box {
+     width: 40%;
+     margin: 0 auto;
+     background: rgba(255,255,255,0.2);
+     padding: 15px;
+     border: 2px solid #fff;
+     border-radius: 20px/50px;
+     background-clip: padding-box;
+     text-align: center;
+     text-decoration: solid;
+   }
+   
+   .button {
+     font-size: 1em;
+     padding: 10px;
+     color: rgb(104, 42, 42);
+     border: 2px solid #0778a5;
+     border-radius: 20px/50px;
+     text-decoration: none;
+     cursor: pointer;
+     transition: all 0.3s ease-out;
+   }
+   .button:hover {
+     background: #7d9c89;
+   }
+   
+   .overlay {
+     position: fixed;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     background: rgba(0, 0, 0, 0.7);
+     transition: opacity 500ms;
+     visibility: hidden;
+     opacity: 0;
+   }
+   .overlay:target {
+     visibility: visible;
+     opacity: 1;
+   }
+ 

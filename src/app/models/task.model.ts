@@ -1,4 +1,5 @@
 import { ETask, ETypeTask } from "./etask.enum";
+import { Team } from "./team.model";
 
 
 
@@ -14,4 +15,5 @@ export class Task {
     public typeTask: ETypeTask;
     public estimation: number;
     public bugs: number;
+    public users: Team[];
 }

@@ -31,6 +31,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SigninComponent } from './component/team/signin/signin.component';
 import { SignupComponent } from './component/team/signup/signup.component';
 import { AddMemeberComponent } from './component/projet/projet-details/memeber/add-memeber/add-memeber.component';
+import { AddMemberComponent } from './component/task/task-details/member/add-member/add-member.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path: 'teamList', component: TeamListComponent},
   {path: 'updateMember/:id', component: UpdateMemberComponent},
   {path: 'addmemeber/:id', component: AddMemeberComponent, outlet: 'addMemberPopup'},
+  {path: 'addMemberTask/:id', component: AddMemberComponent, outlet: 'memberTaskPopup'},
 
 // Project Router
   {path: 'projectList', component: ProjetListComponent},
