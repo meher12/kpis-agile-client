@@ -1,7 +1,7 @@
 <div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
   <h3 class="text-center"> View Project Details</h3>
 
-  
+
 
   <div class="col-md-12 detailsp">
     <div class="card mb-3">
@@ -96,6 +96,57 @@
             <h3>There is no Sprint for this project!!</h3>
           </div>
         </ng-template>
+
+        <!-- ************** -->
+        <div class="without-table-tag" *ngIf="teamList?.length > 0; else noTeamList">
+          <h3> List member of {{projectdetails.titre}} project: </h3>
+          <br>
+          <div class="table">
+            <div class="row bold">
+              <div class="col c5 border">Name</div>
+              <div class="col c25 border">Email</div>
+              <div class="col c50 border">Role</div>
+            </div>
+            <div class="row" *ngFor="let teamMember of projectdetails.users">
+              <div class="col c5 border">{{teamMember.username}}</div>
+              <div class="col c25 border">{{teamMember.email}}</div>
+
+              <div class="col c50 border" *ngFor="let role of teamMember.roles">{{role.name}}</div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noTeamList>
+          <div class="text-danger font-weight-bold" style="padding-top: 10px;">
+            <h3>There is no team for this project!!</h3>
+          </div>
+        </ng-template>
+        <!-- ************** -->
+        <!-- PopUp Add memeber -->
+        <!-- Start button popup -->
+        <button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary"
+          (click)="openPopup(projectdetails.id)">Add
+          Add Member
+        </button>
+
+        <div class="modal" *ngIf="showScrumMBoard" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+          <div class="modal-dialog reveal-modal" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Add New Member</h4>
+              </div>
+              <div class="modal-body">
+                <app-add-memeber></app-add-memeber>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closePopup()">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End button popup -->
+        <!-- End popUp Add memeber -->
       </div>
     </div>
   </div>

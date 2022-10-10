@@ -1,0 +1,52 @@
+<div class="card" *ngIf="showScrumMBoard;else BadCredentials">
+  <div class="container">
+
+   <!--  <h1>Add Team </h1> -->
+
+    <form [formGroup]="newMemberForm" (ngSubmit)="onSubmit()">
+
+      <!--   <p>
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" name="name" formControlName="name" class="form-control">
+      </p> -->
+
+      <table class="table table-bordered" formArrayName="dataArray">
+        <tr>
+          <th colspan="2">Add member:</th>
+          <th width="150px"><button type="button" (click)="addTeams()" class="btn btn-primary">Add More</button>
+          </th>
+        </tr>
+        <tr *ngFor="let dataa of dataArray().controls; let i=index" [formGroupName]="i">
+            <td>  <input type="email" formControlName="emailMember" class="form-control" /></td>
+          
+         <!--  <td *ngIf="i < this.sprint.daysarray.length-1">
+            
+             
+              Date {{i+1}}: {{this.sprint.daysarray[i]}} il reste  {{(this.sprint.daysarray.length)-i}} jours
+
+              <input type="number" formControlName="storypC" class="form-control" />
+            
+          </td> -->
+          <!--  <td>
+              Price:
+              <input type="text" formControlName="price" class="form-control">
+          </td> -->
+          <td>
+            <button (click)="removeMember(i)" class="btn btn-danger">Remove</button>
+          </td>
+        </tr>
+      </table>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+
+    <br />
+
+    <!--   {{this.workCompletedForm.value | json}} -->
+
+  </div>
+</div>
+<ng-template #BadCredentials>
+  <h3 class="text-danger " style="text-align: center; margin: 0px auto;"> Bad Credentials </h3>
+</ng-template>

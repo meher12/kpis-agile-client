@@ -96,6 +96,13 @@ export class ProjectService {
     return this.httpClient.put(`${this.baseUrl}` + '/projects/gettaskbugs/' + `${preference}`, startDateObject, httpOptions);
   }
 
+
+
+   // add, update memeber
+   addUpdateteamMember(id: number, teamMember: any): Observable<any> {
+    return this.httpClient.put<any>(`${this.baseUrl}` + '/project/addmember/'+ `${id}`, teamMember, httpOptions);
+  }
+
  
 }
 

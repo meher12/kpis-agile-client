@@ -1,4 +1,6 @@
 import { Sprint } from "./sprint.model";
+import { Team } from "./team.model";
+import { User } from "./user.model";
 
 
 export class Projet {
@@ -12,7 +14,9 @@ export class Projet {
     public dateDebut: Date;
     public dateFin: Date;
     public pupdatedDate: Date;
-    public sprints: Sprint[]
+    public sprints: Sprint[];
+    //public team: Team[];
+    public users: Team[];
 
     public pSpCommitment: string[];
     public pSpwrked: string[];

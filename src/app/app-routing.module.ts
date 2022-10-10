@@ -30,6 +30,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SigninComponent } from './component/team/signin/signin.component';
 import { SignupComponent } from './component/team/signup/signup.component';
+import { AddMemeberComponent } from './component/projet/projet-details/memeber/add-memeber/add-memeber.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
   // team Router
   {path: 'teamList', component: TeamListComponent},
   {path: 'updateMember/:id', component: UpdateMemberComponent},
+  {path: 'addmemeber/:id', component: AddMemeberComponent, outlet: 'addMemberPopup'},
 
 // Project Router
   {path: 'projectList', component: ProjetListComponent},

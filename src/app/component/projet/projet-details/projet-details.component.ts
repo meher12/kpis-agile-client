@@ -2,6 +2,7 @@ import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Projet } from 'src/app/models/projet.model';
 import { Sprint } from 'src/app/models/sprint.model';
+import { Team } from 'src/app/models/team.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -27,6 +28,9 @@ export class ProjetDetailsComponent implements OnInit{
   
   projectdetails: Projet;
   sprintList: Sprint[];
+  teamList: Team[];
+
+  displayStyle = "none";
 
 
   constructor(private projectService: ProjectService, private sprintService: SprintService,  private route: ActivatedRoute,
@@ -43,7 +47,7 @@ export class ProjetDetailsComponent implements OnInit{
       localStorage.removeItem('project_data') 
     }
 
-   this.updateTablesprint();
+   //this.updateTablesprint();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -59,8 +63,8 @@ export class ProjetDetailsComponent implements OnInit{
         .subscribe(data => {
           this.projectdetails = data;
           this.sprintList = this.projectdetails.sprints;
-         // this.preference = this.projectdetails.pReference;
-          //console.log(this.projectdetails);
+         this.teamList = this.projectdetails.users;
+          console.log(this.projectdetails);
           //console.log(this.preference);
 
         },
@@ -80,5 +84,15 @@ export class ProjetDetailsComponent implements OnInit{
 }
 
 
+
+openPopup(id: number) {
+  this.router.navigate([{ outlets: { addMemberPopup: ['addmemeber', id] } }]);
+  this.displayStyle = "block";
+}
+closePopup() {
+  this.displayStyle = "none";
+  this.router.navigate([{ outlets: { addspPopup: null } }]);
+  location.reload();
+}
 
 }

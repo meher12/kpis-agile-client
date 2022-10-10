@@ -55,6 +55,7 @@ import { TaskBugsChartComponent } from './charts/task-bugs-chart/task-bugs-chart
 import { TaskBugsDataComponent } from './component/task-bugs-data/task-bugs-data.component';
 import { TeamListComponent } from './component/team/team-list/team-list.component';
 import { UpdateMemberComponent } from './component/team/update-member/update-member.component';
+import { AddMemeberComponent } from './component/projet/projet-details/memeber/add-memeber/add-memeber.component';
 
 
 
@@ -109,6 +110,7 @@ import { UpdateMemberComponent } from './component/team/update-member/update-mem
     TaskBugsDataComponent,
     TeamListComponent,
     UpdateMemberComponent,
+    AddMemeberComponent,
 
 
   ],
