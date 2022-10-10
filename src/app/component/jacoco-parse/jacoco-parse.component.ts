@@ -113,7 +113,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
             newArray3[0] = this.getprojectRefer;
             for (var i = 0; i < this.dataSave.length; i++) {
               this.dataSave[i]['projectRef']  = newArray3[0]
-              console.log("Project ID ---------"+ this.dataSave[i]['projectRef']);
+              //console.log("Project ID ---------"+ this.dataSave[i]['projectRef']);
               
             } 
 
