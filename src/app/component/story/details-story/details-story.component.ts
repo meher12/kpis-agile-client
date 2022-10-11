@@ -6,6 +6,7 @@ import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { StoryService } from 'src/app/services/story/story.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
+import * as moment from 'moment';  
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,6 +26,7 @@ export class DetailsStoryComponent implements OnInit {
   id: number;
   story: Story;
   tasks: Task[];
+  taskSorted: any[] = [];
 
   constructor(private storyService: StoryService,  private route: ActivatedRoute,
     private tokenStorageService: TokenStorageService, private sprintService: SprintService) { }
@@ -53,8 +55,15 @@ export class DetailsStoryComponent implements OnInit {
       this.storyService.getStoryById(this.id)
         .subscribe(data => {
           this.story = data;
-          this.tasks = this.story.tasks;
+         // this.tasks = this.story.tasks;
           console.log(this.story);
+            //*************** */
+            var taskNotStored = this.story.tasks;
+            // sort sprints array
+            this.taskSorted = taskNotStored.sort((a, b) => {
+              return moment(a.tdateDebut).diff(b.tdateDebut);
+            });
+            //**************** */
 
         },
           err => {

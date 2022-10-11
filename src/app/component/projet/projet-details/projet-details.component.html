@@ -70,7 +70,7 @@
           </div>
         </div>
 
-        <div class="without-table-tag" *ngIf="sprintList?.length > 0; else noSprintList">
+        <div class="without-table-tag" *ngIf="sprintSorted?.length > 0; else noSprintList">
           <h3> List Sprints of {{projectdetails.titre}} project: </h3>
           <br>
           <div class="table">
@@ -81,7 +81,7 @@
               <div class="col c30 border">Start Date</div>
               <div class="col clast border">End Date</div>
             </div>
-            <div class="row" *ngFor="let sprint of projectdetails.sprints">
+            <div class="row" *ngFor="let sprint of sprintSorted">
               <div class="col c5 border">{{sprint.sReference}}</div>
               <div class="col c25 border">{{sprint.stitre}}</div>
               <div class="col c50 border">{{sprint.sdescription}}</div>

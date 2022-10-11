@@ -58,7 +58,7 @@
             </div>
           </div>
   
-          <div class="without-table-tag" *ngIf="tasks?.length > 0; else noTasksList">
+          <div class="without-table-tag" *ngIf="taskSorted?.length > 0; else noTasksList">
             <h3> List Task of {{story.stname}} story: </h3>
             <br>
             <div class="table">
@@ -71,7 +71,7 @@
                 <div class="col c30 border">Status</div>
                 <div class="col clast border">Type Task</div>
               </div>
-              <div class="row" *ngFor="let task of story.tasks">
+              <div class="row" *ngFor="let task of taskSorted">
                 <div class="col c5 border">{{task.tReference}}</div>
                 <div class="col c25 border">{{task.tname}}</div>
                 <div class="col c50 border">{{task.tdescription}}</div>
