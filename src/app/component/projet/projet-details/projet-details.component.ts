@@ -47,7 +47,7 @@ export class ProjetDetailsComponent implements OnInit{
       localStorage.removeItem('project_data') 
     }
 
-   //this.updateTablesprint();
+    this.updateTablesprint();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {

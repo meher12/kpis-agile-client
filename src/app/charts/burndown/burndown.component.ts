@@ -152,7 +152,7 @@ export class BurndownComponent implements OnInit {
 
         this.datePickedB.emit( this.sprintObject.supdatedDate);
 
-        this.brunDownChart(this.idealLineArray, this.workedStoryarray, this.dateList);
+        this.burnDownChart(this.idealLineArray, this.workedStoryarray, this.dateList);
 
 
       },
@@ -168,7 +168,7 @@ export class BurndownComponent implements OnInit {
 
 
   // brundown Chart by sprint
-  brunDownChart(idealLine: string[], workedDayLine: string[], workedDay: String[]) {
+  burnDownChart(idealLine: string[], workedDayLine: string[], workedDay: String[]) {
     // Start brundown Chart
     this.chartOptions = {
       series: [
@@ -190,7 +190,7 @@ export class BurndownComponent implements OnInit {
         toolbar: {
           export: {
             csv: {
-              filename: "BrundownChart",
+              filename: "BurndownChart",
               //headerCategory: 'Date;',
               //columnDelimiter: ';',
               headerCategory: 'Date',
@@ -198,20 +198,13 @@ export class BurndownComponent implements OnInit {
               
             },
             svg: {
-              filename: "BrundownChart",
+              filename: "BurndownChart",
             },
             png: {
-              filename: "BrundownChart",
+              filename: "BurndownChart",
             }
           },
         }
-
-
-
-        
-
-
-
 
       },
       dataLabels: {
@@ -223,7 +216,7 @@ export class BurndownComponent implements OnInit {
         dashArray: [0, 8, 5]
       },
       title: {
-        text: 'Brundown Chart',
+        text: 'Burndown Chart',
         align: 'center',
         margin: 30,
         offsetX: 0,

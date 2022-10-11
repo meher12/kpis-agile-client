@@ -87,7 +87,7 @@ export class ReleaseBurndownComponent implements OnInit {
 
       this.getAllproject();
       this.updateTablesprint();
-     // this.getUpdateAllsp();
+      // this.getUpdateAllsp();
 
 
     }
@@ -95,9 +95,9 @@ export class ReleaseBurndownComponent implements OnInit {
   }
 
   //update all sp
- /*  getUpdateAllsp() {
-    this.projectService.updateAllSp().subscribe(data => console.log(data));
-  } */
+  /*  getUpdateAllsp() {
+     this.projectService.updateAllSp().subscribe(data => console.log(data));
+   } */
   // update work Commitment and work Completed in sprint
   updateTablesprint() {
     this.sprintService.updateStoryPointInSprint()
@@ -143,7 +143,7 @@ export class ReleaseBurndownComponent implements OnInit {
     this.projectService.getProjectByReference(event.target.value)
       .subscribe(data => {
         this.project = data;
-        console.log("get release brundown chart data from project",this.project);
+        console.log("get release burndown chart data from project", this.project);
 
         this.project.pSpCommitment.pop();
         // this.project.pSpCommitment.pop();
@@ -208,14 +208,30 @@ export class ReleaseBurndownComponent implements OnInit {
         height: 'auto',
         stacked: true,
         toolbar: {
-          show: true
+          show: true,
+          export: {
+            csv: {
+              filename: "ReleaseBurndownChart",
+              //headerCategory: 'Date;',
+              //columnDelimiter: ';',
+              headerCategory: 'Date',
+              //headerValue: 'value'
+
+            },
+            svg: {
+              filename: "ReleaseBurndownChart",
+            },
+            png: {
+              filename: "ReleaseBurndownChart",
+            }
+          },
         },
         zoom: {
           enabled: true
         }
       },
       title: {
-        text: 'Release brundoun Chart',
+        text: 'Release burndoun Chart',
         align: 'center',
         margin: 30,
         offsetX: 0,
