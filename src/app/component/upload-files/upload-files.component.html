@@ -2,7 +2,7 @@
 <div class="container">
   <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
     [(ngModel)]="selected" name="valueCheck" (change)="sendProjectRef($event)">
-    <option [ngValue]="undefined" disabled>Choose project title...</option>
+    <option [ngValue]="undefined" disabled>Choose project </option>
     <option *ngFor="let project of projects" [value]="project.pReference" [selected]="project == selected">
       {{project.titre}} -- {{project.pReference}}
     </option>
@@ -55,6 +55,6 @@
   </div>
   <!--  <div *ngIf="fileInfos"> -->
   <app-jacoco-parse [getfileName]="fileName" [savefiledb]="this.savefileIndb"
-    (reportnameChanged)="getreportName($event)" [getprojectRefer]="projectReference"></app-jacoco-parse>
+    (reportnameChanged)="getreportName($event)" [getprojectRefer]="projectReference" [listNameReport]="arrayProjectName"></app-jacoco-parse>
   <!--  </div> -->
 </div>

@@ -34,7 +34,7 @@ export type ChartOptions = {
 })
 export class JacocoParseComponent implements OnChanges, OnInit {
 
-  
+
 
   @ViewChild("cartradar") chart: ChartComponent;
   public chartOptions: Partial<any>;
@@ -42,6 +42,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   @Input() getfileName;
   @Input() savefiledb;
   @Input() getprojectRefer;
+  @Input() listNameReport;
 
   @Output() reportnameChanged = new EventEmitter<string>();
 
@@ -55,10 +56,10 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   dataHTML: any[]
 
   selected;
+  selectedOne;
   nameselected;
   arrayProjectName: string[];
 
-  booleanValue;
 
   projectJacocoverage;
 
@@ -100,26 +101,26 @@ export class JacocoParseComponent implements OnChanges, OnInit {
             var array3 = myobj.data
 
             this.dataSave = array.map(element => element.xmlData);
-           
+
             var newArray2 = array2.map(element => element.id);
             var newArray3 = array3.map(element => element.projRef);
 
 
             for (var i = 0; i < this.dataSave.length; i++) {
               this.dataSave[i]['projectname'] = newArray2[0];
-              
-              
+
+
             }
             newArray3[0] = this.getprojectRefer;
             for (var i = 0; i < this.dataSave.length; i++) {
-              this.dataSave[i]['projectRef']  = newArray3[0]
+              this.dataSave[i]['projectRef'] = newArray3[0]
               //console.log("Project ID ---------"+ this.dataSave[i]['projectRef']);
-              
-            } 
+
+            }
 
 
             if (this.savefiledb.value) {
-              
+
               this.jacoreportService.createReport(this.dataSave).subscribe(data => { console.log(data) })
             }
 
@@ -132,29 +133,83 @@ export class JacocoParseComponent implements OnChanges, OnInit {
           );
 
         });
+
+
     }
-    // get project name for select option to choose project
-    this.getAllProjectName()
+    // get project report for select option to choose report
+    /* 
+    ************* ngOnChanges best practice - always use SimpleChanges - always *************
+
+    This code now has a problem. OnChanges gets called twice - once for every @Input. What if the first time it's called is for mySecondInputParameter? Well,
+    we'd be calling doSomething with 'undefined' since myFirstInputParameter hasn't been set yet. The way I typically see this handled is like this...
+    OnChanges() {
+    if (this.myFirstInputParameter) {
+      this.getAllProjectName(this.myFirstInputParameter);
+    }
+      }
+    And this is the anti-pattern. Or worse, it's just plain wrong. Consider what happens if the first value to be set happens to be myFirstInputParameter. 
+    Well, our OnChanges fires, finds myFirstInputParameter is set and calls doSomething(). Then OnChanges fires again because mySecondInputParameter is set, finds that myFirstInputParameter is set and calls doSomething() again. This was not intended by the developer. If further @Input()'s are added, then doSomething() gets called even more. Does the angular developer really control the order that ngOnChanges() is called for each @Input? I'd say not. So writing code that assumes a particular order is bad. In fact, depending on your app, the order of calls to OnChanges may not be consistent and then your app may act inconsistently with race conditions.
+
+    The solution is to use SimpleChanges. And further to that - to ALWAYS use SimpleChanges. Lets see how SimpleChanges actually works. It's quite a simple change ;-)
+
+
+    This looks a bit verbose but it fixes our problem. ngOnChanges still gets called multiple times,
+     but crucially the changes parameter tells us which @Input() caused the call. SimpleChanges also happens to provide the old value of the 
+     @Input() if there has been multiple changes to that value - pretty handy.
+    I propose that we should always take the SimpleChanges parameter in our ngOnChanges methods. Even if we only have a single @Input() on our component. 
+    I don't want code that assumes there will always be only one @Input(). 
+    That would be forcing the next developer to handle my @Input() if they want to add their own.
+     It would be so easy to introduce a bug by adding another @Input() to a component and forgetting to check ngOnChanges() for the handling of the other @Input()'s. 
+    So take responsibility of your @Input() and embrace SimpleChanges.
+    
+    Here get only the current value changed ;)
+    https://dev.to/nickraphael/ngonchanges-best-practice-always-use-simplechanges-always-1feg#
+    */
+    /* for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'listNameReport': {
+            this.getAllProjectName(changes.currentValue)
+          }
+        }
+      }
+    } */
+
+   //  https://generic-ui.com/blog/how-to-make-angular-onChanges-better
+    // Here get only not undefined and  current value changed ;)
+    if (changes.listNameReport !== undefined && changes.listNameReport.currentValue !== undefined) {
+      this.getAllProjectName(changes.currentValue)
+    }
+
   }
 
   ngOnInit(): void {
+
   }
 
   // get list of project saved in jacoco coverage table
-  getAllProjectName() {
-    this.jacoreportService.getReportList()
-      .subscribe({
-        next: (data) => {
-          this.jacocoReports = data;
-          this.arrayProjectName = [...new Set(this.jacocoReports.map(elem => elem.projectname))];
-          //console.log(this.arrayProjectName)
-        }
+  getAllProjectName(listNameReport: any) {
+    if (Array.isArray(this.listNameReport) && this.listNameReport.length) {
+      this.arrayProjectName = this.listNameReport;
+      //console.log("List Project Name: " + this.arrayProjectName)
+    }
+    else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'There is no report for this project ! Import one',
       })
+
+      this.arrayProjectName = [];
+    }
+
+
   }
 
+
+  // get report by name
   getreportByName(event: any) {
     this.nameselected = event.target.value;
-
     this.jacoreportService.gettotalCoverageByPName(this.nameselected)
       .subscribe(data => {
         this.projectJacocoverage = data;
@@ -171,10 +226,13 @@ export class JacocoParseComponent implements OnChanges, OnInit {
       })
   }
 
-//deletReportByName from table jcoverage
-  deletReportByName(reportName: string){
-   /*  this.jacoreportService.deletereportByReportName(reportName)
-    .subscribe( data => console.log(data)); */
+
+
+
+  //deletReportByName from table jcoverage
+  deletReportByName(reportName: string) {
+    /*  this.jacoreportService.deletereportByReportName(reportName)
+     .subscribe( data => console.log(data)); */
 
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -200,18 +258,18 @@ export class JacocoParseComponent implements OnChanges, OnInit {
           'success'
         ),
 
-        this.jacoreportService.deletereportByReportName(reportName)
-        .subscribe(data => {
+          this.jacoreportService.deletereportByReportName(reportName)
+            .subscribe(data => {
               console.log(data);
-              setTimeout(function(){
-              if (!localStorage.getItem('reprot')) { 
-                localStorage.setItem('reprot', 'no reload') 
-                location.reload() 
-              } else {
-                localStorage.removeItem('reprot') 
-              }
-            }, 2000);
-              
+              setTimeout(function () {
+                if (!localStorage.getItem('reprot')) {
+                  localStorage.setItem('reprot', 'no reload')
+                  location.reload()
+                } else {
+                  localStorage.removeItem('reprot')
+                }
+              }, 2000);
+
             },
               err => {
                 this.msgError = err.error.message;

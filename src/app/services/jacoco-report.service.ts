@@ -44,4 +44,9 @@ export class JacocoReportService {
     return this.httpClient.delete(`${this.baseUrl}`+'/report/deleteallbyname/' + `${reportName}`, httpOptions);
 
   }
+
+  // get  All report by Project reference
+  getAllReportByProjectReference(pReference: string): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.baseUrl}` + '/reports/'+`${pReference}`, httpOptions);
+  }
 }

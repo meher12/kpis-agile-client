@@ -5,26 +5,30 @@
     </div>
   </div>
 
-  <!-- Start -->
+
+
+
+
+     <!-- Start -->
   <div class="search-sprints">
     <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
       (change)="getreportByName($event)">
-      <option [ngValue]="undefined" disabled>Choose project...</option>
-      <option *ngFor="let jacRep of arrayProjectName" [value]="jacRep" [selected]=" jacRep == selected">
+      <option [ngValue]="undefined" disabled>Choose Report</option>
+      <option *ngFor="let jacRep of arrayProjectName" [value]="jacRep" [selected]=" jacRep == selectedOne">
         {{jacRep}}
       </option>
     </select>
   </div>
   <!-- End -->
 
-
-
   <!--  <div *ngIf="selected">
   <button (click)="getdaa()"> get data</button>
 
   </div> -->
 
-  <!--  <div *ngIf="booleanValue"> -->
+ 
+ <div *ngIf="listNameReport?.length>0">
+
   <div class="container">
     <div class="msgList" *ngIf="selected">
 
@@ -38,12 +42,14 @@
         </ng-container>
       </div>
       <div class="row">
-        <h3>Project Name: {{nameselected}}</h3>
+        <h3>JaCoCo report: {{nameselected}}</h3>
       </div>
-<div class="btn btn-danger" (click)="deletReportByName(nameselected)"> Delete report</div>
-      <table class="table table-bordered table-striped ">
+      <div class="buttonContainer d-flex flex-row-reverse">
+      <div class="btn btn-danger deleteButton" (click)="deletReportByName(nameselected)"> Delete
+        report</div>
+      </div> 
+      <table class="table table-bordered table-striped">
         <tr>
-          <!--  <th>Project Name</th> -->
           <th>Type</th>
           <th>Covered</th>
           <th>Missed</th>
@@ -53,7 +59,7 @@
         </tr>
         <tr *ngFor="let itemReport of jacocoReport">
           <!--  <td>{{itemReport.projectname}}</td> -->
-          
+
           <td>{{itemReport.type}}</td>
           <td>{{itemReport.covered}}</td>
           <td>{{itemReport.missed}}</td>
@@ -65,5 +71,6 @@
       </table>
     </div>
 
+  </div>
   </div>
 </div>

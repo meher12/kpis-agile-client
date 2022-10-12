@@ -7,6 +7,8 @@ import * as swal from 'sweetalert2';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { Projet } from 'src/app/models/projet.model';
+import { JacocoReportService } from 'src/app/services/jacoco-report.service';
+import { JacocoReport } from 'src/app/models/jacoco.model';
 @Component({
   selector: 'app-upload-files',
   templateUrl: './upload-files.component.html',
@@ -38,6 +40,8 @@ export class UploadFilesComponent implements OnChanges, OnInit {
   selected;
 
   projectReference;
+  arrayProjectName: string[];
+  jacocoReports: JacocoReport[];
   
   ngOnChanges(changes: SimpleChanges): void {
     this.fileInfos = this.uploadService.getFiles();
@@ -62,8 +66,8 @@ export class UploadFilesComponent implements OnChanges, OnInit {
   }
 
 
-
-  constructor(private uploadService: FileUploadService, private tokenStorageService: TokenStorageService, private projectService: ProjectService) { }
+  constructor(private uploadService: FileUploadService, private tokenStorageService: TokenStorageService, 
+    private projectService: ProjectService, private jacoreportService: JacocoReportService) { }
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
@@ -84,13 +88,30 @@ sendProjectRef(event: any) {
   this.selectedListOption = true;
  
 
-
-  //get project name
+  //get project reference
   this.projectService.getProjectByReference(event.target.value)
     .subscribe(data => {
       this.project = data;
       console.log("***********-----------"+this.project.pReference);
       this.projectReference = this.project.pReference;
+
+      // **********Get All Report by referece project********
+      this.jacoreportService.getAllReportByProjectReference(this.projectReference)
+      .subscribe(data => {
+        this.jacocoReports = data;
+        // console.log("my data: "+ this.jacocoReports)
+         this.arrayProjectName = [...new Set(this.jacocoReports.map(elem => elem.projectname))];
+         
+      })
+      /* .subscribe({
+        next: (data) => {
+          this.jacocoReports = data;
+         // console.log("my data: "+ this.jacocoReports)
+          this.arrayProjectName = [...new Set(this.jacocoReports.map(elem => elem.projectname))];
+          
+        }
+      }) */
+      // ******************
     })
 
 
