@@ -57,6 +57,7 @@ import { TeamListComponent } from './component/team/team-list/team-list.componen
 import { UpdateMemberComponent } from './component/team/update-member/update-member.component';
 import { AddMemeberComponent } from './component/projet/projet-details/memeber/add-memeber/add-memeber.component';
 import { AddMemberComponent } from './component/task/task-details/member/add-member/add-member.component';
+import { ProductBurndownChartComponent } from './charts/product-burndown-chart/product-burndown-chart.component';
 
 
 
@@ -113,6 +114,7 @@ import { AddMemberComponent } from './component/task/task-details/member/add-mem
     UpdateMemberComponent,
     AddMemeberComponent,
     AddMemberComponent,
+    ProductBurndownChartComponent,
 
 
   ],
