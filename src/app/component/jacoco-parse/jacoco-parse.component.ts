@@ -222,6 +222,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
       .subscribe({
         next: (data) => {
           this.jacocoReport = data;
+          console.log("Report is:"+ this.jacocoReport);
         }
       })
   }
