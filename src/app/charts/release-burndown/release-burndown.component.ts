@@ -185,21 +185,21 @@ export class ReleaseBurndownComponent implements OnInit {
   relaseBrundounChart(spcommitment: any[], spworked: any[], spmore: any[], sprintname: any[]) {
 
 
-    sprintname.push("release sprint");
+    sprintname.push("Remaining story points");
 
     /* Start Chart*/
     this.chartOptions = {
       series: [
         {
-          name: "Total story points",
+          name: "Remaining",
           data: spcommitment  //[85, 61, 40, 33, 0] //[85, 61, 40, 18, 10]
         },
         {
-          name: "Completed story point",
+          name: "Done",
           data: spworked //[24, 21, 22, 33]  //[24, 21, 22, 18]
         },
         {
-          name: "New task",
+          name: "New",
           data: spmore //[0, 0, 15, 0] //[0, 0, 10, 0]
         }
       ],
@@ -214,7 +214,7 @@ export class ReleaseBurndownComponent implements OnInit {
               filename: "ReleaseBurndownChart",
               //headerCategory: 'Date;',
               //columnDelimiter: ';',
-              headerCategory: 'Date',
+              headerCategory: 'Sprint',
               //headerValue: 'value'
 
             },
@@ -261,12 +261,55 @@ export class ReleaseBurndownComponent implements OnInit {
           horizontal: false
         }
       },
-      xaxis: {
+     /*  xaxis: {
         type: "category",
         categories: sprintname, //['sprint 1', 'sprint 2', 'sprint 3', 'sprint 4', 'release sprint'],
         tickPlacement: 'on',
 
+      }, */
+      xaxis: {
+        categories: sprintname,
+        tickPlacement: 'on',
+        labels: {
+          style: {
+            colors: [],
+            fontSize: '12px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        }
       },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"]
+      },
+     /*  yaxis: {
+        show: true,
+        showAlways: true,
+        title: {
+          text: "Story points",
+          style: {
+            colors: [],
+            fontSize: '10px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        },
+        labels: {
+          show: true,
+          style: {
+            colors: [],
+            fontSize: '10px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-xaxis-label',
+          }
+        }
+
+      }, */
       legend: {
         position: "right",
         offsetY: 40

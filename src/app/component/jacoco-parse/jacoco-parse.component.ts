@@ -222,13 +222,13 @@ export class JacocoParseComponent implements OnChanges, OnInit {
       decimalseparator: '.',
       showLabels: true,
       showTitle: true,
-      title: "Jacoco Coverage for "+ this.nameselected + " is "+ this.projectJacocoverage.toFixed(2)+ "%",
+      title: "Coverage for "+ this.nameselected + " is "+ this.projectJacocoverage.toFixed(2)+ "%",
       //useBom: true,
       noDownload: false,
       headers: ["Type", "Covered", "Missed", "Coverage", "Created At"]
     };
 
-    new ngxCsv(this.csvJacocoReport, "Report", options);
+    new ngxCsv(this.csvJacocoReport, "JacocoReport", options);
   }
 
 
