@@ -9,7 +9,7 @@
 
 
 
-     <!-- Start -->
+  <!-- Start -->
   <div class="search-sprints">
     <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
       (change)="getreportByName($event)">
@@ -21,51 +21,53 @@
   </div>
   <!-- End -->
 
- 
- <div *ngIf="listNameReport?.length>0">
 
-  <div class="container">
-    <div class="msgList" *ngIf="selected">
+  <div *ngIf="listNameReport?.length>0">
 
-      <div class="cartradar">
-        <ng-container *ngIf="chartOptions">
-          <div id="cartradar">
-            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
-              [plotOptions]="chartOptions.plotOptions" [labels]="chartOptions.labels" [fill]="chartOptions.fill"
-              [stroke]="chartOptions.stroke"></apx-chart>
-          </div>
-        </ng-container>
+    <div class="container">
+      <div class="msgList" *ngIf="selected">
+
+        <div class="cartradar">
+          <ng-container *ngIf="chartOptions">
+            <div id="cartradar">
+              <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                [plotOptions]="chartOptions.plotOptions" [labels]="chartOptions.labels" [fill]="chartOptions.fill"
+                [stroke]="chartOptions.stroke"></apx-chart>
+            </div>
+          </ng-container>
+        </div>
+        <div class="row">
+          <h3>JaCoCo report: {{nameselected}}</h3>
+        </div>
+        <div class="buttonContainer d-flex">
+
+          <div class="btn btn-info csvButton p-2" (click)="downloadCSVFile()"> Export CSV File </div>
+          <div class="btn btn-danger deleteButton ml-auto p-2" (click)="deletReportByName(nameselected)"> Delete
+            report</div>
+        </div>
+        <table class="table table-bordered table-striped">
+          <tr>
+            <th>Type</th>
+            <th>Covered</th>
+            <th>Missed</th>
+            <th>Coverage</th>
+            <th>Created At</th>
+
+          </tr>
+          <tr *ngFor="let itemReport of jacocoReport">
+            <!--  <td>{{itemReport.projectname}}</td> -->
+
+            <td>{{itemReport.type}}</td>
+            <td>{{itemReport.covered}}</td>
+            <td>{{itemReport.missed}}</td>
+            <td>{{itemReport.percentage}}%</td>
+            <td>{{itemReport.createdAt}}</td>
+
+          </tr>
+
+        </table>
       </div>
-      <div class="row">
-        <h3>JaCoCo report: {{nameselected}}</h3>
-      </div>
-      <div class="buttonContainer d-flex flex-row-reverse">
-      <div class="btn btn-danger deleteButton" (click)="deletReportByName(nameselected)"> Delete
-        report</div>
-      </div> 
-      <table class="table table-bordered table-striped">
-        <tr>
-          <th>Type</th>
-          <th>Covered</th>
-          <th>Missed</th>
-          <th>Coverage</th>
-          <th>Created At</th>
 
-        </tr>
-        <tr *ngFor="let itemReport of jacocoReport">
-          <!--  <td>{{itemReport.projectname}}</td> -->
-
-          <td>{{itemReport.type}}</td>
-          <td>{{itemReport.covered}}</td>
-          <td>{{itemReport.missed}}</td>
-          <td>{{itemReport.percentage}}%</td>
-          <td>{{itemReport.createdAt}}</td>
-
-        </tr>
-
-      </table>
     </div>
-
-  </div>
   </div>
 </div>

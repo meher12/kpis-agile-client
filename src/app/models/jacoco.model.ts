@@ -9,3 +9,11 @@ export class JacocoReport {
     public totalpercentage: any;
     public createdAt: Date;
 }
+
+export class CsvJacocoReport{
+    public type: any;
+    public covered: any;
+    public missed: any;
+    public percentage: any;
+    public createdAt: Date;
+}

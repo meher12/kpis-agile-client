@@ -5,8 +5,9 @@ const xml2js = require("xml2js");
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JacocoReportService } from 'src/app/services/jacoco-report.service';
-import { JacocoReport } from 'src/app/models/jacoco.model';
+import { CsvJacocoReport, JacocoReport } from 'src/app/models/jacoco.model';
 import Swal from 'sweetalert2';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 import {
   ApexNonAxisChartSeries,
@@ -48,6 +49,8 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
   jacocoReports: JacocoReport[];
   jacocoReport: JacocoReport[];
+  csvJacocoReport = [];
+
   projectName;
   projectRef: String;
   msgError = "";
@@ -175,7 +178,7 @@ export class JacocoParseComponent implements OnChanges, OnInit {
       }
     } */
 
-   //  https://generic-ui.com/blog/how-to-make-angular-onChanges-better
+    //  https://generic-ui.com/blog/how-to-make-angular-onChanges-better
     // Here get only not undefined and  current value changed ;)
     if (changes.listNameReport !== undefined && changes.listNameReport.currentValue !== undefined) {
       this.getAllProjectName(changes.currentValue)
@@ -185,7 +188,10 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
 
+
+
   }
+
 
   // get list of project saved in jacoco coverage table
   getAllProjectName(listNameReport: any) {
@@ -207,6 +213,25 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   }
 
 
+  // download csv report
+  downloadCSVFile() {
+
+    var options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: "Jacoco Coverage for "+ this.nameselected + " is "+ this.projectJacocoverage.toFixed(2)+ "%",
+      //useBom: true,
+      noDownload: false,
+      headers: ["Type", "Covered", "Missed", "Coverage", "Created At"]
+    };
+
+    new ngxCsv(this.csvJacocoReport, "Report", options);
+  }
+
+
   // get report by name
   getreportByName(event: any) {
     this.nameselected = event.target.value;
@@ -219,12 +244,51 @@ export class JacocoParseComponent implements OnChanges, OnInit {
 
     // get arary data coverage
     this.jacoreportService.getReportListByPName(this.nameselected)
-      .subscribe({
-        next: (data) => {
+      .subscribe(
+        (data) => {
           this.jacocoReport = data;
-          console.log("Report is:"+ this.jacocoReport);
-        }
-      })
+          //this.downloadCSVFile(this.jacocoReport, this.nameselected)
+
+         // const reportDataValue = Object.values(this.jacocoReport);
+
+          let element = {"type":"", "covered": "","missed":"", "percentage":"", "createdAt":  ""};
+          /* element.id = id;
+          element.quantity = quantity; */
+          for (const data of Object.values(this.jacocoReport)) {
+
+            element.type = data.type
+            element.covered = data.covered
+            element.missed = data.missed
+            element.percentage = data.percentage
+            element.createdAt = data.createdAt.toString()
+
+            this.csvJacocoReport.push(Object.assign({}, element))
+
+          }
+         
+          //this.csvJacocoReport.push(element);
+
+        })
+    /* .subscribe({
+      next: (data) => {
+        this.jacocoReport = data;
+        //this.downloadCSVFile(this.jacocoReport, this.nameselected)
+
+         const reportDataFiltred = Object.values(this.jacocoReport);
+         for (const data of Object.entries(reportDataFiltred)){
+           
+          console.log("type"+ data[1].type)
+          console.log("covered"+ data[1].covered)
+          console.log("missed"+ data[1].missed)
+          console.log("percentage"+ data[1].percentage)
+          console.log("createdAt"+ data[1].createdAt)
+
+          this.jacocoReportToCSV.splice(this.jacocoReportToCSV.length, 0, data[1].type, data[1].covered, data[1].missed, data[1].percentage
+            , data[1].createdAt);
+          
+         }
+      }
+    }) */
   }
 
 
