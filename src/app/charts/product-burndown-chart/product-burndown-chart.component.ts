@@ -144,7 +144,7 @@ export class ProductBurndownChartComponent implements OnInit {
             this.doneSp = data.doneSp;
             this.newSp = data.newSp;
             this.remainingSp = data.remainingSp
-           // console.log(this.doneSp + " **" + this.newSp + "**" +this.remainingSp)
+           console.log(this.doneSp + " **" + this.newSp + "**" +this.remainingSp)
           // let valArrtoNumber = this.valueArr.map(i => Number(i));
           this.productBrundounChart(this.remainingSp, this.doneSp, this.newSp, this.sprintName)
 
@@ -163,7 +163,7 @@ export class ProductBurndownChartComponent implements OnInit {
 
   productBrundounChart(remainingSp: any[], doneSp: any[], newSp: any[], sprintname: any[]) {
 
-
+    sprintname.unshift("all story points");
 
 
     /* Start Chart*/
