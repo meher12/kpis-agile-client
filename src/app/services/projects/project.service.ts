@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpParamsOptions } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -9,6 +9,10 @@ import { AppConstants } from '../AppConstants';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -57,12 +61,23 @@ export class ProjectService {
   }
 
   //update all story points
-   updateAllSp(): Observable<Object> {
+  updateAllSp(): Observable<Object> {
     return this.httpClient.get<any>(`${this.baseUrl}` + '/projects/updateallsp', httpOptions);
   }
   // percentage sp by project 
   percentageSpCByproject(preference: string): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}` + '/projects/percentageSpcChart/' + `${preference}`, httpOptions);
+  }
+
+  // productbdchart project by preference
+  getProductBurndownChart(pReference: string): Observable<any> {
+
+    const myObject: any = {pReference /* , that: 'thatThing', other: 'otherThing' */ };
+    const httpParams: HttpParamsOptions = { fromObject: myObject } as HttpParamsOptions;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const httpOptionsWithParams = { params: new HttpParams(httpParams), headers: headers };
+   
+    return this.httpClient.get(`${this.baseUrl}` + '/projects/productbdchart', httpOptionsWithParams);
   }
 
   // releasebdchart project by preference
@@ -75,8 +90,8 @@ export class ProjectService {
     return this.httpClient.get(`${this.baseUrl}` + '/projects/percentTaskStatuscChart/' + `${preference}`, httpOptions);
   }
 
-   // select tdate_debut in task by project ref
-   getListTaskStartDateBypRef(preference: string): Observable<any> {
+  // select tdate_debut in task by project ref
+  getListTaskStartDateBypRef(preference: string): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}` + '/projects/listStartDateTask/' + `${preference}`, httpOptions);
   }
 
@@ -87,23 +102,23 @@ export class ProjectService {
 
   //  select work completed in task by project reference
   getPercentageStoryPointsInProject(preference: string): Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}` + '/projects/percentageStoryPointsInProject/' + `${preference}`,  httpOptions);
+    return this.httpClient.get(`${this.baseUrl}` + '/projects/percentageStoryPointsInProject/' + `${preference}`, httpOptions);
   }
 
 
-   // task status chart by project  preference
-   getTaskBugsByStartDateTask(preference: string, startDateObject: any): Observable<any> {
+  // task status chart by project  preference
+  getTaskBugsByStartDateTask(preference: string, startDateObject: any): Observable<any> {
     return this.httpClient.put(`${this.baseUrl}` + '/projects/gettaskbugs/' + `${preference}`, startDateObject, httpOptions);
   }
 
 
 
-   // add, update memeber
-   addUpdateteamMember(id: number, teamMember: any): Observable<any> {
-    return this.httpClient.put<any>(`${this.baseUrl}` + '/project/addmember/'+ `${id}`, teamMember, httpOptions);
+  // add, update memeber
+  addUpdateteamMember(id: number, teamMember: any): Observable<any> {
+    return this.httpClient.put<any>(`${this.baseUrl}` + '/project/addmember/' + `${id}`, teamMember, httpOptions);
   }
 
- 
+
 }
 
 

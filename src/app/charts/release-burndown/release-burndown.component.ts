@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
+import { Component, EventEmitter,  OnInit, Output,  ViewChild } from "@angular/core";
 import * as moment from "moment";
-import { asapScheduler } from "rxjs";
+
 import {
   ApexAxisChartSeries,
   ApexChart,

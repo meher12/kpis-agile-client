@@ -15,7 +15,6 @@ export class Projet {
     public dateFin: Date;
     public pupdatedDate: Date;
     public sprints: Sprint[];
-    //public team: Team[];
     public users: Team[];
 
     public pSpCommitment: string[];
