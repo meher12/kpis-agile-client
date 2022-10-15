@@ -1,4 +1,4 @@
-import { Component, EventEmitter,  OnInit, Output,  ViewChild } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import * as moment from "moment";
 
 import {
@@ -65,6 +65,10 @@ export class ReleaseBurndownComponent implements OnInit {
   msgError = "";
   selected;
 
+  newSp: string[] = [];
+  remainingSp: any[] = [];
+  doneSp: string[] = [];
+
 
 
 
@@ -94,32 +98,6 @@ export class ReleaseBurndownComponent implements OnInit {
 
   }
 
-  //update all sp
-  /*  getUpdateAllsp() {
-     this.projectService.updateAllSp().subscribe(data => console.log(data));
-   } */
-  // update work Commitment and work Completed in sprint
-  updateTablesprint() {
-    this.sprintService.updateStoryPointInSprint()
-      .subscribe(data => console.log(data));
-  }
-
-  // brundown chart update data in backend
-  pReleaseBurndownChart(refproject: string) {
-
-    // Reload release chart
-    if (!localStorage.getItem('release_chart')) {
-      localStorage.setItem('release_chart', 'no reload')
-      location.reload()
-    } else {
-      localStorage.removeItem('release_chart')
-    }
-
-    this.projectService.releasebdchart(refproject)
-      .subscribe(data => console.log(data));
-  }
-
-
 
   getAllproject() {
     this.projectService.getProjectList()
@@ -133,27 +111,45 @@ export class ReleaseBurndownComponent implements OnInit {
         });
   }
 
+  //update all sp
+  /*  getUpdateAllsp() {
+     this.projectService.updateAllSp().subscribe(data => console.log(data));
+   } */
+  // update work Commitment and work Completed in sprint
+  updateTablesprint() {
+    this.sprintService.updateStoryPointInSprint()
+      .subscribe(data => console.log(data));
+  }
+
+  // release brundown chart update data in backend
+  /* pReleaseBurndownChart(refproject: string) {
+
+    // Reload release chart
+    if (!localStorage.getItem('release_chart')) {
+      localStorage.setItem('release_chart', 'no reload')
+      location.reload()
+    } else {
+      localStorage.removeItem('release_chart')
+    }
+
+     this.projectService.releasebdchart(refproject)
+      .subscribe(data => console.log(data)); 
+  } */
+
+
+
+
 
   //  get release Brundown Chart project reference
-  getreleaseBrundownChartByProject(event: any) {
+  getReleaseBrundownChartByProject(event: any) {
 
-    this.pReleaseBurndownChart(event.target.value);
+    // this.pReleaseBurndownChart(event.target.value);
 
 
     this.projectService.getProjectByReference(event.target.value)
       .subscribe(data => {
         this.project = data;
-        console.log("get release burndown chart data from project", this.project);
-
-        this.project.pSpCommitment.pop();
-        // this.project.pSpCommitment.pop();
-        this.pSpCommitmentF = this.project.pSpCommitment;
-
-        this.project.pSpwrked.pop();
-        this.pSpwrkedF = this.project.pSpwrked;
-
-        this.project.pMoresp.pop();
-        this.pMorespF = this.project.pMoresp;
+        // console.log("get release burndown chart data from project", this.project);
 
         // sort sprints array
         const newarr = this.project.sprints.sort((a, b) => {
@@ -169,10 +165,21 @@ export class ReleaseBurndownComponent implements OnInit {
           this.sprintName[i] = this.project.sprints[i].stitre;
         }
 
+        this.projectService.releasebdchart(event.target.value)
+          .subscribe(data => {
+
+            this.doneSp = data.doneSp;
+            this.newSp = data.newSp;
+            this.remainingSp = data.remainingSp
+           console.log(this.doneSp + " **" + this.newSp + "**" +this.remainingSp)
+          // let valArrtoNumber = this.valueArr.map(i => Number(i));
+          this.relaseBrundounChart(this.remainingSp, this.doneSp, this.newSp, this.sprintName)
+           
+          })
+ 
 
         this.datePicked.emit(this.project.pupdatedDate);
 
-        this.relaseBrundounChart(this.pSpCommitmentF, this.pSpwrkedF, this.pMorespF, this.sprintName)
 
       },
         err => {
@@ -183,7 +190,6 @@ export class ReleaseBurndownComponent implements OnInit {
   }
 
   relaseBrundounChart(spcommitment: any[], spworked: any[], spmore: any[], sprintname: any[]) {
-
 
     sprintname.push("Remaining story points");
 
@@ -261,12 +267,12 @@ export class ReleaseBurndownComponent implements OnInit {
           horizontal: false
         }
       },
-     /*  xaxis: {
-        type: "category",
-        categories: sprintname, //['sprint 1', 'sprint 2', 'sprint 3', 'sprint 4', 'release sprint'],
-        tickPlacement: 'on',
-
-      }, */
+      /*  xaxis: {
+         type: "category",
+         categories: sprintname, //['sprint 1', 'sprint 2', 'sprint 3', 'sprint 4', 'release sprint'],
+         tickPlacement: 'on',
+ 
+       }, */
       xaxis: {
         categories: sprintname,
         tickPlacement: 'on',
@@ -285,31 +291,31 @@ export class ReleaseBurndownComponent implements OnInit {
         width: 2,
         colors: ["transparent"]
       },
-     /*  yaxis: {
-        show: true,
-        showAlways: true,
-        title: {
-          text: "Story points",
-          style: {
-            colors: [],
-            fontSize: '10px',
-            fontFamily: 'Helvetica, Arial, sans-serif',
-            fontWeight: 'bold',
-            cssClass: 'apexcharts-xaxis-label',
-          }
-        },
-        labels: {
-          show: true,
-          style: {
-            colors: [],
-            fontSize: '10px',
-            fontFamily: 'Helvetica, Arial, sans-serif',
-            fontWeight: 'bold',
-            cssClass: 'apexcharts-xaxis-label',
-          }
-        }
-
-      }, */
+      /*  yaxis: {
+         show: true,
+         showAlways: true,
+         title: {
+           text: "Story points",
+           style: {
+             colors: [],
+             fontSize: '10px',
+             fontFamily: 'Helvetica, Arial, sans-serif',
+             fontWeight: 'bold',
+             cssClass: 'apexcharts-xaxis-label',
+           }
+         },
+         labels: {
+           show: true,
+           style: {
+             colors: [],
+             fontSize: '10px',
+             fontFamily: 'Helvetica, Arial, sans-serif',
+             fontWeight: 'bold',
+             cssClass: 'apexcharts-xaxis-label',
+           }
+         }
+ 
+       }, */
       legend: {
         position: "right",
         offsetY: 40

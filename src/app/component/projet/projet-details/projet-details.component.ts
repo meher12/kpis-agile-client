@@ -42,12 +42,12 @@ export class ProjetDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (!localStorage.getItem('project_data')) {
+   /*  if (!localStorage.getItem('project_data')) {
       localStorage.setItem('project_data', 'no reload')
       location.reload()
     } else {
       localStorage.removeItem('project_data')
-    }
+    } */
 
     this.updateTablesprint();
     this.isLoggedIn = !!this.tokenStorageService.getToken();

@@ -3,7 +3,7 @@
     <!-- Start -->
     <div class="search-sprints">
         <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
-            (change)="getreleaseBrundownChartByProject($event)">
+            (change)="getReleaseBrundownChartByProject($event)">
             <option [ngValue]="undefined" disabled>Choose project...</option>
             <option *ngFor="let projet of projects" [value]="projet.pReference" [selected]=" projet == selected">
                 {{projet.titre}}

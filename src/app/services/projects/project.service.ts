@@ -81,8 +81,14 @@ export class ProjectService {
   }
 
   // releasebdchart project by preference
-  releasebdchart(preference: string): Observable<any> {
-    return this.httpClient.get(`${this.baseUrl}` + '/projects/releasebdchart/' + `${preference}`, httpOptions);
+  releasebdchart(pReference: string): Observable<any> {
+
+    const myParams: any = {pReference /* , that: 'thatThing', other: 'otherThing' */ };
+    const httpParams: HttpParamsOptions = { fromObject: myParams } as HttpParamsOptions;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const httpOptionsWithParams = { params: new HttpParams(httpParams), headers: headers };
+
+    return this.httpClient.get(`${this.baseUrl}` + '/projects/releasebdchart', httpOptionsWithParams);
   }
 
   // task status percentage chart by project  preference

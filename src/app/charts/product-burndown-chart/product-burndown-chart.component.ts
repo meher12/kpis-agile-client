@@ -100,9 +100,9 @@ export class ProductBurndownChartComponent implements OnInit {
   }
 
   // product burndown chart update data in backend
-  updateProductBurndownChart(refproject: string) {
+ /*  updateProductBurndownChart(refproject: string) {
 
-    // Reload release chart
+    // Reload product chart
     if (!localStorage.getItem('product_chart')) {
       localStorage.setItem('product_chart', 'no reload')
       location.reload()
@@ -113,13 +113,13 @@ export class ProductBurndownChartComponent implements OnInit {
     this.projectService.getProductBurndownChart(refproject)
       .subscribe(data => console.log(data));
   }
-
+ */
 
   // ************
   //  get product Brundown Chart project reference
   getreleaseBrundownChartByProject(event: any) {
 
-    this.updateProductBurndownChart(event.target.value);
+    //this.updateProductBurndownChart(event.target.value);
 
     this.projectService.getProjectByReference(event.target.value)
       .subscribe(data => {
