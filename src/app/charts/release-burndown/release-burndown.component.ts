@@ -237,7 +237,7 @@ export class ReleaseBurndownComponent implements OnInit {
         }
       },
       title: {
-        text: 'Release burndoun Chart',
+        text: 'Release burndown Chart',
         align: 'center',
         margin: 30,
         offsetX: 0,

@@ -210,7 +210,7 @@ export class ProductBurndownChartComponent implements OnInit {
         }
       },
       title: {
-        text: 'Product burndoun Chart',
+        text: 'Product burndown Chart',
         align: 'center',
         margin: 30,
         offsetX: 0,
