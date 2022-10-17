@@ -125,12 +125,25 @@ export class TaskDetailsComponent implements OnInit {
 
           // console.log("List mail: " + emailMember)
           this.taskService.addUpdateTeamMember(this.id, emailMember)
-            .subscribe(data => { console.log(data) })
+            .subscribe(data => { 
+              console.log(data) 
+              Swal.fire('Hey!', 'File uploaded ', 'success').then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                location.reload();
+              })
+          },
+          err => {
+            this.msgError = err.error.message;
+            Swal.fire('Hey!', this.msgError, 'error').then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              location.reload();
+            })
+            console.error(this.msgError);
+          });
 
         }
       }
       reader.readAsArrayBuffer(file);
-      location.reload();
 
     }
 
@@ -147,23 +160,47 @@ export class TaskDetailsComponent implements OnInit {
     utils.sheet_add_aoa(ws, headings);
     utils.sheet_add_json(ws, this.memberListFiltred, { origin: 'A2', skipHeader: true });
     utils.book_append_sheet(wb, ws, 'Report');
-    writeFile(wb, 'MemberList.csv');
+   
+      //****************choose format file*********************** */
+    
+      const items = [ 
+        { id: "CSV type", name: "CSV" },
+        { id: "XLSX type", name: "XLSX" },
+  
+      ]
+      
+      const inputOptions = new Map
+      items.forEach(item => inputOptions.set(item.id, item.name)) 
+  
+     Swal.fire({
+        title: 'Select file format',
+        input: 'radio',
+        inputOptions: inputOptions,
+        showDenyButton: true,  showCancelButton: true,  
+        confirmButtonText: `Export`,  
+        denyButtonText: `Don't export`,
+        inputValidator: (value) => {
+          if (!value) {
+            return 'You need to choose something!'
+          }
+          if (value === "CSV type") {
+           // Swal.fire({ html: `You selected: ${value}` })
+            writeFile(wb, 'MemberList.csv');
+          }
+          if (value === "XLSX type") {
+           // Swal.fire({ html: `You selected: ${value}` })
+            writeFile(wb, 'MemberList.xlsx');
+          }
+        }
+      }).then((result) => {  
+        /* Read more about isConfirmed, isDenied below */  
+          if (result.isConfirmed) {    
+            Swal.fire('File exported!', 'MemberList.csv', 'success')  
+          } else if (result.isDenied) {    
+            Swal.fire('File are not exported', 'MemberList.xlsx', 'info')  
+         }
+      });
   }
 
-  handleExportXlsx() {
-    const headings = [[
-      'Member',
-      'Mail',
-      'Role'
-    ]];
-    const wb = utils.book_new();
-    const ws: any = utils.json_to_sheet([]);
-    utils.sheet_add_aoa(ws, headings);
-    utils.sheet_add_json(ws, this.memberListFiltred, { origin: 'A2', skipHeader: true });
-    utils.book_append_sheet(wb, ws, 'Report');
-    writeFile(wb, 'MemberList.xlsx');
-  }
-
-  // **********************
 
 }

@@ -123,7 +123,7 @@
            <!-- ********Begi nimport csv or xslx file********** -->
 
            <main>
-            <div class="row mb-2 mt-5">
+            <div class="row mt-5 mt-5">
               <div class="col-sm-6 offset-3">
                 <div class="import_export">
                   <div class="col-md-6">
@@ -132,20 +132,20 @@
                         <input type="file" name="file" class="custom-file-input" id="inputGroupFile" required
                           (change)="handleImport($event)"
                           accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                        <label class="custom-file-label" for="inputGroupFile">Choose file</label>
+                        <label  class="custom-file-label" for="inputGroupFile">Upload member list (csv or xlsx)</label>
                       </div>
                     </div>
                   </div>
-                  <div >
+                  <div class="col-md-6">
                     <button (click)="handleExport()" class="btn btn-primary">
-                      Export CSV<i class="fa fa-download"></i>
+                      Export list member<i class="fa fa-download"></i>
                     </button>
                   </div>
-                  <div class="col-sm-3">
+                  <!-- <div class="col-sm-3">
                     <button (click)="handleExportXlsx()" class="btn btn-primary">
                       Export XLSX<i class="fa fa-download"></i>
                     </button>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

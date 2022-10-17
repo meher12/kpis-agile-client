@@ -163,7 +163,7 @@ export class ProductBurndownChartComponent implements OnInit {
 
   productBrundounChart(remainingSp: any[], doneSp: any[], newSp: any[], sprintname: any[]) {
 
-    sprintname.unshift("all story points");
+    sprintname.unshift("sprint 0");
 
 
     /* Start Chart*/

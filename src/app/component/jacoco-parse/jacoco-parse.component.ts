@@ -5,7 +5,7 @@ const xml2js = require("xml2js");
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JacocoReportService } from 'src/app/services/jacoco-report.service';
-import { CsvJacocoReport, JacocoReport } from 'src/app/models/jacoco.model';
+import {  JacocoReport } from 'src/app/models/jacoco.model';
 import Swal from 'sweetalert2';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 
