@@ -17,6 +17,8 @@ export class AppComponent {
   showScrumMBoard = false;
   showDevBoard = false;
   username?: string;
+  imageSrc = ""  
+  imageAlt = ""
 
   constructor(private tokenStorageService: TokenStorageService) {
 
@@ -24,6 +26,9 @@ export class AppComponent {
 
 
   ngOnInit(): void {
+    //export class sample Component implements OnInit {
+      this.imageSrc = '../assets/images/logo.png'  
+      this.imageAlt = 'Agile KPIs'
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {

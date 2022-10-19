@@ -1,2 +1,18 @@
 
 @import "~bootstrap/scss/bootstrap.scss"; 
+
+/* Styling Logo*/
+
+.logo{
+    padding: 3vh 3vw;
+    text-align: left;
+    width: 20vw;
+    
+   
+}
+
+.logo img {
+    /* height: auto; */
+    height: 57px;
+    width: 167px;
+}

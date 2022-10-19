@@ -191,7 +191,8 @@ export class ReleaseBurndownComponent implements OnInit {
 
   relaseBrundounChart(spcommitment: any[], spworked: any[], spmore: any[], sprintname: any[]) {
 
-    sprintname.push("Remaining story points");
+   // sprintname.push("Remaining story points");
+   sprintname.push("Next sprint");
 
     /* Start Chart*/
     this.chartOptions = {

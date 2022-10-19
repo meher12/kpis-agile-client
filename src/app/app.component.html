@@ -2,28 +2,32 @@
 
 
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <ul class="nav-links">
 
+    <ul class="nav-links">
       <!-- USING CHECKBOX HACK -->
       <input type="checkbox" id="checkbox_toggle" />
       <label for="checkbox_toggle" class="hamburger">&#9776;</label>
 
       <!-- NAVIGATION MENUS -->
       <div class="menu">
-        <a href="#" class="navbar-brand">KPIs Agile</a>
+        <div class="logo">
+          <a href="#" class="navbar-brand"> <img src="{{imageSrc}}" alt="{{imageAlt}}" /></a>
+        </div>
         <!-- routerLinkActive="active" -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a href="/home" class="nav-link" routerLink="home">Home </a>
           </li>
-          <li class="nav-item" *ngIf="showPOBoard || showScrumMBoard" >
+          <li class="nav-item" *ngIf="showPOBoard || showScrumMBoard">
             <a href="/po" class="nav-link" routerLink="po" routerLinkActive="active">Measuring work in progress</a>
           </li>
           <li class="nav-item" *ngIf="showScrumMBoard || showPOBoard">
-            <a href="/scrm" class="nav-link" routerLink="scrm" routerLinkActive="active">Process health and finding bottlenecks</a>
+            <a href="/scrm" class="nav-link" routerLink="scrm" routerLinkActive="active">Process health and finding
+              bottlenecks</a>
           </li>
           <li class="nav-item">
-            <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev" routerLinkActive="active">Measuring code quality</a>
+            <a href="/dev" class="nav-link" *ngIf="isLoggedIn" routerLink="dev" routerLinkActive="active">Measuring code
+              quality</a>
           </li>
         </ul>
 
@@ -36,7 +40,7 @@
           </li>
         </ul>
 
-       <ul class="navbar-nav" *ngIf="isLoggedIn">
+        <ul class="navbar-nav" *ngIf="isLoggedIn">
           <li class="nav-item">
             <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
           </li>
@@ -71,8 +75,8 @@
     <a href="/taskList" routerLink="taskList" routerLinkActive="active2">List Task</a>
   </div>
 
-   <!-- Sidebar Developer -->
-   <div class="sidebar" *ngIf="showDevBoard">
+  <!-- Sidebar Developer -->
+  <div class="sidebar" *ngIf="showDevBoard">
     <a href="/storyList" routerLink="storyList" routerLinkActive="active2">List Story</a>
     <a href="/taskList" routerLink="taskList" routerLinkActive="active2">List Task</a>
   </div>
@@ -89,13 +93,13 @@
   </div>
 
 
-<footer class="footer">
-  <div class="row align-items-center justify-content-xl-between">
-    <div class="col-xl-6 m-auto text-center">
-      <div class="copyright">
-        <p>Made with <a href="#" target="_blank">KPI Agile Dashboard</a> by AlterCall Tunisie</p>
+  <footer class="footer">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6 m-auto text-center">
+        <div class="copyright">
+          <p>Made with <a href="#" target="_blank">KPI Agile Dashboard</a> by AlterCall Tunisie</p>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 </div>
