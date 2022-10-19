@@ -4,6 +4,7 @@ import { Sprint } from 'src/app/models/sprint.model';
 import { Story } from 'src/app/models/story.model';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import * as moment from 'moment';
 
 import {
   ChartComponent,
@@ -53,6 +54,7 @@ export class SprintDetailsComponent implements OnInit {
   id: number;
   sprint: Sprint;
   stories: Story[];
+  storiesSorted: Story[];
 
   idealLine: string[];
   workedLine: string[];
@@ -96,6 +98,14 @@ export class SprintDetailsComponent implements OnInit {
           this.sprint = data;
           this.stories = this.sprint.stories;
 
+           //*************** */
+           var storyNotStored = this.sprint.stories;
+           // sort sprints array
+           this.storiesSorted = storyNotStored.sort((a, b) => {
+             return moment(a.priority).diff(b.priority);
+           });
+           //**************** */
+
           // arrays of brundown chart
           this.sprint.idealLinearray.pop();
           this.idealLine = this.sprint.idealLinearray;
@@ -106,11 +116,11 @@ export class SprintDetailsComponent implements OnInit {
           this.sprint.daysarray.pop();
           this.dayinsprint = this.sprint.daysarray;
 
-          console.log(this.sprint);
+        /*   console.log(this.sprint);
 
           console.log("Ideal line" + this.idealLine);
           console.log("worked line" + this.workedLine);
-          console.log("sprint day" + this.dayinsprint);
+          console.log("sprint day" + this.dayinsprint); */
 
           /* ************************** */
           // brundown Chart by sprint

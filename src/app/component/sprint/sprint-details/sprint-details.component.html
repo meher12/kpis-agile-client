@@ -118,7 +118,7 @@
           </div>
         </div> -->
         <hr>
-        <div class="without-table-tag" *ngIf="stories?.length > 0; else noStoriesList">
+        <div class="without-table-tag" *ngIf="storiesSorted?.length > 0; else noStoriesList">
           <h3> List Story of {{sprint.titre}} sprint: </h3>
           <br>
           <div class="table">
@@ -130,7 +130,7 @@
               <div class="col c30 border">SP Completed</div>
               <div class="col clast border">Priority</div>
             </div>
-            <div class="row" *ngFor="let story of sprint.stories">
+            <div class="row" *ngFor="let story of storiesSorted">
               <div class="col c5 border">{{story.stReference}}</div>
               <div class="col c25 border">{{story.stname}}</div>
               <div class="col c50 border">{{story.stdescription}}</div>

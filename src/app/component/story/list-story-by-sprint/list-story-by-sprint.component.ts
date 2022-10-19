@@ -53,14 +53,14 @@ export class ListStoryBySprintComponent implements OnInit {
   ngOnInit(): void {
 
     // Reload story list after 2000 ms
-    setTimeout(() => {
+    /* setTimeout(() => {
        if (!localStorage.getItem('story_data')) { 
       localStorage.setItem('story_data', 'no reload') 
       location.reload() 
     } else {
       localStorage.removeItem('story_data') 
     }
-  }, 2000);
+  }, 2000);  */
    
 // Get Role
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -73,8 +73,8 @@ export class ListStoryBySprintComponent implements OnInit {
 
       this.store_ref_sprint = this.route.snapshot.params['refsprint'];
       //localStorage of ref project
-     localStorage.setItem("ref", this.store_ref_sprint);
-     this.ref= localStorage.getItem("ref");
+     localStorage.setItem("refsprint", this.store_ref_sprint);
+     this.ref= localStorage.getItem("refsprint"); 
 
       this.getRefSprint()
       this.getTitleSprint()
@@ -96,7 +96,7 @@ export class ListStoryBySprintComponent implements OnInit {
       .subscribe(data => {
         this.sprint = data;
       })
-      console.log("*Ref sp*"+this._getsselectedSRef)
+     console.log("*Ref sp*"+this._getsselectedSRef)
   }
 
   // find sprint by project reference

@@ -52,11 +52,13 @@ export class CreateStoryComponent implements OnInit {
     priority: new FormControl(''),
   });
 
+  
+
   ngOnInit(): void {
    
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    localStorage.removeItem('refsprint');
-    localStorage.setItem('refsprint', this.form.controls.stReference.value );
+   /*  localStorage.removeItem('refsprint');
+    localStorage.setItem('refsprint', this.form.controls.stReference.value ); */
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
@@ -79,6 +81,7 @@ export class CreateStoryComponent implements OnInit {
         .subscribe(data => {
           this.sprint = data;
           this._sprint_id = this.sprint.id
+          console.log("------------"+ this._sprint_id)
         },
           err => {
             this.msgError = err.error.message;
@@ -103,6 +106,8 @@ export class CreateStoryComponent implements OnInit {
     this.storyService.changeSReference(this._sselectedSRef);
       
   }
+
+  
  
 
   saveStory() {
