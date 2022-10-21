@@ -37,24 +37,24 @@ export class StoryListComponent implements OnInit {
   tableSize: number = 4;
   tableSizes: any = [3, 6, 9, 12];
 
-    /* Search by title */
-    storyList?: Story[];
-    currentStory: Story[] = [];
-    currentIndex = -1;
-    searchSReference = '';
-    
+  /* Search by title */
+  storyList?: Story[];
+  currentStory: Story[] = [];
+  currentIndex = -1;
+  searchSReference = '';
+
 
   constructor(private storyService: StoryService, private router: Router, private tokenStorageService: TokenStorageService,
     private sprintService: SprintService) { }
 
   ngOnInit(): void {
 
-   /*  if (!localStorage.getItem('story_data')) { 
-      localStorage.setItem('story_data', 'no reload') 
-      location.reload() 
-    } else {
-      localStorage.removeItem('story_data') 
-    } */
+    /*  if (!localStorage.getItem('story_data')) { 
+       localStorage.setItem('story_data', 'no reload') 
+       location.reload() 
+     } else {
+       localStorage.removeItem('story_data') 
+     } */
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     //update SP call 
@@ -67,7 +67,7 @@ export class StoryListComponent implements OnInit {
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
       this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 
-     // this.getTitleSprint();
+      // this.getTitleSprint();
       this.cgetAllStory();
       this.selected = true;
       this.tableSize = 4;
@@ -80,15 +80,15 @@ export class StoryListComponent implements OnInit {
     this.sprintService.updateStoryPointInSprint()
       .subscribe(data => console.log(data));
   }
- 
+
 
   //  get all Story
   cgetAllStory() {
 
     this.storyService.getAllStory()
-    .subscribe(data => {
-      this.stories = data;
-    },
+      .subscribe(data => {
+        this.stories = data;
+      },
         err => {
           this.msgError = err.error.message;
           Swal.fire('Hey!', this.msgError, 'warning')
@@ -146,12 +146,12 @@ export class StoryListComponent implements OnInit {
 
   // navigate to update story
   updateStory(id: number) {
-    if(this.selectedListOption){
+    if (this.selectedListOption) {
       this.router.navigate(['updatestory', id]);
-      } 
-      else{
-        Swal.fire('Hey!', 'Select Sprint first', 'warning');
-      }
+    }
+    else {
+      Swal.fire('Hey!', 'Select Sprint first', 'warning');
+    }
   }
 
   detailStory(id: number) {
@@ -262,38 +262,37 @@ export class StoryListComponent implements OnInit {
   findStoryBySprintReference(): void {
     this.currentStory = [];
     this.currentIndex = -1;
-    
 
-    if(this.searchSReference === ""){
+
+    if (this.searchSReference === "") {
       Swal.fire('Hey!', 'Choose sprint to display story list', 'warning')
     }
-    else{
+    else {
+      this.sprintService.findStoryBySprintReference(this.searchSReference)
+        .subscribe(
+          data => {
+            this.storyList = data;
+            console.log(data);
+            if (this.storyList) {
+              this.selectedListOption = true;
+              //get project ref
+              this.sprintService.getSprintByReference(this.searchSReference)
+                .subscribe(data => {
+                  this.sprint = data;
+                  console.log(this.sprint);
+                  // send sprint ref
+                  this.storyService.changeSReference(this.sprint.sReference);
 
-      this.selectedListOption = true;
-        //get project ref
-     this.sprintService.getSprintByReference(this.searchSReference)
-     .subscribe(data => {
-       this.sprint = data;
-       console.log(this.sprint);
-       // send sprint ref
-       this.storyService.changeSReference(this.sprint.sReference);
-       
-     })
-
-
-    this.sprintService.findStoryBySprintReference(this.searchSReference)
-      .subscribe(
-        data => {
-          this.storyList = data;
-          console.log(data);
-        },
-        err => {
-          this.msgError = err.error.message;
-          Swal.fire('Hey!', 'error: ' + this.msgError, 'warning')
-          console.error(this.msgError);
-        });
+                })
+            }
+          },
+          err => {
+            this.msgError = err.error.message;
+            Swal.fire('Hey!', 'error: ' + this.msgError, 'warning')
+            console.error(this.msgError);
+          });
     }
-        
+
   }
 
 

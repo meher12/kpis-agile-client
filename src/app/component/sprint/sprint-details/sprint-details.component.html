@@ -2,13 +2,13 @@
   <h3 class="text-center"> View Sprint Details</h3>
 
   <!-- Start button popup -->
-  <div class="col-md-10">
-    <button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary" (click)="openPopup(sprint.id)">Add
-      story
-      points completed
-    </button>
+  <div class="buttonContainer d-flex">
+
+      <div class="btn btn-info  p-2 sprintDButton" (click)="openPopup(sprint.id)">Add story points completed</div>
+    <div class="btn btn-danger sprintDButton ml-auto p-2" (click)="backToSprintListByRefProject()">Back to
+        Sprint List
+      </div>
   </div>
-  <div class="col-md-10"><button  class="btn btn-outline-primary" (click)="backToSprintListByRefProject()">Back to Sprint List</button> </div>
   <div class="modal" *ngIf="showScrumMBoard" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
     <div class="modal-dialog reveal-modal" role="document">
       <div class="modal-content">
@@ -16,7 +16,7 @@
           <h4 class="modal-title">Add stories points completed</h4>
         </div>
         <div class="modal-body">
-          <app-add-sp-completed></app-add-sp-completed>
+          <app-add-sp-completed [storePreference]="referenceProject"></app-add-sp-completed>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="closePopup()">
@@ -145,9 +145,10 @@
         </div>
 
         <!-- ************** -->
+        
         <ng-container *ngIf="chartOptions">
           <div id="burndownChartBySprint">
-            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+            <apx-chart [series]="chartOptions?.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
               [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels"
               [legend]="chartOptions.legend" [markers]="chartOptions.markers" [grid]="chartOptions.grid"
               [yaxis]="chartOptions.yaxis" [title]="chartOptions.title" [plotOptions]="chartOptions.plotOptions"

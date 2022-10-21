@@ -2,7 +2,6 @@ import { ETask, ETypeTask } from "./etask.enum";
 import { Team } from "./team.model";
 
 
-
 export class Task {
 
     public id: number;

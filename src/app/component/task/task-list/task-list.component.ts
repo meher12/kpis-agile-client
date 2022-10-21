@@ -18,7 +18,7 @@ export class TaskListComponent implements OnInit {
   selected;
   selectedListOption;
   searchRef;
-  
+
   tasks: Task[];
   story: Story;
 
@@ -35,18 +35,24 @@ export class TaskListComponent implements OnInit {
   tableSize: number = 7;
   tableSizes: any = [3, 6, 9, 12];
 
+  /* Search by Reference */
+  taskListSearched?: {};
+  currentTask: Task[] = [];
+  currentIndex = -1;
+  searchSTReference = '';
+
   constructor(private storyService: StoryService, private router: Router, private tokenStorageService: TokenStorageService,
     private taskService: TaskService) { }
 
 
   ngOnInit(): void {
 
-   /*  if (!localStorage.getItem('task_data')) { 
-      localStorage.setItem('task_data', 'no reload') 
-      location.reload() 
-    } else {
-      localStorage.removeItem('task_data') 
-    } */
+    /*  if (!localStorage.getItem('task_data')) { 
+       localStorage.setItem('task_data', 'no reload') 
+       location.reload() 
+     } else {
+       localStorage.removeItem('task_data') 
+     } */
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
@@ -59,7 +65,8 @@ export class TaskListComponent implements OnInit {
 
       this.getTitleStory();
       this.cgetAllTask();
-      this.selected=true;
+      this.selected = true;
+      this.tableSize = 5;
 
 
     }
@@ -70,7 +77,7 @@ export class TaskListComponent implements OnInit {
     this.taskService.getAllTasks()
       .subscribe(data => {
         this.tasks = data;
-        console.log(this.tasks);
+       // console.log(this.tasks);
       },
         err => {
           this.msgError = err.error.message;
@@ -79,16 +86,16 @@ export class TaskListComponent implements OnInit {
         });
   }
 
-      /* Pagination */
-      onTableDataChange(event: any) {
-        this.page = event;
-        this.cgetAllTask();
-      }
-      onTableSizeChange(event: any): void {
-        this.tableSize = event.target.value;
-        this.page = 1;
-        this.cgetAllTask();
-      }
+  /* Pagination */
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.cgetAllTask();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.cgetAllTask();
+  }
 
   // Get Stories for select option
   getTitleStory() {
@@ -126,16 +133,16 @@ export class TaskListComponent implements OnInit {
 
   // navigate to update story
   updateTask(id: number) {
-    if(this.selectedListOption){
-    this.router.navigate(['updatetask', id]);
-    } 
-    else{
+    if (this.selectedListOption) {
+      this.router.navigate(['updatetask', id]);
+    }
+    else {
       Swal.fire('Hey!', 'Select Story first', 'warning');
     }
   }
 
-   // navigate to deatils task story
-   detailsTask(id: number) {
+  // navigate to deatils task story
+  detailsTask(id: number) {
     this.router.navigate(['detailtask', id]);
   }
 
@@ -239,6 +246,43 @@ export class TaskListComponent implements OnInit {
         )
       }
     })
+
+  }
+
+  // search by story refrence
+  findTaskByStoryReference(): void {
+    this.currentTask = [];
+    this.currentIndex = -1;
+
+
+    if (this.searchSTReference === "") {
+      Swal.fire('Hey!', 'Choose story to display task list', 'warning')
+    }
+    else {
+      this.storyService.findTaskByStoryReference(this.searchSTReference)
+        .subscribe(
+          data => {
+           this.taskListSearched = data;
+            console.log(data);
+            if (this.taskListSearched) {
+              this.selectedListOption = true;
+              //get project ref
+              this.storyService.getStoryByReference(this.searchSTReference)
+                .subscribe(data => {
+                  this.story = data;
+                  console.log(this.story);
+                  // send story ref
+                  this.taskService.changeSTReference(this.story.stReference);
+
+                })
+            }
+          },
+          err => {
+            this.msgError = err.error.message;
+            Swal.fire('Hey!', 'error: ' + this.msgError, 'warning')
+            console.error(this.msgError);
+          });
+    }
 
   }
 

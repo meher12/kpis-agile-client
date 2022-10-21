@@ -57,7 +57,7 @@ export class SprintListComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-     this.getTitleProjects();
+      this.getTitleProjects();
       this.cgetAllSprints();
       this.selected = true;
 
@@ -249,35 +249,35 @@ export class SprintListComponent implements OnInit {
   searchSprintListByProjectRef(): void {
     this.currentSprint = [];
     this.currentIndex = -1;
-    
 
-    if(this.searchPReference === ""){
+
+    if (this.searchPReference === "") {
       Swal.fire('Hey!', 'Choose project to display sprints list', 'warning')
     }
-    else{
-
-      this.selectedListOption = true;
-        //get project ref
-     this.projectService.getProjectByReference(this.searchPReference)
-     .subscribe(data => {
-       this.project = data;
-       // send project ref
-       this.sprintService.changePReference(this.project.pReference);
-     })
-
-
-    this.projectService.findSprintByProjectReference(this.searchPReference)
-      .subscribe( data => {
+    else {
+      this.projectService.findSprintByProjectReference(this.searchPReference)
+        .subscribe(data => {
           this.sprintsList = data;
           console.log(data);
+
+          if (this.sprintsList) {
+            this.selectedListOption = true;
+            //get project ref
+            this.projectService.getProjectByReference(this.searchPReference)
+              .subscribe(data => {
+                this.project = data;
+                // send project ref
+                this.sprintService.changePReference(this.project.pReference);
+              })
+          }
         },
-        err => {
-          this.msgError = err.error.message;
-          Swal.fire('Hey!', 'Error: ' + this.msgError, 'error')
-          console.error(this.msgError);
-        });
+          err => {
+            this.msgError = err.error.message;
+            Swal.fire('Hey!', 'Error: ' + this.msgError, 'error')
+            console.error(this.msgError);
+          });
     }
-        
+
   }
 
 

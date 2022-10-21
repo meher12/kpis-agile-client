@@ -78,4 +78,9 @@ export class StoryService {
     return this.httpClient.delete(`${this.baseUrl}` + '/sprints/' + `${sprint_id}` + '/stories', httpOptions);
   }
 
+   // find task by story ref
+   findTaskByStoryReference(storyReference: any): Observable<Task[]> {
+    return this.httpClient.get<Task[]>(`${this.baseUrl}`+ "/searchBySTReference"+`?storyReference=${storyReference}`);
+  }
+
 }

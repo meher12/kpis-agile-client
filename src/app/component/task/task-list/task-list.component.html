@@ -7,17 +7,30 @@
         <div class="search-sprints">
 
             <!-- Start -->
-            <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
+            <!-- <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
                 [(ngModel)]="selected" name="valueCheck" (change)="cgetAllTaskByStoryRef($event)">
                 <option [ngValue]="undefined" disabled>Choose your story by unique id...</option>
                 <option *ngFor="let story of stories" [value]="story.stReference" [selected]="story == selected">
                     {{story.stReference}} -- {{story.stname}}
                 </option>
-            </select>
+            </select> -->
 
             <!-- End -->
+            <!-- Start search -->
+            <div class="col-md-12">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="&#xf002; search..."
+                        [(ngModel)]="searchSTReference" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" (click)="findTaskByStoryReference()">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- End search -->
         </div>
-        <div *ngIf="selected">
+        <div *ngIf="selectedListOption">
             <div *ngIf="showScrumMBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
                 <div *ngIf="selectedListOption" class="btn-group btn-group-toggle" role="group">
@@ -58,13 +71,13 @@
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Status</th>
-                           <!--  <th>Type</th> -->
+                            <!--  <th>Type</th> -->
                             <th>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let task of tasks  | filter:searchRef | paginate : {
+                        <tr *ngFor="let task of taskListSearched  | filter:searchRef | paginate : {
                             itemsPerPage: tableSize,
                             currentPage: page,
                             totalItems: count
@@ -76,12 +89,12 @@
                             <td>{{task.tdateDebut}}</td>
                             <td>{{task.tdateFin}}</td>
                             <td>{{task.status}}</td>
-                           <!--  <td>{{task.typeTask}}</td> -->
+                            <!--  <td>{{task.typeTask}}</td> -->
                             <td>
                                 <div class="nowrap btn-group">
                                     <button class="btn btn-success" (click)="detailsTask(task.id)">Details</button>
-                                    <button *ngIf="showScrumMBoard || showDevBoard;" style="margin-left: 2px" class="btn btn-info"
-                                        (click)="updateTask(task.id)">Update</button>
+                                    <button *ngIf="showScrumMBoard || showDevBoard;" style="margin-left: 2px"
+                                        class="btn btn-info" (click)="updateTask(task.id)">Update</button>
 
                                     <button *ngIf="showScrumMBoard;" style="margin-left: 2px" class="btn btn-danger"
                                         (click)="confirmDeleteById(task.id)">Delete</button>

@@ -95,7 +95,6 @@ export class CreateTaskComponent implements OnInit {
       });
 
       this.getRefStory();
-
       this.storyService.getStoryByReference(this._sselectedSTRef)
         .subscribe(data => {
           this.story = data;

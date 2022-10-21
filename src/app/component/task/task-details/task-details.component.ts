@@ -35,17 +35,25 @@ export class TaskDetailsComponent implements OnInit {
   memberList: Team[];
   memberListFiltred = []
 
+   //Get value in component 2
+   _sselectedSTRef: any;
+   //Getter and Setters
+   get selectedSTRef() { return this._sselectedSTRef };
+   set selectedSTRef(value: string) { //debugger;
+     this._sselectedSTRef = value;
+   }
+
   constructor(private taskService: TaskService,  private route: ActivatedRoute,
     private tokenStorageService: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {
 
-    if (!localStorage.getItem('task_data')) { 
+   /*  if (!localStorage.getItem('task_data')) { 
       localStorage.setItem('task_data', 'no reload') 
       location.reload() 
     } else {
       localStorage.removeItem('task_data') 
-    }
+    } */
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -84,6 +92,8 @@ export class TaskDetailsComponent implements OnInit {
            Swal.fire('Hey!', this.msgError, 'warning');
           console.error(this.msgError);
           });
+
+          this.getRefStory();
     }
   }
 
@@ -95,6 +105,23 @@ export class TaskDetailsComponent implements OnInit {
     this.displayStyle = "none";
     this.router.navigate([{ outlets: { addspPopup: null } }]);
     location.reload();
+  }
+
+  gotToTaskListBystref() {
+    this.router.navigate(['taskListBystre', this._sselectedSTRef]);
+  }
+
+  // Get storyRef in create task from story list
+  getRefStory() {
+    this.taskService.currentrefStory
+      .subscribe(storyRef => {
+        this._sselectedSTRef = storyRef;
+      }); //<= Always get current value!
+  }
+
+  sendRefStoryParams(){
+    //Set refprodect in component 1
+    this.taskService.changeSTReference( this._sselectedSTRef);
   }
 
    // **********Import Export CSV List mail File************

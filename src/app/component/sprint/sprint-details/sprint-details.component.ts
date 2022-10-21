@@ -71,6 +71,8 @@ export class SprintDetailsComponent implements OnInit {
      this._sselectedPRef= value;
    }
 
+   referenceProject: string;
+
   @ViewChild("brundownChartBySprint") chart: ChartComponent;
   public chartOptions: Partial<any>;
 
@@ -134,7 +136,8 @@ export class SprintDetailsComponent implements OnInit {
           /* ************************** */
           // brundown Chart by sprint
 
-          this.chartOptions = {
+         /*  this.chartOptions = {
+            
             series: [
               {
                 name: "ideal",
@@ -276,7 +279,7 @@ export class SprintDetailsComponent implements OnInit {
             grid: {
               borderColor: "#f1f1f1"
             }
-          };
+          }; */
 
           /* ************************** */
 
@@ -291,7 +294,6 @@ export class SprintDetailsComponent implements OnInit {
       this.daysNumberInSprint();
       this.idealLineForSprint();
       this.getRefProject();
-
 
     }
   }
@@ -322,7 +324,7 @@ export class SprintDetailsComponent implements OnInit {
   closePopup() {
     this.displayStyle = "none";
     this.router.navigate([{ outlets: { addspPopup: null } }]);
-    location.reload();
+    
   }
 
    // Get projectRef in create sprint from sprint list
@@ -330,10 +332,12 @@ export class SprintDetailsComponent implements OnInit {
     this.sprintService.currentrefProject
       .subscribe(projectRef => {
         this._sselectedPRef = projectRef;
+        this.referenceProject  = projectRef;
     // set local storage
       localStorage.removeItem('refprojectforsprintlist');
       localStorage.setItem('refprojectforsprintlist', this._sselectedPRef);
       console.log("************"+this._sselectedPRef)
+
       }); //<= Always get current value!
   }
 
@@ -350,5 +354,14 @@ export class SprintDetailsComponent implements OnInit {
     this.gotToSprintListBypref();
   }
 
+refreshChart(){
+   let chart = new ApexCharts(
+    document.querySelector("#burndownChartBySprint"),
+    this.chartOptions
+  );
+  
+  chart.render();
+}
+ 
 
 }

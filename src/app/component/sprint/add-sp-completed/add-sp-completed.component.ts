@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -19,93 +19,114 @@ export class AddSpCompletedComponent implements OnInit {
   showScrumMBoard = false;
   roles: string[] = [];
 
-  msgError="";
+  msgError = "";
   workCompletedForm: FormGroup;
 
   tableauwkline = new Object();
   id: number;
-
   sprint: Sprint;
 
- 
 
-  constructor(private tokenStorageService: TokenStorageService, private fb:FormBuilder, private sprintService: SprintService, private route: ActivatedRoute) {
-   
+  @Input() storePreference; 
+
+
+  constructor(private tokenStorageService: TokenStorageService, private fb: FormBuilder, private sprintService: SprintService, private route: ActivatedRoute) {
+
     this.workCompletedForm = this.fb.group({
-      dataArray: this.fb.array([]) 
+      dataArray: this.fb.array([])
     });
   }
 
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    
+
     if (this.isLoggedIn) {
+      console.log("ffffffff"+ this.storePreference)
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
       //this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
-  
 
-    this.id = this.route.snapshot.params['id'];
-    console.log("id: ", this.id);
 
-    this.sprintService.getSprintById(this.id)
-    .subscribe(data => {
-      this.sprint = data;
+      this.id = this.route.snapshot.params['id'];
+      console.log("id: ", this.id);
+
+      this.sprintService.getSprintById(this.id)
+        .subscribe(data => {
+          this.sprint = data;
+
+          console.log(this.sprint);
+
+        },
+          err => {
+            this.msgError = err.error.message;
+
+            console.error(this.msgError);
+          });
    
-      console.log(this.sprint);
-
-    },
-      err => {
-       this.msgError = err.error.message;
-      
-      console.error(this.msgError);
-      });
-
     }
+
+
   }
- 
-  dataArray() : FormArray {
+
+  dataArray(): FormArray {
     return this.workCompletedForm.get("dataArray") as FormArray
   }
-   
+
   newStoryPoint(): FormGroup {
     return this.fb.group({
-     storypC: ''
+      storypC: ''
     })
   }
-   
+
   addWorkCompleted() {
-   this.dataArray().push(this.newStoryPoint());
+    this.dataArray().push(this.newStoryPoint());
   }
-   
-  removeStoryPoint(i:number) {
+
+  removeStoryPoint(i: number) {
     this.dataArray().removeAt(i);
   }
 
 
-   
-  onupdateStoryPointCompleted(){
+
+  onupdateStoryPointCompleted() {
     console.log("id: ", this.id);
 
-  this.tableauwkline  =  Object.values(this.dataArray().value) //Object.entries(this.dataArray().value)
+    this.tableauwkline = Object.values(this.dataArray().value) //Object.entries(this.dataArray().value)
 
-  this.sprintService.updateSprintWorkCompleted(this.id,  this.tableauwkline)
-     .subscribe(data => {
-      console.log(data);
-      //console.log("-------", Object.values(this.tableauwkline));
-   
-    },
-      err => {
-        this.msgError = err.error.message;
-        console.error(this.msgError);
-      } ) 
+    this.sprintService.updateSprintWorkCompleted(this.id, this.tableauwkline)
+      .subscribe(data => {
+        console.log(data);
+        //console.log("-------", Object.values(this.tableauwkline));
+
+      },
+        err => {
+          this.msgError = err.error.message;
+          console.error(this.msgError);
+        })
   }
 
   onSubmit() {
-   this.onupdateStoryPointCompleted();
+    this.onupdateStoryPointCompleted();
+    //location.reload();
+    this.sprintService.updateStoryPointInSprint()
+      .subscribe(data => console.log(data));
+      
+       this.sprintService.daysInSprint()
+      .subscribe(data => console.log(data));
+      
+      this.sprintService.idealLineOfSprint()
+      .subscribe(data => console.log(data));
+      //location.reload();
+  }
+
+  
+
+  sendRefProjectParams() {
+    //Set refprodect in component 1
+    this.sprintService.changePReference(this.storePreference);
   }
 
 
