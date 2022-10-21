@@ -57,7 +57,7 @@ export class SprintListComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-     // this.getTitleProjects();
+     this.getTitleProjects();
       this.cgetAllSprints();
       this.selected = true;
 
@@ -267,14 +267,13 @@ export class SprintListComponent implements OnInit {
 
 
     this.projectService.findSprintByProjectReference(this.searchPReference)
-      .subscribe(
-        data => {
+      .subscribe( data => {
           this.sprintsList = data;
           console.log(data);
         },
         err => {
           this.msgError = err.error.message;
-          Swal.fire('Hey!', 'error: ' + this.msgError, 'warning')
+          Swal.fire('Hey!', 'Error: ' + this.msgError, 'error')
           console.error(this.msgError);
         });
     }

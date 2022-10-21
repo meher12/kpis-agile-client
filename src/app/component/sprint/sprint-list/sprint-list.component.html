@@ -33,7 +33,7 @@
             </div>
             <!-- End search -->
         </div>
-        <div *ngIf="selectedListOption" >
+        <div *ngIf="selectedListOption">
             <div *ngIf="showScrumMBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
                 <div class="btn-group btn-group-toggle" role="group">
@@ -79,6 +79,7 @@
                     </thead>
 
                     <tbody>
+                        <!-- "sprintsList" => search by refrence && "sprints" option list-->
                         <tr *ngFor="let sprint of sprintsList | filter:searchRef | paginate : {
                             itemsPerPage: tableSize,
                             currentPage: page,
