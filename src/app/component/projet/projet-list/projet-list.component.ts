@@ -43,6 +43,8 @@ export class ProjetListComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
+      this.tableSize = 3;
+
       this.getAllProject();
 
     }

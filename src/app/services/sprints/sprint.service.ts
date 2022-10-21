@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Sprint } from 'src/app/models/sprint.model';
+import { Story } from 'src/app/models/story.model';
 import { AppConstants } from '../AppConstants';
 
 
@@ -99,6 +100,11 @@ export class SprintService {
   //  Number of sprint By velocity average
   getNumberOfSprintByVelocity(sreference: string): Observable<any> {
     return this.httpClient.get<any>(`${this.baseUrl}` + '/sprints/' + `${sreference}/` + 'nbrSprintByVelocity', httpOptions);
+  }
+
+  // find story by sprint ref
+  findStoryBySprintReference(sprintReference: any): Observable<Story[]> {
+    return this.httpClient.get<Story[]>(`${this.baseUrl}`+ "/searchBySReference"+`?sprintReference=${sprintReference}`);
   }
 
 

@@ -2,11 +2,13 @@
   <h3 class="text-center"> View Sprint Details</h3>
 
   <!-- Start button popup -->
-  <button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary" (click)="openPopup(sprint.id)">Add
-    story
-    points completed
-  </button>
-
+  <div class="col-md-10">
+    <button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary" (click)="openPopup(sprint.id)">Add
+      story
+      points completed
+    </button>
+  </div>
+  <div class="col-md-10"><button  class="btn btn-outline-primary" (click)="backToSprintListByRefProject()">Back to Sprint List</button> </div>
   <div class="modal" *ngIf="showScrumMBoard" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
     <div class="modal-dialog reveal-modal" role="document">
       <div class="modal-content">
@@ -24,6 +26,7 @@
       </div>
     </div>
   </div>
+
   <!-- End button popup -->
   <div class="col-md-12 detailsp">
     <div class="card mb-3">
@@ -91,7 +94,7 @@
           </div>
         </div>
         <hr>
-       <!--  <div class="row">
+        <!--  <div class="row">
           <div class="col-sm-3">
             <h6 class="mb-0">Ideal line:</h6>
           </div>
@@ -142,17 +145,17 @@
         </div>
 
         <!-- ************** -->
-  <ng-container *ngIf="chartOptions">
-    <div id="burndownChartBySprint">
-      <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
-        [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels"
-        [legend]="chartOptions.legend" [markers]="chartOptions.markers" [grid]="chartOptions.grid"
-        [yaxis]="chartOptions.yaxis" [title]="chartOptions.title" [plotOptions]="chartOptions.plotOptions"
-        [fill]="chartOptions.fill" [xaxis]="chartOptions.xaxis"></apx-chart>
+        <ng-container *ngIf="chartOptions">
+          <div id="burndownChartBySprint">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+              [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels"
+              [legend]="chartOptions.legend" [markers]="chartOptions.markers" [grid]="chartOptions.grid"
+              [yaxis]="chartOptions.yaxis" [title]="chartOptions.title" [plotOptions]="chartOptions.plotOptions"
+              [fill]="chartOptions.fill" [xaxis]="chartOptions.xaxis"></apx-chart>
 
-    </div>
-  </ng-container>
-  <!-- *************** -->
+          </div>
+        </ng-container>
+        <!-- *************** -->
 
         <ng-template #noStoriesList>
           <div class="text-danger font-weight-bold" style="padding-top: 10px;">

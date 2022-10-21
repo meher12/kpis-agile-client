@@ -62,6 +62,15 @@ export class SprintDetailsComponent implements OnInit {
 
   displayStyle = "none";
 
+
+   //Get value in component 2
+   _sselectedPRef: any;
+   //Getter and Setters
+   get selectedPRef() { return this._sselectedPRef };
+   set selectedPRef(value: string) { //debugger;
+     this._sselectedPRef= value;
+   }
+
   @ViewChild("brundownChartBySprint") chart: ChartComponent;
   public chartOptions: Partial<any>;
 
@@ -74,12 +83,12 @@ export class SprintDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (!localStorage.getItem('sprint_data')) {
+   /*  if (!localStorage.getItem('sprint_data')) {
       localStorage.setItem('sprint_data', 'no reload')
       location.reload()
     } else {
       localStorage.removeItem('sprint_data')
-    }
+    } */
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -279,13 +288,14 @@ export class SprintDetailsComponent implements OnInit {
           });
 
       this.updateTablesprint();
-
       this.daysNumberInSprint();
       this.idealLineForSprint();
+      this.getRefProject();
 
 
     }
   }
+
 
 
   updateTablesprint() {
@@ -313,6 +323,31 @@ export class SprintDetailsComponent implements OnInit {
     this.displayStyle = "none";
     this.router.navigate([{ outlets: { addspPopup: null } }]);
     location.reload();
+  }
+
+   // Get projectRef in create sprint from sprint list
+   getRefProject() {
+    this.sprintService.currentrefProject
+      .subscribe(projectRef => {
+        this._sselectedPRef = projectRef;
+    // set local storage
+      localStorage.removeItem('refprojectforsprintlist');
+      localStorage.setItem('refprojectforsprintlist', this._sselectedPRef);
+      console.log("************"+this._sselectedPRef)
+      }); //<= Always get current value!
+  }
+
+  sendRefProjectParams(){
+    //Set refprodect in component 1
+    this.sprintService.changePReference( this._sselectedPRef);
+  }
+
+  gotToSprintListBypref() {
+    this.router.navigate(['/sprintListBypre', this._sselectedPRef]);
+  }
+
+  backToSprintListByRefProject(){
+    this.gotToSprintListBypref();
   }
 
 

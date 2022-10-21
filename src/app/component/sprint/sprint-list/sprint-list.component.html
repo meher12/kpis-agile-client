@@ -1,6 +1,6 @@
 <div class="card" *ngIf="showPOBoard || showScrumMBoard;else BadCredentials">
     <div class="container text-center">
-        <h3>Sprint Search Using Project title</h3>
+        <h3> Sprint list by Project reference</h3>
     </div>
 
     <div class="container container-search-sprints">
@@ -11,20 +11,32 @@
                 [(ngModel)]="searchRef"> -->
 
             <!-- Start -->
-            <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
+           <!--  <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
                 [(ngModel)]="selected" name="valueCheck" (change)="cgetAllSprintsByProjectRef($event)">
                 <option [ngValue]="undefined" disabled>Choose your project title...</option>
                 <option *ngFor="let project of projects" [value]="project.pReference" [selected]="project == selected">
                     {{project.titre}}
                 </option>
-            </select>
+            </select> -->
 
             <!-- End -->
+            <!-- Start search -->
+            <div class="col-md-12">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="&#xf002; Search..." [(ngModel)]="searchPReference" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" (click)="searchSprintListByProjectRef()">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- End search -->
         </div>
-        <div *ngIf="selected">
+        <div *ngIf="selectedListOption" >
             <div *ngIf="showScrumMBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
-                <div *ngIf="selectedListOption" class="btn-group btn-group-toggle" role="group">
+                <div class="btn-group btn-group-toggle" role="group">
                     <button routerLink="/createsprint" class="btn btn-outline-primary">Add Sprint</button>
                     <button style="margin-left: 2px" class="btn btn-outline-danger" (click)="confirmDeleteAll()">Delete
                         All Sprint</button>
@@ -39,7 +51,7 @@
 
                 <div class="search-boxs">
                     <input class="form-control" type="text" name="search" autocomplete="off"
-                        placeholder="&#xf002; Start searching for a sprint by any item" [(ngModel)]="searchRef">
+                        placeholder="&#xf002; Searching sprint by any item" [(ngModel)]="searchRef">
                 </div>
 
                 <!-- Pagination -->
@@ -67,7 +79,7 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let sprint of sprints | filter:searchRef | paginate : {
+                        <tr *ngFor="let sprint of sprintsList | filter:searchRef | paginate : {
                             itemsPerPage: tableSize,
                             currentPage: page,
                             totalItems: count

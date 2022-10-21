@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Story } from 'src/app/models/story.model';
 import { Task } from 'src/app/models/task.model';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
@@ -28,17 +28,25 @@ export class DetailsStoryComponent implements OnInit {
   tasks: Task[];
   taskSorted: any[] = [];
 
+    //Get value in component 2
+    _sselectedSRef: any;
+    //Getter and Setters
+    get selectedSRef() { return this._sselectedSRef };
+    set selectedSRef(value: string) { //debugger;
+      this._sselectedSRef= value;
+    }
+
   constructor(private storyService: StoryService,  private route: ActivatedRoute,
-    private tokenStorageService: TokenStorageService, private sprintService: SprintService) { }
+    private tokenStorageService: TokenStorageService, private router: Router, private sprintService: SprintService) { }
 
   ngOnInit(): void {
 
-    if (!localStorage.getItem('story_data')) { 
+   /*  if (!localStorage.getItem('story_data')) { 
       localStorage.setItem('story_data', 'no reload') 
       location.reload() 
     } else {
       localStorage.removeItem('story_data') 
-    }
+    } */
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -73,12 +81,32 @@ export class DetailsStoryComponent implements OnInit {
           });
 
           this.updateTablesprint();
+          this.getRefSprint();
     }
   }
 
   updateTablesprint() {
     this.sprintService.updateStoryPointInSprint()
       .subscribe(data => console.log(data));
+  }
+
+
+   // Get projectRef in create sprint from sprint list
+   getRefSprint() {
+    this.storyService.currentrefSprint
+      .subscribe(sprintRef => {
+        this._sselectedSRef = sprintRef;
+      }); //<= Always get current value!
+  }
+
+  sendRefSprintParams(){
+    //Set refprodect in component 1
+    this.storyService.changeSReference(this._sselectedSRef);
+      
+  }
+  
+  gotToStoryListBysref() {
+    this.router.navigate(['storylistByspr', this._sselectedSRef]);
   }
 
 }

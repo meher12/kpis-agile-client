@@ -90,6 +90,12 @@ export class ListStoryBySprintComponent implements OnInit {
       }); //<= Always get current value!
   }
 
+  sendRefSprintParams(){
+    //Set refprodect in component 1
+    this.storyService.changeSReference(this._getsselectedSRef);
+      
+  }
+
   // Get All projects by ref id
   getTitleSprint() {
     this.sprintService.getSprintByReference(this.store_ref_sprint)

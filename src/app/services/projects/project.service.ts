@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Projet } from 'src/app/models/projet.model';
+import { Sprint } from 'src/app/models/sprint.model';
 import { AppConstants } from '../AppConstants';
 
 
@@ -117,14 +118,21 @@ export class ProjectService {
     return this.httpClient.put(`${this.baseUrl}` + '/projects/gettaskbugs/' + `${preference}`, startDateObject, httpOptions);
   }
 
-
-
   // add, update memeber
   addUpdateteamMember(id: number, teamMember: any): Observable<any> {
     return this.httpClient.put<any>(`${this.baseUrl}` + '/project/addmember/' + `${id}`, teamMember, httpOptions);
   }
 
-
+  // find sprint by project title
+  findSprintByProjectReference(projectReference: any): Observable<Sprint[]> {
+    return this.httpClient.get<Sprint[]>(`${this.baseUrl}`+ "/projects/searchByPReference"+`?projectReference=${projectReference}`);
+  }
+  
+  // find project by title
+  // find sprint by project title
+ /*  findProjectTitle(title: any): Observable<Projet> {
+    return this.httpClient.get<Projet>(`${this.baseUrl}`+ "/findProjects"+`?title=${title}`);
+  } */
 }
 
 

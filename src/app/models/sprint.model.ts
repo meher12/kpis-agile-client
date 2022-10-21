@@ -6,7 +6,7 @@ export class Sprint {
 
     public id: number;
     public stitre: String;
-    public sReference: String;
+    public sReference: string;
     public sdescription: String;
     public workCommitment: number;
     public workCompleted: number;

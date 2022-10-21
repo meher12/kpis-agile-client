@@ -1,23 +1,36 @@
 <div class="card" *ngIf="showPOBoard || showScrumMBoard || showDevBoard;else BadCredentials">
     <div class="container text-center">
-        <h3>Story Search By Sprint Title</h3>
+        <h3>Search Story by sprint reference</h3>
     </div>
 
     <div class="container container-search-sprints">
-        <div class="search-sprints">
+      <div class="search-sprints">
 
-            <!-- Start -->
-            <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
+          
+             <!-- <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
                 [(ngModel)]="selected" name="valueCheck" (change)="cgetAllStoryBySprintRef($event)">
                 <option [ngValue]="undefined" disabled>Choose your sprint By Unique Id...</option>
                 <option *ngFor="let sprint of sprints" [value]="sprint.sReference" [selected]="sprint == selected">
                     {{sprint.sReference}} -- {{sprint.stitre}}
                 </option>
-            </select>
+            </select>  -->
 
-            <!-- End -->
+            
+        
+         <!-- Start search -->
+         <div class="col-md-12">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="&#xf002; search..." [(ngModel)]="searchSReference" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="findStoryBySprintReference()">
+                        Search
+                    </button>
+                </div>
+            </div>
         </div>
-        <div *ngIf="selected">
+        <!-- End search -->
+    </div>
+    <div *ngIf="selectedListOption" >
             <div *ngIf="showScrumMBoard;" class="col-md-10" style="margin-bottom: 10px;">
 
                 <div *ngIf="selectedListOption" class="btn-group btn-group-toggle" role="group">
@@ -39,7 +52,7 @@
 
                 <div class="search-boxs">
                     <input class="form-control" type="text" name="search" autocomplete="off"
-                        placeholder="&#61442; Start searching for a sprint by any item" [(ngModel)]="searchRef">
+                        placeholder="&#61442; search story by any item" [(ngModel)]="searchRef">
                 </div>
 
                   <!-- Pagination -->
@@ -68,7 +81,7 @@
                     </thead>
 
                     <tbody>
-                        <tr *ngFor="let story of stories  | filter:searchRef  | paginate : {
+                        <tr *ngFor="let story of storyList  | filter:searchRef  | paginate : {
                             itemsPerPage: tableSize,
                             currentPage: page,
                             totalItems: count

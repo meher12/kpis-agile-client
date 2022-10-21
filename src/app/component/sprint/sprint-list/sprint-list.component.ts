@@ -38,6 +38,12 @@ export class SprintListComponent implements OnInit {
   tableSize: number = 4;
   tableSizes: any = [3, 6, 9, 12];
 
+  /* Search by title */
+  sprintsList?: Sprint[];
+  currentSprint: Sprint[] = [];
+  currentIndex = -1;
+  searchPReference = '';
+
 
   constructor(private sprintService: SprintService, private router: Router, private tokenStorageService: TokenStorageService,
     private projectService: ProjectService) { }
@@ -51,9 +57,11 @@ export class SprintListComponent implements OnInit {
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
 
-      this.getTitleProjects();
+     // this.getTitleProjects();
       this.cgetAllSprints();
       this.selected = true;
+
+      this.tableSize = 4;
 
     }
   }
@@ -238,21 +246,40 @@ export class SprintListComponent implements OnInit {
   }
 
 
+  searchSprintListByProjectRef(): void {
+    this.currentSprint = [];
+    this.currentIndex = -1;
+    
+
+    if(this.searchPReference === ""){
+      Swal.fire('Hey!', 'Choose project to display sprints list', 'warning')
+    }
+    else{
+
+      this.selectedListOption = true;
+        //get project ref
+     this.projectService.getProjectByReference(this.searchPReference)
+     .subscribe(data => {
+       this.project = data;
+       // send project ref
+       this.sprintService.changePReference(this.project.pReference);
+     })
 
 
-
-
-
-
-
-
-
-
+    this.projectService.findSprintByProjectReference(this.searchPReference)
+      .subscribe(
+        data => {
+          this.sprintsList = data;
+          console.log(data);
+        },
+        err => {
+          this.msgError = err.error.message;
+          Swal.fire('Hey!', 'error: ' + this.msgError, 'warning')
+          console.error(this.msgError);
+        });
+    }
+        
+  }
 
 
 }
-
-
-
-
-
