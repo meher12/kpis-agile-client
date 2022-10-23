@@ -43,6 +43,9 @@ export class StoryListComponent implements OnInit {
   currentIndex = -1;
   searchSReference = '';
 
+  refSprintAfterRefresh?: string;
+  getHtmlArray;
+
 
   constructor(private storyService: StoryService, private router: Router, private tokenStorageService: TokenStorageService,
     private sprintService: SprintService) { }
@@ -275,6 +278,7 @@ export class StoryListComponent implements OnInit {
             console.log(data);
             if (this.storyList) {
               this.selectedListOption = true;
+              this.getHtmlArray = true;
               //get project ref
               this.sprintService.getSprintByReference(this.searchSReference)
                 .subscribe(data => {
@@ -284,6 +288,54 @@ export class StoryListComponent implements OnInit {
                   this.storyService.changeSReference(this.sprint.sReference);
 
                 })
+            }
+            else {
+              this.getHtmlArray = false;
+              //localStorage of ref project
+              localStorage.setItem("refsprint", this.searchSReference);
+              console.log("Before refresh " + this.searchSReference)
+
+              Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to create a new story?",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, create it!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+
+                  this.selectedListOption = true;
+
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'You can click on add story button',
+                    showConfirmButton: false,
+                    timer: 1550
+                  }).then((confirm) => {
+                    if (confirm) {
+
+                      this.refSprintAfterRefresh = localStorage.getItem("refsprint");
+                      console.log("After frersh " + this.refSprintAfterRefresh)
+                      //get sprint ref
+                      this.sprintService.getSprintByReference(this.searchSReference)
+                        .subscribe(data => {
+                          this.sprint = data;
+                          console.log(this.sprint);
+                          // send sprint ref
+                          this.storyService.changeSReference(this.sprint.sReference);
+
+                        })
+                    }
+                    else {
+                      console.log("There is no sprint refernce")
+                    }
+                  });
+                }
+              })
+
             }
           },
           err => {

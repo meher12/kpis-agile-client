@@ -15,10 +15,10 @@
 
 
         <div class="search-boxs">
-            <input class="form-control"  type="text" name="search" autocomplete="off"
+            <input class="form-control" type="text" name="search" autocomplete="off"
                 placeholder="&#xf002; search project by any item" [(ngModel)]="searchRef">
-                
-                
+
+
         </div>
 
         <!-- Pagination -->
@@ -51,7 +51,11 @@
                     currentPage: page,
                     totalItems: count
                    };  let i = index ">
-                    <td>{{project.pReference}}</td>
+
+                    <td>
+                        {{project.pReference}}
+
+                    </td>
                     <td> {{project.titre}}</td>
                     <!-- <td>{{project.descriptionProject}}</td> -->
                     <td>{{project.dateDebut}}</td>

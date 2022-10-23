@@ -30,7 +30,11 @@ export class ProjetListComponent implements OnInit {
 
 
 
+
+
+ 
   constructor(private projectService: ProjectService, private router: Router, private tokenStorageService: TokenStorageService) { }
+
 
   ngOnInit(): void {
 
@@ -51,11 +55,11 @@ export class ProjetListComponent implements OnInit {
   }
 
 
-
   getAllProject() {
     this.projectService.getProjectList()
       .subscribe(data => {
         this.projects = data;
+        
         console.log(data);
       },
         err => {

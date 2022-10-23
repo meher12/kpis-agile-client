@@ -44,6 +44,9 @@ export class SprintListComponent implements OnInit {
   currentIndex = -1;
   searchPReference = '';
 
+  refProjForRefresh?: string;
+  getArray;
+
 
   constructor(private sprintService: SprintService, private router: Router, private tokenStorageService: TokenStorageService,
     private projectService: ProjectService) { }
@@ -262,13 +265,60 @@ export class SprintListComponent implements OnInit {
 
           if (this.sprintsList) {
             this.selectedListOption = true;
+            this.getArray = true;
             //get project ref
             this.projectService.getProjectByReference(this.searchPReference)
               .subscribe(data => {
                 this.project = data;
                 // send project ref
-                this.sprintService.changePReference(this.project.pReference);
+                this.sprintService.changePReference(this.searchPReference);
               })
+          }
+          else {
+            this.getArray = false;
+            //localStorage of ref project
+            localStorage.setItem("refproject", this.searchPReference);
+            console.log("Before refresh"+this.searchPReference)
+
+            Swal.fire({
+              title: 'Are you sure?',
+              text: "Do you want to create a new sprint?",
+              icon: 'info',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, create it!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+
+                this.selectedListOption = true;
+               
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'You can click on add sprint button',
+                  showConfirmButton: false,
+                  timer: 1550
+                }).then((confirm) => {
+                  if (confirm) {
+                    
+                  this.refProjForRefresh = localStorage.getItem("refproject");
+                  console.log("After frersh "+this.refProjForRefresh)
+                  //get project ref
+                  this.projectService.getProjectByReference(this.refProjForRefresh)
+                    .subscribe(data => {
+                      this.project = data;
+                      // send project ref
+                      this.sprintService.changePReference(this.refProjForRefresh);
+                    })
+                  }
+                  else{
+                    console.log("There is no project refernce")
+                  }
+                });
+              }
+            })
+
           }
         },
           err => {

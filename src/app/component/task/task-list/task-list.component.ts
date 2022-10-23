@@ -41,6 +41,9 @@ export class TaskListComponent implements OnInit {
   currentIndex = -1;
   searchSTReference = '';
 
+  refStoryAfterRefresh?: string;
+  getHtmlArray;
+
   constructor(private storyService: StoryService, private router: Router, private tokenStorageService: TokenStorageService,
     private taskService: TaskService) { }
 
@@ -77,7 +80,7 @@ export class TaskListComponent implements OnInit {
     this.taskService.getAllTasks()
       .subscribe(data => {
         this.tasks = data;
-       // console.log(this.tasks);
+        // console.log(this.tasks);
       },
         err => {
           this.msgError = err.error.message;
@@ -262,20 +265,69 @@ export class TaskListComponent implements OnInit {
       this.storyService.findTaskByStoryReference(this.searchSTReference)
         .subscribe(
           data => {
-           this.taskListSearched = data;
+            this.taskListSearched = data;
             console.log(data);
             if (this.taskListSearched) {
               this.selectedListOption = true;
-              //get project ref
+              this.getHtmlArray = true;
+              //get story ref
               this.storyService.getStoryByReference(this.searchSTReference)
                 .subscribe(data => {
                   this.story = data;
                   console.log(this.story);
                   // send story ref
                   this.taskService.changeSTReference(this.story.stReference);
-
                 })
             }
+            else {
+              this.getHtmlArray = false;
+              //localStorage of ref project
+              localStorage.setItem("refstory", this.searchSTReference);
+              console.log("Before refresh " + this.searchSTReference)
+
+              Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to create a new task?",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, create it!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+
+                  this.selectedListOption = true;
+
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'You can click on add task button',
+                    showConfirmButton: false,
+                    timer: 1550
+                  }).then((confirm) => {
+                    if (confirm) {
+
+                      this.refStoryAfterRefresh = localStorage.getItem("refstory");
+                      console.log("After frersh " + this.refStoryAfterRefresh)
+                      //get project ref
+                      //get story ref
+                      this.storyService.getStoryByReference(this.refStoryAfterRefresh)
+                        .subscribe(data => {
+                          this.story = data;
+                          console.log(this.story);
+                          // send story ref
+                          this.taskService.changeSTReference(this.story.stReference);
+                        })
+                    }
+                    else {
+                      console.log("There is no story refernce")
+                    }
+                  });
+                }
+              })
+
+            }
+
           },
           err => {
             this.msgError = err.error.message;
