@@ -57,6 +57,8 @@ export class BurndownComponent implements OnInit {
   workedStoryarray: string[];
   idealLineArray: any[];
   dateList: String[];
+  dicimalArrayIdealLine =  [];
+  dicimalArrayDoneLine =  [];
 
 
   isLoggedIn = false;
@@ -64,6 +66,11 @@ export class BurndownComponent implements OnInit {
   showScrumMBoard = false;
 
   roles: string[] = [];
+
+  sprintsList?: Sprint[];
+  currentSprint: Sprint[] = [];
+  currentIndex = -1;
+  searchSReference = '';
 
   @ViewChild("brundownChart") chart: ChartComponent;
   public chartOptions: Partial<any>;
@@ -162,6 +169,74 @@ export class BurndownComponent implements OnInit {
           Swal.fire('Hey!', this.msgError, 'warning')
           console.error(this.msgError);
         });
+
+  }
+
+
+
+  sprintBurndownChartByRef(): void {
+    this.currentSprint = [];
+    this.currentIndex = -1;
+
+
+    if (this.searchSReference === "") {
+      Swal.fire('Hey!', 'Choose sprint reference', 'warning')
+    }
+    else {
+      this.daysNumberInSprint();
+      this.idealLineForSprint();
+      this.selected = true
+      this.sprintService.getSprintByReference(this.searchSReference)
+        .subscribe(data => {
+          this.sprintObject = data;
+          //console.log(this.sprintObject)
+  
+       
+          this.sprintObject.idealLinearray.pop()
+          this.idealLineArray = this.sprintObject.idealLinearray;
+
+          // ********
+          function getValueBeforeDecimal(num) {
+            const beforeDecimalStr = num.toString().split('.')[0];
+          
+            return Number(beforeDecimalStr);
+          }
+          // ********
+  
+          for (var i=0; i<this.idealLineArray.length; i++){
+          //this.idealLineArray[i] = this.idealLineArray[i] //Math.round(this.idealLineArray[i])
+         
+          this.dicimalArrayIdealLine.push(getValueBeforeDecimal(this.idealLineArray[i]));
+         } 
+
+         console.log("---------"+  this.dicimalArrayIdealLine)
+          this.sprintObject.workedlarray.pop();
+          this.workedStoryarray =  this.sprintObject.workedlarray;
+
+          // ************
+          for (var i=0; i<this.workedStoryarray.length; i++){
+            //this.idealLineArray[i] = this.idealLineArray[i] //Math.round(this.idealLineArray[i])
+           
+            this.dicimalArrayDoneLine.push(getValueBeforeDecimal(this.workedStoryarray[i]));
+           } 
+  
+           console.log("----Done-----"+  this.dicimalArrayDoneLine)
+          // **********
+  
+          this.sprintObject.daysarray.pop() 
+          this.dateList = this.sprintObject.daysarray
+  
+          this.datePickedB.emit( this.sprintObject.supdatedDate);
+  
+          this.burnDownChart(this.idealLineArray, this.workedStoryarray, this.dateList);
+  
+        },
+          err => {
+            this.msgError = err.error.message;
+            Swal.fire('Hey!', 'Error: ' + this.msgError, 'error')
+            console.error(this.msgError);
+          });
+    }
 
   }
 
@@ -315,6 +390,8 @@ export class BurndownComponent implements OnInit {
 
   }
 
+
+ 
 
 
 

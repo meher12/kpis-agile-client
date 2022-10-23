@@ -62,7 +62,8 @@ const routes: Routes = [
   {path: 'updatesprint/:id', component: UpdateSprintComponent},
   {path: 'detailssprint/:id', component: SprintDetailsComponent},
   {path: 'sprintListBypre/:refproject', component: SprintListByProjectComponent},
-  {path: 'addspcompleted/:id', component: AddSpCompletedComponent, outlet: 'addspPopup'},
+  //{path: 'addspcompleted/:id', component: AddSpCompletedComponent, outlet: 'addspPopup'},
+ 
 
   // Story Router
   {path: 'storyList', component: StoryListComponent},

@@ -3,19 +3,31 @@
 
 
   <!-- Start -->
-  <div class="search-sprints">
+  <!-- <div class="search-sprints">
     <select class="form-control select2bs4" style="width: 100%" [(ngModel)]="selected" name="valueCheck"
       (change)="generateDataChart($event)" autocomplete="nope">
       <option [ngValue]="undefined" disabled>Choose sprint...</option>
       <option *ngFor="let sprint of sprints" [value]="sprint.sReference" [selected]="sprint == selected">
         {{sprint.stitre}}
       </option>
-    </select>
+    </select> 
 
-
-
-  </div>
+  </div>-->
   <!-- End -->
+
+ <!-- Start search -->
+ <div class="col-md-12">
+  <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="&#xf002; search..." [(ngModel)]="searchSReference" />
+      <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="sprintBurndownChartByRef()">
+              Search
+          </button>
+      </div>
+  </div>
+</div>
+<!-- End search -->
+
   <div *ngIf="selected;else selectList">
     <ng-container *ngIf="chartOptions">
       <div id="brundownChart">
@@ -31,8 +43,7 @@
 
   <ng-template #selectList>
     <div class="msgList">
-      <h4 class="text-info" style="text-align: center;"> Choose your item from list to display the
-        Burndown Chart </h4>
+      <h4 class="text-info" style="text-align: center;"> Choose sprint to show the burndown chart </h4>
     </div>
   </ng-template>
 </div>

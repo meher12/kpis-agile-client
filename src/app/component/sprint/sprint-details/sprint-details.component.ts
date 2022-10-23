@@ -136,7 +136,7 @@ export class SprintDetailsComponent implements OnInit {
           /* ************************** */
           // brundown Chart by sprint
 
-         /*  this.chartOptions = {
+       /*    this.chartOptions = {
             
             series: [
               {
@@ -318,7 +318,8 @@ export class SprintDetailsComponent implements OnInit {
 
 
   openPopup(id: number) {
-    this.router.navigate([{ outlets: { addspPopup: ['addspcompleted', id] } }]);
+    //this.router.navigate([{ outlets: { addspPopup: ['addspcompleted', id] } }]);
+    this.router.navigate(['detailssprint', id]);
     this.displayStyle = "block";
   }
   closePopup() {

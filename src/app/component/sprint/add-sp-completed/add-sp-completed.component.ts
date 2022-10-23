@@ -42,7 +42,8 @@ export class AddSpCompletedComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
-      console.log("ffffffff"+ this.storePreference)
+      localStorage.setItem("preference", this.storePreference);
+      console.log("in model "+ this.storePreference)
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
@@ -67,7 +68,6 @@ export class AddSpCompletedComponent implements OnInit {
           });
    
     }
-
 
   }
 
@@ -118,15 +118,22 @@ export class AddSpCompletedComponent implements OnInit {
       .subscribe(data => console.log(data));
       
       this.sprintService.idealLineOfSprint()
-      .subscribe(data => console.log(data));
-      //location.reload();
+      .subscribe(data => {
+       // console.log(data)
+        this.sprintService.changePReference(localStorage.getItem("preference"));
+        console.log("in model 2  "+ localStorage.getItem("preference"))
+        
+      })
+       
+      //
   }
 
   
 
   sendRefProjectParams() {
     //Set refprodect in component 1
-    this.sprintService.changePReference(this.storePreference);
+    this.sprintService.changePReference(localStorage.getItem("preference"));
+    location.reload();
   }
 
 
