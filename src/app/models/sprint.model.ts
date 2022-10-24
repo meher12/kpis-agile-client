@@ -5,7 +5,7 @@ import { Story } from "./story.model";
 export class Sprint {
 
     public id: number;
-    public stitre: String;
+    public stitre: string;
     public sReference: string;
     public sdescription: String;
     public workCommitment: number;

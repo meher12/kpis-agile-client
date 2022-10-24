@@ -5,6 +5,7 @@ import { ProjectService } from 'src/app/services/projects/project.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 import Swal from 'sweetalert2';
+import { read, utils, writeFile } from 'xlsx';
 
 @Component({
   selector: 'app-projet-list',
@@ -28,11 +29,11 @@ export class ProjetListComponent implements OnInit {
   tableSize: number = 3;
   tableSizes: any = [3, 6, 9, 12];
 
+  csvProject = [];
 
 
 
 
- 
   constructor(private projectService: ProjectService, private router: Router, private tokenStorageService: TokenStorageService) { }
 
 
@@ -59,8 +60,16 @@ export class ProjetListComponent implements OnInit {
     this.projectService.getProjectList()
       .subscribe(data => {
         this.projects = data;
-        
-        console.log(data);
+
+        let objectElement = { "projectReference": "", "title": "" };
+        for (const data of Object.values(this.projects)) {
+          objectElement.projectReference = data.pReference
+          objectElement.title = data.titre
+          this.csvProject.push(Object.assign({}, objectElement))
+        }
+
+        console.log(this.csvProject);
+
       },
         err => {
           this.msgError = err.error.message;
@@ -209,6 +218,62 @@ export class ProjetListComponent implements OnInit {
 
   refresh(): void {
     window.location.reload();
+  }
+
+
+
+  handleExport() {
+    const headings = [[
+      'Reference',
+      'Title',
+
+    ]];
+    const wb = utils.book_new();
+    const ws: any = utils.json_to_sheet([]);
+    utils.sheet_add_aoa(ws, headings);
+    utils.sheet_add_json(ws, this.csvProject, { origin: 'A2', skipHeader: true });
+    utils.book_append_sheet(wb, ws, 'List');
+
+
+    //****************choose format file*********************** */
+
+    const items = [
+      { id: "CSV type", name: "CSV" },
+      { id: "XLSX type", name: "XLSX" },
+
+    ]
+
+    const inputOptions = new Map
+    items.forEach(item => inputOptions.set(item.id, item.name))
+
+    Swal.fire({
+      title: 'Select file format',
+      input: 'radio',
+      inputOptions: inputOptions,
+      showDenyButton: true, showCancelButton: true,
+      confirmButtonText: `Export`,
+      denyButtonText: `Don't export`,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to choose something!'
+        }
+        if (value === "CSV type") {
+          // Swal.fire({ html: `You selected: ${value}` })
+          writeFile(wb, 'List.csv');
+        }
+        if (value === "XLSX type") {
+          // Swal.fire({ html: `You selected: ${value}` })
+          writeFile(wb, 'List.xlsx');
+        }
+      }
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('File exported!', 'List.csv', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('File are not exported', 'List.xlsx', 'info')
+      }
+    });
   }
 
 }

@@ -11,7 +11,7 @@
                 [(ngModel)]="searchRef"> -->
 
             <!-- Start -->
-           <!--  <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
+            <!--  <select class="form-control select2bs4" name="country_code" id="country_code" style="width: 100%"
                 [(ngModel)]="selected" name="valueCheck" (change)="cgetAllSprintsByProjectRef($event)">
                 <option [ngValue]="undefined" disabled>Choose your project title...</option>
                 <option *ngFor="let project of projects" [value]="project.pReference" [selected]="project == selected">
@@ -23,9 +23,11 @@
             <!-- Start search -->
             <div class="col-md-12">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="&#xf002; Search..." [(ngModel)]="searchPReference" />
+                    <input type="text" class="form-control" placeholder="&#xf002; Search..."
+                        [(ngModel)]="searchPReference" />
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" (click)="searchSprintListByProjectRef()">
+                        <button class="btn btn-outline-secondary" type="button"
+                            (click)="searchSprintListByProjectRef()">
                             Search
                         </button>
                     </div>
@@ -42,7 +44,7 @@
                         All Sprint</button>
 
                 </div>
-                
+
                 <div class="row titre" *ngIf="selectedListOption">
                     <h3>Project: {{project?.pReference}} -- {{project?.titre}}</h3>
                 </div>
@@ -66,8 +68,12 @@
                     </div>
                 </div>
                 <!-- End Pagination -->
-
-                <table class="table table-striped" >
+                <div class="buttonexprt float-right">
+                    <button (click)="handleExport()" class="btn btn-info">
+                        Export list<i class="fa fa-download"></i>
+                    </button>
+                </div>
+                <table class="table table-striped">
                     <thead class="bg-none bgc-default-tp1">
                         <tr>
                             <th>Reference</th>

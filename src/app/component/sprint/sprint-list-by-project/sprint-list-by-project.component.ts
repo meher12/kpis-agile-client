@@ -5,7 +5,7 @@ import { Sprint } from 'src/app/models/sprint.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
-
+import { utils, writeFile } from 'xlsx';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -43,6 +43,8 @@ export class SprintListByProjectComponent implements OnInit {
    count: number = 0;
    tableSize: number = 4;
    tableSizes: any = [3, 6, 9, 12];
+
+   csvSprint = [];
 
   constructor(private sprintService: SprintService, private projectService: ProjectService, private router: Router,
      private tokenStorageService: TokenStorageService, private route: ActivatedRoute ) { }
@@ -93,6 +95,14 @@ export class SprintListByProjectComponent implements OnInit {
       .subscribe(data => {
         this.sprints = data;
         // console.log(this.sprints);
+        let objectElement = { "reference": "", "title": "" };
+        for (const data of Object.values(this.sprints)) {
+          objectElement.reference = data.sReference
+          objectElement.title = data.stitre
+          this.csvSprint.push(Object.assign({}, objectElement))
+        }
+
+        console.log(this.csvSprint);
       },
         err => {
           this.msgError = err.error.message;
@@ -227,7 +237,60 @@ export class SprintListByProjectComponent implements OnInit {
 
   }
 
+  handleExport() {
+    const headings = [[
+      'Reference',
+      'Title',
 
+    ]];
+    const wb = utils.book_new();
+    const ws: any = utils.json_to_sheet([]);
+    utils.sheet_add_aoa(ws, headings);
+    utils.sheet_add_json(ws, this.csvSprint, { origin: 'A2', skipHeader: true });
+    utils.book_append_sheet(wb, ws, 'List');
+
+
+    //****************choose format file*********************** */
+
+    const items = [
+      { id: "CSV type", name: "CSV" },
+      { id: "XLSX type", name: "XLSX" },
+
+    ]
+
+    const inputOptions = new Map
+    items.forEach(item => inputOptions.set(item.id, item.name))
+
+    Swal.fire({
+      title: 'Select file format',
+      input: 'radio',
+      inputOptions: inputOptions,
+      showDenyButton: true, showCancelButton: true,
+      confirmButtonText: `Export`,
+      denyButtonText: `Don't export`,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to choose something!'
+        }
+        if (value === "CSV type") {
+          // Swal.fire({ html: `You selected: ${value}` })
+          writeFile(wb, 'List.csv');
+        }
+        if (value === "XLSX type") {
+          // Swal.fire({ html: `You selected: ${value}` })
+          writeFile(wb, 'List.xlsx');
+        }
+      }
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('File exported!', 'List.csv', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('File are not exported', 'List.xlsx', 'info')
+      }
+    });
+  }
+  
 
 
 }
