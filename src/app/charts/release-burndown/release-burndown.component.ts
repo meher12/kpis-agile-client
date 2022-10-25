@@ -211,6 +211,7 @@ export class ReleaseBurndownComponent implements OnInit {
         }
       ],
       chart: {
+        
         type: "bar",
         height: 'auto',
         stacked: true,
@@ -275,9 +276,14 @@ export class ReleaseBurndownComponent implements OnInit {
  
        }, */
       xaxis: {
+        type: "category",
         categories: sprintname,
         tickPlacement: 'on',
         labels: {
+          rotate: -45,
+          rotateAlways: true,
+          /*  minHeight: 100,
+           maxHeight: 200,  */
           style: {
             colors: [],
             fontSize: '12px',
@@ -285,6 +291,13 @@ export class ReleaseBurndownComponent implements OnInit {
             fontWeight: 'bold',
             cssClass: 'apexcharts-xaxis-label',
           }
+        }
+      },
+      grid: {
+        margin: {
+          //left: 0,
+          //right: 0,
+          bottom: 500
         }
       },
       stroke: {

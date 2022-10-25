@@ -76,6 +76,7 @@ export class TaskListByStoryComponent implements OnInit {
       this.getRefStory()
       this.getTitleStory()
       this.cgetAllTaskByStoryRef()
+      this.tableSize = 5;
     }
   }
 

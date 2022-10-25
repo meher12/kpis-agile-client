@@ -250,6 +250,8 @@ export class ProductBurndownChartComponent implements OnInit {
         categories: sprintname,
         tickPlacement: 'on',
         labels: {
+          rotate: -45,
+          rotateAlways: true,
           style: {
             colors: [],
             fontSize: '12px',
@@ -260,24 +262,24 @@ export class ProductBurndownChartComponent implements OnInit {
         }
       },
       stroke: {
-        show: true,
+       // show: true,
         width: 2,
-        colors: ["transparent"]
+       // colors: ["transparent"]
       },
-      /*  yaxis: {
-         show: true,
-         showAlways: true,
+       yaxis: {
+        // show: true,
+         //showAlways: true,
          title: {
            text: "Story points",
-           style: {
+          /*  style: {
              colors: [],
              fontSize: '10px',
              fontFamily: 'Helvetica, Arial, sans-serif',
              fontWeight: 'bold',
              cssClass: 'apexcharts-xaxis-label',
-           }
+           } */
          },
-         labels: {
+         /* labels: {
            show: true,
            style: {
              colors: [],
@@ -286,15 +288,15 @@ export class ProductBurndownChartComponent implements OnInit {
              fontWeight: 'bold',
              cssClass: 'apexcharts-xaxis-label',
            }
-         }
+         } */
  
-       }, */
+       },
       legend: {
         position: "right",
         offsetY: 40
       },
       fill: {
-        // opacity: 1,
+        //opacity: 1,
         colors: ['#003366', '#01DF3A', '#D7DF01']
       }
 

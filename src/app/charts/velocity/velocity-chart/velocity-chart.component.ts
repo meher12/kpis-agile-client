@@ -225,9 +225,11 @@ export class VelocityChartComponent implements OnInit {
         categories: this.sprintName,
         tickPlacement: 'on',
         labels: {
+          rotate: -45,
+          rotateAlways: true,
           style: {
             colors: [],
-            fontSize: '15px',
+            fontSize: '12px',
             fontFamily: 'Helvetica, Arial, sans-serif',
             fontWeight: 'bold',
             cssClass: 'apexcharts-xaxis-label',
