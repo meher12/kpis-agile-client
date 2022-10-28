@@ -241,7 +241,7 @@ export class VelocityChartComponent implements OnInit {
           text: "Story points",
           style: {
             colors: [],
-            fontSize: '15px',
+            fontSize: '12px',
             fontFamily: 'Helvetica, Arial, sans-serif',
             fontWeight: 'bold',
             cssClass: 'apexcharts-xaxis-label',
@@ -250,13 +250,17 @@ export class VelocityChartComponent implements OnInit {
         labels: {
           style: {
             colors: [],
-            fontSize: '15px',
+            fontSize: '12px',
             fontFamily: 'Helvetica, Arial, sans-serif',
             fontWeight: 'bold',
             cssClass: 'apexcharts-xaxis-label',
           }
         }
 
+      },
+      legend: {
+        position: "right",
+        offsetY: 40
       },
       fill: {
         opacity: 1,
@@ -276,7 +280,7 @@ export class VelocityChartComponent implements OnInit {
               width: 400
             },
             legend: {
-              position: "bottom"
+              position: "right"
             }
           }
         }
