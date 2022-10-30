@@ -4,6 +4,31 @@
 
 
   <div class="col-md-12 detailsp">
+    <div class="col-md-6">
+      <div>
+
+<div class="copytext">
+   <h3>
+          Click copy icon to copy all project details then click export details:
+    </h3>
+</div>
+       
+        <div class="container">
+          <button (click)="doCopy()" title="Copy content in this box"
+            class="material-icons copy-button no-print ng-star-inserted" aria-label="">
+            <span class="copy-span" aria-hidden="true">content_copy</span>
+          </button>
+          <div class="PopUpFad">
+            <a href="https://data.page/" target="popup"
+              onclick="window.open('https://data.page/','popup','width=600,height=600,left=500,top=300');">
+              Export details
+            </a>
+          </div>
+          <!--  <p class="text-content"> {{viewListFiltred | json}} </p> -->
+        </div>
+
+      </div>
+    </div>
     <div class="card mb-3">
       <div class="card-body">
         <div class="row">
@@ -120,38 +145,38 @@
             <h3>There is no team for this project!!</h3>
           </div>
         </ng-template>
-           <!-- ********Begi nimport csv or xslx file********** -->
+        <!-- ********Begi nimport csv or xslx file********** -->
 
-           <main>
-            <div class="row mt-5 mt-5">
-              <div class="col-sm-6 offset-3">
-                <div class="import_export">
-                  <div class="col-md-6">
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" name="file" class="custom-file-input" id="inputGroupFile" required
-                          (change)="handleImport($event)"
-                          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                        <label  class="custom-file-label" for="inputGroupFile">Upload member list (csv or xlsx)</label>
-                      </div>
+        <main>
+          <div class="row mt-5 mt-5">
+            <div class="col-sm-6 offset-3">
+              <div class="import_export">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" name="file" class="custom-file-input" id="inputGroupFile" required
+                        (change)="handleImport($event)"
+                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                      <label class="custom-file-label" for="inputGroupFile">Upload member list (csv or xlsx)</label>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <button (click)="handleExport()" class="btn btn-primary">
-                      Export list member<i class="fa fa-download"></i>
-                    </button>
-                  </div>
-                  <!-- <div class="col-sm-3">
+                </div>
+                <div class="col-md-6">
+                  <button (click)="handleExport()" class="btn btn-primary">
+                    Export list member<i class="fa fa-download"></i>
+                  </button>
+                </div>
+                <!-- <div class="col-sm-3">
                     <button (click)="handleExportXlsx()" class="btn btn-primary">
                       Export XLSX<i class="fa fa-download"></i>
                     </button>
                   </div> -->
-                </div>
               </div>
             </div>
+          </div>
 
-          </main>
-          <!-- *******End************ -->
+        </main>
+        <!-- *******End************ -->
         <!-- PopUp Add memeber -->
         <!-- Start button popup -->
         <div class="box">
@@ -159,7 +184,7 @@
             (click)="openPopup(projectdetails.id)">Add Member
           </button>
         </div>
-        
+
         <div class="modal" *ngIf="showScrumMBoard" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
           <div class="modal-dialog reveal-modal" role="document">
             <div class="modal-content">

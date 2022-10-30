@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Projet } from 'src/app/models/projet.model';
-import { Sprint } from 'src/app/models/sprint.model';
 import { Team } from 'src/app/models/team.model';
 import { ProjectService } from 'src/app/services/projects/project.service';
 import { SprintService } from 'src/app/services/sprints/sprint.service';
@@ -9,6 +8,10 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { read, utils, writeFile } from 'xlsx';
+import { ViewAllReference } from 'src/app/models/viewAllReference.model';
+
+import { CopyContentService } from 'src/app/services/copy-content.service';
+
 
 @Component({
   selector: 'app-projet-details',
@@ -39,11 +42,16 @@ export class ProjetDetailsComponent implements OnInit {
   memberList: Team[];
   memberListFiltred = []
 
+  viewListFiltred: ViewAllReference[] = [];
+  myJSON: any;
+  top: any;
+  left: any;
+
 
   constructor(private projectService: ProjectService, private sprintService: SprintService, private route: ActivatedRoute,
-    private tokenStorageService: TokenStorageService, private router: Router) { }
+    private tokenStorageService: TokenStorageService, private router: Router, private copier:CopyContentService) { }
 
-
+   
 
   ngOnInit(): void {
 
@@ -58,6 +66,8 @@ export class ProjetDetailsComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
+
+
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
@@ -70,10 +80,10 @@ export class ProjetDetailsComponent implements OnInit {
         .subscribe(data => {
           this.projectdetails = data;
           this.memberList = this.projectdetails.users;
-          console.log(this.memberList);
+          
 
-          let objectElement = { "username": "", "email": "", "role": "" };
-
+          let objectElement = { "username": "", "email": "", "role": "", "attachedTo": "" };
+          objectElement.attachedTo = this.projectdetails.pReference
           for (const data of Object.values(this.memberList)) {
             objectElement.username = data.username
             objectElement.email = data.email
@@ -96,6 +106,8 @@ export class ProjetDetailsComponent implements OnInit {
           this.teamList = this.projectdetails.users;
           // console.log(this.projectdetails);
 
+          // for excel list of all reference 
+          this.getAllReferenceToexcel(this.projectdetails.pReference);
 
         },
           err => {
@@ -105,6 +117,8 @@ export class ProjetDetailsComponent implements OnInit {
           });
 
     }
+
+
   }
 
   // update work Commitment and work Completed in sprint
@@ -173,7 +187,7 @@ export class ProjetDetailsComponent implements OnInit {
         }
       }
       reader.readAsArrayBuffer(file);
-     
+
 
     }
 
@@ -183,7 +197,8 @@ export class ProjetDetailsComponent implements OnInit {
     const headings = [[
       'Member',
       'Mail',
-      'Role'
+      'Role',
+      'AttachedTo'
     ]];
     const wb = utils.book_new();
     const ws: any = utils.json_to_sheet([]);
@@ -233,5 +248,34 @@ export class ProjetDetailsComponent implements OnInit {
     });
   }
 
+
+  getAllReferenceToexcel(referenceForList: string) {
+    //getAllReferenceByProject
+    this.projectService.getAllReferenceByProject(referenceForList)
+      .subscribe(data => {
+
+        const jsonString = JSON.stringify(Object.assign({}, data))
+        this.viewListFiltred = data
+     
+      })
+  }
+
+  doCopy(){
+   // https://stackblitz.com/edit/angular-text-copy-itjem7?file=src%2Fapp%2Fapp.component.ts
+   this.myJSON = JSON.stringify(this.viewListFiltred);
+     
+   //  console.log(this.viewListFiltred.toString())
+
+    this.copier.copyText(this.myJSON.toString());
+    alert('Your content is copied. Paste in text editor to see copied content(ctrl + V, cmd+ V)');
+
+    this.top = window.screen.height - 300;
+    this.top =  this.top > 0 ?  this.top/2 : 0;
+            
+    this.left = window.screen.width - 400;
+    this.left = this.left > 0 ? this.left/2 : 0;
+  }
+
+ 
 
 }

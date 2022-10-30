@@ -133,8 +133,21 @@
   /* flex-direction: row;
   flex-grow: 3; */
 }
-/* .import_export .col-sm-6 {
-    flex: 80% !important; 
-    max-width: 100% !important; 
-} */
+
+  
+  
+.PopUpFad a {
+  text-decoration: none;
+  
+  border: none;
+  
+  font-size: 20px;
+  
+  color: rgb(15, 13, 20);
+  
+  }
+
+
+
+.copytext h3 { color: #151820; font-family: 'Trocchi', serif; font-size: 20px; font-weight: normal; line-height: 48px; margin: 0; }
 

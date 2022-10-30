@@ -169,9 +169,6 @@ export class VelocityChartComponent implements OnInit {
       ],
       chart: {
         type: "bar",
-        //height: 'auto',
-
-
         toolbar: {
           export: {
             csv: {
@@ -179,8 +176,8 @@ export class VelocityChartComponent implements OnInit {
               //headerCategory: 'Date;',
               //columnDelimiter: ';',
               headerCategory: 'Sprint',
-		          //headerValue: 'value'
-              
+              //headerValue: 'value'
+
             },
             svg: {
               filename: "VelocityChart",
@@ -189,8 +186,11 @@ export class VelocityChartComponent implements OnInit {
               filename: "VelocityChart",
             }
           },
+        },
+        zoom: {
+          enabled: true
         }
-        
+
       },
       title: {
         text: 'Velocity Chart',
@@ -222,10 +222,11 @@ export class VelocityChartComponent implements OnInit {
         colors: ["transparent"]
       },
       xaxis: {
+        type: "category",
         categories: this.sprintName,
         tickPlacement: 'on',
         labels: {
-          rotate: -45,
+          rotate: -10,
           rotateAlways: true,
           style: {
             colors: [],
@@ -272,7 +273,7 @@ export class VelocityChartComponent implements OnInit {
           }
         }
       },
-      responsive: [
+      /* responsive: [
         {
           breakpoint: 480,
           options: {
@@ -284,9 +285,9 @@ export class VelocityChartComponent implements OnInit {
             }
           }
         }
-      ]
+      ] */
     };
   }
 
- 
+
 }

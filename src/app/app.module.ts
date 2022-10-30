@@ -58,6 +58,7 @@ import { UpdateMemberComponent } from './component/team/update-member/update-mem
 import { AddMemeberComponent } from './component/projet/projet-details/memeber/add-memeber/add-memeber.component';
 import { AddMemberComponent } from './component/task/task-details/member/add-member/add-member.component';
 import { ProductBurndownChartComponent } from './charts/product-burndown-chart/product-burndown-chart.component';
+import { CopyContentService } from './services/copy-content.service';
 
 
 
@@ -132,7 +133,7 @@ import { ProductBurndownChartComponent } from './charts/product-burndown-chart/p
 
 
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, CopyContentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

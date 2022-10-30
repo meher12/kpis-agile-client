@@ -269,12 +269,7 @@ export class ReleaseBurndownComponent implements OnInit {
           horizontal: false
         }
       },
-      /*  xaxis: {
-         type: "category",
-         categories: sprintname, //['sprint 1', 'sprint 2', 'sprint 3', 'sprint 4', 'release sprint'],
-         tickPlacement: 'on',
- 
-       }, */
+    
       xaxis: {
         type: "category",
         categories: sprintname,
@@ -293,13 +288,7 @@ export class ReleaseBurndownComponent implements OnInit {
           }
         }
       },
-      grid: {
-        margin: {
-          //left: 0,
-          //right: 0,
-          bottom: 500
-        }
-      },
+      
       stroke: {
         show: true,
         width: 2,

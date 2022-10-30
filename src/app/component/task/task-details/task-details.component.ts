@@ -76,8 +76,8 @@ export class TaskDetailsComponent implements OnInit {
           this.memberList = this.task.users;
           console.log(this.memberList);
 
-          let objectElement = { "username": "", "email": "", "role": "" };
-
+          let objectElement = { "username": "", "email": "", "role": "",  "attachedTo": "" };
+          objectElement.attachedTo = this.task.tReference
           for (const data of Object.values(this.memberList)) {
             objectElement.username = data.username
             objectElement.email = data.email
@@ -180,7 +180,8 @@ export class TaskDetailsComponent implements OnInit {
     const headings = [[
       'Member',
       'Mail',
-      'Role'
+      'Role',
+      'AttachedTo'
     ]];
     const wb = utils.book_new();
     const ws: any = utils.json_to_sheet([]);

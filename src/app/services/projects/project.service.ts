@@ -127,6 +127,11 @@ export class ProjectService {
   findSprintByProjectReference(projectReference: any): Observable<Sprint[]> {
     return this.httpClient.get<Sprint[]>(`${this.baseUrl}`+ "/projects/searchByPReference"+`?projectReference=${projectReference}`);
   }
+
+  // find sprint by project title
+  getAllReferenceByProject(ref_p: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}`+ "/projects/theref"+`?ref_p=${ref_p}`);
+  }
   
   // find project by title
   // find sprint by project title
