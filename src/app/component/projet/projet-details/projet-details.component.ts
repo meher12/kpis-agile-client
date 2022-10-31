@@ -256,6 +256,7 @@ export class ProjetDetailsComponent implements OnInit {
 
         const jsonString = JSON.stringify(Object.assign({}, data))
         this.viewListFiltred = data
+      
      
       })
   }
@@ -269,11 +270,7 @@ export class ProjetDetailsComponent implements OnInit {
     this.copier.copyText(this.myJSON.toString());
     alert('Your content is copied. Paste in text editor to see copied content(ctrl + V, cmd+ V)');
 
-    this.top = window.screen.height - 300;
-    this.top =  this.top > 0 ?  this.top/2 : 0;
-            
-    this.left = window.screen.width - 400;
-    this.left = this.left > 0 ? this.left/2 : 0;
+   
   }
 
  

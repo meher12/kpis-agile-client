@@ -7,5 +7,5 @@ export class ViewAllReference {
     public  titleStory?: string;
     public  refTask?: string;
     public  titleTask?: string;
-    public  taskStaredAt?: Date;
+    public  taskStaredAt?: string;
 }
