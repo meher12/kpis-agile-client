@@ -268,7 +268,42 @@ export class ProjetDetailsComponent implements OnInit {
    //  console.log(this.viewListFiltred.toString())
 
     this.copier.copyText(this.myJSON.toString());
-    alert('Your content is copied. Paste in text editor to see copied content(ctrl + V, cmd+ V)');
+    //alert('Your content is copied. Paste in text editor to see copied content(ctrl + V, cmd+ V)');
+
+
+
+
+    Swal.fire({
+      title: '<strong>Your content is copied. </strong>',
+      icon: 'info',
+      html:
+        'You can paste in text editor to see copied content(ctrl + V, cmd+ V), ' +
+        'to export project detail',
+      showCloseButton: true,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Great!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+        '<i class="fa fa-thumbs-down"></i>',
+      cancelButtonAriaLabel: 'Thumbs down'
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        Swal.fire({
+         // title: '<strong>Your content is copied. </strong>',
+         // icon: 'info',
+         // html: '<a href="https://data.page/" target="popup" onclick="window.open("https://data.page/","popup", "width=600,height=600,left=500,top=300, scrollbars=no,resizable=no") return false;"> Export details  </a>'
+         position: 'center',
+         icon: 'success',
+         title: 'You can  past your content',
+         showConfirmButton: false,
+         timer: 1000,
+         html: "" + window.open('https://data.page/') 
+        })
+      } 
+    });
 
    
   }
