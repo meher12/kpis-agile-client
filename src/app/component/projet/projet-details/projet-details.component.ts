@@ -12,6 +12,8 @@ import { ViewAllReference } from 'src/app/models/viewAllReference.model';
 
 import { CopyContentService } from 'src/app/services/copy-content.service';
 import exportFromJSON from 'export-from-json'
+import * as jsonexport from "jsonexport/dist"
+
 
 
 @Component({
@@ -48,7 +50,7 @@ export class ProjetDetailsComponent implements OnInit {
   isCopyed;
 
   left;
-  top;  
+  top;
 
 
 
@@ -59,8 +61,8 @@ export class ProjetDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.left = (screen.width - 800/2)/2;
-    this.top = (screen.height - 800/2)/2;  
+    this.left = (screen.width - 800 / 2) / 2;
+    this.top = (screen.height - 800 / 2) / 2;
 
     this.updateTablesprint();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -255,9 +257,18 @@ export class ProjetDetailsComponent implements OnInit {
       .subscribe(data => {
 
         // const jsonString = JSON.stringify(Object.assign({}, data))
-       // console.log(data);
+        // console.log(data);
         this.viewListFiltred = data
-      
+
+
+        jsonexport(data, function (err, csv) {
+          if (err) return console.log(err);
+          console.log(csv);
+
+        });
+
+
+
       })
   }
 
@@ -297,8 +308,8 @@ export class ProjetDetailsComponent implements OnInit {
           icon: 'success',
           title: 'You can  past your content',
           showConfirmButton: false,
-          timer:20,
-          html: "" + window.open('https://data.page/', '_popup', 'width=500, height=500, top='+this.top+', left='+this.left)
+          timer: 20,
+          html: "" + window.open('https://data.page/', '_popup', 'width=500, height=500, top=' + this.top + ', left=' + this.left)
         })
       }
     });
@@ -314,6 +325,7 @@ export class ProjetDetailsComponent implements OnInit {
     const exportType = 'json'
 
     exportFromJSON({ data, fileName, exportType })
+
   }
 
 }
