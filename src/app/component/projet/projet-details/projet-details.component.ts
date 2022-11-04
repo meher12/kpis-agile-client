@@ -11,6 +11,7 @@ import { read, utils, writeFile } from 'xlsx';
 import { ViewAllReference } from 'src/app/models/viewAllReference.model';
 
 import { CopyContentService } from 'src/app/services/copy-content.service';
+import exportFromJSON from 'export-from-json'
 
 
 @Component({
@@ -44,23 +45,22 @@ export class ProjetDetailsComponent implements OnInit {
 
   viewListFiltred: ViewAllReference[] = [];
   myJSON: any;
-  top: any;
-  left: any;
+  isCopyed;
+
+  left;
+  top;  
+
 
 
   constructor(private projectService: ProjectService, private sprintService: SprintService, private route: ActivatedRoute,
-    private tokenStorageService: TokenStorageService, private router: Router, private copier:CopyContentService) { }
+    private tokenStorageService: TokenStorageService, private router: Router, private copier: CopyContentService) { }
 
-   
+
 
   ngOnInit(): void {
 
-    /*  if (!localStorage.getItem('project_data')) {
-       localStorage.setItem('project_data', 'no reload')
-       location.reload()
-     } else {
-       localStorage.removeItem('project_data')
-     } */
+    this.left = (screen.width - 800/2)/2;
+    this.top = (screen.height - 800/2)/2;  
 
     this.updateTablesprint();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -80,7 +80,7 @@ export class ProjetDetailsComponent implements OnInit {
         .subscribe(data => {
           this.projectdetails = data;
           this.memberList = this.projectdetails.users;
-          
+
 
           let objectElement = { "username": "", "email": "", "role": "", "attachedTo": "" };
           objectElement.attachedTo = this.projectdetails.pReference
@@ -254,31 +254,29 @@ export class ProjetDetailsComponent implements OnInit {
     this.projectService.getAllReferenceByProject(referenceForList)
       .subscribe(data => {
 
-        const jsonString = JSON.stringify(Object.assign({}, data))
+        // const jsonString = JSON.stringify(Object.assign({}, data))
+       // console.log(data);
         this.viewListFiltred = data
       
-     
       })
   }
 
-  doCopy(){
-   // https://stackblitz.com/edit/angular-text-copy-itjem7?file=src%2Fapp%2Fapp.component.ts
-   this.myJSON = JSON.stringify(this.viewListFiltred);
-     
-   //  console.log(this.viewListFiltred.toString())
+  doCopy() {
+    // https://stackblitz.com/edit/angular-text-copy-itjem7?file=src%2Fapp%2Fapp.component.ts
+    console.log(this.viewListFiltred);
+    this.myJSON = JSON.stringify(this.viewListFiltred);
+    //  console.log("*****22 **" + this.myJSON);
+    this.isCopyed = true;
 
     this.copier.copyText(this.myJSON.toString());
-    //alert('Your content is copied. Paste in text editor to see copied content(ctrl + V, cmd+ V)');
-
-
-
+    // this.copier.copyText(this.viewListFiltred.toString());
 
     Swal.fire({
       title: '<strong>Your content is copied. </strong>',
       icon: 'info',
       html:
         'You can paste in text editor to see copied content(ctrl + V, cmd+ V), ' +
-        'to export project detail',
+        'and export csv project detail',
       showCloseButton: true,
       showCancelButton: true,
       focusConfirm: false,
@@ -289,25 +287,33 @@ export class ProjetDetailsComponent implements OnInit {
         '<i class="fa fa-thumbs-down"></i>',
       cancelButtonAriaLabel: 'Thumbs down'
     }).then((result) => {
-      
+
       if (result.isConfirmed) {
         Swal.fire({
-         // title: '<strong>Your content is copied. </strong>',
-         // icon: 'info',
-         // html: '<a href="https://data.page/" target="popup" onclick="window.open("https://data.page/","popup", "width=600,height=600,left=500,top=300, scrollbars=no,resizable=no") return false;"> Export details  </a>'
-         position: 'center',
-         icon: 'success',
-         title: 'You can  past your content',
-         showConfirmButton: false,
-         timer: 1000,
-         html: "" + window.open('https://data.page/') 
+          // title: '<strong>Your content is copied. </strong>',
+          // icon: 'info',
+          // html: '<a href="https://data.page/" target="popup" onclick="window.open("https://data.page/","popup", "width=600,height=600,left=500,top=500, scrollbars=no,resizable=no") return false;"> Export details  </a>'
+          position: 'center',
+          icon: 'success',
+          title: 'You can  past your content',
+          showConfirmButton: false,
+          timer:20,
+          html: "" + window.open('https://data.page/', '_popup', 'width=500, height=500, top='+this.top+', left='+this.left)
         })
-      } 
+      }
     });
 
-   
+
   }
 
- 
+  onClick() {
+    console.log('clicked');
+
+    const data = this.viewListFiltred
+    const fileName = 'detailProject'
+    const exportType = 'json'
+
+    exportFromJSON({ data, fileName, exportType })
+  }
 
 }

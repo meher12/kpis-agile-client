@@ -8,22 +8,25 @@
       <div>
 
         <div class="copytext">
+          <br />
+
           <h3>
             Click copy icon to copy all project details:
           </h3>
-         <!--  <div class="container"> -->
-            <button (click)="doCopy()" title="Copy content in this box"
-              class="material-icons copy-button no-print ng-star-inserted" aria-label="">
-              <span class="copy-span" aria-hidden="true">content_copy</span>
-            </button>
-           <!--  <div class="PopUpFad">
+          <!--  <div class="container"> -->
+          <button (click)="doCopy()" title="Copy content in this box"
+            class="material-icons copy-button no-print ng-star-inserted" aria-label="">
+            <span class="copy-span" aria-hidden="true">content_copy</span>
+          </button>
+         <div class="text-content"> <button class="btn-light" (click)="onClick()" *ngIf="isCopyed">Click to download Json file</button></div>
+          <!--  <div class="PopUpFad">
                <a href="https://data.page/" target="popup"
               onclick="window.open('https://data.page/','popup','width=600,height=600,left=500,top=300');">
               Export details
             </a> 
             </div> -->
-            <!--  <p class="text-content"> {{viewListFiltred | json}} </p> -->
-         <!--  </div> -->
+          <!--  <p class="text-content"> {{viewListFiltred | json}} </p> -->
+          <!--  </div> -->
         </div>
 
 
