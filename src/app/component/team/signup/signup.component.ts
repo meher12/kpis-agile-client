@@ -23,12 +23,16 @@ export class SignupComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  imageSrc = ""  
+  imageAlt = ""
 
   constructor(private authService: AuthService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.imageSrc = '../assets/images/logo.png'  
+    this.imageAlt = 'Agile KPIs'
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();

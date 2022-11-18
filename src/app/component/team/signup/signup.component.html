@@ -1,6 +1,9 @@
 <div class="col-md-12">
     <div class="card card-container">
-        <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+        <!-- <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" /> -->
+        <div class="logo2">
+            <a href="#" class="navbar-brand"> <img src="{{imageSrc}}" alt="{{imageAlt}}" /></a>
+          </div>
 
         <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 

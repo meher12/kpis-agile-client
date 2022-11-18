@@ -18,10 +18,14 @@ export class SigninComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  imageSrc = ""  
+  imageAlt = ""
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.imageSrc = '../assets/images/logo.png'  
+    this.imageAlt = 'Agile KPIs'
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
