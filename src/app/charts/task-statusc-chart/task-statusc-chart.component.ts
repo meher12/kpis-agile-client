@@ -119,8 +119,25 @@ export class TaskStatuscChartComponent implements OnInit {
       chart: {
         width: "100%",
         type: "pie",
+
         toolbar: {
           show: true,
+          export: {
+            csv: {
+              filename: "TaskStatusChart",
+              //headerCategory: 'Date;',
+              //columnDelimiter: ';',
+              headerCategory: 'Status',
+		          //headerValue: 'value'
+              
+            },
+            svg: {
+              filename: "TaskStatusChart",
+            },
+            png: {
+              filename: "TaskStatusChart",
+            }
+          }
         }
       },
       labels: statusTask,
@@ -130,7 +147,7 @@ export class TaskStatuscChartComponent implements OnInit {
         }
       },
       title: {
-        text: "Percentage Status of task",
+        text: "Percentage of task status",
         align: 'center',
         margin: 30,
         offsetX: 0,
@@ -142,6 +159,14 @@ export class TaskStatuscChartComponent implements OnInit {
           fontFamily: 'Helvetica, Arial, sans-serif',
           color: '#263238'
         },
+      },
+      legend: {
+        position: "right",
+        offsetY: 40,
+        horizontalAlign: "right",
+       /*  floating: true,
+        offsetY: -25,
+        offsetX: -5 */
       },
       responsive: [
         {

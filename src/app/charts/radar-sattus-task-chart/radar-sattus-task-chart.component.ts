@@ -131,6 +131,26 @@ export class RadarSattusTaskChartComponent implements OnInit {
       chart: {
         height: 380,
         type: "radar",
+
+        toolbar: {
+          show: true,
+          export: {
+            csv: {
+              filename: "TaskStatusCountChart",
+              //headerCategory: 'Date;',
+              //columnDelimiter: ';',
+              headerCategory: 'Status',
+		          headerValue: 'value'
+              
+            },
+            svg: {
+              filename: "TaskStatusCountChart",
+            },
+            png: {
+              filename: "TaskStatusCountChart",
+            }
+          }
+        }
   
       },
       dataLabels: {
@@ -189,8 +209,8 @@ export class RadarSattusTaskChartComponent implements OnInit {
         }
       },
       title: {
-        text: "Radar Status of task",
-        align: 'left',
+        text: "Count of task status",
+        align: 'center',
         margin: 30,
         offsetX: 0,
         offsetY: 0,
