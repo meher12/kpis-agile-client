@@ -143,7 +143,22 @@ export class TaskBugsChartComponent implements OnInit {
           opacity: 0.2
         },
         toolbar: {
-          show: false
+          export: {
+            csv: {
+              filename: "CycleTimeChart",
+              //headerCategory: 'Date;',
+              //columnDelimiter: ';',
+              headerCategory: 'Date',
+		          //headerValue: 'value'
+              
+            },
+            svg: {
+              filename: "CycleTimeChart",
+            },
+            png: {
+              filename: "CycleTimeChart",
+            }
+          },
         }
       },
       colors: ["#77B6EA", "#545454"],
@@ -155,7 +170,17 @@ export class TaskBugsChartComponent implements OnInit {
       },
       title: {
         text: "Cycle Time by period",
-        align: "left"
+        align: "center",
+        margin: 30,
+        offsetX: 0,
+        offsetY: 0,
+        floating: false,
+        style: {
+          fontSize: '24px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          color: '#263238'
+        },
       },
       grid: {
         borderColor: "#e7e7e7",
@@ -179,11 +204,12 @@ export class TaskBugsChartComponent implements OnInit {
         max: 20 */
       },
       legend: {
-        position: "top",
+        position: "right",
+        offsetY: 40,
         horizontalAlign: "right",
-        floating: true,
+       /*  floating: true,
         offsetY: -25,
-        offsetX: -5
+        offsetX: -5 */
       }
     };
   }

@@ -139,6 +139,25 @@ export class EfficacityChartComponent implements OnInit {
       chart: {
         height: 'auto',
         type: "line",
+        toolbar: {
+          export: {
+            csv: {
+              filename: "EfficacityChart",
+              //headerCategory: 'Date;',
+              //columnDelimiter: ';',
+              headerCategory: 'Date',
+		          //headerValue: 'value'
+              
+            },
+            svg: {
+              filename: "EfficacityChart",
+            },
+            png: {
+              filename: "EfficacityChart",
+            }
+          },
+        },
+
         zoom: {
           enabled: false
         },
