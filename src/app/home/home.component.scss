@@ -1,0 +1,65 @@
+
+// https://codepen.io/saeedalipoor/pen/XORedo
+  .brands{
+    --bordersize: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+   width: 100%;
+   
+
+  }
+
+  // Extra styles to have beauty pen
+
+  .brand{
+    flex: 1 0 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: var(--bordersize) dashed rgb(94, 54, 54);
+     border-bottom: var(--bordersize) dashed #ccc;
+
+     
+     max-width: calc(100% - 5vw);
+
+     /*padding: 20px 25px 30px;*/
+     margin: 0px auto;
+  }
+
+
+ 
+
+  //https://codepen.io/GeorgePark/pen/EEGJEj
+
+  .headshot {
+    flex-shrink: 0;
+    margin: 20px;
+    height: calc(500px + 0vw);
+    width: calc(500px + 0vw);
+    border: calc(10px + 0.2vw) solid transparent;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    background-size: cover;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .headshot-1 {
+    border-radius: 30%;
+    //background-image: var(--img-url), linear-gradient(#f9f047, #0fd850);
+  }
+  
+  .headshot-2 {
+    border-radius: 50%;
+    background-image: var(--img-url), linear-gradient(to bottom right, #ff3cac, #562b7c, #2b86c5);
+  }
+  
+  .headshot-3 {
+    border-radius: 50% 10%;
+    background-image: var(--img-url), linear-gradient(to bottom left, #f83600, #f9d423);
+  }
+  
+  
+ 
+  

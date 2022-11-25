@@ -1,0 +1,20 @@
+
+
+
+<div class="chartbrand">
+    <ng-container *ngIf="chartOptions">
+        <div id="HChart">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+                [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels"
+                [legend]="chartOptions.legend" [markers]="chartOptions.markers" [grid]="chartOptions.grid"
+                [yaxis]="chartOptions.yaxis" [title]="chartOptions.title" [plotOptions]="chartOptions.plotOptions"
+                [fill]="chartOptions.fill" [xaxis]="chartOptions.xaxis"></apx-chart>
+
+        </div>
+    </ng-container>
+    <div class="textbrand">
+        <p>
+            Burndown chart is a graph that shows how many project tasks are left to finish during a selected time period. Teams use it to keep track of progress and to visualize forecasting. The x-axis of the chart shows the amount of time  and the y-axis shows the number of tasks 
+        </p>
+    </div>
+</div>

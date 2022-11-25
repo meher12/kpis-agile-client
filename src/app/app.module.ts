@@ -59,6 +59,10 @@ import { AddMemeberComponent } from './component/projet/projet-details/memeber/a
 import { AddMemberComponent } from './component/task/task-details/member/add-member/add-member.component';
 import { ProductBurndownChartComponent } from './charts/product-burndown-chart/product-burndown-chart.component';
 import { CopyContentService } from './services/copy-content.service';
+import { StaticVelocityComponent } from './static-chart/static-velocity/static-velocity.component';
+import { StaticBurndownComponent } from './static-chart/static-burndown/static-burndown.component';
+import { StaticReleaseComponent } from './static-chart/static-release/static-release.component';
+import { StaticEfficacityComponent } from './static-chart/static-efficacity/static-efficacity.component';
 
 
 
@@ -117,6 +121,10 @@ import { CopyContentService } from './services/copy-content.service';
     AddMemeberComponent,
     AddMemberComponent,
     ProductBurndownChartComponent,
+    StaticVelocityComponent,
+    StaticBurndownComponent,
+    StaticReleaseComponent,
+    StaticEfficacityComponent,
 
 
   ],

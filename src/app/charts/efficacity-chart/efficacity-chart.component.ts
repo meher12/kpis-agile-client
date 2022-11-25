@@ -132,7 +132,7 @@ export class EfficacityChartComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: "Efficacity",
+          name: "Efficiency",
           data: efficacityReq
         }
       ],
@@ -177,7 +177,7 @@ export class EfficacityChartComponent implements OnInit {
         curve: "smooth"
       },
       title: {
-        text: 'Efficacity Chart',
+        text: 'Efficiency Chart',
         align: 'center',
         margin: 30,
         offsetX: 0,
@@ -202,7 +202,7 @@ export class EfficacityChartComponent implements OnInit {
       },
       yaxis: {
         title: {
-          text: "Efficacity",
+          text: "Efficiency",
           style: {
             colors: [],
             fontSize: '15px',

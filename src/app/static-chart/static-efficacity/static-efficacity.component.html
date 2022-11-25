@@ -1,0 +1,15 @@
+<div class="chartbrand">
+    <ng-container *ngIf="chartOptions">
+        
+            <div id="HChart">
+                <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+                    [dataLabels]="chartOptions.dataLabels" [grid]="chartOptions.grid" [stroke]="chartOptions.stroke"
+                    [title]="chartOptions.title" [yaxis]="chartOptions.yaxis"></apx-chart>
+            </div>
+        </ng-container>
+    <div class="textbrand">
+        <p>
+            The effectiveness of a Scrum team is characterized by the success of the team to develop a number of User Stories during a Sprint.
+        </p>
+    </div>
+</div>

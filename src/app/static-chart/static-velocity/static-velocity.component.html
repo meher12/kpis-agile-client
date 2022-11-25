@@ -1,0 +1,17 @@
+<div class="chartbrand">
+
+    <ng-container *ngIf="chartOptions">
+        <div id="HChart">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                [yaxis]="chartOptions.yaxis" [legend]="chartOptions.legend" [fill]="chartOptions.fill"
+                [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [xaxis]="chartOptions.xaxis"
+                [title]="chartOptions.title"></apx-chart>
+        </div>
+    </ng-container>
+</div>
+<div class="textbrand">
+    <p>
+        Velocity in Agile, also known as throughput, is a measurement of how much work can be completed in a short period of time. In an Agile workplace, these time periods are known as iterations or sprints. They usually run for about two weeks, at the end of which a new deliverable is produced.   
+    </p>
+</div>

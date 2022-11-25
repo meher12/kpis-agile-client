@@ -1,0 +1,19 @@
+<div class="chartbrand">
+
+    <ng-container *ngIf="chartOptions">
+        <div id="HChart">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                [responsive]="chartOptions.responsive" [xaxis]="chartOptions.xaxis" [legend]="chartOptions.legend"
+                [fill]="chartOptions.fill" [title]="chartOptions.title"></apx-chart>
+        </div>
+    </ng-container>
+</div>
+<div class="textbrand">
+    <p>
+
+        A Release Burndown chart can be defined as a tracking tool that focuses on measuring the release efforts of the Scrum team across every release cycle. Therefore, in simple words, the Release Burndown chart tracks all the team progress carried out during the product release or development. 
+
+The chart is measured graphically where the y-axis will show the story hours or points versus the x-axis which will show the time used by the Scrum team members, i.e. the number of Sprints. 
+    </p>
+</div>
