@@ -63,7 +63,7 @@ export class StaticBurndownComponent implements OnInit {
 
     ],
     chart: {
-     height: '400px',
+     height: 'auto',
       type: "line",
      
       toolbar: {
@@ -101,7 +101,9 @@ export class StaticBurndownComponent implements OnInit {
           opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
           "</strong>"
         );
-      }
+      },
+      position: "right",
+      offsetY: 40
     },
     markers: {
       size: 0,

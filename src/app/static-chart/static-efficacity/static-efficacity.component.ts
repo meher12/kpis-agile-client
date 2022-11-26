@@ -89,7 +89,7 @@ export class StaticEfficacityComponent implements OnInit {
       },
       yaxis: {
         title: {
-          text: "Efficacity",
+          text: "Efficiency",
           style: {
             colors: [],
             fontSize: '15px',

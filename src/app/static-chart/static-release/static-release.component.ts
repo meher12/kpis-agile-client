@@ -67,7 +67,7 @@ export class StaticReleaseComponent implements OnInit {
        chart: {
          
          type: "bar",
-         height: '400px',
+         height: 'auto',
          stacked: true,
          toolbar: {
           show: false,

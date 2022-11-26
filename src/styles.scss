@@ -36,14 +36,18 @@
 
 // static chart
 .chartbrand{
-    width: 500px;
-    
+    width: auto;
   }
 .textbrand{
-   width: 500px;
+   width: auto;
   }
 
 #HChart{
     margin: 25px 25px 25px 25px;
-
   }
+
+.borderSeparator{
+    border-radius: 5%;
+    box-shadow: 10px 5px 5px rgb(70, 64, 64);
+    padding:20px;
+}

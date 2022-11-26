@@ -1,4 +1,7 @@
-
+.contentWithlogin{
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+}
 // https://codepen.io/saeedalipoor/pen/XORedo
   .brands{
     --bordersize: 2px;
@@ -13,16 +16,14 @@
   // Extra styles to have beauty pen
 
   .brand{
-    flex: 1 0 10%;
+    flex: 1 0 35%;
     display: flex;
     align-items: center;
     justify-content: center;
     border-right: var(--bordersize) dashed rgb(94, 54, 54);
      border-bottom: var(--bordersize) dashed #ccc;
-
      
      max-width: calc(100% - 5vw);
-
      /*padding: 20px 25px 30px;*/
      margin: 0px auto;
   }

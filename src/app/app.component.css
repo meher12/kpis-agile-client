@@ -157,6 +157,21 @@ div.content {
   /*height: auto;*/
 }
 
+.contentWithoutLogin{
+ /* text-align: center;*/
+  margin:15px auto;
+  width: 100%;
+  padding: 30px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+}
+.contentWithlogin{
+   /* text-align: center;*/
+  margin:15px auto;
+  width: 100%;
+  padding: 30px;
+}
+
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 760px) {
   .sidebar {

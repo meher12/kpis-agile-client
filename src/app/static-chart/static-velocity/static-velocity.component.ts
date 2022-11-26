@@ -63,7 +63,7 @@ velocityChart() {
     ],
     chart: {
       type: "bar",
-      height: "350px",
+      height: "auto",
       toolbar: {
         show: false,
       }
