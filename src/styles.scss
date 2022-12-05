@@ -1,16 +1,15 @@
-
-@import "~bootstrap/scss/bootstrap.scss"; 
+@import "~bootstrap/scss/bootstrap.scss";
 
 
 
 /* Styling Logo*/
 
-.logo{
+.logo {
     padding: 3vh 3vw;
     text-align: left;
     width: 20vw;
-    
-   
+
+
 }
 
 .logo img {
@@ -19,13 +18,13 @@
     width: 167px;
 }
 
-.logo2{
+.logo2 {
     /*padding: 3vh 3vw;*/
     margin: 0px auto;
     text-align: left;
     width: auto;
-    
-   
+
+
 }
 
 .logo2 img {
@@ -35,19 +34,107 @@
 }
 
 // static chart
-.chartbrand{
+.chartbrand {
     width: auto;
-  }
-.textbrand{
-   width: auto;
-  }
+}
 
-#HChart{
+.textbrand {
+    width: auto;
+}
+
+#HChart {
     margin: 25px 25px 25px 25px;
-  }
+}
 
-.borderSeparator{
+.borderSeparator {
     border-radius: 5%;
     box-shadow: 10px 5px 5px rgb(70, 64, 64);
-    padding:20px;
+    padding: 20px;
+}
+
+.nameapp {
+    font-style: italic;
+    font-family: Oswald;
+    font-size: 100px;
+    animation: Color 4s linear infinite;
+    -webkit-animation: Color 4s ease-in-out infinite;
+    text-shadow: 10px 10px #F0F0F0;
+}
+
+@keyframes Color {
+    0% {
+        color: #A0D468;
+    }
+
+    20% {
+        color: #4FC1E9;
+    }
+
+    40% {
+        color: #FFCE54;
+    }
+
+    60% {
+        color: #FC6E51;
+    }
+
+    80% {
+        color: #ED5565;
+    }
+
+    100% {
+        color: #AC92EC;
+    }
+}
+
+@-moz-keyframes Color {
+    0% {
+        color: #A0D468;
+    }
+
+    20% {
+        color: #4FC1E9;
+    }
+
+    40% {
+        color: #FFCE54;
+    }
+
+    60% {
+        color: #FC6E51;
+    }
+
+    80% {
+        color: #ED5565;
+    }
+
+    100% {
+        color: #AC92EC;
+    }
+}
+
+@-webkit-keyframes Color {
+    0% {
+        color: #A0D468;
+    }
+
+    20% {
+        color: #4FC1E9;
+    }
+
+    40% {
+        color: #FFCE54;
+    }
+
+    60% {
+        color: #FC6E51;
+    }
+
+    80% {
+        color: #ED5565;
+    }
+
+    100% {
+        color: #AC92EC;
+    }
 }
