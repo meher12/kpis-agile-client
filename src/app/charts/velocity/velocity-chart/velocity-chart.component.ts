@@ -226,7 +226,7 @@ export class VelocityChartComponent implements OnInit {
         categories: this.sprintName,
         tickPlacement: 'on',
         labels: {
-          rotate: -10,
+          rotate: -20,
           rotateAlways: true,
           style: {
             colors: [],
