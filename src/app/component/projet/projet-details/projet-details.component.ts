@@ -98,7 +98,7 @@ export class ProjetDetailsComponent implements OnInit {
 
 
 
-          //*************** */
+          //********Sort by sprint date debut******* */
           var sprintNotStored = this.projectdetails.sprints;
           // sort sprints array
           this.sprintSorted = sprintNotStored.sort((a, b) => {
@@ -263,7 +263,7 @@ export class ProjetDetailsComponent implements OnInit {
 
         jsonexport(data, function (err, csv) {
           if (err) return console.log(err);
-          console.log(csv);
+            //console.log(csv);
 
         });
 
@@ -274,7 +274,7 @@ export class ProjetDetailsComponent implements OnInit {
 
   doCopy() {
     // https://stackblitz.com/edit/angular-text-copy-itjem7?file=src%2Fapp%2Fapp.component.ts
-    console.log(this.viewListFiltred);
+    //console.log(this.viewListFiltred);
     this.myJSON = JSON.stringify(this.viewListFiltred);
     //  console.log("*****22 **" + this.myJSON);
     this.isCopyed = true;
@@ -321,11 +321,16 @@ export class ProjetDetailsComponent implements OnInit {
     console.log('clicked');
 
     const data = this.viewListFiltred
+
     const fileName = 'detailProject'
     const exportType = 'json'
 
     exportFromJSON({ data, fileName, exportType })
 
   }
+
+ 
+
+
 
 }
