@@ -321,8 +321,12 @@ export class ProjetDetailsComponent implements OnInit {
     console.log('clicked');
 
     const data = this.viewListFiltred
+    
+    const detailProjectName = this.projectdetails.pReference +"--" +this.projectdetails.titre + " " + new Date()
+    .toLocaleString("en-US", {timeZone: "Africa/Tunis"}).slice(0, 18)//.toString().slice(0, 16)
+    console.log(detailProjectName)
 
-    const fileName = 'detailProject'
+    const fileName = detailProjectName  //'detailProject'
     const exportType = 'json'
 
     exportFromJSON({ data, fileName, exportType })

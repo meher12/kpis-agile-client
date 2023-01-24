@@ -17,6 +17,7 @@ import {
   ChartComponent,
   ApexStroke
 } from "ng-apexcharts";
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 export type ChartOptions = {
@@ -63,12 +64,18 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   nameselected;
   arrayProjectName: string[];
 
+  isLoggedIn = false;
+  showPOBoard = false;
+  showScrumMBoard = false;
+  showDevBoard = false;
+  roles: string[] = [];
+
 
   projectJacocoverage;
 
 
   public xmlItems: any;
-  constructor(private _http: HttpClient, private jacoreportService: JacocoReportService) { localStorage.clear(); }
+  constructor(private _http: HttpClient, private jacoreportService: JacocoReportService,  private tokenStorageService: TokenStorageService) { localStorage.clear(); }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.getfileName) {
@@ -187,7 +194,16 @@ export class JacocoParseComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
 
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
+      this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+      this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
+    }
 
 
   }
