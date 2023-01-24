@@ -151,7 +151,7 @@
         </ng-template>
         <!-- ********Begi nimport csv or xslx file********** -->
 
-        <main>
+        <main *ngIf="showScrumMBoard">
           <div class="row mt-5 mt-5">
             <div class="col-sm-6 offset-3">
               <div class="import_export">
@@ -183,7 +183,7 @@
         <!-- *******End************ -->
         <!-- PopUp Add memeber -->
         <!-- Start button popup -->
-        <div class="box">
+        <div class="box" *ngIf="showScrumMBoard">
           <button style="margin: 50px; padding: 10px" type="button" class="button"
             (click)="openPopup(projectdetails.id)">Add Member
           </button>

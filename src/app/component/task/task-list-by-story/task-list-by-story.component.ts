@@ -29,6 +29,7 @@ export class TaskListByStoryComponent implements OnInit {
   isLoggedIn = false;
   showPOBoard = false;
   showScrumMBoard = false;
+  showDevBoard = false;
   roles: string[] = [];
 
 
@@ -67,6 +68,7 @@ export class TaskListByStoryComponent implements OnInit {
 
       this.showPOBoard = this.roles.includes('ROLE_PRODUCTOWNER');
       this.showScrumMBoard = this.roles.includes('ROLE_SCRUMMASTER');
+      this.showDevBoard = this.roles.includes('ROLE_DEVELOPER');
 
       this.store_ref_story = this.route.snapshot.params['refstory'];
       //localStorage of ref project
