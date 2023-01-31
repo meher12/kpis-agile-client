@@ -27,6 +27,7 @@ text-decoration: solid;
   justify-content: space-between;
   padding: 20px;
   color: #fff;
+  z-index: 20;
  }
 
 
@@ -125,6 +126,9 @@ text-decoration: solid;
   position: fixed;
   height: 100%;
   overflow: auto;
+  z-index: 10;
+  padding-top: 121px;
+  top: 0px;
 }
 
 /* Sidebar links */
@@ -153,24 +157,29 @@ text-decoration: solid;
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
   margin-left: 200px;
-  padding: 1px 16px;
-  /*height: auto;*/
+ /* padding: 1px 16px;*/
+  min-height: 100%;
+  padding-bottom: 100px;
 }
 
 .contentWithoutLogin{
  /* text-align: center;*/
   margin:15px auto;
   width: 100%;
-  padding: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
+  padding-bottom: 100px;
 }
 .contentWithlogin{
    /* text-align: center;*/
-  margin:15px auto;
+  /*margin:15px auto;
   width: 100%;
-  padding: 30px;
+  padding: 30px;*/
+  padding-bottom: 200px;
 }
+
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 760px) {
@@ -193,12 +202,11 @@ div.content {
 
 
 .footer {
-height: 100px;
-padding: 2.5rem 0;
-background: #f7fafc;
-/* bottom: 0px;
-position: fixed;
-width: 100%; */
+  /*position: fixed;
+  height: auto;*/
+  padding: 2.5rem 0;
+  background: #f7fafc;
+  z-index: 1;
 }
 
 .footer .copyright {
