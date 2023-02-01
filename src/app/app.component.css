@@ -160,6 +160,8 @@ div.content {
  /* padding: 1px 16px;*/
   min-height: 100%;
   padding-bottom: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .contentWithoutLogin{
