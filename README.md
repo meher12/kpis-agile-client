@@ -6,7 +6,16 @@
 - Deployment of the dashboards.
 
 ## Technologies:
-- Frontend languages: HTML5, Bootstrap, CSS3, Javascript and Angular Framework
+- Frontend languages: HTML, Bootstrap, CSS, Javascript and Angular Framework
 - Webservices: RESTful Webservices
 - Build tooling: NPM
-- Server: nginx
+
+### DevOps
+
+- Jenkins
+- Docker
+- NPM
+
+### Server
+
+- Nginx
