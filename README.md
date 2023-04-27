@@ -11,11 +11,9 @@
 - Build tooling: NPM
 
 ### DevOps
-
 - Jenkins
 - Docker
 - NPM
 
 ### Server
-
 - Nginx
