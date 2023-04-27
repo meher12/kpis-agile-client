@@ -10,10 +10,10 @@
 - Webservices: RESTful Webservices
 - Build tooling: NPM
 
-### DevOps
+### DevOps:
 - Jenkins
 - Docker
 - NPM
 
-### Server
+### Server:
 - Nginx
